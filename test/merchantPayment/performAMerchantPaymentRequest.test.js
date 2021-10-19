@@ -1,5 +1,3 @@
-const { v4: uuidv4 } = require('uuid');
-
 require('../test_helper');
 
 const client = require('../test_harness').client();
@@ -23,13 +21,11 @@ const buildRequestBody = () => ({
   ],
 });
 
-buildXCorrelationID = () => uuidv4();
-
 buildXCallbackURL = () => 'https://www.example.com';
 
 const performAMerchantPaymentRequest = async () => {
   const request = new PerformAMerchantPaymentRequest();
-  request.xCorrelationID(buildXCorrelationID());
+
   request.xCallbackURL(buildXCallbackURL());
   request.requestBody(buildRequestBody());
 
@@ -38,7 +34,7 @@ const performAMerchantPaymentRequest = async () => {
   return response;
 }
 
-describe('Merchant Payment Request', () => {
+describe('Perform A Merchant Payment Request', () => {
   it('should return the request state object to indicate that the request is pending', async () => {
     const response = await performAMerchantPaymentRequest();
 
@@ -50,7 +46,7 @@ describe('Merchant Payment Request', () => {
 });
 
 module.exports = {
-  PerformAMerchantPayment: performAMerchantPaymentRequest
+  PerformAMerchantPayment: performAMerchantPaymentRequest,
 }
 
 

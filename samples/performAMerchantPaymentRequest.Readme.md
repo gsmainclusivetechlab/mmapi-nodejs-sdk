@@ -1,6 +1,5 @@
 
-
-# PayeeInitiated Merchant Payment
+# Perform A Merchant Payment Request
 
 ### Usage/Examples
 
@@ -34,8 +33,6 @@ const buildRequestBody = () => ({
   ],
 });
 
-buildXCorrelationID = () => uuidv4();
-
 buildXCallbackURL = () => 'https://www.example.com';
 
 // Call API with your client and get a response for your call
@@ -43,7 +40,7 @@ let performAMerchantPaymentRequest  = async function() {
     // Construct a request object and set desired parameters
     // Here, PerformAMerchantPaymentRequest() creates a POST request to /transactions/type/merchantpay
     const request = new mmapi.merchantPayment.PerformAMerchantPaymentRequest();
-    request.xCorrelationID(buildXCorrelationID());
+    // CorrelationID is available in the request.headers['X-CorrelationID']. Save it for future reference if you want.
     request.xCallbackURL(buildXCallbackURL());
     request.requestBody(buildRequestBody());
 
