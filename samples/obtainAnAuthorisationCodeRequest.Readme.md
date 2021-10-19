@@ -1,5 +1,4 @@
-
-# Perform A Merchant Payment
+# Obtain An Authorisation Code
 
 ### Usage/Examples
 
@@ -12,36 +11,22 @@ let consumerSecret = "<<MOBILE_MONEY_API_API_CONSUMER_SERCRET>>";
 let apiKey = "<<MOBILE_MONEY_API_API_KEY>>"
 let securityOption = "<<DEVELOPMENT_LEVEL || STANDARD_LEVEL || ENHANCED_LEVEL>>" // optional
 
-// This sample uses SandboxEnvironment. In production, use LiveEnvironment
-let environment = new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret, apiKey);
-let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
-
 const buildRequestBody = () => ({
-  amount: '200.00',
-  creditParty: [
-    {
-      key: 'accountid',
-      value: '2999',
-    },
-  ],
-  currency: 'RWF',
-  debitParty: [
-    {
-      key: 'accountid',
-      value: '2999',
-    },
-  ],
+  requestDate: '2018-07-03T10:43:27.405Z',
+  currency: 'GBP',
+  amount: '1000.00',
 });
 
 buildXCallbackURL = () => 'https://www.example.com';
 
 // Call API with your client and get a response for your call
-let performAMerchantPaymentRequest  = async function() {
+let obtainAnAuthorisationCodeRequest  = async function() {
     // Construct a request object and set desired parameters
-    // Here, PerformAMerchantPaymentRequest() creates a POST request to /transactions/type/merchantpay
-    const request = new mmapi.merchantPayment.PerformAMerchantPaymentRequest();
-    // CorrelationID is available in the request.headers['X-CorrelationID']. Save it for future reference if you want.
+    // Here, ObtainAnAuthorisationCodeRequest() creates a POST request to /accounts/{{identifierType}}/{{identifier}}/authorisationcodes
+    const request = new ObtainAnAuthorisationCodeRequest();
     request.xCallbackURL(buildXCallbackURL());
+    request.identifierType('accountid');
+    request.identifier(2000);
     request.requestBody(buildRequestBody());
 
     const response = await client.execute(request);
@@ -50,5 +35,5 @@ let performAMerchantPaymentRequest  = async function() {
     console.log(`Response Data: ${JSON.stringify(response.data)}`);
     return response;
 }
-performAMerchantPaymentRequest()
+obtainAnAuthorisationCodeRequest()
 ```

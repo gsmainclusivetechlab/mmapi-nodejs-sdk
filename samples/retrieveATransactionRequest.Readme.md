@@ -1,6 +1,6 @@
 
 
-# Retrieve A Transaction Request
+# Retrieve A Transaction
 
 ### Usage/Examples
 
