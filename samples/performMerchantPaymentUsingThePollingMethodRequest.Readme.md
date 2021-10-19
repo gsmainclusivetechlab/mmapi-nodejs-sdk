@@ -1,4 +1,6 @@
-# Poll To Determine The Request State
+
+
+# Perform Merchant Payment Using The Polling Method
 
 ### Usage/Examples
 
@@ -32,27 +34,12 @@ const buildRequestBody = () => ({
   ],
 });
 
-buildXCallbackURL = () => 'https://www.example.com';
-
-// Construct a request object and set desired parameters
-// Here, PerformAMerchantPaymentRequest() creates a POST request to transactions/type/merchantpay
-performAMerchantPaymentRequest = async () => {
-  const request = new mmapi.merchantPay.PerformAMerchantPaymentRequest();
-  request.xCallbackURL(buildXCallbackURL());
-  request.requestBody(buildRequestBody());
-
-  const response = await client.execute(request);
-  
-  return response.data.serverCorrelationId;
-};
-
 // Call API with your client and get a response for your call
-let pollToDetermineTheRequestStateRequest  = async function() {
+let performMerchantPaymentUsingThePollingMethodRequest  = async function() {
     // Construct a request object and set desired parameters
-    // Here, PollToDetermineTheRequestStateRequest() creates a GET request to /requeststates/{serverCorrelationId}
-    const request = new mmapi.merchantPayment.PollToDetermineTheRequestStateRequest();
-    const serverCorrelationId = await performAMerchantPaymentRequest();
-    request.serverCorrelationId(serverCorrelationId);
+    // Here, PerformMerchantPaymentUsingThePollingMethodRequest() creates a POST request to /transactions/type/merchantpay
+    const request = new mmapi.merchantPayment.PerformMerchantPaymentUsingThePollingMethodRequest();
+    request.requestBody(buildRequestBody());
 
     const response = await client.execute(request);
     console.log(`Response: ${JSON.stringify(response)}`);
@@ -60,5 +47,5 @@ let pollToDetermineTheRequestStateRequest  = async function() {
     console.log(`Response Data: ${JSON.stringify(response.data)}`);
     return response;
 }
-pollToDetermineTheRequestStateRequest()
+performMerchantPaymentUsingThePollingMethodRequest()
 ```

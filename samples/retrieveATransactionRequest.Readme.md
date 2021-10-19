@@ -34,15 +34,12 @@ const buildRequestBody = () => ({
   ],
 });
 
-buildXCorrelationID = () => uuidv4();
-
 buildXCallbackURL = () => 'https://www.example.com';
 
 // Construct a request object and set desired parameters
 // Here, PerformAMerchantPaymentRequest() creates a POST request to transactions/type/merchantpay
 performAMerchantPaymentRequest = async () => {
   const request = new mmapi.merchantPay.PerformAMerchantPaymentRequest();
-  request.xCorrelationID(buildXCorrelationID());
   request.xCallbackURL(buildXCallbackURL());
   request.requestBody(buildRequestBody());
 
