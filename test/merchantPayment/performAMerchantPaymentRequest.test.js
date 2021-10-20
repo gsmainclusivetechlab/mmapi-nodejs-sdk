@@ -25,7 +25,6 @@ buildXCallbackURL = () => 'https://www.example.com';
 
 const performAMerchantPaymentRequest = async () => {
   const request = new PerformAMerchantPaymentRequest();
-
   request.xCallbackURL(buildXCallbackURL());
   request.requestBody(buildRequestBody());
 

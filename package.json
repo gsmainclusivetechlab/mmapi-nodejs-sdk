@@ -17,6 +17,9 @@
   "scripts": {
     "test": "jest --watchAll --verbose --detectOpenHandles --forceExit --coverage"
   },
+  "jest": {
+    "testTimeout": 25000
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk.git"

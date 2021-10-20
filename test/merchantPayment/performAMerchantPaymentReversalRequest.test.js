@@ -30,5 +30,5 @@ describe('Perform A Merchant Payment Reversal Request', () => {
 });
 
 module.exports = {
-  performAMerchantPaymentReversal: performAMerchantPaymentReversalRequest
+  PerformAMerchantPaymentReversal: performAMerchantPaymentReversalRequest
 }

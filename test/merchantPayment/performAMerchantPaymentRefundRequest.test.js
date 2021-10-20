@@ -44,5 +44,5 @@ describe('Merchant Payment Refund Request', () => {
 });
 
 module.exports = {
-  performAMerchantPaymentRefund: performAMerchantPaymentRefundRequest
+  PerformAMerchantPaymentRefund: performAMerchantPaymentRefundRequest
 }
