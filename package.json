@@ -15,10 +15,7 @@
     "jest": "^27.2.5"
   },
   "scripts": {
-    "test": "jest --watchAll --verbose --detectOpenHandles --forceExit --coverage"
-  },
-  "jest": {
-    "testTimeout": 25000
+    "test": "jest --watchAll --verbose --detectOpenHandles --runInBand --forceExit --coverage"
   },
   "repository": {
     "type": "git",
