@@ -2,7 +2,7 @@ require('../test_helper');
 
 const client = require('../test_harness').client();
 
-const { CheckForServiceAvailabilityRequest } = mobileMoneyApi.merchantPayment;
+const { CheckForServiceAvailabilityRequest } = mobileMoneyApi.core;
 
 const checkForServiceAvailabilityRequest = async () => {
   const request = new CheckForServiceAvailabilityRequest();
