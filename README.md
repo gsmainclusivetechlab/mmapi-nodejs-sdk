@@ -18,4 +18,4 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 
 | Method     | API           |
 | ------------- | ------------- |
-|[Perform a Bulk Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/readme/disbursement/performABulkDisbursement.Readme.md)| [POST] |
+| POST |[Perform a Bulk Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/readme/disbursement/performABulkDisbursement.Readme.md)|
