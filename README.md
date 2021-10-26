@@ -18,9 +18,24 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 
 | Usecase     | Method     | API           |
 | ------------- | ------------- | ------------- |
-| Merchant Payments | POST |[Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/doc/merchantPayment/performAMerchantPaymentRequest.Readme.md)|
-| Merchant Payments | GET |[Poll to Determine the Request State](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/doc/merchantPayment/pollToDetermineTheRequestStateRequest.Readme.md)|
-| Merchant Payments | GET |[Retrieve a Transaction](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/doc/merchantPayment/retrieveATransactionRequest.Readme.md)|
-| Merchant Payments | POST |[Payer Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/doc/merchantPayment/performAMerchantPaymentRequest.Readme.md)|
+| Merchant Payments | POST |[Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/performAMerchantPaymentRequest.Readme.md)|
+
+| Merchant Payments | GET |[Poll to Determine the Request State](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/pollToDetermineTheRequestStateRequest.Readme.md)|
+
+| Merchant Payments | GET |[Retrieve a Transaction](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/retrieveATransactionRequest.Readme.md)|
+
+| Merchant Payments | POST |[Payer Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/performAMerchantPaymentRequest.Readme.md)|
+
+| Merchant Payments | POST |[Obtain an Authorisation Code](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/obtainAnAuthorisationCodeRequest.Readme.md)|
+
+| Merchant Payments | POST |[Perform a Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/performAMerchantPaymentRequest.Readme.md)|
+
+| Merchant Payments | POST |[Perform a Merchant Payment Refund](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/performAMerchantPaymentRefundRequest.Readme.md)|
+
+| Merchant Payments | POST |[Perform a Merchant Payment Refund](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/performAMerchantPaymentRefundRequest.Readme.md)|
+
+| Merchant Payments | POST |[Perform a Merchant Payment Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/performAMerchantPaymentReversalRequest.Readme.md)|
+
 | Disbursements | POST |[Perform an Individual Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/disbursement/performAnIndividualDisbursement.Readme.md)|
+
 | Disbursements | POST |[Perform a Bulk Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/disbursement/performABulkDisbursement.Readme.md)|
