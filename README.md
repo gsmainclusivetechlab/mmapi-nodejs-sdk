@@ -16,6 +16,6 @@ let environment = new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret,
 let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 ```
 
-| API       | Method           |
+| Method     | API           |
 | ------------- | ------------- |
-|[POST Perform a Bulk Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/readme/disbursement/performABulkDisbursement.Readme.md)|
+|[Perform a Bulk Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/readme/disbursement/performABulkDisbursement.Readme.md)| [POST] |
