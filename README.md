@@ -1,79 +1,41 @@
 # mmapi-nodejs-sdk
 
+# Disbursement
 
 ## Perform a Bulk Disbursement
 
-### Request
-
-`POST /batchtransactions`
-
-     | First Header  | Second Header | Second Header |
-     | ------------- | ------------- | ------------- |
-     | X-Callback-URL | Required | String containing the URL which should receive the Callback. For asynchronous requests.  |
-     | data  | Required | |
+### Code to Execute:
 
 ```
-const buildRequestBody = () => ({
-  "transactions": [
-    {
-      "amount": "200.00",
-      "type": "transfer",
-      "creditParty": [
-        {
-          "key": "accountid",
-          "value": "2000"
-        }
-      ],
-      "currency": "RWF",
-      "debitParty": [
-        {
-          "key": "accountid",
-          "value": "2999"
-        }
-      ]
-    },
-    {
-      "amount": "200.00",
-      "type": "transfer",
-      "creditParty": [
-        {
-          "key": "accountid",
-          "value": "2999"
-        }
-      ],
-      "currency": "RWF",
-      "debitParty": [
-        {
-          "key": "accountid",
-          "value": "2000"
-        }
-      ]
-    }
-  ],
-  "batchTitle": "Batch_Test",
-  "batchDescription": "Testing a Batch",
-  "scheduledStartDate": "2019-12-11T15:08:03.158Z"
-});
+const buildRequestBody = () => ({"transactions":[{"amount":"200.00","type":"transfer","creditParty":[{"key":"accountid","value":"2000"}],"currency":"RWF","debitParty":[{"key":"accountid","value":"2999"}]},{"amount":"200.00","type":"transfer","creditParty":[{"key":"accountid","value":"2999"}],"currency":"RWF","debitParty":[{"key":"accountid","value":"2000"}]}],"batchTitle":"Batch_Test","batchDescription":"Testing a Batch","scheduledStartDate":"2019-12-11T15:08:03.158Z"});
 
 const buildXCallbackURL = () => '<<PLACE YOUR CALLBACK URL HERE>>';
 
-let performAMerchantPayment  = async function() {
-    const request = new mmapi.disbursement.PerformABulkDisbursementRequest();
-    request.data = buildRequestBody();
-    request.headers['X-Callback-URL'] = buildXCallbackURL();
+let performABulkDisbursement  = async () => {
+    try{
+        const request = new mmapi.disbursement.PerformABulkDisbursementRequest();
+        // Body 
+        // Required
+        request.data = buildRequestBody();
+        // String containing the URL which should receive the Callback. For asynchronous requests.
+        // Required
+        request.headers['X-Callback-URL'] = buildXCallbackURL();
 
 
-    const response = await client.execute(request);
-    console.log(`Response Data: ${response.status}`);
-    console.log(`Response Data: ${response.data}`);
+        const response = await client.execute(request);
+        console.log(`Response Status: ${response.status}`);
+        console.log(`Response Data: ${response.data}`);
 
-    return response;
+        return response;
+    } catch (e) {
+        console.log(e)
+    }
 }
-performAMerchantPayment();
+performABulkDisbursement();
 ```
 
-### Response
-
+### Example Response
+```
   202
 
   {
@@ -83,3 +45,4 @@ performAMerchantPayment();
     "objectReference": "429",
     "pollLimit": 100
   }
+  ```
