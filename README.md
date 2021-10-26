@@ -15,3 +15,7 @@ let securityOption = "<<DEVELOPMENT_LEVEL || STANDARD_LEVEL || ENHANCED_LEVEL>>"
 let environment = new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret, apiKey);
 let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 ```
+
+| Package       | NPM           |
+| ------------- | ------------- |
+|[POST Perform a Bulk Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/readme/disbursement/performABulkDisbursement.Readme.md)|
