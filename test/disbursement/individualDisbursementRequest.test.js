@@ -2,7 +2,7 @@ require('../test_helper');
 
 const client = require('../test_harness').client();
 
-const { PerformAnIndividualDisbursement } = mobileMoneyApi.disbursement;
+const { PerformAnIndividualDisbursementRequest } = mobileMoneyApi.disbursement;
 
 const buildRequestBody = () => ({
   "amount": "200.00",
@@ -21,10 +21,10 @@ const buildRequestBody = () => ({
   "currency": "RWF"
 });
 
-buildXCallbackURL = () => 'https://www.example.com';
+buildXCallbackURL = () => 'https://322894a8-6c41-4b35-80cc-7fbfec49c4a2.mock.pstmn.io/pramisha';
 
 const performAnIndividualDisbursement = async () => {
-  const request = new PerformAnIndividualDisbursement();
+  const request = new PerformAnIndividualDisbursementRequest();
   request.data = buildRequestBody();
   request.headers['X-Callback-URL'] = buildXCallbackURL();
 
