@@ -2,9 +2,9 @@ require('../test_helper');
 
 const client = require('../test_harness').client();
 
-const { RetrieveATransactionRequest } = mobileMoneyApi.merchantPayment;
+const { RetrieveATransactionRequest } = mobileMoneyApi.common;
 
-const { PollToDetermineTheRequestState } = require('./pollToDetermineTheRequestStateRequest.test');
+const { PollToDetermineTheRequestState } = require('../merchantPayment/pollToDetermineTheRequestStateRequest.test');
 
 const retrieveATransactionRequest = async () => {
   const request = new RetrieveATransactionRequest();

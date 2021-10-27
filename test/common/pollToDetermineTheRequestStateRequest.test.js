@@ -2,9 +2,9 @@ require('../test_helper');
 
 const client = require('../test_harness').client();
 
-const { PollToDetermineTheRequestStateRequest } = mobileMoneyApi.merchantPayment;
+const { PollToDetermineTheRequestStateRequest } = mobileMoneyApi.common;
 
-const { PerformAMerchantPayment } = require('./performAMerchantPaymentRequest.test');
+const { PerformAMerchantPayment } = require('../merchantPayment/performAMerchantPaymentRequest.test');
 
 const pollToDetermineTheRequestStateRequest = async () => {
   const request = new PollToDetermineTheRequestStateRequest();
