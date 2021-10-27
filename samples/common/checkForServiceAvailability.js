@@ -28,14 +28,14 @@ let checkForServiceAvailability = async function () {
 };
 
 /**
- * This is the Immediately invoked function which invokes the checkForServiceAvailability function to retrieve an order details.
+ * This is the immediately invoked function which invokes the checkForServiceAvailability function.
 */
 (async () => {
   await checkForServiceAvailability();
 })();
 
 /**
- * Exports the checkForServiceAvailability function. If needed this can be invoked from the other modules
+ * Exports the checkForServiceAvailability function. If needed this can be invoked from the other modules.
  */
 module.exports = { checkForServiceAvailability: checkForServiceAvailability };
 

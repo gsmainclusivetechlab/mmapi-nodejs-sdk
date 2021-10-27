@@ -4,7 +4,7 @@ const client = require('../test_harness').client();
 
 const { CheckForServiceAvailabilityRequest } = mobileMoneyApi.common;
 
-const checkForServiceAvailabilityRequest = async () => {
+const checkForServiceAvailability = async () => {
   const request = new CheckForServiceAvailabilityRequest();
 
   const response = await client.execute(request);
@@ -12,14 +12,14 @@ const checkForServiceAvailabilityRequest = async () => {
 }
 
 describe('Check For Service Availability Request', () => {
-  it('should return status 200 with the availability of the service (available, unavailable, degraded) ', async () => {
-    const response = await checkForServiceAvailabilityRequest();
+  it('should return status 200 with the availability of the service (available, unavailable, degraded)', async () => {
+    const response = await checkForServiceAvailability();
 
     expect(response.status).toBe(200);
-    expect(response.data.serviceStatus).toMatch('available');
+    expect(response.data.serviceStatus).toMatch(/^(available|unavailable|degraded)$/);
   });
 });
 
 module.exports = {
-  CheckForServiceAvailability: checkForServiceAvailabilityRequest
+  checkForServiceAvailability: checkForServiceAvailability
 }

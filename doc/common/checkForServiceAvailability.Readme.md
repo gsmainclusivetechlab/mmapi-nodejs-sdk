@@ -1,10 +1,13 @@
-# Check for Service Availability
+# Check For Service Availability
 
-### Code to Execute
+### Code To Execute
 
 ```javascript
-let checkForServiceAvailabilityRequest  = async function() {
+// Call API with your client and get a response for your call
+let checkForServiceAvailability  = async function() {
   try{
+    // Construct a request object and set desired parameters
+    // Here, CheckForServiceAvailabilityRequest() creates a GET request to /heartbeat
     let request = new mmapi.common.CheckForServiceAvailabilityRequest();
 
     // Call API with your client and get a response for your call
@@ -17,7 +20,7 @@ let checkForServiceAvailabilityRequest  = async function() {
     console.log(e)
   }
 }
-checkForServiceAvailabilityRequest()
+checkForServiceAvailability()
 ```
 
 ### Expected Output
