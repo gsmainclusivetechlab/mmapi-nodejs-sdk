@@ -3,8 +3,7 @@
 ### Code To Execute
 
 ```javascript
-// Call API with your client and get a response for your call
-let checkForServiceAvailability  = async function() {
+const checkForServiceAvailability  = async () => {
   try{
     // Construct a request object and set desired parameters
     // Here, CheckForServiceAvailabilityRequest() creates a GET request to /heartbeat
@@ -16,7 +15,7 @@ let checkForServiceAvailability  = async function() {
     console.log(`Response Data: ${response.data}`);
 
     return response;
-   } catch (e) {
+  } catch (e) {
     console.log(e)
   }
 }
