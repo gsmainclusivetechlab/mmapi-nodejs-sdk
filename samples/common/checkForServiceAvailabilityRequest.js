@@ -13,7 +13,7 @@ const client = require('../sample_harness').client();
 /**
  * This function can be used to check service availability.
  */
-let checkForServiceAvailabilityRequest = async function () {
+let checkForServiceAvailability = async function () {
   try {
     const request = new mmapi.common.CheckForServiceAvailabilityRequest();
 
