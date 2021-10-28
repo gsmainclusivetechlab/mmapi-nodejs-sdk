@@ -11,20 +11,20 @@ const mmapi = require('../../lib/index');
 const client = require('../sample_harness').client();
 
 const buildRequestBody = () => ({
-  amount: '200.00',
-  creditParty: [
+  "amount": "200.00",
+  "debitParty": [
     {
-      key: 'accountid',
-      value: '2999',
-    },
+      "key": "accountid",
+      "value": "2999"
+    }
   ],
-  currency: 'RWF',
-  debitParty: [
+  "creditParty": [
     {
-      key: 'accountid',
-      value: '2999',
-    },
+      "key": "accountid",
+      "value": "2999"
+    }
   ],
+  "currency": "RWF"
 });
 
 const buildXCallbackURL = () => 'https://322894a8-6c41-4b35-80cc-7fbfec49c4a2.mock.pstmn.io/pramisha';
@@ -32,11 +32,11 @@ const buildXCallbackURL = () => 'https://322894a8-6c41-4b35-80cc-7fbfec49c4a2.mo
 /**
  * This function can be used to perform an individual disbursement
  */
-let performAnIndividualDisbursement = async function () {
+let performAMerchantPayment = async () => {
   try {
     // Construct a request object and set desired parameters
-    // Here, PerformAnIndividualDisbursement() creates a POST request to /transactions/type/disbursement
-    const request = new mmapi.disbursement.PerformAnIndividualDisbursementRequest();
+    // Here, PerformAMerchantPaymentRequest() creates a POST request to /transactions/type/merchantpay
+    const request = new mmapi.merchantPayment.PerformAMerchantPaymentRequest();
     request.data = buildRequestBody();
     request.headers['X-Callback-URL'] = buildXCallbackURL();
 
@@ -51,15 +51,14 @@ let performAnIndividualDisbursement = async function () {
 };
 
 /**
- * This is the driver function which invokes the performAnIndividualDisbursement function
- * to retrieve an order details.
+ * This is the This is the immediately invoked function which invokes the performAMerchantPayment function.
 */
 (async () => {
-  await performAnIndividualDisbursement();
+  await performAMerchantPayment();
 })();
 
 /**
- * Exports the performAnIndividualDisbursement function. If needed this can be invoked from the other modules
+ * Exports the performAMerchantPayment function. If needed this can be invoked from the other modules.
  */
-module.exports = { performAnIndividualDisbursement: performAnIndividualDisbursement };
+module.exports = { performAMerchantPayment: performAMerchantPayment };
 
