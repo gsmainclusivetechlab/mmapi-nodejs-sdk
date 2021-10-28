@@ -22,7 +22,7 @@ const checkForServiceAvailability  = async () => {
 checkForServiceAvailability()
 ```
 
-### Expected Output
+### Example Output
 
 ```javascript
   200
