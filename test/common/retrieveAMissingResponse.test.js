@@ -2,7 +2,8 @@ require('../test_helper');
 
 const client = require('../test_harness').client();
 
-const { RetrieveAMissingApiResponseRequest, PerformAMerchantPaymentRequest } = mobileMoneyApi.merchantPayment;
+const { PerformAMerchantPaymentRequest } = mobileMoneyApi.merchantPayment;
+const { RetrieveAMissingResponseRequest } = mobileMoneyApi.common;
 
 const buildRequestBody = () => ({
   amount: '200.00',
@@ -21,33 +22,29 @@ const buildRequestBody = () => ({
   ],
 });
 
-buildXCallbackURL = () => 'https://www.example.com';
-
 let clientCorrelationId;
 
-const performAMerchantPaymentRequest = async () => {
+const performAMerchantPayment = async () => {
   const request = new PerformAMerchantPaymentRequest();
   clientCorrelationId = request.headers['X-CorrelationID'];
-  request.xCallbackURL(buildXCallbackURL());
-  request.requestBody(buildRequestBody());
+  request.data = buildRequestBody();
 
   const response = await client.execute(request);
 
   return response;
 }
 
-const retrieveAMissingApiResponseRequest = async () => {
-  const request = new RetrieveAMissingApiResponseRequest();
-  await performAMerchantPaymentRequest();
-  request.clientCorrelationId(clientCorrelationId);
+const retrieveAMissingResponse = async () => {
+  await performAMerchantPayment();
+  const request = new RetrieveAMissingResponseRequest(clientCorrelationId);
 
   const response = await client.execute(request);
   return response;
 }
 
-describe('Retrieve A Missing Api Response Request', () => {
+describe('Retrieve A Missing Response Request', () => {
   it('should return a response object containing a link to the missing resource', async () => {
-    const response = await retrieveAMissingApiResponseRequest();
+    const response = await retrieveAMissingResponse();
 
     expect(response.status).toBe(200);
     expect(response.data).toHaveProperty('link');
@@ -55,5 +52,5 @@ describe('Retrieve A Missing Api Response Request', () => {
 });
 
 module.exports = {
-  RetrieveAMissingApiResponse: retrieveAMissingApiResponseRequest
+  retrieveAMissingResponse: retrieveAMissingResponse
 }

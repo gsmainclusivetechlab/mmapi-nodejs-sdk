@@ -19,7 +19,7 @@ let checkForServiceAvailability = async function () {
 
     const response = await client.execute(request);
     console.log("Response Status: " + response.status);
-    console.log("Response Data: " + JSON.stringify(response.data, null, 4));
+    console.log("Respoanse Data: " + JSON.stringify(response.data, null, 4));
 
     return response;
   } catch (e) {

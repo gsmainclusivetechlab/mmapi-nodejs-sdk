@@ -21,12 +21,9 @@ const buildRequestBody = () => ({
   ],
 });
 
-buildXCallbackURL = () => 'https://www.example.com';
-
-const performAMerchantPaymentRefundRequest = async () => {
+const performAMerchantPaymentRefund = async () => {
   const request = new PerformAMerchantPaymentRefundRequest();
-  request.xCallbackURL(buildXCallbackURL());
-  request.requestBody(buildRequestBody());
+  request.data = buildRequestBody();
 
   const response = await client.execute(request);
 
@@ -35,7 +32,7 @@ const performAMerchantPaymentRefundRequest = async () => {
 
 describe('Merchant Payment Refund Request', () => {
   it('should return the request state object to indicate that the request is pending', async () => {
-    const response = await performAMerchantPaymentRefundRequest();
+    const response = await performAMerchantPaymentRefund();
 
     expect(response.status).toBe(202);
     expect(response.data).toHaveProperty('status');
@@ -44,5 +41,5 @@ describe('Merchant Payment Refund Request', () => {
 });
 
 module.exports = {
-  PerformAMerchantPaymentRefund: performAMerchantPaymentRefundRequest
+  performAMerchantPaymentRefund: performAMerchantPaymentRefund
 }

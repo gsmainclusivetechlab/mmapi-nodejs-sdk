@@ -19,7 +19,7 @@ const retrieveAMissingResponse  = async () => {
     console.log(e)
   }
 }
-retrieveAMissingResponse()
+retrieveAMissingResponse(clientCorrelationId)
 ```
 
 ### Expected Output
@@ -28,6 +28,6 @@ retrieveAMissingResponse()
   200
 
   {
-    "serviceStatus": "available"
+    "link": "/transactions/REF-1635433380991"
   }
 ```
