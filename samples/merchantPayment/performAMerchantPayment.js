@@ -27,8 +27,6 @@ const buildRequestBody = () => ({
   "currency": "RWF"
 });
 
-const buildXCallbackURL = () => 'https://322894a8-6c41-4b35-80cc-7fbfec49c4a2.mock.pstmn.io/pramisha';
-
 /**
  * This function can be used to perform an individual disbursement
  */
@@ -38,7 +36,6 @@ let performAMerchantPayment = async () => {
     // Here, PerformAMerchantPaymentRequest() creates a POST request to /transactions/type/merchantpay
     const request = new mmapi.merchantPayment.PerformAMerchantPaymentRequest();
     request.data = buildRequestBody();
-    request.headers['X-Callback-URL'] = buildXCallbackURL();
 
     const response = await client.execute(request);
     console.log("Response Status: " + response.status);
