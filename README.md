@@ -20,7 +20,9 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 | ------------- | ------------- | ------------- |
 | Common | GET |[Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/doc/common/checkForServiceAvailability.Readme.md)|
 | Common | GET |[Retrieve a Missing Response](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/common/retriveMissingResourceRepresentationRequest.Readme.md)|
-| Merchant Payments | POST |[Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/performAMerchantPaymentRequest.Readme.md)|
+| Merchant Payments | POST |[Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/doc/merchantPayment/performAMerchantPayment.Readme.md)|
+| Merchant Payments | POST |[Payer Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/doc/merchantPayment/performAMerchantPayment.Readme.md)|
+| Merchant Payments | POST |[Perform a Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/doc/merchantPayment/performAMerchantPayment.Readme.md)|
 | Merchant Payments | GET |[Poll to Determine the Request State](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/pollToDetermineTheRequestStateRequest.Readme.md)|
 | Merchant Payments | GET |[Retrieve a Transaction](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/retrieveATransactionRequest.Readme.md)|
 | Merchant Payments | POST |[Payer Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/merchantPayment/performAMerchantPaymentRequest.Readme.md)|

@@ -6,9 +6,9 @@
 ```javascript
 const buildRequestBody = () => ({"amount":"200.00","debitParty":[{"key":"accountid","value":"2999"}],"creditParty":[{"key":"accountid","value":"2999"}],"currency":"RWF"});
 
-buildXCallbackURL = () => 'https://www.example.com';
+const buildXCallbackURL = () => 'https://www.example.com';
 
-let performAMerchantPayment  = async () => {
+const performAMerchantPayment  = async () => {
   try {
     // Construct a request object and set desired parameters
     // Here, PerformAMerchantPaymentRequest() creates a POST request to /transactions/type/merchantpay
