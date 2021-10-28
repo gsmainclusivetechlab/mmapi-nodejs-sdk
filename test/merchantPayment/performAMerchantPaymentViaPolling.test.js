@@ -2,7 +2,7 @@ require('../test_helper');
 
 const client = require('../test_harness').client();
 
-const { PerformMerchantPaymentUsingThePollingMethodRequest } = mobileMoneyApi.merchantPayment;
+const { PerformAMerchantPaymentViaPollingRequest } = mobileMoneyApi.merchantPayment;
 
 const buildRequestBody = () => ({
   amount: '200.00',
@@ -21,11 +21,9 @@ const buildRequestBody = () => ({
   ],
 });
 
-buildXCallbackURL = () => 'https://www.example.com';
-
-const performMerchantPaymentUsingThePollingMethodRequest = async () => {
-  const request = new PerformMerchantPaymentUsingThePollingMethodRequest();
-  request.requestBody(buildRequestBody());
+const performAMerchantPaymentViaPolling = async () => {
+  const request = new PerformAMerchantPaymentViaPollingRequest();
+  request.data = buildRequestBody();
 
   const response = await client.execute(request);
 
@@ -34,7 +32,7 @@ const performMerchantPaymentUsingThePollingMethodRequest = async () => {
 
 describe('Perform Merchant Payment Using The Polling Method Request', () => {
   it('should return the request state object to indicate that the request is pending', async () => {
-    const response = await performMerchantPaymentUsingThePollingMethodRequest();
+    const response = await performAMerchantPaymentViaPolling();
 
     expect(response.status).toBe(202);
     expect(response.data).toHaveProperty('status');
@@ -44,5 +42,5 @@ describe('Perform Merchant Payment Using The Polling Method Request', () => {
 });
 
 module.exports = {
-  PerformMerchantPaymentUsingThePollingMethod: performMerchantPaymentUsingThePollingMethodRequest
+  performAMerchantPaymentViaPolling: performAMerchantPaymentViaPolling
 }
