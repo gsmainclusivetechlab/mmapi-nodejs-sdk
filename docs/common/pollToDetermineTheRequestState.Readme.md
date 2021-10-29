@@ -12,6 +12,7 @@ const pollToDetermineTheRequestState  = async (serverCorrelationId) => {
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Header: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
 
     return response;
@@ -19,7 +20,7 @@ const pollToDetermineTheRequestState  = async (serverCorrelationId) => {
     console.log(e)
   }
 }
-pollToDetermineTheRequest('8626661d-2b3a-4166-b3d2-33a0c5fccd35')
+pollToDetermineTheRequest('REPLACE-WITH-SERVER-CORRELATION-ID')
 ```
 
 ### Example Output
