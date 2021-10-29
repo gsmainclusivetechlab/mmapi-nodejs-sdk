@@ -1,6 +1,4 @@
-## Retrieve A Missing Response
-
-> In some circumstances, the caller may not have received the final representation of the resource for which it attempted to create. This use case allows a caller to retrieve a representation of the resource assuming that it exists. The provider will use the Client Correlation Id to identify the requested resource and return a link to that resource.
+# Retrieve A Missing Response
  
 ### Code To Execute
 
