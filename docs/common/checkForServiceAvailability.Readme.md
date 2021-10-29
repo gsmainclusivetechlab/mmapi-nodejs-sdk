@@ -1,11 +1,12 @@
 # Check For Service Availability
 
+> This use case enables the caller to determine the availability of the service from the API provider. The provider will return a status of ‘available’, ‘unavailable’ or ‘degraded’.
+
+`GET /heartbeat`
+   
 ### Code To Execute
 
 ```javascript
-/**
- * This use case enables the caller to determine the availability of the service from the API provider. The provider will return a status of   ‘available’, ‘unavailable’ or ‘degraded’.
-*/
 const checkForServiceAvailability  = async () => {
   try{
     // Construct a request object and set desired parameters
@@ -15,8 +16,9 @@ const checkForServiceAvailability  = async () => {
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Headers: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
-
+    
     return response;
   } catch (e) {
     console.log(e)
