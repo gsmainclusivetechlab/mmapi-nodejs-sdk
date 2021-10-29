@@ -46,12 +46,9 @@ const buildRequestBody = () => ({
   "scheduledStartDate": "2019-12-11T15:08:03.158Z"
 });
 
-buildXCallbackURL = () => 'https://322894a8-6c41-4b35-80cc-7fbfec49c4a2.mock.pstmn.io/pramisha';
-
 const performABulkDisbursement = async () => {
   const request = new PerformABulkDisbursementRequest();
   request.data = buildRequestBody();
-  request.headers['X-Callback-URL'] = buildXCallbackURL();
 
   const response = await client.execute(request);
 

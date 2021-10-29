@@ -38,8 +38,8 @@ let performAMerchantPayment = async () => {
     request.data = buildRequestBody();
 
     const response = await client.execute(request);
-    console.log("Response Status: " + response.status);
-    console.log("Response Data: " + JSON.stringify(response.data, null, 4));
+    console.log("Response Status: 1" + response.status);
+    console.log("Response Data: 1" + JSON.stringify(response.data, null, 4));
 
     return response;
   } catch (e) {
@@ -50,9 +50,12 @@ let performAMerchantPayment = async () => {
 /**
  * This is the This is the immediately invoked function which invokes the performAMerchantPayment function.
 */
-(async () => {
-  await performAMerchantPayment();
-})();
+
+if (require.main === module) {
+  (async () => {
+    await performAMerchantPayment();
+  })();
+}
 
 /**
  * Exports the performAMerchantPayment function. If needed this can be invoked from the other modules.

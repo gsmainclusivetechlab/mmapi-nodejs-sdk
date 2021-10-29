@@ -4,12 +4,11 @@ const client = require('../test_harness').client();
 
 const { RetrieveATransactionRequest } = mobileMoneyApi.common;
 
-const { PollToDetermineTheRequestState } = require('../merchantPayment/pollToDetermineTheRequestStateRequest.test');
+const { pollToDetermineTheRequestState } = require('../common/pollToDetermineTheRequestState.test');
 
-const retrieveATransactionRequest = async () => {
-  const request = new RetrieveATransactionRequest();
-  const { data: { objectReference } } = await PollToDetermineTheRequestState();
-  request.transactionReference(objectReference);
+const retrieveATransaction = async () => {
+  const { data: { objectReference } } = await pollToDetermineTheRequestState();
+  const request = new RetrieveATransactionRequest(objectReference);
 
   const response = await client.execute(request);
 
@@ -18,7 +17,7 @@ const retrieveATransactionRequest = async () => {
 
 describe('Retrieve A Transaction Request', () => {
   it('should return transaction object for a given objec Reference (transaction reference) with status 200', async () => {
-    const response = await retrieveATransactionRequest();
+    const response = await retrieveATransaction();
 
     expect(response.status).toBe(200);
     expect(response.data).toHaveProperty('transactionReference');
@@ -27,6 +26,6 @@ describe('Retrieve A Transaction Request', () => {
 });
 
 module.exports = {
-  RetrieveATransaction: retrieveATransactionRequest
+  retrieveATransaction: retrieveATransaction
 }
 

@@ -27,18 +27,13 @@ const buildRequestBody = () => ({
   ],
 });
 
-const buildXCallbackURL = () => 'https://322894a8-6c41-4b35-80cc-7fbfec49c4a2.mock.pstmn.io/pramisha';
-
 /**
  * This function can be used to perform an individual disbursement
  */
 let performAnIndividualDisbursement = async function () {
   try {
-    // Construct a request object and set desired parameters
-    // Here, PerformAnIndividualDisbursement() creates a POST request to /transactions/type/disbursement
     const request = new mmapi.disbursement.PerformAnIndividualDisbursementRequest();
     request.data = buildRequestBody();
-    request.headers['X-Callback-URL'] = buildXCallbackURL();
 
     const response = await client.execute(request);
     console.log("Response Status: " + response.status);

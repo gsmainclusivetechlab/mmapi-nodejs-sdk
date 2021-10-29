@@ -21,12 +21,9 @@ const buildRequestBody = () => ({
   "currency": "RWF"
 });
 
-buildXCallbackURL = () => 'https://322894a8-6c41-4b35-80cc-7fbfec49c4a2.mock.pstmn.io/pramisha';
-
 const performAnIndividualDisbursement = async () => {
   const request = new PerformAnIndividualDisbursementRequest();
   request.data = buildRequestBody();
-  request.headers['X-Callback-URL'] = buildXCallbackURL();
 
   const response = await client.execute(request);
 

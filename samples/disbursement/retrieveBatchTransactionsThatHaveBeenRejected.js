@@ -13,10 +13,10 @@ const client = require('../sample_harness').client();
 /**
  * This function can be used to perform an individual disbursement
  */
-let retrieveBatchTransactionsThatHaveBeenRejected = async function (batchId) {
+let retrieveBatchTransactionsThatHaveBeenRejected = async (batchId) => {
   try {
     // Construct a request object and set desired parameters
-    // Here, retrieveBatchTransactionsThatHaveBeenRejected(batchId) creates a GET request to /batchtransactions/{batchId}/rejections
+    // Here, RetrieveBatchTransactionsThatHaveBeenRejectedRequest(batchId) creates a GET request to /batchtransactions/{batchId}/rejections
     const request = new mmapi.disbursement.RetrieveBatchTransactionsThatHaveBeenRejectedRequest(batchId);
 
     const response = await client.execute(request);
@@ -34,7 +34,7 @@ let retrieveBatchTransactionsThatHaveBeenRejected = async function (batchId) {
  * to retrieve an order details.
 */
 (async () => {
-  await retrieveBatchTransactionsThatHaveBeenRejected('REF-1635245232914');
+  await retrieveBatchTransactionsThatHaveBeenRejected('REF-1635509903380');
 })();
 
 /**

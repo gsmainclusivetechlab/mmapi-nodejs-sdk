@@ -2,7 +2,7 @@ require('../test_helper');
 
 const client = require('../test_harness').client();
 
-const { PerformAnIndividualDisbursementUsingPollingRequest } = mobileMoneyApi.disbursement;
+const { PerformAnIndividualDisbursementUsingViaRequest } = mobileMoneyApi.disbursement;
 
 const buildRequestBody = () => ({
   "amount": "200.00",
@@ -21,8 +21,8 @@ const buildRequestBody = () => ({
   "currency": "RWF"
 });
 
-const performAnIndividualDisbursementUsingPolling = async () => {
-  const request = new PerformAnIndividualDisbursementUsingPollingRequest();
+const performAnIndividualDisbursementViaPolling = async () => {
+  const request = new PerformAnIndividualDisbursementUsingViaRequest();
   request.data = buildRequestBody();
 
   const response = await client.execute(request);
@@ -32,7 +32,7 @@ const performAnIndividualDisbursementUsingPolling = async () => {
 
 describe('Perform An Individual Disbursement', () => {
   it('should return the request state object to indicate that the request is pending', async () => {
-    const response = await performAnIndividualDisbursementUsingPolling();
+    const response = await performAnIndividualDisbursementViaPolling();
 
     expect(response.status).toBe(202);
     expect(response.data).toHaveProperty('status');
@@ -42,7 +42,7 @@ describe('Perform An Individual Disbursement', () => {
 });
 
 module.exports = {
-  performAnIndividualDisbursementUsingPolling: performAnIndividualDisbursementUsingPolling,
+  performAnIndividualDisbursementViaPolling: performAnIndividualDisbursementViaPolling,
 }
 
 

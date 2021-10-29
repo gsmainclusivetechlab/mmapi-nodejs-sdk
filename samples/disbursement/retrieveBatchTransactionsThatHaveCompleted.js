@@ -34,7 +34,7 @@ let retrieveBatchTransactionsThatHaveCompleted = async function (batchId) {
  * to retrieve an order details.
 */
 (async () => {
-  await retrieveBatchTransactionsThatHaveCompleted('REF-1635245232914');
+  await retrieveBatchTransactionsThatHaveCompleted('REF-1635509903380');
 })();
 
 /**

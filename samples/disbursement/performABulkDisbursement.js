@@ -52,8 +52,6 @@ const buildRequestBody = () => ({
   "scheduledStartDate": "2019-12-11T15:08:03.158Z"
 });
 
-const buildXCallbackURL = () => 'http://117.221.152.105:3000';
-
 /**
  * This function can be used to perform an individual disbursement
  */
@@ -63,7 +61,6 @@ let performABulkDisbursement = async function () {
     // Here, PerformABulkDisbursementRequest() creates a POST request to /batchtransactions
     const request = new mmapi.disbursement.PerformABulkDisbursementRequest();
     request.data = buildRequestBody();
-    request.headers['X-Callback-URL'] = buildXCallbackURL();
 
     const response = await client.execute(request);
     console.log("Response Status: " + response.status);

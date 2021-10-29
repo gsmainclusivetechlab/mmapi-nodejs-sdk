@@ -4,12 +4,11 @@ const client = require('../test_harness').client();
 
 const { PollToDetermineTheRequestStateRequest } = mobileMoneyApi.common;
 
-const { PerformAMerchantPayment } = require('../merchantPayment/performAMerchantPaymentRequest.test');
+const { performAMerchantPayment } = require('../merchantPayment/performAMerchantPayment.test');
 
-const pollToDetermineTheRequestStateRequest = async () => {
-  const request = new PollToDetermineTheRequestStateRequest();
-  const { data: { serverCorrelationId } } = await PerformAMerchantPayment();
-  request.serverCorrelationId(serverCorrelationId);
+const pollToDetermineTheRequestState = async () => {
+  const { data: { serverCorrelationId } } = await performAMerchantPayment();
+  const request = new PollToDetermineTheRequestStateRequest(serverCorrelationId);
 
   const response = await client.execute(request);
 
@@ -18,7 +17,7 @@ const pollToDetermineTheRequestStateRequest = async () => {
 
 describe('Poll To Determine The Request State Request', () => {
   it('should return the state of a request with objectReference for a given Server Correlation Id with status 200', async () => {
-    const response = await pollToDetermineTheRequestStateRequest();
+    const response = await pollToDetermineTheRequestState();
 
     expect(response.status).toBe(200);
     expect(response.data).toHaveProperty('objectReference');
@@ -26,5 +25,5 @@ describe('Poll To Determine The Request State Request', () => {
 });
 
 module.exports = {
-  PollToDetermineTheRequestState: pollToDetermineTheRequestStateRequest
+  pollToDetermineTheRequestState: pollToDetermineTheRequestState
 }

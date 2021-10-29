@@ -30,11 +30,11 @@ const buildRequestBody = () => ({
 /**
  * This function can be used to perform an individual disbursement
  */
-let performAnIndividualDisbursementUsingPolling = async function () {
+let performAnIndividualDisbursementViaPolling = async function () {
   try {
     // Construct a request object and set desired parameters
-    // Here, PerformAnIndividualDisbursementUsingPollingRequest() creates a POST request to /transactions/type/disbursement
-    const request = new mmapi.disbursement.PerformAnIndividualDisbursementUsingPollingRequest();
+    // Here, PerformAnIndividualDisbursementViaPolling() creates a POST request to /transactions/type/disbursement
+    const request = new mmapi.disbursement.PerformAnIndividualDisbursementViaPollingRequest();
     request.data = buildRequestBody();
 
     const response = await client.execute(request);
@@ -48,15 +48,15 @@ let performAnIndividualDisbursementUsingPolling = async function () {
 };
 
 /**
- * This is the driver function which invokes the performAnIndividualDisbursementUsingPolling function
+ * This is the driver function which invokes the performAnIndividualDisbursementViaPolling function
  * to retrieve an order details.
 */
 (async () => {
-  await performAnIndividualDisbursementUsingPolling();
+  await performAnIndividualDisbursementViaPolling();
 })();
 
 /**
- * Exports the performAnIndividualDisbursementUsingPolling function. If needed this can be invoked from the other modules
+ * Exports the performAnIndividualDisbursementViaPolling function. If needed this can be invoked from the other modules
  */
-module.exports = { performAnIndividualDisbursementUsingPolling: performAnIndividualDisbursementUsingPolling };
+module.exports = { performAnIndividualDisbursementViaPolling: performAnIndividualDisbursementViaPolling };
 
