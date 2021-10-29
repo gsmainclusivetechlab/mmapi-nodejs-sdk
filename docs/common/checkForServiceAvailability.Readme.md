@@ -3,6 +3,9 @@
 ### Code To Execute
 
 ```javascript
+/**
+ * This use case enables the caller to determine the availability of the service from the API provider. The provider will return a status of   ‘available’, ‘unavailable’ or ‘degraded’.
+*/
 const checkForServiceAvailability  = async () => {
   try{
     // Construct a request object and set desired parameters
@@ -22,7 +25,7 @@ const checkForServiceAvailability  = async () => {
 checkForServiceAvailability()
 ```
 
-### Example Output
+### Expected Output
 
 ```javascript
   200
