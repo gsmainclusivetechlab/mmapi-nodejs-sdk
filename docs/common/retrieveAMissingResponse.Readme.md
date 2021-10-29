@@ -1,9 +1,11 @@
-# Retrieve A Missing Response
+## Retrieve A Missing Response
 
+> In some circumstances, the caller may not have received the final representation of the resource for which it attempted to create. This use case allows a caller to retrieve a representation of the resource assuming that it exists. The provider will use the Client Correlation Id to identify the requested resource and return a link to that resource.
+ 
 ### Code To Execute
 
 ```javascript
-const retrieveAMissingResponse  = async () => {
+const retrieveAMissingResponse  = async (clientCorrelationId) => {
   try{
     // Construct a request object and set desired parameters
     // Here, RetrieveAMissingResponseRequest(clientCorrelationId) creates a GET request to /responses/{clientCorrelationId}
@@ -12,6 +14,7 @@ const retrieveAMissingResponse  = async () => {
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Header: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
 
     return response;
@@ -19,10 +22,10 @@ const retrieveAMissingResponse  = async () => {
     console.log(e)
   }
 }
-retrieveAMissingResponse(clientCorrelationId)
+retrieveAMissingResponse('REPLACE-WITH-CLIENT-CORRELATION-ID')
 ```
 
-### Expected Output
+### Example Output
 
 ```javascript
   200
