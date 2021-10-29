@@ -16,9 +16,9 @@ let environment = new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret,
 let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 ```
 
-| Usecase     | Method     | API           |
-| ------------- | ------------- | ------------- |
-| Common | GET |[Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/doc/common/checkForServiceAvailability.Readme.md)|
+| Usecase     | Method     | API           | End Point
+| ------------- | ------------- | ------------- | ------------- |
+| Common | GET |[Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/common/checkForServiceAvailability.Readme.md)| /heartbeat |
 | Common | GET |[Retrieve a Missing Response](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-bulk-disbursement/doc/common/retriveMissingResourceRepresentationRequest.Readme.md)|
 | Merchant Payments | POST |[Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/doc/merchantPayment/performAMerchantPayment.Readme.md)|
 | Merchant Payments | POST |[Payer Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/doc/merchantPayment/performAMerchantPayment.Readme.md)|
