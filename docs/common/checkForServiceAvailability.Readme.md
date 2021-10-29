@@ -1,9 +1,5 @@
 # Check For Service Availability
-
-> This use case enables the caller to determine the availability of the service from the API provider. The provider will return a status of ‘available’, ‘unavailable’ or ‘degraded’.
-
-`GET /heartbeat`
-   
+  
 ### Code To Execute
 
 ```javascript
@@ -27,7 +23,7 @@ const checkForServiceAvailability  = async () => {
 checkForServiceAvailability()
 ```
 
-### Expected Output
+### Example Output
 
 ```javascript
   200
