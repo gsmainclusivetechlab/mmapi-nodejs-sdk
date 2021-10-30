@@ -3,14 +3,13 @@ require('../test_helper');
 
 const client = require('../test_harness').client();
 
-const { LinkRequest } = mobileMoneyApi.merchantPayment;
+const { LinkRequest } = mobileMoneyApi.common;
 
-const { RetrieveAMissingResponse } = require('./retrieveAMissingResponse.test')
+const { retrieveAMissingResponse } = require('./retrieveAMissingResponse.test')
 
 const link = async () => {
-  const request = new LinkRequest();
-  const { data: { link } } = await RetrieveAMissingResponse();
-  request.link(link);
+  const { data: { link } } = await retrieveAMissingResponse();
+  const request = new LinkRequest(link);
 
   const response = await client.execute(request);
 

@@ -2,7 +2,7 @@ require('../test_helper');
 
 const client = require('../test_harness').client();
 
-const { PerformAnIndividualDisbursementUsingViaRequest } = mobileMoneyApi.disbursement;
+const { PerformAnIndividualDisbursementViaPollingRequest } = mobileMoneyApi.disbursement;
 
 const buildRequestBody = () => ({
   "amount": "200.00",
@@ -22,7 +22,7 @@ const buildRequestBody = () => ({
 });
 
 const performAnIndividualDisbursementViaPolling = async () => {
-  const request = new PerformAnIndividualDisbursementUsingViaRequest();
+  const request = new PerformAnIndividualDisbursementViaPollingRequest();
   request.data = buildRequestBody();
 
   const response = await client.execute(request);

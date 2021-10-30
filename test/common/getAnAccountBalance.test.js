@@ -2,7 +2,7 @@ require('../test_helper');
 
 const client = require('../test_harness').client();
 
-const { GetAnAccountBalanceRequest } = mobileMoneyApi.merchantPayment;
+const { GetAnAccountBalanceRequest } = mobileMoneyApi.common;
 
 const getAnAccountBalance = async () => {
   const request = new GetAnAccountBalanceRequest('accountid', 2000);
