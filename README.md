@@ -10,9 +10,10 @@ let consumerKey = "<<MOBILE_MONEY_API_CONSUMER_KEY>>";
 let consumerSecret = "<<MOBILE_MONEY_API_API_CONSUMER_SERCRET>>";
 let apiKey = "<<MOBILE_MONEY_API_API_KEY>>"
 let securityOption = "<<DEVELOPMENT_LEVEL || STANDARD_LEVEL || ENHANCED_LEVEL>>" // optional
+let callbackUrl = "<<CALLBACK_URL>>"
 
 // This sample uses SandboxEnvironment. In production, use LiveEnvironment
-let environment = new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret, apiKey);
+let environment = new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret, apiKey, securityOption, callbackUrl);
 let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 ```
 
@@ -35,3 +36,11 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 | Disbursement | POST |[Perform an Individual Disbursement Via Polling](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/disbursement/performAnIndividualDisbursementViaPolling.Readme.md)| /transactions/type/disbursement |
 | Disbursement | GET |[Retrieve Batch Transactions that have Completed](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/disbursement/retrieveBatchTransactionsThatHaveCompleted.Readme.md)| /batchtransactions/{batchId}/completions |
 | Disbursement | GET |[Retrieve Batch Transactions that have been Rejected](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/disbursement/retrieveBatchTransactionsThatHaveBeenRejected.Readme.md)| /batchtransactions/{batchId}/rejections |
+
+## How to Run
+
+```
+1. npm install
+2. cd samples/common
+3. node checkForServiceAvailability.js
+```
