@@ -40,7 +40,9 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 ## How to Run
 
 ```
-1. npm install
+1. git clone git@github.com:gsmainclusivetechlab/mmapi-nodejs-sdk.git
+2. cd mmapi-nodejs-sdk
+2. npm install
 2. cd samples/common
 3. node checkForServiceAvailability.js
 ```
