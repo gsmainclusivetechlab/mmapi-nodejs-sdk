@@ -1,6 +1,6 @@
 # Retrieve A Missing Response
  
-### Code To Execute
+### Usage/Examples
 
 ```javascript
 const retrieveAMissingResponse  = async (clientCorrelationId) => {
