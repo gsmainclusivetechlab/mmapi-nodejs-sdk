@@ -1,21 +1,56 @@
 # mmapi-nodejs-sdk
 
-## Initialize Client
+Use the MMAPI Node.js SDK to get started quickly with the [GSMA Mobile Money API](https://developer.mobilemoneyapi.io/1.2).
 
-```javascript
+## Install the SDK
+Create a Node.js project in your directory, then run the following command to install the Mobile Money Api Node.js SDK.
+
+```javascript 
+npm install mmapi-nodejs-sdk
+```
+
+## Set up the environment
+After you install the SDK, make it available to your app and configure your environment. 
+Configuration details include either sandbox for testing or live for production, and your consumer key, consumer secret, api key, security option  and callback url for your app.
+
+In the directory where you installed the SDK, create a file in javascript language. Include this code to make the SDK available and configure your environment with your application credentials for sandbox and live environments in the Developer Dashboard.
+
+```javascript 
+/**
+ *
+ * MMAPI Node.js SDK dependency
+ */
 const mmapi = require('mmapi-nodejs-sdk');
 
-// Creating an environment
-let consumerKey = "<<MOBILE_MONEY_API_CONSUMER_KEY>>";
-let consumerSecret = "<<MOBILE_MONEY_API_API_CONSUMER_SERCRET>>";
-let apiKey = "<<MOBILE_MONEY_API_API_KEY>>"
-let securityOption = "<<DEVELOPMENT_LEVEL || STANDARD_LEVEL || ENHANCED_LEVEL>>" // optional
-let callbackUrl = "<<CALLBACK_URL>>"
+/**
+ * Returns MMAPI Noe.js SDK HTTP client instance with environment.
+ * Use this instance to invoke MMAPI APIs
+ */
+const client = () => {
+    return new mmapi.core.MobileMoneyApiHttpClient(environment());
+}
 
-// This sample uses SandboxEnvironment. In production, use LiveEnvironment
-let environment = new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret, apiKey, securityOption, callbackUrl);
-let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
+/**
+ * Set up and return MMAPI Noe.js SDK environment.
+ */
+const environment = () => {
+    const consumerKey = process.env.CONSUMER_KEY
+    const consumerSecret = process.env.CONSUMER_SECRET;
+    const apiKey = process.env.API_KEY;
+    const securityOption = process.env.SECURITY_OPTION; // optional  DEVELOPMENT_LEVEL, STANDARD_LEVEL, ENHANCED_LEVEL
+    const callbackUrl = process.env.CALLBACK_URL;
+    
+    if (process.env.NODE_ENV === 'production') {
+      return new mmapi.core.LiveEnvironment(consumerKey, consumerSecret, apiKey, securityOption, callbackUrl);
+    }
+
+    return new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret, apiKey, securityOption, callbackUrl);
+}
+
+module.exports = { client };
 ```
+
+## How to make API calls
 
 | Usecase     | Method     | API           | End Point
 | ------------- | ------------- | ------------- | ------------- |
@@ -44,13 +79,14 @@ $ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YO
 ```
 ## Samples
 
-### Way 1
+#### Way 1
+
 ```
 $ npm install
 $ cd samples/common
 $ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node checkForServiceAvailability.js 
 ```
-### Way 2
+#### Way 2
 ```
 $ npm install
 $ cd samples
