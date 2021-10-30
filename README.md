@@ -37,12 +37,24 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 | Disbursement | GET |[Retrieve Batch Transactions that have Completed](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/disbursement/retrieveBatchTransactionsThatHaveCompleted.Readme.md)| /batchtransactions/{batchId}/completions |
 | Disbursement | GET |[Retrieve Batch Transactions that have been Rejected](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/disbursement/retrieveBatchTransactionsThatHaveBeenRejected.Readme.md)| /batchtransactions/{batchId}/rejections |
 
-## How to Run
-
+## Test
 ```
-1. git clone git@github.com:gsmainclusivetechlab/mmapi-nodejs-sdk.git
-2. cd mmapi-nodejs-sdk
-2. npm install
-2. cd samples/common
-3. node checkForServiceAvailability.js
+$ npm install
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL npm run test
+```
+## Samples
+
+### Way 1
+```
+$ npm install
+$ cd samples/common
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node checkForServiceAvailability.js 
+```
+### Way 2
+```
+$ npm install
+$ cd samples
+$ Update the sample_harness.js with your sandbox client credentials
+$ cd common
+$ node checkForServiceAvailability.js 
 ```
