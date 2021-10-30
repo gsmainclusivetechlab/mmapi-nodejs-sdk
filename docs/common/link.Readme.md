@@ -1,6 +1,6 @@
 # Link
 
-### Code To Execute
+### Usage/Examples
 
 ```javascript
 const link  = async (link) => {
