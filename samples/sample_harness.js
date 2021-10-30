@@ -10,7 +10,7 @@ const mmapi = require('../lib/index');
  * For demo purpose, we are using SandboxEnvironment. In production this will be LiveEnvironment.
  */
 const environment = () => {
-  const consumerKey = process.env.CONSUMER_KEY;
+  const consumerKey = process.env.CONSUMER_KEY
   const consumerSecret = process.env.CONSUMER_SECRET
   const apiKey = process.env.API_KEY
   const securityOption = process.env.SECURITY_OPTION // DEVELOPMENT_LEVEL, STANDARD_LEVEL, ENHANCED_LEVEL
