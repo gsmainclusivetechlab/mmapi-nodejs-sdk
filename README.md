@@ -29,6 +29,6 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 | Merchant Payments | POST |[Perform a Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/merchantPayment/performAMerchantPayment.Readme.md)| /transactions/type/merchantpay |
 | Merchant Payments | POST |[Perform A Merchant Payment Via Polling](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/merchantPayment/performAMerchantPaymentViaPolling.Readme.md)| /transactions/type/merchantpay |
 | Merchant Payments | POST |[Obtain an Authorisation Code](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/merchantPayment/obtainAnAuthorisationCode.Readme.md)| /accounts/{identifierType}/{identifier}/authorisationcodes |
-
+| Merchant Payments | POST |[Perform a Merchant Payment Refund](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/merchantPayment/performAMerchantPaymentRefund.Readme.md)| /transactions/type/adjustment |
 
 
