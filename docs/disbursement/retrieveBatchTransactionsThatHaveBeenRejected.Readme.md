@@ -12,8 +12,8 @@ const retrieveBatchTransactionsThatHaveBeenRejected  = async (batchId) => {
     // Call API with your client and get a response for your call
     const response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
-    console.log(`Response Data: ${response.data}`);
     console.log(`Response Header: ${response.headers}`);
+    console.log(`Response Data: ${response.data}`);
 
     return response;
   } catch (e) {
