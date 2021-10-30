@@ -1,4 +1,4 @@
-'use strict';
+require('dotenv').config()
 
 /**
  * MobileMoneyApi Node JS SDK dependency
