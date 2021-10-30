@@ -1,6 +1,6 @@
 # Check For Service Availability
   
-### Code To Execute
+### Usage/Examples
 
 ```javascript
 const checkForServiceAvailability  = async () => {
