@@ -1,8 +1,6 @@
 # Retrieve A Set Of Transactions For An Account
 
-This endpoint returns transactions linked to a specific account.
-
-### Code To Execute
+### Usage/Examples
 
 ```javascript
 const retrieveASetOfTransactionsForAnAccount  = async (identifierType, identifier) => {
