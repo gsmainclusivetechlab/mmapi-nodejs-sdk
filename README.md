@@ -26,6 +26,6 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 | Common | GET |[Poll to Determine the Request State](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/common/pollToDetermineTheRequestState.Readme.md)| /requeststates/{serverCorrelationId} |
 | Common | GET |[Retrieve a Transaction](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/common/retrieveATransaction.Readme.md)| /transactions/{transactionReference} |
 | Common | POST |[Perform a Transaction Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/common/performATransactionReversal.Readme.md)| /transactions/{originalTransactionReference}/reversals |
-| Merchant Payments | POST |[Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/merchantPayment/performAMerchantPayment.Readme.md)| /transactions/type/merchantpay |
-| Merchant Payments | POST |[Payer Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/merchantPayment/performAMerchantPayment.Readme.md)| /transactions/type/merchantpay |
 | Merchant Payments | POST |[Perform a Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/merchantPayment/performAMerchantPayment.Readme.md)| /transactions/type/merchantpay |
+| Merchant Payments | POST |[Perform A Merchant Payment Via Polling](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-authentication/docs/merchantPayment/performAMerchantPaymentViaPolling.Readme.md)| /transactions/type/merchantpay |
+
