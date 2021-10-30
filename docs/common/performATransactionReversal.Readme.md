@@ -1,6 +1,6 @@
 # Perform A Transaction Reversal
 
-### Code To Execute
+### Usage/Examples
 
 ```javascript
 const performATransactionReversal = async (originalTransactionReference) => {
