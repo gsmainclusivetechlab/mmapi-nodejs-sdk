@@ -1,6 +1,6 @@
 # Get An Account Balance
 
-### Code To Execute
+### Usage/Examples
 
 ```javascript
 const getAnAccountBalance  = async (identifierType, identifier) => {
