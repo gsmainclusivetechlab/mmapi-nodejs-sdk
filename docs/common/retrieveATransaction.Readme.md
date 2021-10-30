@@ -1,6 +1,6 @@
 # Retrieve A Transaction
 
-### Code To Execute
+### Usage/Examples
 
 ```javascript
 const retrieveATransaction = async (transactionReference) => {
