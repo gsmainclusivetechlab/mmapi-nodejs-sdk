@@ -28,7 +28,7 @@ const performAMerchantPayment  = async () => {
 performAMerchantPayment()
 ```
 
-### Expected Output
+### Example Output
 ```javascript
   202
 
