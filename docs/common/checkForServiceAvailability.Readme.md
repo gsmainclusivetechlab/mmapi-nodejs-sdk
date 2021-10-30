@@ -3,24 +3,33 @@
 ### Usage/Examples
 
 ```javascript
-const checkForServiceAvailability  = async () => {
-  try{
-    // Construct a request object and set desired parameters
-    // Here, CheckForServiceAvailabilityRequest() creates a GET request to /heartbeat
-    let request = new mmapi.common.CheckForServiceAvailabilityRequest();
+// 1a. Import the SDK package
+const mmapi = require('mmapi-nodejs-sdk');
 
-    // Call API with your client and get a response for your call
+// 1b. Import the MMAPI SDK client that was created in `Set up Server-Side SDK`.
+const { client } = require('./mmapi/client');
+
+// 2. Set up your server to receive a call from the client
+const checkForServiceAvailability = async () => {
+
+  // 3. Construct a request object and set desired parameters.
+  // Here, CheckForServiceAvailabilityRequest() creates a GET request to /heartbeat
+  let request = new mmapi.common.CheckForServiceAvailabilityRequest();
+
+  try {
+    // 4a. Call API with your client and get a response for your call
     let response = await client.execute(request);
-    console.log(`Response Status: ${response.status}`);
-    console.log(`Response Headers: ${response.headers}`);
-    console.log(`Response Data: ${response.data}`);
-    
+    // 5a. Return a successful response to the client
     return response;
-  } catch (e) {
-    console.log(e)
+  } catch (err) {
+    // 4b. Handle any errors from the call
+    console.error(err);
+    // 5b. Return a error response to the client
+    return err;
   }
 }
-checkForServiceAvailability()
+
+module.exports = { checkForServiceAvailability }
 ```
 
 ### Example Output
