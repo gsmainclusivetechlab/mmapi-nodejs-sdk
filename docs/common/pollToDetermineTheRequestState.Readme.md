@@ -1,6 +1,6 @@
 # Poll To Determine The Request State
 
-### Code To Execute
+### Usage/Examples
 
 ```javascript
 const pollToDetermineTheRequestState  = async (serverCorrelationId) => {
