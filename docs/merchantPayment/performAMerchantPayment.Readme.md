@@ -11,11 +11,13 @@ const performAMerchantPayment  = async () => {
     // Construct a request object and set desired parameters
     // Here, PerformAMerchantPaymentRequest() creates a POST request to /transactions/type/merchantpay
     const request = new mmapi.merchantPayment.PerformAMerchantPaymentRequest();
+    // Set request body
     request.data = buildRequestBody();
 
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Header: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
 
     return response;
@@ -26,7 +28,7 @@ const performAMerchantPayment  = async () => {
 performAMerchantPayment()
 ```
 
-### Expected Output
+### Example Output
 ```javascript
   202
 

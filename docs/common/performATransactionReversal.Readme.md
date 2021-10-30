@@ -1,6 +1,6 @@
 # Perform A Transaction Reversal
 
-### Code To Execute
+### Usage/Examples
 
 ```javascript
 const performATransactionReversal = async (originalTransactionReference) => {
@@ -12,6 +12,7 @@ const performATransactionReversal = async (originalTransactionReference) => {
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Header: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
 
     return response;
@@ -19,7 +20,7 @@ const performATransactionReversal = async (originalTransactionReference) => {
     console.log(e)
   }
 }
-performATransactionReversal('REF-1635493338939')
+performATransactionReversal('REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE')
 ```
 
 ### Example Output

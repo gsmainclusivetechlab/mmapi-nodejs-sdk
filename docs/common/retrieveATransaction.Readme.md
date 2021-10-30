@@ -1,6 +1,6 @@
-# Poll To Determine The Request State
+# Retrieve A Transaction
 
-### Code To Execute
+### Usage/Examples
 
 ```javascript
 const retrieveATransaction = async (transactionReference) => {
@@ -12,6 +12,7 @@ const retrieveATransaction = async (transactionReference) => {
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Header: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
 
     return response;
@@ -19,7 +20,7 @@ const retrieveATransaction = async (transactionReference) => {
     console.log(e)
   }
 }
-retrieveATransaction('REF-1635490512846')
+retrieveATransaction('REPLACE-WITH-TRANSACTION-REFERENCE')
 ```
 
 ### Example Output

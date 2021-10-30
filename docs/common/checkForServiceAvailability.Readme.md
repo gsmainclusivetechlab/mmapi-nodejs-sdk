@@ -1,6 +1,6 @@
 # Check For Service Availability
-
-### Code To Execute
+  
+### Usage/Examples
 
 ```javascript
 const checkForServiceAvailability  = async () => {
@@ -12,8 +12,9 @@ const checkForServiceAvailability  = async () => {
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Headers: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
-
+    
     return response;
   } catch (e) {
     console.log(e)

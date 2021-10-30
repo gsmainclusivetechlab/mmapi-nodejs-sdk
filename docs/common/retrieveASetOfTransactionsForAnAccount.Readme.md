@@ -1,18 +1,29 @@
 # Retrieve A Set Of Transactions For An Account
 
-### Code To Execute
+### Usage/Examples
 
 ```javascript
-const retrieveASetOfTransactionsForAnAccount  = async () => {
+const retrieveASetOfTransactionsForAnAccount  = async (identifierType, identifier) => {
   try{
-    // Construct a request object and set desired parameters
-    // Here, RetrieveASetOfTransactionsForAnAccountRequest(identifierType, identifier) creates a GET request to /accounts/{identifierType}/{identifier}/transactions?offset=0&limit=20
+    /**
+     * Construct a request object and set desired parameters
+     * Here, RetrieveASetOfTransactionsForAnAccountRequest(identifierType, identifier) creates a GET request to /accounts/{identifierType}/{identifier}/transactions
+     * @param {string} identifierType - The type of the identifier that is used to identify the account..
+     * @param {string} identifier - Path variable that contains the account identifier.
+    */
     let request = new mmapi.common.RetrieveASetOfTransactionsForAnAccountRequest(identifierType, identifier);
+     /**
+     * creates query params 
+     * @param {number} offset - Supports pagination. This value will indicate the cursor position from where to retrieve the set of records. For example, a limit of 50 and offset of 10 will return records 11 to 60.
+     * @param {number} limit  - Supports pagination. If this is not supplied, then the server will apply a limit of 50 records returned for each request.
+     * @returns               - /accounts/{identifierType}/{identifier}/transactions?offset=0&limit=20
+    */ 
     request.queryParams(0, 20);
 
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Header: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
 
     return response;
@@ -20,7 +31,7 @@ const retrieveASetOfTransactionsForAnAccount  = async () => {
     console.log(e)
   }
 }
-retrieveASetOfTransactionsForAnAccount()
+retrieveASetOfTransactionsForAnAccount('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER')
 ```
 
 ### Example Output
@@ -109,7 +120,7 @@ retrieveASetOfTransactionsForAnAccount()
         "modificationDate": "2021-05-03T08:53:27",
         "requestDate": "2021-05-03T08:53:27"
     },
-    ...
+    ...,
     {
         "transactionReference": "REF-1620133857481",
         "creditParty": [

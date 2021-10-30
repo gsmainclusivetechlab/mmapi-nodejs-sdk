@@ -1,6 +1,6 @@
 # Get An Account Balance
 
-### Code To Execute
+### Usage/Examples
 
 ```javascript
 const getAnAccountBalance  = async (identifierType, identifier) => {
@@ -12,6 +12,7 @@ const getAnAccountBalance  = async (identifierType, identifier) => {
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Header: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
 
     return response;
@@ -19,10 +20,10 @@ const getAnAccountBalance  = async (identifierType, identifier) => {
     console.log(e)
   }
 }
-getAnAccountBalance('accountid', 2000)
+getAnAccountBalance('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER')
 ```
 
-### Expected Output
+### Example Output
 
 ```javascript
   200

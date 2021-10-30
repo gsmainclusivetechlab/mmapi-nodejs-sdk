@@ -1,9 +1,9 @@
 # Retrieve A Missing Response
-
-### Code To Execute
+ 
+### Usage/Examples
 
 ```javascript
-const retrieveAMissingResponse  = async () => {
+const retrieveAMissingResponse  = async (clientCorrelationId) => {
   try{
     // Construct a request object and set desired parameters
     // Here, RetrieveAMissingResponseRequest(clientCorrelationId) creates a GET request to /responses/{clientCorrelationId}
@@ -12,6 +12,7 @@ const retrieveAMissingResponse  = async () => {
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Header: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
 
     return response;
@@ -19,10 +20,10 @@ const retrieveAMissingResponse  = async () => {
     console.log(e)
   }
 }
-retrieveAMissingResponse(clientCorrelationId)
+retrieveAMissingResponse('REPLACE-WITH-CLIENT-CORRELATION-ID')
 ```
 
-### Expected Output
+### Example Output
 
 ```javascript
   200

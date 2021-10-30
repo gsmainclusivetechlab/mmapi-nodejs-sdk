@@ -10,13 +10,14 @@ const performAnIndividualDisbursement  = async () => {
     // Construct a request object and set desired parameters
     // Here, PerformAnIndividualDisbursement() creates a POST request to /transactions/type/disbursement
     const request = new mmapi.disbursement.PerformAnIndividualDisbursementRequest();
+    // Set request body
     request.data = buildRequestBody();
 
     // Call API with your client and get a response for your call
     const response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
-    console.log(`Response Data: ${response.data}`);
     console.log(`Response Header: ${response.headers}`);
+    console.log(`Response Data: ${response.data}`);
 
     return response;
   } catch (e) {

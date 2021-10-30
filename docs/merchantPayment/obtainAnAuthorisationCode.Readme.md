@@ -6,16 +6,18 @@
 ```javascript
 const buildRequestBody = () => ({"requestDate":"2018-07-03T10:43:27.405Z","currency":"GBP","amount":"1000.00"});
 
-const obtainAnAuthorisationCode  = async () => {
+const obtainAnAuthorisationCode  = async (identifierType, identifier) => {
   try {
     // Construct a request object and set desired parameters
     // Here, ObtainAnAuthorisationCodeRequest(identifierType, identifier) creates a POST request to /accounts/{identifierType}/{identifier}/authorisationcodes
-    const request = new mmapi.merchantPayment.ObtainAnAuthorisationCodeRequest('accountId', 2000);
+    const request = new mmapi.merchantPayment.ObtainAnAuthorisationCodeRequest(identifierType, identifier);
+    // Set request body
     request.data = buildRequestBody();
 
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Header: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
 
     return response;
@@ -23,10 +25,10 @@ const obtainAnAuthorisationCode  = async () => {
     console.log(e)
   }
 }
-obtainAnAuthorisationCode()
+obtainAnAuthorisationCode('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER')
 ```
 
-### Expected Output
+### Example Output
 ```javascript
   202
 
