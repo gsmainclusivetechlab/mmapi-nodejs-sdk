@@ -1,4 +1,4 @@
-# Poll To Determine The Request State
+# Retrieve A Transaction
 
 ### Code To Execute
 
