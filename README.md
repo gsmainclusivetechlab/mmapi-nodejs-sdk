@@ -17,35 +17,32 @@ In the directory where you installed the SDK, create a file in javascript langua
 
 ```javascript 
 /**
- *
  * MMAPI Node.js SDK dependency
- */
+*/
 const mmapi = require('mmapi-nodejs-sdk');
 
 /**
- * Returns MMAPI Noe.js SDK HTTP client instance with environment.
- * Use this instance to invoke MMAPI APIs
- */
-const client = () => {
-    return new mmapi.core.MobileMoneyApiHttpClient(environment());
+  * Set up and return MMAPI Noe.js SDK environment.
+*/
+const consumerKey = process.env.CONSUMER_KEY
+const consumerSecret = process.env.CONSUMER_SECRET;
+const apiKey = process.env.API_KEY;
+const securityOption = process.env.SECURITY_OPTION; // optional  DEVELOPMENT_LEVEL, STANDARD_LEVEL, ENHANCED_LEVEL
+const callbackUrl = process.env.CALLBACK_URL;
+
+let environment;
+
+if (process.env.NODE_ENV === 'production') {
+  environment = new mmapi.core.LiveEnvironment(consumerKey, consumerSecret, apiKey, securityOption, callbackUrl);
 }
+
+environment = new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret, apiKey, securityOption, callbackUrl);
 
 /**
- * Set up and return MMAPI Noe.js SDK environment.
- */
-const environment = () => {
-    const consumerKey = process.env.CONSUMER_KEY
-    const consumerSecret = process.env.CONSUMER_SECRET;
-    const apiKey = process.env.API_KEY;
-    const securityOption = process.env.SECURITY_OPTION; // optional  DEVELOPMENT_LEVEL, STANDARD_LEVEL, ENHANCED_LEVEL
-    const callbackUrl = process.env.CALLBACK_URL;
-    
-    if (process.env.NODE_ENV === 'production') {
-      return new mmapi.core.LiveEnvironment(consumerKey, consumerSecret, apiKey, securityOption, callbackUrl);
-    }
-
-    return new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret, apiKey, securityOption, callbackUrl);
-}
+  * Returns MMAPI Noe.js SDK HTTP client instance with environment.
+  * Use this instance to invoke MMAPI APIs
+*/
+let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 
 module.exports = { client };
 ```
