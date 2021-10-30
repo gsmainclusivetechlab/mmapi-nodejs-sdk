@@ -7,7 +7,7 @@
 const mmapi = require('mmapi-nodejs-sdk');
 
 // 1b. Import the MMAPI SDK client that was created in `Set up Server-Side SDK`.
-const { client } = require('./mmapi/client');
+const { client } = require('<REPLACE-WITH-RELATIVE-PATH-TO-CLIENT-FILE>');
 
 // 2. Set up your server to receive a call from the client
 const checkForServiceAvailability = async () => {
