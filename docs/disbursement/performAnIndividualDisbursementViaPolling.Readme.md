@@ -10,14 +10,15 @@ const performAnIndividualDisbursementViaPolling  = async () => {
     // Construct a request object and set desired parameters
     // Here, performAnIndividualDisbursementViaPolling() creates a POST request to /transactions/type/disbursement
     const request = new mmapi.disbursement.performAnIndividualDisbursementViaPollingRequest();
+    // Set request body
     request.data = buildRequestBody();
 
     // Call API with your client and get a response for your call
     const response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
-    console.log(`Response Data: ${response.data}`);
     console.log(`Response Header: ${response.headers}`);
-
+    console.log(`Response Data: ${response.data}`);
+    
     return response;
   } catch (e) {
     console.log(e)
