@@ -10,6 +10,7 @@ let performABulkDisbursement  = async () => {
       // Construct a request object and set desired parameters
       // Here, PerformABulkDisbursementRequest() creates a POST request to /batchtransactions
       const request = new mmapi.disbursement.PerformABulkDisbursementRequest();
+      // Set request body
       request.data = buildRequestBody();
 
       // Call API with your client and get a response for your call
