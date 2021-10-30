@@ -12,6 +12,7 @@ const link  = async (link) => {
     // Call API with your client and get a response for your call
     let response = await client.execute(request);
     console.log(`Response Status: ${response.status}`);
+    console.log(`Response Header: ${response.headers}`);
     console.log(`Response Data: ${response.data}`);
 
     return response;
@@ -19,7 +20,7 @@ const link  = async (link) => {
     console.log(e)
   }
 }
-link('/transactions/REF-1635442955061')
+link('REPLACE-WITH-LINK')
 ```
 
 ### Example Output
