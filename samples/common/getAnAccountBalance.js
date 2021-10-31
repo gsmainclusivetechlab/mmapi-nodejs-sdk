@@ -30,9 +30,11 @@ let getAnAccountBalance = async function () {
 /**
  * This is the immediately invoked function which invokes the getAnAccountBalance function.
 */
-(async () => {
-  await getAnAccountBalance();
-})();
+if (require.main === module) {
+ (async () => {
+   await getAnAccountBalance();
+ })();
+}
 
 /**
  * Exports the getAnAccountBalance function. If needed this can be invoked from the other modules.
