@@ -33,9 +33,11 @@ let retrieveBatchTransactionsThatHaveBeenRejected = async (batchId) => {
  * This is the driver function which invokes the RetrieveBatchTransactionsThatHaveBeenRejectedRequest function
  * to retrieve an order details.
 */
-(async () => {
-  await retrieveBatchTransactionsThatHaveBeenRejected('REF-1635509903380');
-})();
+if (require.main === module) {
+ (async () => {
+   await retrieveBatchTransactionsThatHaveBeenRejected('REF-1635509903380');
+ })();
+}
 
 /**
  * Exports the retrieveBatchTransactionsThatHaveBeenRejected function. If needed this can be invoked from the other modules
