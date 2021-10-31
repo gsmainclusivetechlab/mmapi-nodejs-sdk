@@ -49,9 +49,11 @@ let performAnIndividualDisbursement = async function () {
  * This is the driver function which invokes the performAnIndividualDisbursement function
  * to retrieve an order details.
 */
-(async () => {
-  await performAnIndividualDisbursement();
-})();
+if (require.main === module) {
+ (async () => {
+   await performAnIndividualDisbursement();
+ })();
+}
 
 /**
  * Exports the performAnIndividualDisbursement function. If needed this can be invoked from the other modules
