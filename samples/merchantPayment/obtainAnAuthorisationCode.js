@@ -39,9 +39,11 @@ let obtainAnAuthorisationCode = async () => {
 /**
  * This is the This is the immediately invoked function which invokes the obtainAnAuthorisationCode function.
 */
-(async () => {
-  await obtainAnAuthorisationCode();
-})();
+if (require.main === module) {
+ (async () => {
+   await obtainAnAuthorisationCode();
+ })();
+}
 
 /**
  * Exports the obtainAnAuthorisationCode function. If needed this can be invoked from the other modules.
