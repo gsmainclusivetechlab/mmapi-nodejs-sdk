@@ -50,9 +50,11 @@ let performAMerchantPaymentViaPolling = async () => {
 /**
  * This is the This is the immediately invoked function which invokes the performAMerchantPaymentViaPolling function.
 */
-(async () => {
-  await performAMerchantPaymentViaPolling();
-})();
+if (require.main === module) {
+ (async () => {
+   await performAMerchantPaymentViaPolling();
+ })();
+}
 
 /**
  * Exports the performAMerchantPaymentViaPolling function. If needed this can be invoked from the other modules.
