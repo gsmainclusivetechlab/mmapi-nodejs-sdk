@@ -32,9 +32,11 @@ let retrieveASetOfTransactionsForAnAccount = async function (identifierType, ide
 /**
  * This is the immediately invoked function which invokes the retrieveASetOfTransactionsForAnAccount function.
 */
-(async () => {
-  await retrieveASetOfTransactionsForAnAccount('accountid', 2000);
-})();
+if (require.main === module) {
+ (async () => {
+   await retrieveASetOfTransactionsForAnAccount('accountid', 2000);
+ })();
+}
 
 /**
  * Exports the retrieveASetOfTransactionsForAnAccount function. If needed this can be invoked from the other modules.
