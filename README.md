@@ -13,7 +13,7 @@ npm install mmapi-nodejs-sdk
 After you install the SDK, make it available to your app and configure your environment. 
 Configuration details include either sandbox for testing or live for production, and your consumer key, consumer secret, api key, security option  and callback url for your app.
 
-In the directory where you installed the SDK, create a file in javascript language. Include this code to make the SDK available and configure your environment with your application credentials for sandbox and live environments in the Developer Dashboard.
+In the directory where you installed the SDK,  include this code to make the SDK available and configure your environment with your application credentials for sandbox and live environments in the Developer Dashboard.
 
 ```javascript 
 /**
@@ -43,8 +43,6 @@ environment = new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret, api
   * Use this instance to invoke MMAPI APIs
 */
 let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
-
-module.exports = { client };
 ```
 
 ## How to make API calls
