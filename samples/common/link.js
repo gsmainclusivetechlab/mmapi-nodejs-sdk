@@ -66,11 +66,13 @@ let retrieveAMissingResponse = async function (clientCorrelationId) {
 /**
  * This is the immediately invoked function which invokes the link function.
 */
-(async () => {
-  const clientCorrelationId = await performAMerchantPayment();
-  const { data: { link } } = await retrieveAMissingResponse(clientCorrelationId);
-  await getLink(link);
-})();
+if (require.main === module) {
+ (async () => {
+   const clientCorrelationId = await performAMerchantPayment();
+   const { data: { link } } = await retrieveAMissingResponse(clientCorrelationId);
+   await getLink(link);
+ })();
+}
 
 /**
  * Exports the link function. If needed this can be invoked from the other modules.
