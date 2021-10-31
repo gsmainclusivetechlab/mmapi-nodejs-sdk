@@ -48,12 +48,12 @@ let retrieveAMissingResponse = async function (clientCorrelationId) {
 /**
  * This is the immediately invoked function which invokes the retrieveAMissingResponse function.
 */
-
-
-(async () => {
-  const clientCorrelationId = await performAMerchantPayment();
-  return await retrieveAMissingResponse(clientCorrelationId);
-})();
+if (require.main === module) {
+ (async () => {
+   const clientCorrelationId = await performAMerchantPayment();
+   return await retrieveAMissingResponse(clientCorrelationId);
+ })();
+}
 
 /**
  * Exports the retrieveAMissingResponse function. If needed this can be invoked from the other modules.
