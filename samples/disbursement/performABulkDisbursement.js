@@ -76,9 +76,11 @@ let performABulkDisbursement = async function () {
  * This is the driver function which invokes the performABulkDisbursement function
  * to retrieve an order details.
 */
-(async () => {
-  await performABulkDisbursement();
-})();
+if (require.main === module) {
+ (async () => {
+   await performABulkDisbursement();
+ })();
+}
 
 /**
  * Exports the performABulkDisbursementRequest function. If needed this can be invoked from the other modules
