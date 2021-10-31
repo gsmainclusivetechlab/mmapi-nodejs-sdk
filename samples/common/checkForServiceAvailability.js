@@ -30,9 +30,11 @@ let checkForServiceAvailability = async function () {
 /**
  * This is the immediately invoked function which invokes the checkForServiceAvailability function.
 */
-(async () => {
-  await checkForServiceAvailability();
-})();
+if (require.main === module) {
+ (async () => {
+   await checkForServiceAvailability();
+ })();
+}
 
 /**
  * Exports the checkForServiceAvailability function. If needed this can be invoked from the other modules.
