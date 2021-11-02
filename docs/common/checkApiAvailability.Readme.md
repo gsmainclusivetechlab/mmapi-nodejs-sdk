@@ -1,6 +1,8 @@
 # Check Api Availability
 
-  `Here, CheckApiAvailabilityRequest() creates a GET request to /heartbeat`
+`Here, CheckApiAvailabilityRequest() creates a GET request to /heartbeat`
+
+> `This endpoint returns the current status of the API`
 
 ### Usage/Examples
 
