@@ -38,15 +38,16 @@ const checkApiAvailability = async () => {
     return err;
   }
 };
-checkApiAvailability()
+
+checkApiAvailability();
 ```
 
 ### Example Output
 
 ```javascript
-  200
+200
 
-  {
-    "serviceStatus": "available"
-  }
+{
+  "serviceStatus": "available"
+}
 ```
