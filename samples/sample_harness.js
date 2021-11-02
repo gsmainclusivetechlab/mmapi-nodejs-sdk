@@ -16,12 +16,6 @@ const environment = () => {
   const securityOption = process.env.SECURITY_OPTION || 'STANDARD_LEVEL' // DEVELOPMENT_LEVEL, STANDARD_LEVEL, ENHANCED_LEVEL
   const callbackUrl = process.env.CALLBACK_URL || 'https://322894a8-6c41-4b35-80cc-7fbfec49c4a2.mock.pstmn.io/pramisha'
 
-  console.log(consumerKey)
-  console.log(consumerSecret)
-  console.log(apiKey)
-  console.log(securityOption)
-  console.log(callbackUrl)
-
   if (process.env.NODE_ENV === 'production') {
     return new mmapi.core.LiveEnvironment(consumerKey, consumerSecret, apiKey, securityOption, callbackUrl);
   }
