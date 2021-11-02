@@ -23,7 +23,7 @@ const viewATransactionBatch  = async (batchId) => {
 viewATransactionBatch('REPLACE-WITH-BATCH-ID')
 ```
 
-### Expected Output
+### Example Output
   ```javascript
   200
 
