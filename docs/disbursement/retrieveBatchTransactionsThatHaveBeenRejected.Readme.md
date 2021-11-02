@@ -20,7 +20,7 @@ const retrieveBatchTransactionsThatHaveBeenRejected  = async (batchId) => {
     console.log(e)
   }
 }
-retrieveBatchTransactionsThatHaveBeenRejected('REF-1635509903380')
+retrieveBatchTransactionsThatHaveBeenRejected('REPLACE-WITH-BATCH-ID')
 ```
 
 ### Expected Output

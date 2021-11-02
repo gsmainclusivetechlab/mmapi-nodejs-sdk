@@ -61,6 +61,7 @@ let performABulkDisbursement = async function () {
     // Here, PerformABulkDisbursementRequest() creates a POST request to /batchtransactions
     const request = new mmapi.disbursement.PerformABulkDisbursementRequest();
     request.data = buildRequestBody();
+    console.log('request', request)
 
     const response = await client.execute(request);
     console.log("Response Status: " + response.status);
@@ -77,9 +78,9 @@ let performABulkDisbursement = async function () {
  * to retrieve an order details.
 */
 if (require.main === module) {
- (async () => {
-   await performABulkDisbursement();
- })();
+  (async () => {
+    await performABulkDisbursement();
+  })();
 }
 
 /**

@@ -13,11 +13,11 @@ const client = require('../sample_harness').client();
 /**
  * This function can be used to perform an individual disbursement
  */
-let retrieveBatchTransactionsThatHaveCompleted = async function (batchId) {
+let viewATransactionBatch = async function (batchId) {
   try {
     // Construct a request object and set desired parameters
-    // Here, retrieveBatchTransactionsThatHaveCompletedRequest(batchId) creates a GET request to /batchtransactions/{batchId}/completions
-    const request = new mmapi.disbursement.RetrieveBatchTransactionsThatHaveCompletedRequest(batchId);
+    // Here, ViewATransactionBatchRequest(batchId) creates a GET request to /batchtransactions/{batchId}
+    const request = new mmapi.disbursement.ViewATransactionBatchRequest(batchId);
 
     const response = await client.execute(request);
     console.log("Response Status: " + response.status);
@@ -35,12 +35,12 @@ let retrieveBatchTransactionsThatHaveCompleted = async function (batchId) {
 */
 if (require.main === module) {
   (async () => {
-    await retrieveBatchTransactionsThatHaveCompleted('REF-1635846330263');
+    await viewATransactionBatch('REF-1635846330263');
   })();
 }
 
 /**
- * Exports the retrieveBatchTransactionsThatHaveCompleted function. If needed this can be invoked from the other modules
+ * Exports the viewATransactionBatch function. If needed this can be invoked from the other modules
  */
-module.exports = { retrieveBatchTransactionsThatHaveCompleted: retrieveBatchTransactionsThatHaveCompleted };
+module.exports = { viewATransactionBatch: viewATransactionBatch };
 

@@ -34,9 +34,9 @@ let retrieveBatchTransactionsThatHaveBeenRejected = async (batchId) => {
  * to retrieve an order details.
 */
 if (require.main === module) {
- (async () => {
-   await retrieveBatchTransactionsThatHaveBeenRejected('REF-1635509903380');
- })();
+  (async () => {
+    await retrieveBatchTransactionsThatHaveBeenRejected('REF-1635846330263');
+  })();
 }
 
 /**

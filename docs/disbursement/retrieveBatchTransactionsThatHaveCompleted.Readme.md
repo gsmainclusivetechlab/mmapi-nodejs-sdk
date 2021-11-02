@@ -20,7 +20,7 @@ const retrieveBatchTransactionsThatHaveCompleted  = async (batchId) => {
     console.log(e)
   }
 }
-retrieveBatchTransactionsThatHaveCompleted('REF-1635509903380')
+retrieveBatchTransactionsThatHaveCompleted('REPLACE-WITH-BATCH-ID')
 ```
 
 ### Expected Output
