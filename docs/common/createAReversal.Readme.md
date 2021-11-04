@@ -1,18 +1,21 @@
-# Check Api Availability
+# Create A Reversal
 
-`Here, CheckApiAvailabilityRequest() creates a GET request to /heartbeat`
+`Here, PerformATransactionReversalRequest(originalTransactionReference) creates a POST request to /transactions/{transactionReference}/reversals`
 
-> `This endpoint returns the current status of the API`
+> `Provided with a valid object representation, this endpoint allows for a new reversal to be created`
 
 ### Usage/Examples
 
 ```javascript
-const checkApiAvailability = async () => {
+/**
+ * Set up your function to be invoked
+ */
+const createAReversal = async (originalTransactionReference) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.CheckApiAvailabilityRequest();
+    const request = new mmapi.common.CreateAReversalRequest(originalTransactionReference);
 
     /**
      * Call API with your client and get a response for your call
@@ -30,7 +33,7 @@ const checkApiAvailability = async () => {
     /**
      * Handle any errors from the call
      */
-    console.log(err)
+    console.log(err);
 
     /**
      * Return an error response
@@ -42,15 +45,19 @@ const checkApiAvailability = async () => {
 /**
  * Invoke the function
  */
-checkApiAvailability();
+createAReversal('REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE');
 ```
 
 ### Example Output
 
 ```javascript
-200
+202
 
 {
-  "serviceStatus": "available"
+  "serverCorrelationId": "66b3e91a-1d36-41a6-8f4a-833ef1f9d125",
+  "status": "pending",
+  "notificationMethod": "callback",
+  "objectReference": "8287",
+  "pollLimit": 100
 }
 ```

@@ -11,14 +11,39 @@ const mmapi = require('../../lib/index');
 const client = require('../sample_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const buildRequestBody = () => ({
+  "amount": "200.00",
+  "debitParty": [
+    {
+      "key": "accountid",
+      "value": "2999"
+    }
+  ],
+  "creditParty": [
+    {
+      "key": "accountid",
+      "value": "2999"
+    }
+  ],
+  "currency": "RWF"
+});
+
+/**
  * Set up your function to be invoked
  */
-const link = async (link) => {
+const createAMerchantPayTransactionPolling = async () => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.LinkRequest(link);
+    const request = new mmapi.merchantPayment.CreateAMerchantPayTransactionPollingRequest();
+
+    /**
+     * Set the request body parameter
+     */
+    request.data = buildRequestBody();
 
     /**
      * Call API with your client and get a response for your call
@@ -46,7 +71,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      const response = await link('REPLACE-WITH-LINK');
+      const response = await createAMerchantPayTransactionPolling();
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
       console.log("Response Headers: ", response.headers);
@@ -63,5 +88,5 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  link
+  createAMerchantPayTransactionPolling
 };

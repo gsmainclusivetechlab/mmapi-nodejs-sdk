@@ -13,12 +13,12 @@ const client = require('../sample_harness').client();
 /**
  * Set up your function to be invoked
  */
-const link = async (link) => {
+const createAReversal = async (originalTransactionReference) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.LinkRequest(link);
+    const request = new mmapi.common.CreateAReversalRequest(originalTransactionReference);
 
     /**
      * Call API with your client and get a response for your call
@@ -46,7 +46,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      const response = await link('REPLACE-WITH-LINK');
+      const response = await createAReversal('REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE');
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
       console.log("Response Headers: ", response.headers);
@@ -63,5 +63,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  link
+  createAReversal
 };
+

@@ -11,14 +11,28 @@ const mmapi = require('../../lib/index');
 const client = require('../sample_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const buildRequestBody = () => ({
+  requestDate: '2018-07-03T10:43:27.405Z',
+  currency: 'GBP',
+  amount: '1000.00',
+});
+
+/**
  * Set up your function to be invoked
  */
-const link = async (link) => {
+const createAnAuthorisationCode = async (identifierType, identifier) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.LinkRequest(link);
+    const request = new mmapi.merchantPayment.CreateAnAuthorisationCodeRequest(identifierType, identifier);
+
+    /**
+     * Set the request body parameter
+     */
+    request.data = buildRequestBody();
 
     /**
      * Call API with your client and get a response for your call
@@ -46,7 +60,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      const response = await link('REPLACE-WITH-LINK');
+      const response = await createAnAuthorisationCode('accountid', '2000');
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
       console.log("Response Headers: ", response.headers);
@@ -62,6 +76,5 @@ if (require.main === module) {
 /**
  * Exports the function. If needed this can be invoked from the other modules.
  */
-module.exports = {
-  link
-};
+module.exports = { createAnAuthorisationCode };
+

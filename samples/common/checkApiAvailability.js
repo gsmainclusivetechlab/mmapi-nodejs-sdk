@@ -24,20 +24,12 @@ const checkApiAvailability = async () => {
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Respoanse Data: ", JSON.stringify(response.data, null, 4));
-    console.log("Respoanse Headers: ", response.headers);
 
     /**
      * Return a successful response
      */
     return response;
   } catch (err) {
-    /**
-     * Handle any errors from the call
-     */
-    console.log(err)
-
     /**
      * Return an error response
      */
@@ -53,7 +45,17 @@ if (require.main === module) {
    * This is an immediately invoked function
    */
   (async () => {
-    await checkApiAvailability();
+    try {
+      const response = await checkApiAvailability();
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+      console.log("Response Headers: ", response.headers);
+    } catch (err) {
+      /**
+       * Handle any errors from the call
+       */
+      console.log(err);
+    }
   })();
 }
 

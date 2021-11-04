@@ -1,53 +1,70 @@
 # Link
 
+`Here, LinkRequest(link) creates a GET request to /{link}`
+
+> `This endpoint allows to obtain a representation of the missing resource`
+
 ### Usage/Examples
 
 ```javascript
-const link  = async (link) => {
-  try{
-    // Construct a request object and set desired parameters
-    // Here, LinkRequest(link) creates a GET request to /{link}
-    let request = new mmapi.common.LinkRequest(link);
+/**
+ * Set up your function to be invoked
+ */
+const link = async (link) => {
+  try {
+    /**
+     * Construct a request object and set desired parameters
+     */
+    const request = new mmapi.common.LinkRequest(link);
 
-    // Call API with your client and get a response for your call
-    let response = await client.execute(request);
-    console.log(`Response Status: ${response.status}`);
-    console.log(`Response Header: ${response.headers}`);
-    console.log(`Response Data: ${response.data}`);
+    /**
+     * Call API with your client and get a response for your call
+     */
+    const response = await client.execute(request);
 
+    /**
+     * Return a successful response
+     */
     return response;
-  } catch (e) {
-    console.log(e)
+  } catch (err) {
+    /**
+     * Return an error response
+     */
+    return err;
   }
-}
-link('REPLACE-WITH-LINK')
+};
+
+/**
+ * Invoke the function
+ */
+link('REPLACE-WITH-LINK');
 ```
 
 ### Example Output
 
 ```javascript
-  200
+200
 
-  {
-    "transactionReference": "REF-1635442955061",
-    "creditParty": [
-        {
-            "key": "accountid",
-            "value": "2999"
-        }
-    ],
-    "debitParty": [
-        {
-            "key": "accountid",
-            "value": "2999"
-        }
-    ],
-    "type": "merchantpay",
-    "transactionStatus": "pending",
-    "amount": "200.00",
-    "currency": "RWF",
-    "creationDate": "2021-10-28T18:42:35",
-    "modificationDate": "2021-10-28T18:42:35",
-    "requestDate": "2021-10-28T18:42:35"
-  }
+{
+  "transactionReference": "REF-1635442955061",
+  "creditParty": [
+    {
+      "key": "accountid",
+      "value": "2999"
+    }
+  ],
+  "debitParty": [
+    {
+      "key": "accountid",
+      "value": "2999"
+    }
+  ],
+  "type": "merchantpay",
+  "transactionStatus": "pending",
+  "amount": "200.00",
+  "currency": "RWF",
+  "creationDate": "2021-10-28T18:42:35",
+  "modificationDate": "2021-10-28T18:42:35",
+  "requestDate": "2021-10-28T18:42:35"
+}
 ```

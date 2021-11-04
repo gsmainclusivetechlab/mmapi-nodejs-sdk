@@ -13,12 +13,19 @@ const client = require('../sample_harness').client();
 /**
  * Set up your function to be invoked
  */
-const link = async (link) => {
+const viewAccountSpecificTransaction = async (identifierType, identifier) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.LinkRequest(link);
+    const request = new mmapi.common.ViewAccountSpecificTransactionRequest(identifierType, identifier);
+
+    /**
+     * Set request query parameters queryParams
+     * @param {Number} offset Supports pagination. This value will indicate the cursor position from where to retrieve the set of records. For example, a limit of 50 and offset of 10 will return records 11 to 60.
+     * @param {Number} limit Supports pagination. If this is not supplied, then the server will apply a limit of 50 records returned for each request.
+     */
+    request.queryParams(0, 20);
 
     /**
      * Call API with your client and get a response for your call
@@ -46,7 +53,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      const response = await link('REPLACE-WITH-LINK');
+      const response = await viewAccountSpecificTransaction('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
       console.log("Response Headers: ", response.headers);
@@ -63,5 +70,8 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  link
+  viewAccountSpecificTransaction
 };
+
+
+
