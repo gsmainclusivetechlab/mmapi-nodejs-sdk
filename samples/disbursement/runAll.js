@@ -1,6 +1,6 @@
-const { createAMerchantPayTransaction } = require('./createAMerchantPayTransaction');
-const { createARefundTransaction } = require('./createARefundTransaction');
-const { createAnAuthorisationCode } = require('./createAnAuthorisationCode');
+const { createADisbursementTransaction } = require('./createADisbursementTransaction');
+const { createATransactionBatch } = require('./createATransactionBatch');
+const { updateATransactionBatch } = require('./updateATransactionBatch');
 
 const { createAReversal } = require('../common/createAReversal');
 const { viewAccountBalance } = require('../common/viewAccountBalance');
@@ -12,17 +12,24 @@ const { viewATransaction } = require('../common/viewATransaction');
 const { viewAResource } = require('../common/viewAResource');
 
 const usecase1 = async () => {
-  console.log("Perform a Payee-Initiated Merchant Payment...");
+  console.log("Perform an Individual Disbursement...");
 
-  console.log("POST Payee Initiated Merchant Payment")
-  await createAMerchantPayTransaction(false, true);
+  console.log("POST Perform an Individual Disbursement")
+  await createADisbursementTransaction(false, true);
 }
 
 const usecase2 = async () => {
-  console.log("Perform a Payee-Initiated Merchant Payment via the Polling Method...")
+  console.log("Perform a Bulk Disbursement...")
 
-  console.log('POST Payee Initiated Merchant Payment')
-  const { data: { serverCorrelationId } } = await createAMerchantPayTransaction(true, true);
+  console.log('POST Perform a Bulk Disbursement')
+  await createATransactionBatch(true);
+}
+
+const usecase3 = async () => {
+  console.log("Perform an Individual Disbursement Using the Polling Method...")
+
+  console.log('POST Perform an Individual Disbursement')
+  const { data: { serverCorrelationId } } = await createADisbursementTransaction(true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewARequestState(serverCorrelationId, true);
@@ -31,66 +38,45 @@ const usecase2 = async () => {
   await viewATransaction(objectReference, true);
 }
 
-const usecase3 = async () => {
-  console.log("Perform a Payer-Initiated Merchant Payment...")
-
-  console.log('POST Payer Initiated Merchant Payment')
-  await createAMerchantPayTransaction(false, true);
-}
-
 const usecase4 = async () => {
-  console.log("Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code...")
+  console.log("Perform a Transaction Reversal...")
 
-  console.log('POST Obtain an Authorisation Code')
-  await createAnAuthorisationCode('accountid', '2000', true);
-}
-
-const usecase5 = async () => {
-  console.log("Perform a Merchant Payment Refund...")
-
-  console.log('POST Perform a Merchant Payment Refund')
-  await createARefundTransaction(true);
-}
-
-const usecase6 = async () => {
-  console.log("Perform a Merchant Payment Reversal...")
-
-  console.log('POST Payee Initiated Merchant Payment')
-  const { data: { serverCorrelationId } } = await createAMerchantPayTransaction(false, true);
+  console.log('POST Perform an Individual Disbursement')
+  const { data: { serverCorrelationId } } = await createADisbursementTransaction(false, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewARequestState(serverCorrelationId, true);
 
-  console.log('GET Perform a Merchant Payment Reversal')
+  console.log('POST Perform a Transaction Reversal')
   await createAReversal(objectReference, true);
 }
 
-const usecase7 = async () => {
-  console.log("Obtain a Merchant Balance...")
+const usecase5 = async () => {
+  console.log("Obtain a Disbursement Organisation Balance...")
 
   console.log('GET Get an Account Balance')
   await viewAccountBalance('accountid', '2000', true);
 }
 
-const usecase8 = async () => {
-  console.log("Retrieve Payments for a Merchant...")
+const usecase6 = async () => {
+  console.log("Retrieve Transactions for a Disbursement Organisation...")
 
   console.log('GET Retrieve a Set of Transactions for an Account')
   await viewAccountSpecificTransaction('accountid', '2000', 0, 2, true);
 }
 
-const usecase9 = async () => {
+const usecase7 = async () => {
   console.log("Check for API Provider Service Availability...")
 
   console.log('GET Check for Service Availability')
   await checkApiAvailability(true);
 }
 
-const usecase10 = async () => {
+const usecase8 = async () => {
   console.log("Retrieve a Missing API Response from an API Provider...")
 
-  console.log('POST Payee Initiated Merchant Payment');
-  const { config: { headers } } = await createAMerchantPayTransaction(false, true);
+  console.log('POST Perform an Individual Disbursement');
+  const { config: { headers } } = await createADisbursementTransaction(false, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewAResponse(headers['X-CorrelationID'], true);
@@ -125,12 +111,6 @@ const usecase10 = async () => {
     case 8:
       await usecase8();
       break;
-    case 9:
-      await usecase9();
-      break;
-    case 9:
-      await usecase10();
-      break;
     default:
       await usecase1();
       await usecase2();
@@ -140,8 +120,6 @@ const usecase10 = async () => {
       await usecase6();
       await usecase7();
       await usecase8();
-      await usecase9();
-      await usecase10();
   }
 })();
 

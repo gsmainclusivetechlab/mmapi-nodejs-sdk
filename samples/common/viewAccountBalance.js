@@ -13,7 +13,7 @@ const client = require('../sample_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewAccountBalance = async (identifierType, identifier) => {
+const viewAccountBalance = async (identifierType, identifier, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -24,12 +24,21 @@ const viewAccountBalance = async (identifierType, identifier) => {
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
      */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
+    console.log(err);
+
     /**
      * Return an error response
      */
@@ -46,15 +55,8 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      const response = await viewAccountBalance('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
-      console.log("Response Status: ", response.status);
-      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-      console.log("Response Headers: ", response.headers);
+      await viewAccountBalance('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER', true);
     } catch (err) {
-      /**
-       * Handle any errors from the call
-       */
-      console.log(err);
     }
   })();
 }

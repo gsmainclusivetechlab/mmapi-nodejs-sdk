@@ -4,6 +4,7 @@ const client = require('./test_harness').client();
 
 const { createADisbursementTransaction, createADisbursementTransactionPolling } = require('../samples/disbursement/createADisbursementTransaction');
 const { createATransactionBatch } = require('../samples/disbursement/createATransactionBatch');
+const { updateATransactionBatch } = require('../samples/disbursement/updateATransactionBatch');
 
 const { createAReversal } = require('../samples/common/createAReversal');
 const { viewAccountBalance } = require('../samples/common/viewAccountBalance');
@@ -16,7 +17,7 @@ const { viewAResource } = require('../samples/common/viewAResource');
 
 describe('Disbursements', () => {
   describe('Perform an Individual Disbursement', () => {
-    describe('Perform an Individual Disbursement', () => {
+    describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
         const response = await createADisbursementTransaction();
 
@@ -31,7 +32,7 @@ describe('Disbursements', () => {
   });
 
   describe('Perform a Bulk Disbursement', () => {
-    describe('Perform a Bulk Disbursement', () => {
+    describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
         const response = await createATransactionBatch();
 
@@ -49,9 +50,9 @@ describe('Disbursements', () => {
     let serverCorrelationId;
     let objectReference;
 
-    describe('Perform an Individual Disbursement', () => {
+    describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createADisbursementTransactionPolling();
+        const response = await createADisbursementTransaction(true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -64,7 +65,7 @@ describe('Disbursements', () => {
       });
     })
 
-    describe('Poll to Determine the Request State', () => {
+    describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
         const response = await viewARequestState(serverCorrelationId);
 
@@ -80,7 +81,7 @@ describe('Disbursements', () => {
       });
     })
 
-    describe('Retrieve a Transaction', () => {
+    describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
         const response = await viewATransaction(objectReference);
 
@@ -99,7 +100,7 @@ describe('Disbursements', () => {
     let serverCorrelationId;
     let objectReference;
 
-    describe('Perform an Individual Disbursement', () => {
+    describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
         const response = await createADisbursementTransaction();
 
@@ -114,7 +115,7 @@ describe('Disbursements', () => {
       });
     })
 
-    describe('Poll to Determine the Request State', () => {
+    describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
         const response = await viewARequestState(serverCorrelationId);
 
@@ -130,7 +131,7 @@ describe('Disbursements', () => {
       });
     })
 
-    describe('Perform a Transaction Reversal', () => {
+    describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
         const response = await createAReversal(objectReference);
 
@@ -145,7 +146,7 @@ describe('Disbursements', () => {
   })
 
   describe('Obtain a Disbursement Organisation Balance', () => {
-    describe('Get an Account Balance', () => {
+    describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
         const response = await viewAccountBalance('accountid', '2000');
 
@@ -155,18 +156,20 @@ describe('Disbursements', () => {
   });
 
   describe('Retrieve Transactions for a Disbursement Organisation', () => {
-    describe('Retrieve a Set of Transactions for an Account', () => {
-      it('should return an array of 20 transactions and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountSpecificTransaction('accountid', '2000');
+    describe('GET Retrieve a Set of Transactions for an Account', () => {
+      it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
+        const response = await viewAccountSpecificTransaction('accountid', '2000', 0, 20);
 
         expect(response.status).toBe(200);
-        // expect(response.headers).toHaveProperty('X-Records-Available-Count');
+        expect(response.data.length).toBe(20);
+        // expect(response.headers).toHaveProperty('x-records-available-count');
+        // expect(response.headers).toHaveProperty('x-records-returned-count');
       });
     })
   });
 
   describe('Check for API Provider Service Availability', () => {
-    describe('Check for Service Availability', () => {
+    describe('GET Check for Service Availability', () => {
       it('should return the heartbeat object with status 200 to indicate the status available, unavailable or degraded', async () => {
         const response = await checkApiAvailability();
 
@@ -181,7 +184,7 @@ describe('Disbursements', () => {
     let clientCorrelationId;
     let link;
 
-    describe('Perform an Individual Disbursement', () => {
+    describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
         const response = await createADisbursementTransaction();
 
@@ -196,7 +199,7 @@ describe('Disbursements', () => {
       });
     })
 
-    describe('Retrieve a Missing Response', () => {
+    describe('GET Retrieve a Missing Response', () => {
       it('should return a response object with status 200 containing a link to the missing resource', async () => {
         const response = await viewAResponse(clientCorrelationId);
 
@@ -207,7 +210,7 @@ describe('Disbursements', () => {
       });
     })
 
-    describe('Retrieve a Missing Resource', () => {
+    describe('GET Retrieve a Missing Resource', () => {
       it('should return the requested object with status 200 containing a representation of the missing resource', async () => {
         const response = await viewAResource(link);
 

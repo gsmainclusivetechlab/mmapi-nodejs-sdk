@@ -59,7 +59,6 @@ const createAMerchantPayTransaction = async (polling = false, debug = false) => 
     if (debug) {
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-      console.log("Response Headers: ", response.headers);
     }
 
     /**
@@ -88,8 +87,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      //Replace polling here to see it work
-      await createAMerchantPayTransaction('REPLACE-WITH-TRUE-OR-FALSE', true);
+      await createAMerchantPayTransaction('REPLACE-WITH-POLLING-TRUE-OR-FALSE', true);
     } catch (err) {
     }
   })();

@@ -186,11 +186,13 @@ describe('Merchant Payments', () => {
 
   describe('Retrieve Payments for a Merchant', () => {
     describe('Retrieve a Set of Transactions for an Account', () => {
-      it('should return an array of 20 transactions and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountSpecificTransaction('accountid', '2000');
+      it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
+        const response = await viewAccountSpecificTransaction('accountid', '2000', 0, 20);
 
         expect(response.status).toBe(200);
-        // expect(response.headers).toHaveProperty('X-Records-Available-Count');
+        expect(response.data.length).toBe(20);
+        // expect(response.headers).toHaveProperty('x-records-available-count');
+        // expect(response.headers).toHaveProperty('x-records-returned-count');
       });
     })
   });

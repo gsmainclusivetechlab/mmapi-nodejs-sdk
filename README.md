@@ -117,21 +117,53 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 ```
 $ npm install
 $ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL npm run test
+
 ```
 ## Samples
+Note: Update the samples/sample_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples. 
 
-#### Way 1
+**To run all usecase scenarios for a usecase (merchantpay, disbursements, etc)**
+
+ ```
+$ npm install
+$ cd samples/merchantPayment
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node runAll.js
+```
+```
+$ npm install
+$ cd samples/merchantPayment
+$ node runAll.js
+```
+*By default runAll.js will execute all usecase scenarios for the usecase*
+
+> To select a specific use case scenario, edit the runAll.js by passing the usecase number as shown below
+
+```javascript
+// runAll.js
+(async () => {
+ 
+})(5);
+```
+
+**To run a usecase scenario by passing parameters to the function manually**
+
+*Replace the parameter with a value*
+
+```javascript
+// createAMerchantPayTransaction.js
+
+if (require.main === module) {
+  (async () => {
+    try {
+      await createAMerchantPayTransaction('REPLACE-WITH-POLLING-TRUE-OR-FALSE', true);
+    } catch (err) {
+    }
+  })();
+}
+```
 
 ```
 $ npm install
-$ cd samples/common
-$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node checkForServiceAvailability.js 
-```
-#### Way 2
-```
-$ npm install
-$ cd samples
-$ Update the sample_harness.js with your sandbox client credentials
-$ cd common
-$ node checkForServiceAvailability.js 
+$ cd samples/merchantPayment
+$ node createAMerchantPayTransaction.js
 ```
