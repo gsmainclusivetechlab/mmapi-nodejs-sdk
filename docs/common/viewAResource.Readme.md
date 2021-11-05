@@ -1,6 +1,6 @@
-# Link
+# View A Resource Request
 
-`Here, LinkRequest(link) creates a GET request to /{link}`
+`Here, ViewAResourceRequest(link) creates a GET request to /{link}`
 
 > `This endpoint allows to obtain a representation of the missing resource`
 
@@ -10,12 +10,12 @@
 /**
  * Set up your function to be invoked
  */
-const link = async (link) => {
+const viewAResource = async (link) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.LinkRequest(link);
+    const request = new mmapi.common.ViewAResourceRequest(link);
 
     /**
      * Call API with your client and get a response for your call
@@ -37,7 +37,7 @@ const link = async (link) => {
 /**
  * Invoke the function
  */
-link('REPLACE-WITH-LINK');
+viewAResource('REPLACE-WITH-LINK');
 ```
 
 ### Example Output

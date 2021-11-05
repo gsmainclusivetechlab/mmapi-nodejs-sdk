@@ -18,11 +18,14 @@ const viewAccountSpecificTransaction = async (identifierType, identifier) => {
     const request = new mmapi.common.ViewAccountSpecificTransactionRequest(identifierType, identifier);
 
     /**
-     * Set request query parameters queryParams
-     * @param {Number} offset Supports pagination. This value will indicate the cursor position from where to retrieve the set of records. For example, a limit of 50 and offset of 10 will return records 11 to 60.
-     * @param {Number} limit Supports pagination. If this is not supplied, then the server will apply a limit of 50 records returned for each request.
+     * Set the offset parameter
      */
-    request.queryParams(0, 20);
+    request.offset('REPLACE-WITH-OFFSET');
+
+    /**
+     * Set the limit parameter
+     */
+    request.limit('REPLACE-WITH-LIMIT');
 
     /**
      * Call API with your client and get a response for your call

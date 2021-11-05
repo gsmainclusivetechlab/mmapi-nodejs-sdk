@@ -11,24 +11,30 @@ const mmapi = require('../../lib/index');
 const client = require('../sample_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const buildRequestBody = () => ([
+  {
+    "op": "replace",
+    "path": "/batchStatus",
+    "value": "approved"
+  }
+]);
+
+/**
  * Set up your function to be invoked
  */
-const viewAccountSpecificTransaction = async (identifierType, identifier) => {
+const updateATransactionBatch = async (batchId) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewAccountSpecificTransactionRequest(identifierType, identifier);
+    const request = new mmapi.disbursement.UpdateATransactionBatchRequest(batchId);
 
     /**
-     * Set the offset parameter
+     * Set the request body parameter
      */
-    request.offset(0);
-
-    /**
-     * Set the limit parameter
-     */
-    request.limit(20);
+    request.data = buildRequestBody();
 
     /**
      * Call API with your client and get a response for your call
@@ -56,7 +62,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      const response = await viewAccountSpecificTransaction('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
+      const response = await updateATransactionBatch('REF-1635854756342');
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
       console.log("Response Headers: ", response.headers);
@@ -73,8 +79,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAccountSpecificTransaction
+  updateATransactionBatch
 };
-
 
 

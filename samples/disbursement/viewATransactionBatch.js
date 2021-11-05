@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * mobileMoneyApi Node JS SDK dependency
+ * mobileMoneyApi Node.js SDK dependency
  */
 const mmapi = require('../../lib/index');
 
@@ -11,36 +11,59 @@ const mmapi = require('../../lib/index');
 const client = require('../sample_harness').client();
 
 /**
- * This function can be used to perform an individual disbursement
+ * Set up your function to be invoked
  */
-let viewATransactionBatch = async function (batchId) {
+const viewATransactionBatch = async (batchId) => {
   try {
-    // Construct a request object and set desired parameters
-    // Here, ViewATransactionBatchRequest(batchId) creates a GET request to /batchtransactions/{batchId}
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.disbursement.ViewATransactionBatchRequest(batchId);
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
-    console.log("Response Status: " + response.status);
-    console.log("Response Data: " + JSON.stringify(response.data, null, 4));
 
+    /**
+     * Return a successful response
+     */
     return response;
-  } catch (e) {
-    console.log(e)
+  } catch (err) {
+    /**
+     * Return an error response
+     */
+    return err;
   }
 };
 
 /**
- * This is the driver function which invokes the retrieveBatchTransactionsThatHaveCompleted function
- * to retrieve an order details.
-*/
+ * This module was run directly from the command line as in node xxx.js
+ */
 if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
   (async () => {
-    await viewATransactionBatch('REF-1635846330263');
+    try {
+      const response = await viewATransactionBatch('REPLACE-WITH-BATCH-ID');
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+      console.log("Response Headers: ", response.headers);
+    } catch (err) {
+      /**
+       * Handle any errors from the call
+       */
+      console.log(err);
+    }
   })();
 }
 
 /**
- * Exports the viewATransactionBatch function. If needed this can be invoked from the other modules
+ * Exports the function. If needed this can be invoked from the other modules.
  */
-module.exports = { viewATransactionBatch: viewATransactionBatch };
+module.exports = {
+  viewATransactionBatch
+};
+
 

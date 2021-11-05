@@ -11,24 +11,64 @@ const mmapi = require('../../lib/index');
 const client = require('../sample_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const buildRequestBody = () => ({
+  "transactions": [
+    {
+      "amount": "200.00",
+      "type": "transfer",
+      "creditParty": [
+        {
+          "key": "accountid",
+          "value": "2000"
+        }
+      ],
+      "currency": "RWF",
+      "debitParty": [
+        {
+          "key": "accountid",
+          "value": "2999"
+        }
+      ]
+    },
+    {
+      "amount": "200.00",
+      "type": "transfer",
+      "creditParty": [
+        {
+          "key": "accountid",
+          "value": "2999"
+        }
+      ],
+      "currency": "RWF",
+      "debitParty": [
+        {
+          "key": "accountid",
+          "value": "2000"
+        }
+      ]
+    }
+  ],
+  "batchTitle": "Batch_Test",
+  "batchDescription": "Testing a Batch",
+  "scheduledStartDate": "2019-12-11T15:08:03.158Z"
+});
+
+/**
  * Set up your function to be invoked
  */
-const viewAccountSpecificTransaction = async (identifierType, identifier) => {
+const createATransactionBatch = async () => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewAccountSpecificTransactionRequest(identifierType, identifier);
+    const request = new mmapi.disbursement.CreateATransactionBatchRequest();
 
     /**
-     * Set the offset parameter
+     * Set the request body parameter
      */
-    request.offset(0);
-
-    /**
-     * Set the limit parameter
-     */
-    request.limit(20);
+    request.data = buildRequestBody();
 
     /**
      * Call API with your client and get a response for your call
@@ -56,7 +96,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      const response = await viewAccountSpecificTransaction('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
+      const response = await createATransactionBatch();
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
       console.log("Response Headers: ", response.headers);
@@ -73,8 +113,5 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAccountSpecificTransaction
+  createATransactionBatch
 };
-
-
-

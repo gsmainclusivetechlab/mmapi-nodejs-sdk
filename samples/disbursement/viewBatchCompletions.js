@@ -13,22 +13,12 @@ const client = require('../sample_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewAccountSpecificTransaction = async (identifierType, identifier) => {
+const viewBatchCompletions = async (batchId) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewAccountSpecificTransactionRequest(identifierType, identifier);
-
-    /**
-     * Set the offset parameter
-     */
-    request.offset(0);
-
-    /**
-     * Set the limit parameter
-     */
-    request.limit(20);
+    const request = new mmapi.disbursement.ViewBatchCompletionsRequest(batchId);
 
     /**
      * Call API with your client and get a response for your call
@@ -56,7 +46,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      const response = await viewAccountSpecificTransaction('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
+      const response = await viewBatchCompletions('REPLACE-WITH-BATCH-ID');
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
       console.log("Response Headers: ", response.headers);
@@ -73,8 +63,9 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAccountSpecificTransaction
+  viewBatchCompletions
 };
+
 
 
 
