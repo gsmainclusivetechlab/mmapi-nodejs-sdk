@@ -28,6 +28,11 @@ const viewAccountBalance = async (identifierType, identifier) => {
     return response;
   } catch (err) {
     /**
+     * Handle any errors from the call
+     */
+    console.log(err);
+
+    /**
      * Return an error response
      */
     return err;
@@ -37,7 +42,7 @@ const viewAccountBalance = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-viewAccountBalance('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER')
+viewAccountBalance('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
 ```
 
 ### Example Output

@@ -28,6 +28,11 @@ const viewAResponse = async (clientCorrelationId) => {
     return response;
   } catch (err) {
     /**
+     * Handle any errors from the call
+     */
+    console.log(err);
+
+    /**
      * Return an error response
      */
     return err;
@@ -37,7 +42,7 @@ const viewAResponse = async (clientCorrelationId) => {
 /**
  * Invoke the function
  */
-viewAResponse('REPLACE-WITH-CLIENT-CORRELATION-ID')
+viewAResponse('REPLACE-WITH-CLIENT-CORRELATION-ID');
 ```
 
 ### Example Output

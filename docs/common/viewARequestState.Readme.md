@@ -28,6 +28,11 @@ const viewARequestState = async (serverCorrelationId) => {
     return response;
   } catch (err) {
     /**
+     * Handle any errors from the call
+     */
+    console.log(err);
+
+    /**
      * Return an error response
      */
     return err;
@@ -37,7 +42,7 @@ const viewARequestState = async (serverCorrelationId) => {
 /**
  * Invoke the function
  */
-viewARequestState('REPLACE-WITH-SERVER-CORRELATION-ID')
+viewARequestState('REPLACE-WITH-SERVER-CORRELATION-ID');
 ```
 
 ### Example Output

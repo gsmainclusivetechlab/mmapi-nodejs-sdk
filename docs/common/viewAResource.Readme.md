@@ -28,6 +28,11 @@ const viewAResource = async (link) => {
     return response;
   } catch (err) {
     /**
+     * Handle any errors from the call
+     */
+    console.log(err);
+
+    /**
      * Return an error response
      */
     return err;

@@ -27,6 +27,11 @@ const viewBatchRejections = async (batchId) => {
     return response;
   } catch (err) {
     /**
+     * Handle any errors from the call
+     */
+    console.log(err);
+
+    /**
      * Return an error response
      */
     return err;
@@ -36,7 +41,7 @@ const viewBatchRejections = async (batchId) => {
 /**
  * Invoke the function
  */
-viewBatchRejections('REPLACE-WITH-BATCH-ID')
+viewBatchRejections('REPLACE-WITH-BATCH-ID');
 ```
 
 ### Example Output

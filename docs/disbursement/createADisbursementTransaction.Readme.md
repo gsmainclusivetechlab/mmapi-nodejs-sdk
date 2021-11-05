@@ -58,6 +58,11 @@ const createADisbursementTransaction = async () => {
     return response;
   } catch (err) {
     /**
+     * Handle any errors from the call
+     */
+    console.log(err);
+
+    /**
      * Return an error response
      */
     return err;
@@ -70,7 +75,7 @@ const createADisbursementTransaction = async () => {
 createADisbursementTransaction();
 ```
 
-### Expected Output - Callback
+### Example Output - Callback
 ```javascript
 202
 
@@ -83,7 +88,7 @@ createADisbursementTransaction();
 }
 ```
 
-### Expected Output - Polling
+### Example Output - Polling
 ```javascript
 202
 

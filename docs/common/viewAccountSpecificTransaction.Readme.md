@@ -38,6 +38,11 @@ const viewAccountSpecificTransaction = async (identifierType, identifier) => {
     return response;
   } catch (err) {
     /**
+     * Handle any errors from the call
+     */
+    console.log(err);
+
+    /**
      * Return an error response
      */
     return err;
@@ -47,7 +52,7 @@ const viewAccountSpecificTransaction = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-viewAccountSpecificTransaction('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER')
+viewAccountSpecificTransaction('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
 ```
 
 ### Example Output
