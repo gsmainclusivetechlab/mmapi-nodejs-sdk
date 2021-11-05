@@ -2,7 +2,7 @@ require('./test_helper');
 
 const client = require('./test_harness').client();
 
-const { createAMerchantPayTransaction, createAMerchantPayTransactionPolling } = require('../samples/merchantPayment/createAMerchantPayTransaction');
+const { createAMerchantPayTransaction } = require('../samples/merchantPayment/createAMerchantPayTransaction');
 const { createARefundTransaction } = require('../samples/merchantPayment/createARefundTransaction');
 const { createAnAuthorisationCode } = require('../samples/merchantPayment/createAnAuthorisationCode');
 
@@ -37,7 +37,7 @@ describe('Merchant Payments', () => {
 
     describe('Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAMerchantPayTransactionPolling();
+        const response = await createAMerchantPayTransaction(true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
