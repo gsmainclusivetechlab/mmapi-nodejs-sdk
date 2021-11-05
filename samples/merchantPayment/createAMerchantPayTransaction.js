@@ -62,6 +62,40 @@ const createAMerchantPayTransaction = async () => {
   }
 };
 
+const createAMerchantPayTransactionPolling = async () => {
+  try {
+    /**
+     * Construct a request object and set desired parameters
+     */
+    const request = new mmapi.merchantPayment.CreateAMerchantPayTransactionRequest();
+
+    /**
+     * Set the request body parameter
+     */
+    request.data = buildRequestBody();
+
+    /**
+     * Chose the polling method.
+     */
+    request.polling();
+
+    /**
+     * Call API with your client and get a response for your call
+     */
+    const response = await client.execute(request);
+
+    /**
+     * Return a successful response
+     */
+    return response;
+  } catch (err) {
+    /**
+     * Return an error response
+     */
+    return err;
+  }
+};
+
 /**
  * This module was run directly from the command line as in node xxx.js
  */
@@ -88,5 +122,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createAMerchantPayTransaction
+  createAMerchantPayTransaction,
+  createAMerchantPayTransactionPolling
 };

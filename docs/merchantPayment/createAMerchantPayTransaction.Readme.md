@@ -44,6 +44,11 @@ const createAMerchantPayTransaction = async () => {
     request.data = buildRequestBody();
 
     /**
+     * Chose the polling method.
+     */
+    request.polling();
+
+    /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
@@ -74,7 +79,7 @@ const createAMerchantPayTransaction = async () => {
 createAMerchantPayTransaction();
 ```
 
-### Example Output
+### Example Output - Callback
 ```javascript
 202
 
@@ -82,6 +87,19 @@ createAMerchantPayTransaction();
   "serverCorrelationId": "2e9ce6e1-8bbc-4938-9274-418c28e78f80",
   "status": "pending",
   "notificationMethod": "callback",
+  "objectReference": "9122",
+  "pollLimit": 100
+}
+```
+
+### Example Output - Polling
+```javascript
+202
+
+{
+  "serverCorrelationId": "2e9ce6e1-8bbc-4938-9274-418c28e78f80",
+  "status": "pending",
+  "notificationMethod": "polling",
   "objectReference": "9122",
   "pollLimit": 100
 }

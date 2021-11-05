@@ -2,8 +2,7 @@ require('./test_helper');
 
 const client = require('./test_harness').client();
 
-const { createAMerchantPayTransaction } = require('../samples/merchantPayment/createAMerchantPayTransaction');
-const { createAMerchantPayTransactionPolling } = require('../samples/merchantPayment/createAMerchantPayTransactionPolling');
+const { createAMerchantPayTransaction, createAMerchantPayTransactionPolling } = require('../samples/merchantPayment/createAMerchantPayTransaction');
 const { createARefundTransaction } = require('../samples/merchantPayment/createARefundTransaction');
 const { createAnAuthorisationCode } = require('../samples/merchantPayment/createAnAuthorisationCode');
 

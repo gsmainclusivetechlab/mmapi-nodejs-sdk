@@ -43,6 +43,11 @@ const createADisbursementTransaction = async () => {
     request.data = buildRequestBody();
 
     /**
+     * Chose the polling method.
+     */
+    request.polling();
+
+    /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
@@ -65,7 +70,7 @@ const createADisbursementTransaction = async () => {
 createADisbursementTransaction();
 ```
 
-### Expected Output
+### Expected Output - Callback
 ```javascript
 202
 
@@ -73,6 +78,19 @@ createADisbursementTransaction();
   "serverCorrelationId": "208108a9-18f7-4b11-8c50-cbb13e25c39d",
   "status": "pending",
   "notificationMethod": "callback",
+  "objectReference": "8331",
+  "pollLimit": 100
+}
+```
+
+### Expected Output - Polling
+```javascript
+202
+
+{
+  "serverCorrelationId": "208108a9-18f7-4b11-8c50-cbb13e25c39d",
+  "status": "pending",
+  "notificationMethod": "polling",
   "objectReference": "8331",
   "pollLimit": 100
 }
