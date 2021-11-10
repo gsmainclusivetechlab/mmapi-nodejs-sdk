@@ -2,18 +2,22 @@ require('./test_helper');
 
 const client = require('./test_harness').client();
 
-const { createADisbursementTransaction, createADisbursementTransactionPolling } = require('../samples/disbursement/createADisbursementTransaction');
-const { createATransactionBatch } = require('../samples/disbursement/createATransactionBatch');
-const { updateATransactionBatch } = require('../samples/disbursement/updateATransactionBatch');
+const {
+  createADisbursementTransaction,
+  createATransactionBatch,
+  updateATransactionBatch,
+} = require('../samples/index').disbursement;
 
-const { createAReversal } = require('../samples/common/createAReversal');
-const { viewAccountBalance } = require('../samples/common/viewAccountBalance');
-const { viewAccountSpecificTransaction } = require('../samples/common/viewAccountSpecificTransaction');
-const { checkApiAvailability } = require('../samples/common/checkApiAvailability');
-const { viewAResponse } = require('../samples/common/viewAResponse');
-const { viewARequestState } = require('../samples/common/viewARequestState');
-const { viewATransaction } = require('../samples/common/viewATransaction');
-const { viewAResource } = require('../samples/common/viewAResource');
+const {
+  createAReversal,
+  viewAccountBalance,
+  viewAccountSpecificTransaction,
+  checkApiAvailability,
+  viewAResponse,
+  viewARequestState,
+  viewATransaction,
+  viewAResource
+} = require('../samples/index').common;
 
 describe('Disbursements', () => {
   describe('Perform an Individual Disbursement', () => {
@@ -162,8 +166,8 @@ describe('Disbursements', () => {
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);
-        // expect(response.headers).toHaveProperty('x-records-available-count');
-        // expect(response.headers).toHaveProperty('x-records-returned-count');
+        expect(response.headers).toHaveProperty('x-records-available-count');
+        expect(response.headers).toHaveProperty('x-records-returned-count');
       });
     })
   });

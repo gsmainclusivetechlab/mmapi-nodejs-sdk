@@ -8,7 +8,7 @@ const mmapi = require('../../lib/index');
 /**
  * mobileMoneyApi HTTP client dependency
  */
-const client = require('../sample_harness').client();
+const client = require('../../test/test_harness').client();
 
 /**
  * Create the request body parameter

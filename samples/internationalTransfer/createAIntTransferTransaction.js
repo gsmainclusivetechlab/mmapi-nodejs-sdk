@@ -8,7 +8,7 @@ const mmapi = require('../../lib/index');
 /**
  * mobileMoneyApi HTTP client dependency
  */
-const client = require('../sample_harness').client();
+const client = require('../../test/test_harness').client();
 
 /**
  * Create the request body parameter
@@ -17,21 +17,21 @@ const buildRequestBody = (quotationReference, quoteId) => ({
   "amount": "100.00",
   "creditParty": [
     {
-      "key": "accountid",
-      "value": "2000"
+      "key": "walletid",
+      "value": "1"
     }
   ],
   "currency": "GBP",
   "debitParty": [
     {
-      "key": "accountid",
-      "value": "2999"
+      "key": "msisdn",
+      "value": "+44012345678"
     }
   ],
   "internationalTransferInformation": {
     "originCountry": "GB",
     "quotationReference": `${quotationReference}`,
-    "quoteId": `${quoteId}`,
+    // "quoteId": `${quoteId}`,
     "receivingCountry": "RW",
     "remittancePurpose": "personal",
     "relationshipSender": "none",
@@ -84,7 +84,7 @@ const buildRequestBody = (quotationReference, quoteId) => ({
 /**
  * Set up your function to be invoked
  */
-const createAIntTransferTransaction = async (quotationReference, quoteId, polling = false, debug = false) => {
+const createAIntTransferTransaction = async (quotationReference, quoteId, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -95,13 +95,6 @@ const createAIntTransferTransaction = async (quotationReference, quoteId, pollin
      * Set the request body parameter
      */
     request.data = buildRequestBody(quotationReference, quoteId);
-
-    /**
-     * Chose the polling method.
-     */
-    if (polling) {
-      request.polling();
-    }
 
     /**
      * Call API with your client and get a response for your call
@@ -138,8 +131,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAIntTransferTransaction('<REPLACE-WITH-QUOTATION-REFERENCE>', '<REPLACE-WITH-QUOTE-ID>',
-        '<REPLACE-WITH-POLLING-TRUE-OR-FALSE>', true);
+      await createAIntTransferTransaction('<REPLACE-WITH-QUOTATION-REFERENCE>', '<REPLACE-WITH-QUOTE-ID>', true);
     } catch (err) {
     }
   })();

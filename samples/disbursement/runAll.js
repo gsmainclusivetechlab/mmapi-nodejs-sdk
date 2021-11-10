@@ -1,15 +1,19 @@
-const { createADisbursementTransaction } = require('./createADisbursementTransaction');
-const { createATransactionBatch } = require('./createATransactionBatch');
-const { updateATransactionBatch } = require('./updateATransactionBatch');
+const {
+  createADisbursementTransaction,
+  createATransactionBatch,
+  updateATransactionBatch,
+} = require('../index').disbursement;
 
-const { createAReversal } = require('../common/createAReversal');
-const { viewAccountBalance } = require('../common/viewAccountBalance');
-const { viewAccountSpecificTransaction } = require('../common/viewAccountSpecificTransaction');
-const { checkApiAvailability } = require('../common/checkApiAvailability');
-const { viewAResponse } = require('../common/viewAResponse');
-const { viewARequestState } = require('../common/viewARequestState');
-const { viewATransaction } = require('../common/viewATransaction');
-const { viewAResource } = require('../common/viewAResource');
+const {
+  createAReversal,
+  viewAccountBalance,
+  viewAccountSpecificTransaction,
+  checkApiAvailability,
+  viewAResponse,
+  viewARequestState,
+  viewATransaction,
+  viewAResource
+} = require('../index').common;
 
 const usecase1 = async () => {
   console.log("Perform an Individual Disbursement...");

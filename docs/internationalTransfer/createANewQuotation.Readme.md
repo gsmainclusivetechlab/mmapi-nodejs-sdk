@@ -1,15 +1,12 @@
-'use strict';
+# Create A New Quotation
 
-/**
- * mobileMoneyApi Node.js SDK dependency
- */
-const mmapi = require('../../lib/index');
+`Here, CreateANewQuotationRequest() creates a POST request to /quotations`
 
-/**
- * mobileMoneyApi HTTP client dependency
- */
-const client = require('../../test/test_harness').client();
+> `Provided with a valid object representation, this endpoint allows for a new quotation to be created.`
 
+### Usage/Examples
+
+```javascript
 /**
  * Create the request body parameter
  */
@@ -83,7 +80,7 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createANewQuotation = async (debug = false) => {
+const createANewQuotation = async () => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -99,10 +96,6 @@ const createANewQuotation = async (debug = false) => {
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    if (debug) {
-      console.log("Response Status: ", response.status);
-      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-    }
 
     /**
      * Return a successful response
@@ -122,24 +115,20 @@ const createANewQuotation = async (debug = false) => {
 };
 
 /**
- * This module was run directly from the command line as in node xxx.js
+ * Invoke the function
  */
-if (require.main === module) {
-  /**
-   * This is an immediately invoked function
-   */
-  (async () => {
-    try {
-      await createANewQuotation(true);
-    } catch (err) {
-    }
-  })();
+createANewQuotation();
+```
+
+### Example Output
+```javascript
+202
+
+{
+  "serverCorrelationId": "7a20ef01-996c-4652-95ee-13766f116544",
+  "status": "pending",
+  "notificationMethod": "callback",
+  "objectReference": "535",
+  "pollLimit": 100
 }
-
-/**
- * Exports the function. If needed this can be invoked from the other modules.
- */
-module.exports = {
-  createANewQuotation
-};
-
+```
