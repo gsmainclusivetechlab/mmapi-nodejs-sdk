@@ -120,19 +120,17 @@ $ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YO
 
 ```
 ## Samples
-Note: Update the samples/sample_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples. 
+Note: Update the test/test_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples. 
 
 **To run all usecase scenarios for a usecase (merchantpay, disbursements, etc)**
 
  ```
 $ npm install
-$ cd samples/merchantPayment
-$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node runAll.js
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node samples/merchantPayment/runAll.js
 ```
 ```
 $ npm install
-$ cd samples/merchantPayment
-$ node runAll.js
+$ node samples/merchantPayment/runAll.js
 ```
 *By default runAll.js will execute all usecase scenarios for the usecase*
 
@@ -164,6 +162,5 @@ if (require.main === module) {
 
 ```
 $ npm install
-$ cd samples/merchantPayment
-$ node createAMerchantPayTransaction.js
+$ node samples/merchantPayment/createAMerchantPayTransaction.js
 ```
