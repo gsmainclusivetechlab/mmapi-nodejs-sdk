@@ -50,6 +50,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 
 * [Merchant Payments](#merchant-payments) 
 * [Disbursements](#disbursements)
+* [International Transfers](#international-transfers)
 
 ### Merchant Payments
 * Payee-Initiated Merchant Payment
@@ -78,7 +79,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Retrieve a Missing API Response
    * [GET Retrieve a Missing Response](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResponse.Readme.md)
    * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResource.Readme.md)
- 
+
 ### Disbursements
 
 * Individual Disbursement
@@ -112,6 +113,26 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
    * [GET Retrieve a Missing Response](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResponse.Readme.md)
    * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResource.Readme.md)
 
+### International Transfers
+
+* International Transfer via Hub
+    * [POST Request a International Transfer Quotation](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-international-transfers/docs/internationalTransfer/createANewQuotation.Readme.md)
+    * [POST Perform an International Transfer](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-international-transfers/docs/internationalTransfer/createANewQuotation.Readme.md)
+* Bilateral International Transfer
+    * [POST Request a International Transfer Quotation](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-international-transfers/docs/internationalTransfer/createANewQuotation.Readme.md)
+    * [POST Perform an International Transfer](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-international-transfers/docs/internationalTransfer/createANewQuotation.Readme.md)
+* International Transfer Failure
+* International Transfer Reversal
+    * [POST Perform a Transaction Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/createAReversal.Readme.md)
+* Obtain an FSP Balance
+    * [GET Get an Account Balance](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountBalance.Readme.md)
+* Retrieve Transactions for an FSP
+    * [GET Retrieve a Set of Transactions for an Account](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountSpecificTransaction.Readme.md)
+* Check for Service Availability
+   * [GET Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/checkApiAvailability.Readme.md)
+* Retrieve a Missing API Response
+   * [GET Retrieve a Missing Response](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResponse.Readme.md)
+   * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResource.Readme.md)
 
 ## Test
 ```
