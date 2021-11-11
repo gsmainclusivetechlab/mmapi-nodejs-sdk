@@ -17,7 +17,7 @@ const buildRequestBody = () => ([
   {
     "op": "replace",
     "path": "/batchStatus",
-    "value": "approved"
+    "value": "completed"
   }
 ]);
 

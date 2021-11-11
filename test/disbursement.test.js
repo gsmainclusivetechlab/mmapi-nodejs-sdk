@@ -6,6 +6,9 @@ const {
   createADisbursementTransaction,
   createATransactionBatch,
   updateATransactionBatch,
+  viewATransactionBatch,
+  viewBatchCompletions,
+  viewBatchRejections
 } = require('../samples/index').disbursement;
 
 const {
@@ -46,6 +49,124 @@ describe('Disbursements', () => {
         expect(response.data).toHaveProperty('serverCorrelationId');
         expect(response.data).toHaveProperty('notificationMethod');
         expect(response.data.notificationMethod).toBe('callback');
+      });
+    })
+
+    let batchId = "REF-1636655437716"
+
+    describe('GET View A Transaction Batch', () => {
+      it('should return the batch transactions object with status 200', async () => {
+        const response = await viewATransactionBatch(batchId, false);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('batchID');
+        expect(response.data).toHaveProperty('batchStatus');
+        expect(response.data).toHaveProperty('approvalDate');
+        expect(response.data).toHaveProperty('completionDate');
+      });
+    })
+
+    describe('GET Retrieve Batch Transactions that have Completed', () => {
+      it('should return the batch completions object with status 200', async () => {
+        const response = await viewBatchCompletions(batchId, false);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('transactionReference');
+        expect(response.data).toHaveProperty('creditParty');
+        expect(response.data).toHaveProperty('debitParty');
+        expect(response.data).toHaveProperty('completionDate');
+        expect(response.data).toHaveProperty('link');
+      });
+    })
+
+    describe('GET Retrieve Batch Transactions that have been Rejected', () => {
+      it('should return the batch rejections object with status 200', async () => {
+        const response = await viewBatchRejections(batchId, false);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('creditParty');
+        expect(response.data).toHaveProperty('debitParty');
+        expect(response.data).toHaveProperty('rejectionReason');
+        expect(response.data).toHaveProperty('rejectionDate');
+      });
+    })
+  });
+
+  describe('Perform a Bulk Disbursement with Maker / Checker', () => {
+    describe('POST Perform a Bulk Disbursement', () => {
+      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createATransactionBatch();
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('callback');
+      });
+    })
+
+    let batchId = "REF-1636655437716"
+
+    describe('GET Retrieve Batch Transactions that have been Rejected', () => {
+      it('should return the batch rejections object with status 200', async () => {
+        const response = await viewBatchRejections(batchId, false);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('creditParty');
+        expect(response.data).toHaveProperty('debitParty');
+        expect(response.data).toHaveProperty('rejectionReason');
+        expect(response.data).toHaveProperty('rejectionDate');
+      });
+    })
+
+    describe('PATCH Approve The Transaction Batch', () => {
+      it('should return the request state object with status 202 to indicate that the request is completed', async () => {
+        const response = await updateATransactionBatch(batchId, false);
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('completed');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('callback');
+      });
+    })
+
+    describe('GET View A Transaction Batch', () => {
+      it('should return the batch transactions object with status 200', async () => {
+        const response = await viewATransactionBatch(batchId, false);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('batchID');
+        expect(response.data).toHaveProperty('batchStatus');
+        expect(response.data).toHaveProperty('approvalDate');
+        expect(response.data).toHaveProperty('completionDate');
+      });
+    })
+
+    describe('GET Retrieve Batch Transactions that have Completed', () => {
+      it('should return the batch completions object with status 200', async () => {
+        const response = await viewBatchCompletions(batchId, false);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('transactionReference');
+        expect(response.data).toHaveProperty('creditParty');
+        expect(response.data).toHaveProperty('debitParty');
+        expect(response.data).toHaveProperty('completionDate');
+        expect(response.data).toHaveProperty('link');
+      });
+    })
+
+    describe('GET Retrieve Batch Transactions that have been Rejected', () => {
+      it('should return the batch rejections object with status 200', async () => {
+        const response = await viewBatchRejections(batchId, false);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('creditParty');
+        expect(response.data).toHaveProperty('debitParty');
+        expect(response.data).toHaveProperty('rejectionReason');
+        expect(response.data).toHaveProperty('rejectionDate');
       });
     })
   });

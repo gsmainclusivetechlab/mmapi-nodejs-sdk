@@ -2,6 +2,9 @@ const {
   createADisbursementTransaction,
   createATransactionBatch,
   updateATransactionBatch,
+  viewATransactionBatch,
+  viewBatchCompletions,
+  viewBatchRejections
 } = require('../index').disbursement;
 
 const {
@@ -27,9 +30,44 @@ const usecase2 = async () => {
 
   console.log('POST Perform a Bulk Disbursement')
   await createATransactionBatch(true);
+
+  let batchId = "REF-1636656115835"
+
+  console.log('GET View A Transaction Batch')
+  await viewATransactionBatch(batchId, true);
+
+  console.log('GET Retrieve Batch Transactions that have Completed')
+  await viewBatchCompletions(batchId, true);
+
+  console.log('GET Retrieve Batch Transactions that have been Rejected')
+  await viewBatchRejections(batchId, true);
 }
 
 const usecase3 = async () => {
+  console.log("Perform a Bulk Disbursement with Maker / Checker...")
+
+  console.log('POST Perform a Bulk Disbursement')
+  await createATransactionBatch(true);
+
+  let batchId = "REF-1636656115835"
+
+  console.log('GET Retrieve Batch Transactions that have been Rejected')
+  await viewBatchRejections(batchId, true);
+
+  console.log('PATCH Approve The Transaction Batch')
+  await updateATransactionBatch(batchId, true);
+
+  console.log('GET View A Transaction Batch')
+  await viewATransactionBatch(batchId, true);
+
+  console.log('GET Retrieve Batch Transactions that have Completed')
+  await viewBatchCompletions(batchId, true);
+
+  console.log('GET Retrieve Batch Transactions that have been Rejected')
+  await viewBatchRejections(batchId, true);
+}
+
+const usecase4 = async () => {
   console.log("Perform an Individual Disbursement Using the Polling Method...")
 
   console.log('POST Perform an Individual Disbursement')
@@ -42,7 +80,7 @@ const usecase3 = async () => {
   await viewATransaction(objectReference, true);
 }
 
-const usecase4 = async () => {
+const usecase5 = async () => {
   console.log("Perform a Transaction Reversal...")
 
   console.log('POST Perform an Individual Disbursement')
@@ -55,28 +93,28 @@ const usecase4 = async () => {
   await createAReversal(objectReference, true);
 }
 
-const usecase5 = async () => {
+const usecase6 = async () => {
   console.log("Obtain a Disbursement Organisation Balance...")
 
   console.log('GET Get an Account Balance')
   await viewAccountBalance('accountid', '2000', true);
 }
 
-const usecase6 = async () => {
+const usecase7 = async () => {
   console.log("Retrieve Transactions for a Disbursement Organisation...")
 
   console.log('GET Retrieve a Set of Transactions for an Account')
   await viewAccountSpecificTransaction('accountid', '2000', 0, 2, true);
 }
 
-const usecase7 = async () => {
+const usecase8 = async () => {
   console.log("Check for API Provider Service Availability...")
 
   console.log('GET Check for Service Availability')
   await checkApiAvailability(true);
 }
 
-const usecase8 = async () => {
+const usecase9 = async () => {
   console.log("Retrieve a Missing API Response from an API Provider...")
 
   console.log('POST Perform an Individual Disbursement');
@@ -115,6 +153,9 @@ const usecase8 = async () => {
     case 8:
       await usecase8();
       break;
+    case 9:
+      await usecase9();
+      break;
     default:
       await usecase1();
       await usecase2();
@@ -124,6 +165,7 @@ const usecase8 = async () => {
       await usecase6();
       await usecase7();
       await usecase8();
+      await usecase9();
   }
-})();
+})(3);
 
