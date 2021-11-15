@@ -1,6 +1,6 @@
 # Check Api Availability
 
-`Here, ViewServiceAvailability() creates a GET request to /heartbeat`
+`Here, viewServiceAvailability() creates a GET request to /heartbeat`
 
 > `This endpoint returns the current status of the API`
 

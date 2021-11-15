@@ -18,7 +18,7 @@ const viewAccountBalance = async (identifierType, identifier, debug = false) => 
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewAccountBalanceRequest(identifierType, identifier);
+    const request = new mmapi.common.viewAccountBalance(identifierType, identifier);
 
     /**
      * Call API with your client and get a response for your call
