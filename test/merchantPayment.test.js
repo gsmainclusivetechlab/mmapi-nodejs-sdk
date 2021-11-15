@@ -4,7 +4,7 @@ const client = require('./test_harness').client();
 
 const {
   createMerchantTransaction,
-  createARefundTransaction,
+  createRefundTransaction,
   createAuthorisationCode,
 } = require('../samples/index').merchantPayment;
 
@@ -117,7 +117,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Merchant Payment Refund', () => {
     describe('Perform a Merchant Payment Refund', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createARefundTransaction();
+        const response = await createRefundTransaction();
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

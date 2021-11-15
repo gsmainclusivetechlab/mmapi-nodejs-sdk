@@ -67,7 +67,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
    * [POST Obtain an Authorisation Code](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createAuthorisationCode.Readme.md)
    * [POST Perform a Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createMerchantTransaction.Readme.md)
 * Merchant Payment Refund
-   * [POST Perform a Merchant Payment Refund](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createARefundTransaction.Readme.md)
+   * [POST Perform a Merchant Payment Refund](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createRefundTransaction.Readme.md)
 * Merchant Payment Reversal
    * [POST Perform a Merchant Payment Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/createReversal.Readme.md)
 * Obtain a Merchant Balance

@@ -1,6 +1,6 @@
 const {
   createMerchantTransaction,
-  createARefundTransaction,
+  createRefundTransaction,
   createAuthorisationCode,
 } = require('../index').merchantPayment;
 
@@ -53,7 +53,7 @@ const usecase5 = async () => {
   console.log("Perform a Merchant Payment Refund...")
 
   console.log('POST Perform a Merchant Payment Refund')
-  await createARefundTransaction(true);
+  await createRefundTransaction(true);
 }
 
 const usecase6 = async () => {

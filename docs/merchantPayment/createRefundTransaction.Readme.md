@@ -2,7 +2,7 @@
 
 # Create A Refund Transaction
 
-`Here, CreateARefundTransactionRequest() creates a POST request to /transactions/type/adjustment`
+`Here, createRefundTransaction() creates a POST request to /transactions/type/adjustment`
 
 > `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'adjustment' passed via the URL.`
 
@@ -32,12 +32,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createARefundTransaction = async () => {
+const createRefundTransaction = async () => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.merchantPayment.CreateARefundTransactionRequest();
+    const request = new mmapi.merchantPayment.createRefundTransaction();
 
     /**
      * Set the request body parameter
@@ -72,7 +72,7 @@ const createARefundTransaction = async () => {
 /**
  * Invoke the function
  */
-createARefundTransaction();
+createRefundTransaction();
 ```
 
 ### Example Output

@@ -33,12 +33,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createARefundTransaction = async (debug = false) => {
+const createRefundTransaction = async (debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.merchantPayment.CreateARefundTransactionRequest();
+    const request = new mmapi.merchantPayment.createRefundTransaction();
 
     /**
      * Set the request body parameter
@@ -80,7 +80,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createARefundTransaction(true);
+      await createRefundTransaction(true);
     } catch (err) {
     }
   })();
@@ -90,5 +90,5 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createARefundTransaction
+  createRefundTransaction
 };
