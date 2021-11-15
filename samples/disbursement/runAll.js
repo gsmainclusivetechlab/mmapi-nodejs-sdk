@@ -13,7 +13,7 @@ const {
   viewAccountSpecificTransaction,
   viewServiceAvailability,
   viewResponse,
-  viewARequestState,
+  viewRequestState,
   viewATransaction,
   viewAResource
 } = require('../index').common;
@@ -74,7 +74,7 @@ const usecase4 = async () => {
   const { data: { serverCorrelationId } } = await createADisbursementTransaction(true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewARequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
   await viewATransaction(objectReference, true);
@@ -87,7 +87,7 @@ const usecase5 = async () => {
   const { data: { serverCorrelationId } } = await createADisbursementTransaction(false, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewARequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
   console.log('POST Perform a Transaction Reversal')
   await createAReversal(objectReference, true);

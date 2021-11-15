@@ -1,6 +1,6 @@
 # View A Request State
 
-`Here, ViewARequestState(serverCorrelationId) creates a GET request to /requeststates/{serverCorrelationId}`
+`Here, viewRequestState(serverCorrelationId) creates a GET request to /requeststates/{serverCorrelationId}`
 
 > `This endpoint returns a specific request state`
 
@@ -10,12 +10,12 @@
 /**
  * Set up your function to be invoked
  */
-const viewARequestState = async (serverCorrelationId) => {
+const viewRequestState = async (serverCorrelationId) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewARequestStateRequest(serverCorrelationId);
+    const request = new mmapi.common.viewRequestState(serverCorrelationId);
 
     /**
      * Call API with your client and get a response for your call
@@ -42,7 +42,7 @@ const viewARequestState = async (serverCorrelationId) => {
 /**
  * Invoke the function
  */
-viewARequestState('REPLACE-WITH-SERVER-CORRELATION-ID');
+viewRequestState('REPLACE-WITH-SERVER-CORRELATION-ID');
 ```
 
 ### Example Output

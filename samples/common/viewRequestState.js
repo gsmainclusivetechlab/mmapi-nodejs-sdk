@@ -13,12 +13,12 @@ const client = require('../../test/test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewARequestState = async (serverCorrelationId, debug = false) => {
+const viewRequestState = async (serverCorrelationId, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewARequestStateRequest(serverCorrelationId);
+    const request = new mmapi.common.viewRequestState(serverCorrelationId);
 
     /**
      * Call API with your client and get a response for your call
@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewARequestState('REPLACE-WITH-SERVER-CORRELATION-ID', true);
+      await viewRequestState('REPLACE-WITH-SERVER-CORRELATION-ID', true);
     } catch (err) {
     }
   })();
@@ -65,6 +65,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewARequestState
+  viewRequestState
 };
 

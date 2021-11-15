@@ -13,7 +13,7 @@ const {
   viewAccountSpecificTransaction,
   viewServiceAvailability,
   viewResponse,
-  viewARequestState,
+  viewRequestState,
   viewATransaction,
   viewAResource
 } = require('../samples/index').common;
@@ -102,7 +102,7 @@ describe('International Transfers', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewARequestState(serverCorrelationId);
+        const response = await viewRequestState(serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');

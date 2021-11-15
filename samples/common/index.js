@@ -3,7 +3,7 @@ const { viewAccountBalance } = require('./viewAccountBalance');
 const { viewAccountSpecificTransaction } = require('./viewAccountSpecificTransaction');
 const { viewServiceAvailability } = require('./viewServiceAvailability');
 const { viewResponse } = require('./viewResponse');
-const { viewARequestState } = require('./viewARequestState');
+const { viewRequestState } = require('./viewRequestState');
 const { viewATransaction } = require('./viewATransaction');
 const { viewAResource } = require('./viewAResource');
 
@@ -13,7 +13,7 @@ module.exports = {
   viewAccountSpecificTransaction,
   viewServiceAvailability,
   viewResponse,
-  viewARequestState,
+  viewRequestState,
   viewATransaction,
   viewAResource
 }
