@@ -1,4 +1,4 @@
-const { createAReversal } = require('./createAReversal');
+const { createReversal } = require('./createReversal');
 const { viewAccountBalance } = require('./viewAccountBalance');
 const { viewAccountSpecificTransaction } = require('./viewAccountSpecificTransaction');
 const { viewServiceAvailability } = require('./viewServiceAvailability');
@@ -8,7 +8,7 @@ const { viewTransaction } = require('./viewTransaction');
 const { viewAResource } = require('./viewAResource');
 
 module.exports = {
-  createAReversal,
+  createReversal,
   viewAccountBalance,
   viewAccountSpecificTransaction,
   viewServiceAvailability,

@@ -13,12 +13,12 @@ const client = require('../../test/test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const createAReversal = async (originalTransactionReference, debug = false) => {
+const createReversal = async (originalTransactionReference, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.CreateAReversalRequest(originalTransactionReference);
+    const request = new mmapi.common.createReversal(originalTransactionReference);
 
     /**
      * Call API with your client and get a response for your call
@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAReversal('REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE', true);
+      await createReversal('REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE', true);
     } catch (err) {
     }
   })();
@@ -65,6 +65,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createAReversal
+  createReversal
 };
 

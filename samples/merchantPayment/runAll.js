@@ -5,7 +5,7 @@ const {
 } = require('../index').merchantPayment;
 
 const {
-  createAReversal,
+  createReversal,
   viewAccountBalance,
   viewAccountSpecificTransaction,
   viewServiceAvailability,
@@ -66,7 +66,7 @@ const usecase6 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
   console.log('GET Perform a Merchant Payment Reversal')
-  await createAReversal(objectReference, true);
+  await createReversal(objectReference, true);
 }
 
 const usecase7 = async () => {

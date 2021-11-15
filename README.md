@@ -69,7 +69,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Merchant Payment Refund
    * [POST Perform a Merchant Payment Refund](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createARefundTransaction.Readme.md)
 * Merchant Payment Reversal
-   * [POST Perform a Merchant Payment Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/createAReversal.Readme.md)
+   * [POST Perform a Merchant Payment Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/createReversal.Readme.md)
 * Obtain a Merchant Balance
    * [GET Get an Account Balance](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountBalance.Readme.md)
 * Retrieve Payments for a Merchant
@@ -102,7 +102,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     * loop [GET Poll to Determine the Request State](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewRequestState.Readme.md)
     * optional [GET Retrieve a Transaction](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewTransaction.Readme.md)
 * Disbursement Reversal
-    * [POST Perform a Transaction Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/createAReversal.Readme.md)
+    * [POST Perform a Transaction Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/createReversal.Readme.md)
 * Obtain a Disbursement Organisation Balance
     * [GET Get an Account Balance](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountBalance.Readme.md)
 * Retrieve Transactions for a Disbursement Organisation
@@ -123,7 +123,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     * [POST Perform an International Transfer](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-international-transfers/docs/internationalTransfer/createAIntTransferTransaction.Readme.md)
 * International Transfer Failure
 * International Transfer Reversal
-    * [POST Perform a Transaction Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/createAReversal.Readme.md)
+    * [POST Perform a Transaction Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/createReversal.Readme.md)
 * Obtain an FSP Balance
     * [GET Get an Account Balance](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountBalance.Readme.md)
 * Retrieve Transactions for an FSP

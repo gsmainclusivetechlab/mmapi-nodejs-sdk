@@ -4,7 +4,7 @@ const {
 } = require('../index').internationalTransfer;
 
 const {
-  createAReversal,
+  createReversal,
   viewAccountBalance,
   viewAccountSpecificTransaction,
   viewServiceAvailability,
@@ -44,7 +44,7 @@ const usecase3 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
   console.log('GET Perform a Merchant Payment Reversal')
-  await createAReversal(objectReference, true);
+  await createReversal(objectReference, true);
 }
 
 const usecase4 = async () => {

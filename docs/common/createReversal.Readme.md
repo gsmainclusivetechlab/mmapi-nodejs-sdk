@@ -1,6 +1,6 @@
 # Create A Reversal
 
-`Here, PerformATransactionReversalRequest(originalTransactionReference) creates a POST request to /transactions/{transactionReference}/reversals`
+`Here, createReversal(originalTransactionReference) creates a POST request to /transactions/{transactionReference}/reversals`
 
 > `Provided with a valid object representation, this endpoint allows for a new reversal to be created`
 
@@ -10,12 +10,12 @@
 /**
  * Set up your function to be invoked
  */
-const createAReversal = async (originalTransactionReference) => {
+const createReversal = async (originalTransactionReference) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.CreateAReversalRequest(originalTransactionReference);
+    const request = new mmapi.common.createReversal(originalTransactionReference);
 
     /**
      * Call API with your client and get a response for your call
@@ -45,7 +45,7 @@ const createAReversal = async (originalTransactionReference) => {
 /**
  * Invoke the function
  */
-createAReversal('REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE');
+createReversal('REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE');
 ```
 
 ### Example Output

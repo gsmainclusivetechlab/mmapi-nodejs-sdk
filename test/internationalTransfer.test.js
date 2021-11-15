@@ -8,7 +8,7 @@ const {
 } = require('../samples/index').internationalTransfer;
 
 const {
-  createAReversal,
+  createReversal,
   viewAccountBalance,
   viewAccountSpecificTransaction,
   viewServiceAvailability,
@@ -118,7 +118,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAReversal(objectReference);
+        const response = await createReversal(objectReference);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

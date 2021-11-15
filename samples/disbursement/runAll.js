@@ -8,7 +8,7 @@ const {
 } = require('../index').disbursement;
 
 const {
-  createAReversal,
+  createReversal,
   viewAccountBalance,
   viewAccountSpecificTransaction,
   viewServiceAvailability,
@@ -90,7 +90,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
   console.log('POST Perform a Transaction Reversal')
-  await createAReversal(objectReference, true);
+  await createReversal(objectReference, true);
 }
 
 const usecase6 = async () => {
