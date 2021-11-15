@@ -1,6 +1,6 @@
 # View Account Specific Transaction
 
-`Here, ViewAccountSpecificTransactionRequest(identifierType, identifier) creates a GET request to /accounts/{identifierType}/{identifier}/transactions`
+`Here, viewAccountTransaction(identifierType, identifier) creates a GET request to /accounts/{identifierType}/{identifier}/transactions`
 
 > `This endpoint returns transactions linked to a specific account.`
 
@@ -10,12 +10,12 @@
 /**
  * Set up your function to be invoked
  */
-const viewAccountSpecificTransaction = async (identifierType, identifier) => {
+const viewAccountTransaction = async (identifierType, identifier) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewAccountSpecificTransactionRequest(identifierType, identifier);
+    const request = new mmapi.common.viewAccountTransaction(identifierType, identifier);
 
     /**
      * Set the offset parameter
@@ -52,7 +52,7 @@ const viewAccountSpecificTransaction = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-viewAccountSpecificTransaction('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
+viewAccountTransaction('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
 ```
 
 ### Example Output

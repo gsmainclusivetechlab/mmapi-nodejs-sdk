@@ -73,7 +73,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Obtain a Merchant Balance
    * [GET Get an Account Balance](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountBalance.Readme.md)
 * Retrieve Payments for a Merchant
-   * [GET Retrieve a Set of Transactions for an Account](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountSpecificTransaction.Readme.md)
+   * [GET Retrieve a Set of Transactions for an Account](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountTransaction.Readme.md)
 * Check for Service Availability
    * [GET Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
@@ -106,7 +106,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Obtain a Disbursement Organisation Balance
     * [GET Get an Account Balance](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountBalance.Readme.md)
 * Retrieve Transactions for a Disbursement Organisation
-    * [GET Retrieve a Set of Transactions for an Account](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountSpecificTransaction.Readme.md)
+    * [GET Retrieve a Set of Transactions for an Account](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountTransaction.Readme.md)
 * Check for Service Availability
    * [GET Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
@@ -127,7 +127,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Obtain an FSP Balance
     * [GET Get an Account Balance](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountBalance.Readme.md)
 * Retrieve Transactions for an FSP
-    * [GET Retrieve a Set of Transactions for an Account](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountSpecificTransaction.Readme.md)
+    * [GET Retrieve a Set of Transactions for an Account](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountTransaction.Readme.md)
 * Check for Service Availability
    * [GET Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response

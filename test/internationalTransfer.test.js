@@ -10,7 +10,7 @@ const {
 const {
   createReversal,
   viewAccountBalance,
-  viewAccountSpecificTransaction,
+  viewAccountTransaction,
   viewServiceAvailability,
   viewResponse,
   viewRequestState,
@@ -143,7 +143,7 @@ describe('International Transfers', () => {
   describe('Retrieve Transactions for a Financial Service Provider', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountSpecificTransaction('accountid', '2000', 0, 20);
+        const response = await viewAccountTransaction('accountid', '2000', 0, 20);
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);
