@@ -15,7 +15,7 @@ const {
   createAReversal,
   viewAccountBalance,
   viewAccountSpecificTransaction,
-  checkApiAvailability,
+  viewServiceAvailability,
   viewAResponse,
   viewARequestState,
   viewATransaction,
@@ -296,7 +296,7 @@ describe('Disbursements', () => {
   describe('Check for API Provider Service Availability', () => {
     describe('GET Check for Service Availability', () => {
       it('should return the heartbeat object with status 200 to indicate the status available, unavailable or degraded', async () => {
-        const response = await checkApiAvailability();
+        const response = await viewServiceAvailability();
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('serviceStatus');

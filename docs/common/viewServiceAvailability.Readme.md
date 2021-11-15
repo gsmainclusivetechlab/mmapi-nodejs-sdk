@@ -1,18 +1,18 @@
 # Check Api Availability
 
-`Here, CheckApiAvailabilityRequest() creates a GET request to /heartbeat`
+`Here, ViewServiceAvailability() creates a GET request to /heartbeat`
 
 > `This endpoint returns the current status of the API`
 
 ### Usage/Examples
 
 ```javascript
-const checkApiAvailability = async () => {
+const viewServiceAvailability = async () => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.CheckApiAvailabilityRequest();
+    const request = new mmapi.common.viewServiceAvailability();
 
     /**
      * Call API with your client and get a response for your call
@@ -42,7 +42,7 @@ const checkApiAvailability = async () => {
 /**
  * Invoke the function
  */
-checkApiAvailability();
+viewServiceAvailability();
 ```
 
 ### Example Output

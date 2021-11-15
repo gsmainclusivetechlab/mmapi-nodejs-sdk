@@ -11,7 +11,7 @@ const {
   createAReversal,
   viewAccountBalance,
   viewAccountSpecificTransaction,
-  checkApiAvailability,
+  viewServiceAvailability,
   viewAResponse,
   viewARequestState,
   viewATransaction,
@@ -111,7 +111,7 @@ const usecase8 = async () => {
   console.log("Check for API Provider Service Availability...")
 
   console.log('GET Check for Service Availability')
-  await checkApiAvailability(true);
+  await viewServiceAvailability(true);
 }
 
 const usecase9 = async () => {

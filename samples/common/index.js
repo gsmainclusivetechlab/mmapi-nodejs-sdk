@@ -1,7 +1,7 @@
 const { createAReversal } = require('./createAReversal');
 const { viewAccountBalance } = require('./viewAccountBalance');
 const { viewAccountSpecificTransaction } = require('./viewAccountSpecificTransaction');
-const { checkApiAvailability } = require('./checkApiAvailability');
+const { viewServiceAvailability } = require('./viewServiceAvailability');
 const { viewAResponse } = require('./viewAResponse');
 const { viewARequestState } = require('./viewARequestState');
 const { viewATransaction } = require('./viewATransaction');
@@ -11,7 +11,7 @@ module.exports = {
   createAReversal,
   viewAccountBalance,
   viewAccountSpecificTransaction,
-  checkApiAvailability,
+  viewServiceAvailability,
   viewAResponse,
   viewARequestState,
   viewATransaction,
