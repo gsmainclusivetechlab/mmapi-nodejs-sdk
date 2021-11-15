@@ -13,7 +13,7 @@ const {
   viewAccountBalance,
   viewAccountSpecificTransaction,
   viewServiceAvailability,
-  viewAResponse,
+  viewResponse,
   viewARequestState,
   viewATransaction,
   viewAResource
@@ -234,7 +234,7 @@ describe('Merchant Payments', () => {
 
     describe('Retrieve a Missing Response', () => {
       it('should return a response object with status 200 containing a link to the missing resource', async () => {
-        const response = await viewAResponse(clientCorrelationId);
+        const response = await viewResponse(clientCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('link');

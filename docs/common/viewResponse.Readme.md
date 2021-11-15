@@ -1,6 +1,6 @@
 # View A Response
 
-`Here, ViewAResponseRequest(clientCorrelationId) creates a GET request to /responses/{clientCorrelationId}`
+`Here, viewResponse(clientCorrelationId) creates a GET request to /responses/{clientCorrelationId}`
 
 > `This endpoint returns a specific response.`
 
@@ -10,12 +10,12 @@
 /**
  * Set up your function to be invoked
  */
-const viewAResponse = async (clientCorrelationId) => {
+const viewResponse = async (clientCorrelationId) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewAResponseRequest(clientCorrelationId);
+    const request = new mmapi.common.viewResponse(clientCorrelationId);
 
     /**
      * Call API with your client and get a response for your call
@@ -42,7 +42,7 @@ const viewAResponse = async (clientCorrelationId) => {
 /**
  * Invoke the function
  */
-viewAResponse('REPLACE-WITH-CLIENT-CORRELATION-ID');
+viewResponse('REPLACE-WITH-CLIENT-CORRELATION-ID');
 ```
 
 ### Example Output

@@ -9,7 +9,7 @@ const {
   viewAccountBalance,
   viewAccountSpecificTransaction,
   viewServiceAvailability,
-  viewAResponse,
+  viewResponse,
   viewARequestState,
   viewATransaction,
   viewAResource
@@ -97,7 +97,7 @@ const usecase10 = async () => {
   const { config: { headers } } = await createAMerchantPayTransaction(false, true);
 
   console.log('GET Retrieve a Missing Response');
-  const { data: { link } } = await viewAResponse(headers['X-CorrelationID'], true);
+  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], true);
 
   console.log('GET Retrieve a Missing Resource');
   await viewAResource(link, true);
