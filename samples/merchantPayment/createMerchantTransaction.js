@@ -33,12 +33,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createAMerchantPayTransaction = async (polling = false, debug = false) => {
+const createMerchantTransaction = async (polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.merchantPayment.CreateAMerchantPayTransactionRequest();
+    const request = new mmapi.merchantPayment.createMerchantTransaction();
 
     /**
      * Set the request body parameter
@@ -87,7 +87,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAMerchantPayTransaction('REPLACE-WITH-POLLING-TRUE-OR-FALSE', true);
+      await createMerchantTransaction('REPLACE-WITH-POLLING-TRUE-OR-FALSE', true);
     } catch (err) {
     }
   })();
@@ -97,5 +97,5 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createAMerchantPayTransaction
+  createMerchantTransaction
 }

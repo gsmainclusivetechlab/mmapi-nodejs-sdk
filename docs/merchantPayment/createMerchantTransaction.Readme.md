@@ -1,7 +1,7 @@
 
 # Create A MerchantPay Transaction
 
-`Here, CreateAMerchantPayTransactionRequest() creates a POST request to /transactions/type/merchantpay`
+`Here, createMerchantTransaction() creates a POST request to /transactions/type/merchantpay`
 
 > `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'merchantpay' passed via the URL.`
 
@@ -31,12 +31,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createAMerchantPayTransaction = async () => {
+const createMerchantTransaction = async () => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.merchantPayment.CreateAMerchantPayTransactionRequest();
+    const request = new mmapi.merchantPayment.createMerchantTransaction();
 
     /**
      * Set the request body parameter
@@ -76,7 +76,7 @@ const createAMerchantPayTransaction = async () => {
 /**
  * Invoke the function
  */
-createAMerchantPayTransaction();
+createMerchantTransaction();
 ```
 
 ### Example Output - Callback

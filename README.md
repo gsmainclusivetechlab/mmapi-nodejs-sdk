@@ -54,18 +54,18 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 
 ### Merchant Payments
 * Payee-Initiated Merchant Payment
-    * [POST Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createAMerchantPayTransaction.Readme.md)
+    * [POST Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createMerchantTransaction.Readme.md)
 * Payee-Initiated Merchant Payment Failure
 * Payee-Initiated Merchant Payment using the Polling Method
-   * [POST Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createAMerchantPayTransaction.Readme.md)
+   * [POST Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createMerchantTransaction.Readme.md)
    * loop [GET Poll to Determine the Request State](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewRequestState.Readme.md)
    * optional [GET Retrieve a Transaction](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewTransaction.Readme.md)
 * Payer-Initiated Merchant Payment
-   * [POST Payer Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createAMerchantPayTransaction.Readme.md)
+   * [POST Payer Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createMerchantTransaction.Readme.md)
 * Payer-Initiated Merchant Payment Failure
 * Payee-Initiated Merchant Payment using a Pre-authorised Payment Code
    * [POST Obtain an Authorisation Code](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createAnAuthorisationCode.Readme.md)
-   * [POST Perform a Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createAMerchantPayTransaction.Readme.md)
+   * [POST Perform a Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createMerchantTransaction.Readme.md)
 * Merchant Payment Refund
    * [POST Perform a Merchant Payment Refund](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createARefundTransaction.Readme.md)
 * Merchant Payment Reversal
@@ -169,12 +169,12 @@ $ node samples/merchantPayment/runAll.js
 *Replace the parameter with a value*
 
 ```javascript
-// createAMerchantPayTransaction.js
+// createMerchantTransaction.js
 
 if (require.main === module) {
   (async () => {
     try {
-      await createAMerchantPayTransaction('REPLACE-WITH-POLLING-TRUE-OR-FALSE', true);
+      await createMerchantTransaction('REPLACE-WITH-POLLING-TRUE-OR-FALSE', true);
     } catch (err) {
     }
   })();
@@ -183,5 +183,5 @@ if (require.main === module) {
 
 ```
 $ npm install
-$ node samples/merchantPayment/createAMerchantPayTransaction.js
+$ node samples/merchantPayment/createMerchantTransaction.js
 ```

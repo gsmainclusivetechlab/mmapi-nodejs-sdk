@@ -3,7 +3,7 @@ require('./test_helper');
 const client = require('./test_harness').client();
 
 const {
-  createAMerchantPayTransaction,
+  createMerchantTransaction,
   createARefundTransaction,
   createAnAuthorisationCode,
 } = require('../samples/index').merchantPayment;
@@ -23,7 +23,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Payee-Initiated Merchant Payment', () => {
     describe('Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAMerchantPayTransaction();
+        const response = await createMerchantTransaction();
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -41,7 +41,7 @@ describe('Merchant Payments', () => {
 
     describe('Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAMerchantPayTransaction(true);
+        const response = await createMerchantTransaction(true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -88,7 +88,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Payer-Initiated Merchant Payment', () => {
     describe('Payer Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAMerchantPayTransaction();
+        const response = await createMerchantTransaction();
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -135,7 +135,7 @@ describe('Merchant Payments', () => {
 
     describe('Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAMerchantPayTransaction();
+        const response = await createMerchantTransaction();
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -219,7 +219,7 @@ describe('Merchant Payments', () => {
 
     describe('Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAMerchantPayTransaction();
+        const response = await createMerchantTransaction();
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

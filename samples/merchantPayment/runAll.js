@@ -1,5 +1,5 @@
 const {
-  createAMerchantPayTransaction,
+  createMerchantTransaction,
   createARefundTransaction,
   createAnAuthorisationCode,
 } = require('../index').merchantPayment;
@@ -19,14 +19,14 @@ const usecase1 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment...");
 
   console.log("POST Payee Initiated Merchant Payment")
-  await createAMerchantPayTransaction(false, true);
+  await createMerchantTransaction(false, true);
 }
 
 const usecase2 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment via the Polling Method...")
 
   console.log('POST Payee Initiated Merchant Payment')
-  const { data: { serverCorrelationId } } = await createAMerchantPayTransaction(true, true);
+  const { data: { serverCorrelationId } } = await createMerchantTransaction(true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
@@ -39,7 +39,7 @@ const usecase3 = async () => {
   console.log("Perform a Payer-Initiated Merchant Payment...")
 
   console.log('POST Payer Initiated Merchant Payment')
-  await createAMerchantPayTransaction(false, true);
+  await createMerchantTransaction(false, true);
 }
 
 const usecase4 = async () => {
@@ -60,7 +60,7 @@ const usecase6 = async () => {
   console.log("Perform a Merchant Payment Reversal...")
 
   console.log('POST Payee Initiated Merchant Payment')
-  const { data: { serverCorrelationId } } = await createAMerchantPayTransaction(false, true);
+  const { data: { serverCorrelationId } } = await createMerchantTransaction(false, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
@@ -94,7 +94,7 @@ const usecase10 = async () => {
   console.log("Retrieve a Missing API Response from an API Provider...")
 
   console.log('POST Payee Initiated Merchant Payment');
-  const { config: { headers } } = await createAMerchantPayTransaction(false, true);
+  const { config: { headers } } = await createMerchantTransaction(false, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewResponse(headers['X-CorrelationID'], true);
