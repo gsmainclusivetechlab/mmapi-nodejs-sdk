@@ -2,7 +2,7 @@ const {
   createADisbursementTransaction,
   createATransactionBatch,
   updateATransactionBatch,
-  viewATransactionBatch,
+  viewTransactionBatch,
   viewBatchCompletions,
   viewBatchRejections
 } = require('../index').disbursement;
@@ -14,7 +14,7 @@ const {
   viewServiceAvailability,
   viewResponse,
   viewRequestState,
-  viewATransaction,
+  viewTransaction,
   viewAResource
 } = require('../index').common;
 
@@ -34,7 +34,7 @@ const usecase2 = async () => {
   let batchId = "REF-1636656115835"
 
   console.log('GET View A Transaction Batch')
-  await viewATransactionBatch(batchId, true);
+  await viewTransactionBatch(batchId, true);
 
   console.log('GET Retrieve Batch Transactions that have Completed')
   await viewBatchCompletions(batchId, true);
@@ -58,7 +58,7 @@ const usecase3 = async () => {
   await updateATransactionBatch(batchId, true);
 
   console.log('GET View A Transaction Batch')
-  await viewATransactionBatch(batchId, true);
+  await viewTransactionBatch(batchId, true);
 
   console.log('GET Retrieve Batch Transactions that have Completed')
   await viewBatchCompletions(batchId, true);
@@ -77,7 +77,7 @@ const usecase4 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
-  await viewATransaction(objectReference, true);
+  await viewTransaction(objectReference, true);
 }
 
 const usecase5 = async () => {

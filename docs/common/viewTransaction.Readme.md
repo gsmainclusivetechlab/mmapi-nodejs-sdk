@@ -1,6 +1,6 @@
 # View A Transaction
 
-`Here, ViewATransactionRequest(transactionReference) creates a GET request to /transactions/{transactionReference}`
+`Here, viewTransaction(transactionReference) creates a GET request to /transactions/{transactionReference}`
 
 > `This endpoint returns the details of a transaction`
 
@@ -9,12 +9,12 @@
 /**
  * Set up your function to be invoked
  */
-const viewATransaction = async (transactionReference) => {
+const viewTransaction = async (transactionReference) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewATransactionRequest(transactionReference);
+    const request = new mmapi.common.viewTransaction(transactionReference);
 
     /**
      * Call API with your client and get a response for your call
@@ -41,7 +41,7 @@ const viewATransaction = async (transactionReference) => {
 /**
  * Invoke the function
  */
-viewATransaction('REPLACE-WITH-TRANSACTION-REFERENCE');
+viewTransaction('REPLACE-WITH-TRANSACTION-REFERENCE');
 ```
 
 ### Example Output

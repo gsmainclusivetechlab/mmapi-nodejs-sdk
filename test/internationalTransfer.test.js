@@ -14,7 +14,7 @@ const {
   viewServiceAvailability,
   viewResponse,
   viewRequestState,
-  viewATransaction,
+  viewTransaction,
   viewAResource
 } = require('../samples/index').common;
 

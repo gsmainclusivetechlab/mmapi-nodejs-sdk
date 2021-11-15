@@ -11,7 +11,7 @@ const {
   viewServiceAvailability,
   viewResponse,
   viewRequestState,
-  viewATransaction,
+  viewTransaction,
   viewAResource
 } = require('../index').common;
 
@@ -32,7 +32,7 @@ const usecase2 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
-  await viewATransaction(objectReference, true);
+  await viewTransaction(objectReference, true);
 }
 
 const usecase3 = async () => {

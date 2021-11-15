@@ -13,12 +13,12 @@ const client = require('../../test/test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewATransaction = async (transactionReference, debug = false) => {
+const viewTransaction = async (transactionReference, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewATransactionRequest(transactionReference);
+    const request = new mmapi.common.viewTransaction(transactionReference);
 
     /**
      * Call API with your client and get a response for your call
@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewATransaction('REPLACE-WITH-TRANSACTION-REFERENCE', true);
+      await viewTransaction('REPLACE-WITH-TRANSACTION-REFERENCE', true);
     } catch (err) {
     }
   })();
@@ -65,7 +65,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewATransaction
+  viewTransaction
 };
 
 

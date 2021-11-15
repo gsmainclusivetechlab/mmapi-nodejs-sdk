@@ -10,7 +10,7 @@ const {
   viewServiceAvailability,
   viewResponse,
   viewRequestState,
-  viewATransaction,
+  viewTransaction,
   viewAResource
 } = require('../index').common;
 

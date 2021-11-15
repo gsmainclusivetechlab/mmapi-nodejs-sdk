@@ -18,7 +18,7 @@ const {
   viewServiceAvailability,
   viewResponse,
   viewRequestState,
-  viewATransaction,
+  viewTransaction,
   viewAResource
 } = require('../samples/index').common;
 
@@ -208,7 +208,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewATransaction(objectReference);
+        const response = await viewTransaction(objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');

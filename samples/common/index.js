@@ -4,7 +4,7 @@ const { viewAccountSpecificTransaction } = require('./viewAccountSpecificTransac
 const { viewServiceAvailability } = require('./viewServiceAvailability');
 const { viewResponse } = require('./viewResponse');
 const { viewRequestState } = require('./viewRequestState');
-const { viewATransaction } = require('./viewATransaction');
+const { viewTransaction } = require('./viewTransaction');
 const { viewAResource } = require('./viewAResource');
 
 module.exports = {
@@ -14,6 +14,6 @@ module.exports = {
   viewServiceAvailability,
   viewResponse,
   viewRequestState,
-  viewATransaction,
+  viewTransaction,
   viewAResource
 }
