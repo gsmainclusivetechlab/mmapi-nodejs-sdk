@@ -15,7 +15,7 @@ const {
   viewResponse,
   viewRequestState,
   viewTransaction,
-  viewAResource
+  viewResource
 } = require('../index').common;
 
 const usecase1 = async () => {
@@ -124,7 +124,7 @@ const usecase9 = async () => {
   const { data: { link } } = await viewResponse(headers['X-CorrelationID'], true);
 
   console.log('GET Retrieve a Missing Resource');
-  await viewAResource(link, true);
+  await viewResource(link, true);
 }
 
 (async (usecase) => {

@@ -78,7 +78,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
    * [GET Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
    * [GET Retrieve a Missing Response](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResource.Readme.md)
+   * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewResource.Readme.md)
 
 ### Disbursements
 
@@ -111,7 +111,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
    * [GET Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
    * [GET Retrieve a Missing Response](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResource.Readme.md)
+   * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewResource.Readme.md)
 
 ### International Transfers
 
@@ -132,7 +132,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
    * [GET Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
    * [GET Retrieve a Missing Response](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResource.Readme.md)
+   * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewResource.Readme.md)
 
 ## Test
 ```

@@ -13,12 +13,12 @@ const client = require('../../test/test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewAResource = async (link, debug = false) => {
+const viewResource = async (link, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewAResourceRequest(link);
+    const request = new mmapi.common.viewResource(link);
 
     /**
      * Call API with your client and get a response for your call
@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAResource('REPLACE-WITH-LINK', true);
+      await viewResource('REPLACE-WITH-LINK', true);
     } catch (err) {
     }
   })();
@@ -65,5 +65,5 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAResource
+  viewResource
 };

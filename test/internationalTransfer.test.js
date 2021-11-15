@@ -15,7 +15,7 @@ const {
   viewResponse,
   viewRequestState,
   viewTransaction,
-  viewAResource
+  viewResource
 } = require('../samples/index').common;
 
 describe('International Transfers', () => {
@@ -199,7 +199,7 @@ describe('International Transfers', () => {
 
     describe('GET Retrieve a Missing Resource', () => {
       it('should return the requested object with status 200 containing a representation of the missing resource', async () => {
-        const response = await viewAResource(link);
+        const response = await viewResource(link);
 
         expect(response.status).toBe(200);
       });

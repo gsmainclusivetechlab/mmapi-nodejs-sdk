@@ -5,7 +5,7 @@ const { viewServiceAvailability } = require('./viewServiceAvailability');
 const { viewResponse } = require('./viewResponse');
 const { viewRequestState } = require('./viewRequestState');
 const { viewTransaction } = require('./viewTransaction');
-const { viewAResource } = require('./viewAResource');
+const { viewResource } = require('./viewResource');
 
 module.exports = {
   createReversal,
@@ -15,5 +15,5 @@ module.exports = {
   viewResponse,
   viewRequestState,
   viewTransaction,
-  viewAResource
+  viewResource
 }
