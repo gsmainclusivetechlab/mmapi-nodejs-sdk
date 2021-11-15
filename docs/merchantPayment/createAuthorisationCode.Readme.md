@@ -1,7 +1,7 @@
 
 # Create An Authorisation Code Via An Account Identifier.
 
-`Here, CreateAnAuthorisationCodeRequest() creates a POST request to /accounts/{identifierType}/{identifier}/authorisationcodes`
+`Here, createAuthorisationCode() creates a POST request to /accounts/{identifierType}/{identifier}/authorisationcodes`
 
 > `This endpoint allows allows a mobile money payer or payee to generate a code which when presented to the other party, can be redeemed for an amount set by the payer or payee, depending upon the use case.`
 
@@ -20,12 +20,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createAnAuthorisationCode = async (identifierType, identifier) => {
+const createAuthorisationCode = async (identifierType, identifier) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.merchantPayment.CreateAnAuthorisationCodeRequest(identifierType, identifier);
+    const request = new mmapi.merchantPayment.createAuthorisationCode(identifierType, identifier);
 
     /**
      * Set the request body parameter
@@ -60,7 +60,7 @@ const createAnAuthorisationCode = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-createAnAuthorisationCode('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
+createAuthorisationCode('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
 ```
 
 ### Example Output

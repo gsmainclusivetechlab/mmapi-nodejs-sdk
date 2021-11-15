@@ -5,7 +5,7 @@ const client = require('./test_harness').client();
 const {
   createMerchantTransaction,
   createARefundTransaction,
-  createAnAuthorisationCode,
+  createAuthorisationCode,
 } = require('../samples/index').merchantPayment;
 
 const {
@@ -103,7 +103,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code', () => {
     describe('Obtain an Authorisation Code', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAnAuthorisationCode('accountid', '2000');
+        const response = await createAuthorisationCode('accountid', '2000');
 
         expect(response.data).toHaveProperty('status');
         expect(response.data.status).toBe('pending');

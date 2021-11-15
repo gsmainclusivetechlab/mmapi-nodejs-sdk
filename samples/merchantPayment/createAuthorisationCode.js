@@ -22,12 +22,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createAnAuthorisationCode = async (identifierType, identifier, debug = false) => {
+const createAuthorisationCode = async (identifierType, identifier, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.merchantPayment.CreateAnAuthorisationCodeRequest(identifierType, identifier);
+    const request = new mmapi.merchantPayment.createAuthorisationCode(identifierType, identifier);
 
     /**
      * Set the request body parameter
@@ -69,7 +69,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAnAuthorisationCode('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER', true);
+      await createAuthorisationCode('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER', true);
     } catch (err) {
     }
   })();
@@ -78,5 +78,5 @@ if (require.main === module) {
 /**
  * Exports the function. If needed this can be invoked from the other modules.
  */
-module.exports = { createAnAuthorisationCode };
+module.exports = { createAuthorisationCode };
 

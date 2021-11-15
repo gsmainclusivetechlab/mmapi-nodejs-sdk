@@ -1,9 +1,9 @@
 const { createMerchantTransaction } = require('./createMerchantTransaction');
-const { createAnAuthorisationCode } = require('./createAnAuthorisationCode');
+const { createAuthorisationCode } = require('./createAuthorisationCode');
 const { createARefundTransaction } = require('./createARefundTransaction');
 
 module.exports = {
   createMerchantTransaction,
-  createAnAuthorisationCode,
+  createAuthorisationCode,
   createARefundTransaction,
 }

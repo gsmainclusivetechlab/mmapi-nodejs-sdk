@@ -1,7 +1,7 @@
 const {
   createMerchantTransaction,
   createARefundTransaction,
-  createAnAuthorisationCode,
+  createAuthorisationCode,
 } = require('../index').merchantPayment;
 
 const {
@@ -46,7 +46,7 @@ const usecase4 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code...")
 
   console.log('POST Obtain an Authorisation Code')
-  await createAnAuthorisationCode('accountid', '2000', true);
+  await createAuthorisationCode('accountid', '2000', true);
 }
 
 const usecase5 = async () => {
