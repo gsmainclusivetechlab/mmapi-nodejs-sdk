@@ -1,8 +1,8 @@
 const {
   createDisbursementTransaction,
   createBatchTransaction,
-  updateATransactionBatch,
-  viewTransactionBatch,
+  updateBatchTransaction,
+  viewBatchTransaction,
   viewBatchCompletions,
   viewBatchRejections
 } = require('../index').disbursement;
@@ -34,7 +34,7 @@ const usecase2 = async () => {
   let batchId = "REF-1636656115835"
 
   console.log('GET View A Transaction Batch')
-  await viewTransactionBatch(batchId, true);
+  await viewBatchTransaction(batchId, true);
 
   console.log('GET Retrieve Batch Transactions that have Completed')
   await viewBatchCompletions(batchId, true);
@@ -55,10 +55,10 @@ const usecase3 = async () => {
   await viewBatchRejections(batchId, true);
 
   console.log('PATCH Approve The Transaction Batch')
-  await updateATransactionBatch(batchId, true);
+  await updateBatchTransaction(batchId, true);
 
   console.log('GET View A Transaction Batch')
-  await viewTransactionBatch(batchId, true);
+  await viewBatchTransaction(batchId, true);
 
   console.log('GET Retrieve Batch Transactions that have Completed')
   await viewBatchCompletions(batchId, true);

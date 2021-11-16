@@ -1,6 +1,6 @@
 ## Update A Transaction Batch
 
-`Here, UpdateATransactionBatchRequest(batchId) creates a PATCH request to /batchtransactions/{batchId}`
+`Here, updateBatchTransaction(batchId) creates a PATCH request to /batchtransactions/{batchId}`
 
 > `This endpoint updates a specific transaction batch. Only the batchStatus field can be modified.`
 
@@ -20,12 +20,12 @@ const buildRequestBody = () => ([
 /**
  * Set up your function to be invoked
  */
-const updateATransactionBatch = async (batchId) => {
+const updateBatchTransaction = async (batchId) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.UpdateATransactionBatchRequest(batchId);
+    const request = new mmapi.disbursement.updateBatchTransaction(batchId);
 
     /**
      * Set the request body parameter
@@ -54,7 +54,7 @@ const updateATransactionBatch = async (batchId) => {
   }
 };
 
-updateATransactionBatch('REPLACE-WITH-BATCH-ID');
+updateBatchTransaction('REPLACE-WITH-BATCH-ID');
 ```
 
 ### Example Output

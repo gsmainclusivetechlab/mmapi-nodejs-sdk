@@ -24,12 +24,12 @@ const buildRequestBody = () => ([
 /**
  * Set up your function to be invoked
  */
-const updateATransactionBatch = async (batchId, debug = false) => {
+const updateBatchTransaction = async (batchId, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.UpdateATransactionBatchRequest(batchId);
+    const request = new mmapi.disbursement.updateBatchTransaction(batchId);
 
     /**
      * Set the request body parameter
@@ -71,7 +71,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await updateATransactionBatch('REPLACE-WITH-BATCH-ID', true);
+      await updateBatchTransaction('REPLACE-WITH-BATCH-ID', true);
     } catch (err) {
     }
   })();
@@ -81,7 +81,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  updateATransactionBatch
+  updateBatchTransaction
 };
 
 

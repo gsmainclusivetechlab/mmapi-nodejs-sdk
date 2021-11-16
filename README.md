@@ -93,7 +93,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Bulk Disbursement Failure
 * Bulk Disbursement with Maker / Checker
     * [POST Perform a Bulk Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/createBatchTransaction.Readme.md)
-    * [PATCH Update A Transaction Batch](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/updateATransactionBatch.Readme.md)
+    * [PATCH Update A Transaction Batch](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/updateBatchTransaction.Readme.md)
     * optional [GET Retrieve Batch Transactions that have Completed](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/viewBatchCompletions.Readme.md)
     * optional [GET Retrieve Batch Transactions that have been Rejected](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/viewBatchRejections.Readme.md)
     * optional [GET View A Transaction Batch](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/viewTransactionBatch.Readme.md)

@@ -5,7 +5,7 @@ const client = require('./test_harness').client();
 const {
   createDisbursementTransaction,
   createBatchTransaction,
-  updateATransactionBatch,
+  updateBatchTransaction,
   viewBatchTransaction,
   viewBatchCompletions,
   viewBatchRejections
@@ -122,7 +122,7 @@ describe('Disbursements', () => {
 
     describe('PATCH Approve The Transaction Batch', () => {
       it('should return the request state object with status 202 to indicate that the request is completed', async () => {
-        const response = await updateATransactionBatch(batchId, false);
+        const response = await updateBatchTransaction(batchId, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
