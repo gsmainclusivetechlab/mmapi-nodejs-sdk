@@ -33,6 +33,11 @@ const updateBatchTransaction = async (batchId) => {
     request.data = buildRequestBody();
 
     /**
+     * Chose the polling method.
+     */
+    request.polling();
+
+    /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
@@ -57,7 +62,7 @@ const updateBatchTransaction = async (batchId) => {
 updateBatchTransaction('REPLACE-WITH-BATCH-ID');
 ```
 
-### Example Output
+### Example Output - Callback
 ```javascript
 202
 
@@ -66,6 +71,19 @@ updateBatchTransaction('REPLACE-WITH-BATCH-ID');
   "status": "pending",
   "notificationMethod": "callback",
   "objectReference": "493",
+  "pollLimit": 100
+}
+```
+
+### Example Output - Polling
+```javascript
+202
+
+{
+  "serverCorrelationId": "ad221629-1d95-4832-ae46-62d86146d7e0",
+  "status": "pending",
+  "notificationMethod": "polling",
+  "objectReference": "750",
   "pollLimit": 100
 }
 ```

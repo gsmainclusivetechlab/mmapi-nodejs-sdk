@@ -24,7 +24,7 @@ const buildRequestBody = () => ([
 /**
  * Set up your function to be invoked
  */
-const updateBatchTransaction = async (batchId, debug = false) => {
+const updateBatchTransaction = async (batchId, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -35,6 +35,13 @@ const updateBatchTransaction = async (batchId, debug = false) => {
      * Set the request body parameter
      */
     request.data = buildRequestBody();
+
+    /**
+     * Chose the polling method.
+     */
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
@@ -71,7 +78,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await updateBatchTransaction('REPLACE-WITH-BATCH-ID', true);
+      await updateBatchTransaction('<<REPLACE-WITH-BATCH-ID>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewBatchTransaction('REPLACE-WITH-BATCH-ID', true);
+      await viewBatchTransaction('<<REPLACE-WITH-BATCH-ID>>', true);
     } catch (err) {
     }
   })();

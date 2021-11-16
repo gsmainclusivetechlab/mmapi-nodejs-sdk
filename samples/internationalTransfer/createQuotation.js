@@ -137,7 +137,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createQuotation('<REPLACE-WITH-POLLING-TRUE-OR-FALSE>', true);
+      await createQuotation('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

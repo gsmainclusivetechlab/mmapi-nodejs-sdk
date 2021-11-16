@@ -125,7 +125,7 @@ const createQuotation = async () => {
 createQuotation();
 ```
 
-### Example Output
+### Example Output - Callback
 ```javascript
 202
 

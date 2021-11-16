@@ -87,7 +87,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createDisbursementTransaction('REPLACE-WITH-POLLING-TRUE-OR-FALSE', true);
+      await createDisbursementTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

@@ -56,10 +56,10 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewBatchTransaction(batchId, false);
+        const response = await viewBatchTransaction(batchId);
 
         expect(response.status).toBe(200);
-        expect(response.data).toHaveProperty('batchID');
+        expect(response.data).toHaveProperty('batchId');
         expect(response.data).toHaveProperty('batchStatus');
         expect(response.data).toHaveProperty('approvalDate');
         expect(response.data).toHaveProperty('completionDate');
@@ -68,7 +68,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have Completed', () => {
       it('should return the batch completions object with status 200', async () => {
-        const response = await viewBatchCompletions(batchId, false);
+        const response = await viewBatchCompletions(batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -81,7 +81,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have been Rejected', () => {
       it('should return the batch rejections object with status 200', async () => {
-        const response = await viewBatchRejections(batchId, false);
+        const response = await viewBatchRejections(batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('creditParty');
@@ -110,7 +110,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have been Rejected', () => {
       it('should return the batch rejections object with status 200', async () => {
-        const response = await viewBatchRejections(batchId, false);
+        const response = await viewBatchRejections(batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('creditParty');
@@ -122,7 +122,7 @@ describe('Disbursements', () => {
 
     describe('PATCH Approve The Transaction Batch', () => {
       it('should return the request state object with status 202 to indicate that the request is completed', async () => {
-        const response = await updateBatchTransaction(batchId, false);
+        const response = await updateBatchTransaction(batchId);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -135,10 +135,10 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewBatchTransaction(batchId, false);
+        const response = await viewBatchTransaction(batchId);
 
         expect(response.status).toBe(200);
-        expect(response.data).toHaveProperty('batchID');
+        expect(response.data).toHaveProperty('batchId');
         expect(response.data).toHaveProperty('batchStatus');
         expect(response.data).toHaveProperty('approvalDate');
         expect(response.data).toHaveProperty('completionDate');
@@ -147,7 +147,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have Completed', () => {
       it('should return the batch completions object with status 200', async () => {
-        const response = await viewBatchCompletions(batchId, false);
+        const response = await viewBatchCompletions(batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -160,7 +160,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have been Rejected', () => {
       it('should return the batch rejections object with status 200', async () => {
-        const response = await viewBatchRejections(batchId, false);
+        const response = await viewBatchRejections(batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('creditParty');
@@ -217,6 +217,102 @@ describe('Disbursements', () => {
         expect(response.data).toHaveProperty('transactionStatus');
         expect(response.data).toHaveProperty('amount');
         expect(response.data).toHaveProperty('currency');
+      });
+    })
+  });
+
+  describe('Perform a Bulk Disbursement Using the Polling Method', () => {
+    let serverCorrelationId;
+    let objectReference;
+
+    describe('POST Perform a Bulk Disbursement', () => {
+      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createBatchTransaction(true);
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('polling');
+
+        serverCorrelationId = response.data.serverCorrelationId
+      });
+    })
+
+    describe('GET Poll to Determine the Request State', () => {
+      it('should return the request state object with status 200 for a given server correlation id', async () => {
+        const response = await viewRequestState(serverCorrelationId);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toMatch(/^(pending|completed|failed)$/);
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('polling');
+        expect(response.data).toHaveProperty('objectReference');
+
+        objectReference = response.data.objectReference;
+      });
+    })
+
+    describe('GET View A Transaction Batch', () => {
+      it('should return the batch transactions object with status 200', async () => {
+        const response = await viewBatchTransaction(objectReference);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('batchId');
+        expect(response.data).toHaveProperty('batchStatus');
+        expect(response.data).toHaveProperty('approvalDate');
+        expect(response.data).toHaveProperty('completionDate');
+      });
+    })
+  });
+
+  describe('Approve The Transaction Batch Using the Polling Method', () => {
+    let serverCorrelationId;
+    let objectReference;
+
+    describe('PATCH Approve The Transaction Batch', () => {
+      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await updateBatchTransaction("REF-1636656115835", true);
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('polling');
+
+        serverCorrelationId = response.data.serverCorrelationId
+      });
+    })
+
+    describe('GET Poll to Determine the Request State', () => {
+      it('should return the request state object with status 200 for a given server correlation id', async () => {
+        const response = await viewRequestState(serverCorrelationId);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toMatch(/^(pending|completed|failed)$/);
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('polling');
+        expect(response.data).toHaveProperty('objectReference');
+
+        objectReference = response.data.objectReference;
+      });
+    })
+
+    describe('GET View A Transaction Batch', () => {
+      it('should return the batch transactions object with status 200', async () => {
+        const response = await viewBatchTransaction(objectReference);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('batchId');
+        expect(response.data).toHaveProperty('batchStatus');
+        expect(response.data).toHaveProperty('approvalDate');
+        expect(response.data).toHaveProperty('completionDate');
       });
     })
   });

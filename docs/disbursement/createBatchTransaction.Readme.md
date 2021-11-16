@@ -67,6 +67,11 @@ const createBatchTransaction = async () => {
     request.data = buildRequestBody();
 
     /**
+     * Chose the polling method.
+     */
+    request.polling();
+
+    /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
@@ -94,7 +99,7 @@ const createBatchTransaction = async () => {
 createBatchTransaction();
 ```
 
-### Example Output
+### Example Output - Callback
 ```javascript
 202
 
@@ -103,6 +108,19 @@ createBatchTransaction();
   "status": "pending",
   "notificationMethod": "callback",
   "objectReference": "429",
+  "pollLimit": 100
+}
+```
+
+### Example Output - Polling
+```javascript
+202
+
+{
+  "serverCorrelationId": "f91e19ec-5116-4491-a447-11cfc2bc7f93",
+  "status": "pending",
+  "notificationMethod": "polling",
+  "objectReference": "920",
   "pollLimit": 100
 }
 ```

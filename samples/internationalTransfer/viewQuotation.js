@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewQuotation('<REPLACE-WITH-QUOTATION-REFERENCE>', true);
+      await viewQuotation('<<REPLACE-WITH-QUOTATION-REFERENCE>>', true);
     } catch (err) {
     }
   })();

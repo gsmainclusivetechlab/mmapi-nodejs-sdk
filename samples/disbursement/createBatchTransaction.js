@@ -58,7 +58,7 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createBatchTransaction = async (debug = false) => {
+const createBatchTransaction = async (polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -69,6 +69,13 @@ const createBatchTransaction = async (debug = false) => {
      * Set the request body parameter
      */
     request.data = buildRequestBody();
+
+    /**
+     * Chose the polling method.
+     */
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
@@ -105,7 +112,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createBatchTransaction(true);
+      await createBatchTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

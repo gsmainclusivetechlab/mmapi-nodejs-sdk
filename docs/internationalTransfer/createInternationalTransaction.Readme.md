@@ -126,7 +126,7 @@ const createInternationalTransaction = async () => {
 createInternationalTransaction();
 ```
 
-### Example Output
+### Example Output - Callback
 ```javascript
 202
 

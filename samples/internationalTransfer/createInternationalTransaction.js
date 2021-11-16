@@ -138,7 +138,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createInternationalTransaction('<REPLACE-WITH-QUOTATION-REFERENCE>', '<REPLACE-WITH-QUOTE-ID>', '<REPLACE-WITH-POLLING-TRUE-OR-FALSE>', true);
+      await createInternationalTransaction('<<REPLACE-WITH-QUOTATION-REFERENCE>>', '<<REPLACE-WITH-QUOTE-ID>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
