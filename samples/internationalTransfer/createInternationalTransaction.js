@@ -84,7 +84,7 @@ const buildRequestBody = (quotationReference, quoteId) => ({
 /**
  * Set up your function to be invoked
  */
-const createInternationalTransaction = async (quotationReference, quoteId, debug = false) => {
+const createInternationalTransaction = async (quotationReference, quoteId, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -95,6 +95,13 @@ const createInternationalTransaction = async (quotationReference, quoteId, debug
      * Set the request body parameter
      */
     request.data = buildRequestBody(quotationReference, quoteId);
+
+    /**
+     * Chose the polling method.
+     */
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
@@ -131,7 +138,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createInternationalTransaction('<REPLACE-WITH-QUOTATION-REFERENCE>', '<REPLACE-WITH-QUOTE-ID>', true);
+      await createInternationalTransaction('<REPLACE-WITH-QUOTATION-REFERENCE>', '<REPLACE-WITH-QUOTE-ID>', '<REPLACE-WITH-POLLING-TRUE-OR-FALSE>', true);
     } catch (err) {
     }
   })();

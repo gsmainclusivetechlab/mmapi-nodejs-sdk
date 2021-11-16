@@ -94,6 +94,11 @@ const createInternationalTransaction = async () => {
     request.data = buildRequestBody();
 
     /**
+     * Chose the polling method.
+     */
+    request.polling();
+
+    /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
@@ -130,6 +135,19 @@ createInternationalTransaction();
   "status": "pending",
   "notificationMethod": "callback",
   "objectReference": "11582",
+  "pollLimit": 100
+}
+```
+
+### Example Output - Polling
+```javascript
+202
+
+{
+  "serverCorrelationId": "6d4ca881-8b73-4036-8385-4364ba47bbbc",
+  "status": "pending",
+  "notificationMethod": "polling",
+  "objectReference": "13728",
   "pollLimit": 100
 }
 ```

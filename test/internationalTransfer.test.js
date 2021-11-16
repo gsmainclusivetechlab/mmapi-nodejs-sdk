@@ -4,7 +4,8 @@ const client = require('./test_harness').client();
 
 const {
   createQuotation,
-  createInternationalTransaction
+  createInternationalTransaction,
+  viewQuotation
 } = require('../samples/index').internationalTransfer;
 
 const {
@@ -22,7 +23,7 @@ describe('International Transfers', () => {
   describe('Perform an International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(false);
+        const response = await createQuotation(false, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -33,11 +34,22 @@ describe('International Transfers', () => {
       });
     })
 
+    describe('GET View A Quotation', () => {
+      it('should return the quotation object with status 200', async () => {
+        const response = await viewQuotation('REF-1636533162268', false);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('quotationReference');
+        expect(response.data).toHaveProperty('creditParty');
+        expect(response.data).toHaveProperty('debitParty');
+        expect(response.data).toHaveProperty('requestAmount');
+        expect(response.data).toHaveProperty('requestCurrency');
+      });
+    })
+
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        let quotationReference = 'REF-1636533162268';
-        let quoteId = undefined;
-        const response = await createInternationalTransaction(quotationReference, quoteId, false);
+        const response = await createInternationalTransaction('REF-1636533162268', undefined, false, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -52,7 +64,7 @@ describe('International Transfers', () => {
   describe('Perform an Bilateral International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(false);
+        const response = await createQuotation(false, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -65,9 +77,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        let quotationReference = 'REF-1636533162268';
-        let quoteId = undefined;
-        const response = await createInternationalTransaction(quotationReference, quoteId, false);
+        const response = await createInternationalTransaction('REF-1636533162268', undefined, false, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -85,9 +95,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        let quotationReference = 'REF-1636533162268';
-        let quoteId = undefined;
-        const response = await createInternationalTransaction(quotationReference, quoteId, false);
+        const response = await createInternationalTransaction('REF-1636533162268', undefined, false, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -171,9 +179,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        let quotationReference = 'REF-1636533162268';
-        let quoteId = undefined;
-        const response = await createInternationalTransaction(quotationReference, quoteId, false);
+        const response = await createInternationalTransaction('REF-1636533162268', undefined, false, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

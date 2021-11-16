@@ -93,6 +93,11 @@ const createQuotation = async () => {
     request.data = buildRequestBody();
 
     /**
+     * Chose the polling method.
+     */
+    request.polling();
+
+    /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
@@ -129,6 +134,19 @@ createQuotation();
   "status": "pending",
   "notificationMethod": "callback",
   "objectReference": "535",
+  "pollLimit": 100
+}
+```
+
+### Example Output - Polling
+```javascript
+202
+
+{
+  "serverCorrelationId": "eb95b1b5-79bb-4729-9d7c-67d8bd357f8e",
+  "status": "pending",
+  "notificationMethod": "polling",
+  "objectReference": "804",
   "pollLimit": 100
 }
 ```

@@ -1,6 +1,7 @@
 const {
   createInternationalTransaction,
   createQuotation,
+  viewQuotation
 } = require('../index').internationalTransfer;
 
 const {
@@ -18,27 +19,27 @@ const usecase1 = async () => {
   console.log("Perform an International Transfer...");
 
   console.log("POST Request a International Transfer Quotation")
-  await createQuotation(true);
+  await createQuotation(false, true);
 
   console.log("POST Perform an International Transfer")
-  await createInternationalTransaction('REF-1636533162268', undefined, true);
+  await createInternationalTransaction('REF-1636533162268', undefined, false, true);
 }
 
 const usecase2 = async () => {
   console.log("Perform an Bilateral International Transfer...");
 
   console.log("POST Request a International Transfer Quotation")
-  await createQuotation(true);
+  await createQuotation(false, true);
 
   console.log("POST Perform an International Transfer")
-  await createInternationalTransaction('REF-1636533162268', undefined, true);
+  await createInternationalTransaction('REF-1636533162268', undefined, false, true);
 }
 
 const usecase3 = async () => {
   console.log("Perform a International Transfer Reversal...");
 
   console.log("POST Perform an International Transfer")
-  const { data: { serverCorrelationId } } = await createInternationalTransaction('REF-1636533162268', undefined, true);
+  const { data: { serverCorrelationId } } = await createInternationalTransaction('REF-1636533162268', undefined, false, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
@@ -72,13 +73,55 @@ const usecase7 = async () => {
   console.log("Retrieve a Missing API Response from an API Provider...")
 
   console.log('POST Perform an International Transfer');
-  const { config: { headers } } = await createInternationalTransaction('REF-1636533162268', undefined, true);
+  const { config: { headers } } = await createInternationalTransaction('REF-1636533162268', undefined, false, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewResponse(headers['X-CorrelationID'], true);
 
   console.log('GET Retrieve a Missing Resource');
   await viewResource(link, true);
+}
+
+const usecase8 = async () => {
+  console.log("Request a International Transfer Quotation via the Polling Method...");
+
+  console.log("POST Request a International Transfer Quotation")
+  let { data: { serverCorrelationId, pollLimit } } = await createQuotation(true, true);
+
+  pollLimit = 3
+
+  for (let [index] of [...Array(pollLimit)].entries()) {
+    console.log('GET Poll to Determine the Request State', index)
+    const { data: { objectReference, status } } = await viewRequestState(serverCorrelationId, true);
+
+    if (status === 'completed') {
+      console.log('GET View A Quotation')
+      await viewQuotation(objectReference, true);
+
+      break;
+    }
+  }
+}
+
+const usecase9 = async () => {
+  console.log("Perform an International Transfer via the Polling Method...");
+
+  console.log("POST Perform an International Transfer")
+  let { data: { serverCorrelationId, pollLimit } } = await createInternationalTransaction('REF-1636533162268', undefined, true, true);
+
+  pollLimit = 3
+
+  for (let [index] of [...Array(pollLimit)].entries()) {
+    console.log('GET Poll to Determine the Request State', index)
+    const { data: { objectReference, status } } = await viewRequestState(serverCorrelationId, true);
+
+    if (status === 'completed') {
+      console.log('GET Retrieve a Transaction')
+      await viewTransaction(objectReference, true)
+
+      break;
+    }
+  }
 }
 
 (async (usecase) => {
@@ -104,6 +147,12 @@ const usecase7 = async () => {
     case 7:
       await usecase7();
       break;
+    case 8:
+      await usecase8();
+      break;
+    case 9:
+      await usecase9();
+      break;
     default:
       await usecase1();
       await usecase2();
@@ -112,6 +161,8 @@ const usecase7 = async () => {
       await usecase5();
       await usecase6();
       await usecase7();
+      await usecase8();
+      await usecase9();
       break;
   }
 })();
