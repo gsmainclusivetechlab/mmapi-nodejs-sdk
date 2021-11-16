@@ -45,7 +45,7 @@ const createReversal = async (originalTransactionReference) => {
 /**
  * Invoke the function
  */
-createReversal('REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE');
+createReversal('<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>');
 ```
 
 ### Example Output

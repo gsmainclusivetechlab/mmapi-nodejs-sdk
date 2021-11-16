@@ -42,7 +42,7 @@ const viewResponse = async (clientCorrelationId) => {
 /**
  * Invoke the function
  */
-viewResponse('REPLACE-WITH-CLIENT-CORRELATION-ID');
+viewResponse('<<REPLACE-WITH-CLIENT-CORRELATION-ID>>');
 ```
 
 ### Example Output

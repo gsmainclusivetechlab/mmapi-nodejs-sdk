@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewTransaction('REPLACE-WITH-TRANSACTION-REFERENCE', true);
+      await viewTransaction('<<REPLACE-WITH-TRANSACTION-REFERENCE>>', true);
     } catch (err) {
     }
   })();

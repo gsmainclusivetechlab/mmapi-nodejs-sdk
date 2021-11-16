@@ -42,7 +42,7 @@ const viewResource = async (link) => {
 /**
  * Invoke the function
  */
-viewResource('REPLACE-WITH-LINK');
+viewResource('<<REPLACE-WITH-LINK>>');
 ```
 
 ### Example Output

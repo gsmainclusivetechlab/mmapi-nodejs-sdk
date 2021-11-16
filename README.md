@@ -174,7 +174,7 @@ $ node samples/merchantPayment/runAll.js
 if (require.main === module) {
   (async () => {
     try {
-      await createMerchantTransaction('REPLACE-WITH-POLLING-TRUE-OR-FALSE', true);
+      await createMerchantTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

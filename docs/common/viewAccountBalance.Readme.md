@@ -42,7 +42,7 @@ const viewAccountBalance = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-viewAccountBalance('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
+viewAccountBalance('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>');
 ```
 
 ### Example Output

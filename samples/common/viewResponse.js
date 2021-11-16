@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewResponse('REPLACE-WITH-CLIENT-CORRELATION-ID', true);
+      await viewResponse('<<REPLACE-WITH-CLIENT-CORRELATION-ID>>', true);
     } catch (err) {
     }
   })();

@@ -41,7 +41,7 @@ const viewBatchTransaction = async (batchId) => {
 /**
  * Invoke the function
  */
-viewBatchTransaction('REPLACE-WITH-BATCH-ID');
+viewBatchTransaction('<<REPLACE-WITH-BATCH-ID>>');
 ```
 
 ### Example Output

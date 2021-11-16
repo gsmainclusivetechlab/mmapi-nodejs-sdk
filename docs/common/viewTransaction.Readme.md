@@ -41,7 +41,7 @@ const viewTransaction = async (transactionReference) => {
 /**
  * Invoke the function
  */
-viewTransaction('REPLACE-WITH-TRANSACTION-REFERENCE');
+viewTransaction('<<REPLACE-WITH-TRANSACTION-REFERENCE>>');
 ```
 
 ### Example Output

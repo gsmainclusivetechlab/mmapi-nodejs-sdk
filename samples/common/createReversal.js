@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createReversal('REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE', true);
+      await createReversal('<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>', true);
     } catch (err) {
     }
   })();

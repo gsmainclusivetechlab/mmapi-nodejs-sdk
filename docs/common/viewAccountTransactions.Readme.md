@@ -20,12 +20,12 @@ const viewAccountTransactions = async (identifierType, identifier) => {
     /**
      * Set the offset parameter
      */
-    request.offset('REPLACE-WITH-OFFSET');
+    request.offset('<<REPLACE-WITH-OFFSET>>');
 
     /**
      * Set the limit parameter
      */
-    request.limit('REPLACE-WITH-LIMIT');
+    request.limit('<<REPLACE-WITH-LIMIT>>');
 
     /**
      * Call API with your client and get a response for your call
@@ -52,7 +52,7 @@ const viewAccountTransactions = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-viewAccountTransactions('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
+viewAccountTransactions('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>');
 ```
 
 ### Example Output

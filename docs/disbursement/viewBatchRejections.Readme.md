@@ -41,7 +41,7 @@ const viewBatchRejections = async (batchId) => {
 /**
  * Invoke the function
  */
-viewBatchRejections('REPLACE-WITH-BATCH-ID');
+viewBatchRejections('<<REPLACE-WITH-BATCH-ID>>');
 ```
 
 ### Example Output

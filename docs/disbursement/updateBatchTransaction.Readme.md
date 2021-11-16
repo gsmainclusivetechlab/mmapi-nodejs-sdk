@@ -59,7 +59,7 @@ const updateBatchTransaction = async (batchId) => {
   }
 };
 
-updateBatchTransaction('REPLACE-WITH-BATCH-ID');
+updateBatchTransaction('<<REPLACE-WITH-BATCH-ID>>');
 ```
 
 ### Example Output - Callback

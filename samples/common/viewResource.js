@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewResource('REPLACE-WITH-LINK', true);
+      await viewResource('<<REPLACE-WITH-LINK>>', true);
     } catch (err) {
     }
   })();

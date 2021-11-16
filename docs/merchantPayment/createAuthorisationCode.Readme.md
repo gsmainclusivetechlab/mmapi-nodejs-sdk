@@ -65,7 +65,7 @@ const createAuthorisationCode = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-createAuthorisationCode('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
+createAuthorisationCode('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>');
 ```
 
 ### Example Output - Callback

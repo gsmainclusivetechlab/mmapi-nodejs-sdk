@@ -42,7 +42,7 @@ const viewRequestState = async (serverCorrelationId) => {
 /**
  * Invoke the function
  */
-viewRequestState('REPLACE-WITH-SERVER-CORRELATION-ID');
+viewRequestState('<<REPLACE-WITH-SERVER-CORRELATION-ID>>');
 ```
 
 ### Example Output

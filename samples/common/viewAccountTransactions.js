@@ -67,7 +67,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAccountTransactions('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER', 0, 20, true);
+      await viewAccountTransactions('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', 0, 20, true);
     } catch (err) {
     }
   })();
