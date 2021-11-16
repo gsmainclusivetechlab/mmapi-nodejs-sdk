@@ -6,7 +6,7 @@ const {
   createDisbursementTransaction,
   createBatchTransaction,
   updateATransactionBatch,
-  viewATransactionBatch,
+  viewBatchTransaction,
   viewBatchCompletions,
   viewBatchRejections
 } = require('../samples/index').disbursement;
@@ -56,7 +56,7 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewATransactionBatch(batchId, false);
+        const response = await viewBatchTransaction(batchId, false);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('batchID');
@@ -135,7 +135,7 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewATransactionBatch(batchId, false);
+        const response = await viewBatchTransaction(batchId, false);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('batchID');

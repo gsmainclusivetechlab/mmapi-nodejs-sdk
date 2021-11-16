@@ -1,6 +1,6 @@
 # View A Transaction Batch
 
-`Here, ViewATransactionBatchRequest(batchId) creates a GET request to /batchtransactions/{batchId}`
+`Here, viewBatchTransaction(batchId) creates a GET request to /batchtransactions/{batchId}`
 
 > `This endpoint returns the current status of a batch transaction.`
 
@@ -9,12 +9,12 @@
 /**
  * Set up your function to be invoked
  */
-const viewATransactionBatch = async (batchId) => {
+const viewBatchTransaction = async (batchId) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.ViewATransactionBatchRequest(batchId);
+    const request = new mmapi.disbursement.viewBatchTransaction(batchId);
 
     /**
      * Call API with your client and get a response for your call
@@ -41,7 +41,7 @@ const viewATransactionBatch = async (batchId) => {
 /**
  * Invoke the function
  */
-viewATransactionBatch('REPLACE-WITH-BATCH-ID');
+viewBatchTransaction('REPLACE-WITH-BATCH-ID');
 ```
 
 ### Example Output
