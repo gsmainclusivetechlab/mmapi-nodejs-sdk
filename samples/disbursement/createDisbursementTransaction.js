@@ -33,12 +33,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createADisbursementTransaction = async (polling = false, debug = false) => {
+const createDisbursementTransaction = async (polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.CreateADisbursementTransactionRequest();
+    const request = new mmapi.disbursement.createDisbursementTransaction();
 
     /**
      * Set the request body parameter
@@ -87,7 +87,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createADisbursementTransaction('REPLACE-WITH-POLLING-TRUE-OR-FALSE', true);
+      await createDisbursementTransaction('REPLACE-WITH-POLLING-TRUE-OR-FALSE', true);
     } catch (err) {
     }
   })();
@@ -97,6 +97,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createADisbursementTransaction
+  createDisbursementTransaction
 };
 

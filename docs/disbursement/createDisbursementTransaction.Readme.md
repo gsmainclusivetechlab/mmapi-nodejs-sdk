@@ -1,6 +1,6 @@
 # Create A Disbursement Transaction
 
-`Here, CreateADisbursementTransactionRequest() creates a POST request to /transactions/type/disbursement`
+`Here, createDisbursementTransaction() creates a POST request to /transactions/type/disbursement`
 
 > `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'disbursement' passed via the URL.`
 
@@ -30,12 +30,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createADisbursementTransaction = async () => {
+const createDisbursementTransaction = async () => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.CreateADisbursementTransactionRequest();
+    const request = new mmapi.disbursement.createDisbursementTransaction();
 
     /**
      * Set the request body parameter
@@ -72,7 +72,7 @@ const createADisbursementTransaction = async () => {
 /**
  * Invoke the function
  */
-createADisbursementTransaction();
+createDisbursementTransaction();
 ```
 
 ### Example Output - Callback

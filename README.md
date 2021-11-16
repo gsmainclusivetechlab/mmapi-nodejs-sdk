@@ -83,7 +83,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 ### Disbursements
 
 * Individual Disbursement
-    * [POST Perform an Individual Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/createADisbursementTransaction.Readme.md)
+    * [POST Perform an Individual Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/createDisbursementTransaction.Readme.md)
 * Individual Disbursement Failure
 * Bulk Disbursement
     * [POST Perform a Bulk Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/createATransactionBatch.Readme.md)
@@ -98,7 +98,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     * optional [GET Retrieve Batch Transactions that have been Rejected](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/viewBatchRejections.Readme.md)
     * optional [GET View A Transaction Batch](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/viewTransactionBatch.Readme.md)
 * Individual Disbursement Using the Polling Method
-    * [POST Perform an Individual Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/createADisbursementTransaction.Readme.md)
+    * [POST Perform an Individual Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/createDisbursementTransaction.Readme.md)
     * loop [GET Poll to Determine the Request State](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewRequestState.Readme.md)
     * optional [GET Retrieve a Transaction](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewTransaction.Readme.md)
 * Disbursement Reversal

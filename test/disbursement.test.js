@@ -3,7 +3,7 @@ require('./test_helper');
 const client = require('./test_harness').client();
 
 const {
-  createADisbursementTransaction,
+  createDisbursementTransaction,
   createATransactionBatch,
   updateATransactionBatch,
   viewATransactionBatch,
@@ -26,7 +26,7 @@ describe('Disbursements', () => {
   describe('Perform an Individual Disbursement', () => {
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createADisbursementTransaction();
+        const response = await createDisbursementTransaction();
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -177,7 +177,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createADisbursementTransaction(true);
+        const response = await createDisbursementTransaction(true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -227,7 +227,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createADisbursementTransaction();
+        const response = await createDisbursementTransaction();
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -311,7 +311,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createADisbursementTransaction();
+        const response = await createDisbursementTransaction();
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
