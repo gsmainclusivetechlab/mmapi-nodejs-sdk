@@ -1,6 +1,6 @@
 # Create A Transaction Batch Request
 
-`Here, CreateATransactionBatchRequest() creates a POST request to /batchtransactions`
+`Here, createBatchTransaction() creates a POST request to /batchtransactions`
 
 > `Provided with a valid object representation, this endpoint allows for a new transaction batch to be created`
 
@@ -54,12 +54,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createATransactionBatch = async () => {
+const createBatchTransaction = async () => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.CreateATransactionBatchRequest();
+    const request = new mmapi.disbursement.createBatchTransaction();
 
     /**
      * Set the request body parameter
@@ -91,7 +91,7 @@ const createATransactionBatch = async () => {
 /**
  * Invoke the function
  */
-createATransactionBatch();
+createBatchTransaction();
 ```
 
 ### Example Output

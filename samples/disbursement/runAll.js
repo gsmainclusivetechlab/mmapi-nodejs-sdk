@@ -1,6 +1,6 @@
 const {
   createDisbursementTransaction,
-  createATransactionBatch,
+  createBatchTransaction,
   updateATransactionBatch,
   viewTransactionBatch,
   viewBatchCompletions,
@@ -29,7 +29,7 @@ const usecase2 = async () => {
   console.log("Perform a Bulk Disbursement...")
 
   console.log('POST Perform a Bulk Disbursement')
-  await createATransactionBatch(true);
+  await createBatchTransaction(true);
 
   let batchId = "REF-1636656115835"
 
@@ -47,7 +47,7 @@ const usecase3 = async () => {
   console.log("Perform a Bulk Disbursement with Maker / Checker...")
 
   console.log('POST Perform a Bulk Disbursement')
-  await createATransactionBatch(true);
+  await createBatchTransaction(true);
 
   let batchId = "REF-1636656115835"
 

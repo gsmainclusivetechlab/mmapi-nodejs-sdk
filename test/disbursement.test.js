@@ -4,7 +4,7 @@ const client = require('./test_harness').client();
 
 const {
   createDisbursementTransaction,
-  createATransactionBatch,
+  createBatchTransaction,
   updateATransactionBatch,
   viewATransactionBatch,
   viewBatchCompletions,
@@ -41,7 +41,7 @@ describe('Disbursements', () => {
   describe('Perform a Bulk Disbursement', () => {
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createATransactionBatch();
+        const response = await createBatchTransaction();
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -95,7 +95,7 @@ describe('Disbursements', () => {
   describe('Perform a Bulk Disbursement with Maker / Checker', () => {
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createATransactionBatch();
+        const response = await createBatchTransaction();
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
