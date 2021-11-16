@@ -1,6 +1,6 @@
 # Create A Int Transfer Transaction
 
-`Here, CreateAIntTransferTransactionRequest() creates a POST request to /transactions/type/{transactionType}`
+`Here, createInternationalTransaction() creates a POST request to /transactions/type/{transactionType}`
 
 > `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'inttransfer' passed via the URL.`
 
@@ -81,12 +81,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createAIntTransferTransaction = async () => {
+const createInternationalTransaction = async () => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.internationalTransfer.CreateAIntTransferTransactionRequest();
+    const request = new mmapi.internationalTransfer.createInternationalTransaction();
 
     /**
      * Set the request body parameter
@@ -118,7 +118,7 @@ const createAIntTransferTransaction = async () => {
 /**
  * Invoke the function
  */
-createAIntTransferTransaction();
+createInternationalTransaction();
 ```
 
 ### Example Output

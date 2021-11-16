@@ -84,12 +84,12 @@ const buildRequestBody = (quotationReference, quoteId) => ({
 /**
  * Set up your function to be invoked
  */
-const createAIntTransferTransaction = async (quotationReference, quoteId, debug = false) => {
+const createInternationalTransaction = async (quotationReference, quoteId, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.internationalTransfer.CreateAIntTransferTransactionRequest();
+    const request = new mmapi.internationalTransfer.createInternationalTransaction();
 
     /**
      * Set the request body parameter
@@ -131,7 +131,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAIntTransferTransaction('<REPLACE-WITH-QUOTATION-REFERENCE>', '<REPLACE-WITH-QUOTE-ID>', true);
+      await createInternationalTransaction('<REPLACE-WITH-QUOTATION-REFERENCE>', '<REPLACE-WITH-QUOTE-ID>', true);
     } catch (err) {
     }
   })();
@@ -141,6 +141,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createAIntTransferTransaction
+  createInternationalTransaction
 };
 

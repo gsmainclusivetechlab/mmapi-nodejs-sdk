@@ -117,10 +117,10 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 
 * International Transfer via Hub
     * [POST Request a International Transfer Quotation](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-international-transfers/docs/internationalTransfer/createQuotation.Readme.md)
-    * [POST Perform an International Transfer](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-international-transfers/docs/internationalTransfer/createAIntTransferTransaction.Readme.md)
+    * [POST Perform an International Transfer](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-international-transfers/docs/internationalTransfer/createInternationalTransaction.Readme.md)
 * Bilateral International Transfer
     * [POST Request a International Transfer Quotation](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-international-transfers/docs/internationalTransfer/createQuotation.Readme.md)
-    * [POST Perform an International Transfer](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-international-transfers/docs/internationalTransfer/createAIntTransferTransaction.Readme.md)
+    * [POST Perform an International Transfer](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-international-transfers/docs/internationalTransfer/createInternationalTransaction.Readme.md)
 * International Transfer Failure
 * International Transfer Reversal
     * [POST Perform a Transaction Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/createReversal.Readme.md)

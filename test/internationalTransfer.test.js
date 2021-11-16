@@ -4,7 +4,7 @@ const client = require('./test_harness').client();
 
 const {
   createQuotation,
-  createAIntTransferTransaction
+  createInternationalTransaction
 } = require('../samples/index').internationalTransfer;
 
 const {
@@ -37,7 +37,7 @@ describe('International Transfers', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
         let quotationReference = 'REF-1636533162268';
         let quoteId = undefined;
-        const response = await createAIntTransferTransaction(quotationReference, quoteId, false);
+        const response = await createInternationalTransaction(quotationReference, quoteId, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -67,7 +67,7 @@ describe('International Transfers', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
         let quotationReference = 'REF-1636533162268';
         let quoteId = undefined;
-        const response = await createAIntTransferTransaction(quotationReference, quoteId, false);
+        const response = await createInternationalTransaction(quotationReference, quoteId, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -87,7 +87,7 @@ describe('International Transfers', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
         let quotationReference = 'REF-1636533162268';
         let quoteId = undefined;
-        const response = await createAIntTransferTransaction(quotationReference, quoteId, false);
+        const response = await createInternationalTransaction(quotationReference, quoteId, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -173,7 +173,7 @@ describe('International Transfers', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
         let quotationReference = 'REF-1636533162268';
         let quoteId = undefined;
-        const response = await createAIntTransferTransaction(quotationReference, quoteId, false);
+        const response = await createInternationalTransaction(quotationReference, quoteId, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

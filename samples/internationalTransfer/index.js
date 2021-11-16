@@ -1,7 +1,7 @@
 const { createQuotation } = require('./createQuotation');
-const { createAIntTransferTransaction } = require('./createAIntTransferTransaction');
+const { createInternationalTransaction } = require('./createInternationalTransaction');
 
 module.exports = {
   createQuotation,
-  createAIntTransferTransaction
+  createInternationalTransaction
 }
