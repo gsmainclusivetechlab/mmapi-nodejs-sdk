@@ -6,7 +6,7 @@ const {
 const {
   createReversal,
   viewAccountBalance,
-  viewAccountTransaction,
+  viewAccountTransactions,
   viewServiceAvailability,
   viewResponse,
   viewRequestState,
@@ -58,7 +58,7 @@ const usecase5 = async () => {
   console.log("Retrieve Transactions for a Financial Service Provider...");
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransaction('accountid', '2000', 0, 20);
+  await viewAccountTransactions('accountid', '2000', 0, 20);
 }
 
 const usecase6 = async () => {

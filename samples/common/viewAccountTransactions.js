@@ -13,12 +13,12 @@ const client = require('../../test/test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewAccountTransaction = async (identifierType, identifier, offset, limit, debug = false) => {
+const viewAccountTransactions = async (identifierType, identifier, offset, limit, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.viewAccountTransaction(identifierType, identifier);
+    const request = new mmapi.common.viewAccountTransactions(identifierType, identifier);
 
     /**
      * Set the offset parameter
@@ -67,7 +67,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAccountTransaction('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER', 0, 20, true);
+      await viewAccountTransactions('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER', 0, 20, true);
     } catch (err) {
     }
   })();
@@ -77,7 +77,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAccountTransaction
+  viewAccountTransactions
 };
 
 
