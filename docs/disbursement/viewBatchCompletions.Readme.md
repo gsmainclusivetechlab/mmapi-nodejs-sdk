@@ -1,6 +1,6 @@
 # View Batch Completions
 
-`Here, ViewBatchCompletionsRequest(batchId) creates a GET request to /batchtransactions/{batchId}/completions`
+`Here, viewBatchCompletions(batchId) creates a GET request to /batchtransactions/{batchId}/completions`
 
 > `This endpoint returns completed transactions for a specific batch.`
 
@@ -14,7 +14,7 @@ const viewBatchCompletions = async (batchId) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.ViewBatchCompletionsRequest(batchId);
+    const request = new mmapi.disbursement.viewBatchCompletions(batchId);
 
     /**
      * Call API with your client and get a response for your call
