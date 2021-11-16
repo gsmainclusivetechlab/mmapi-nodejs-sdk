@@ -33,6 +33,11 @@ const createAuthorisationCode = async (identifierType, identifier) => {
     request.data = buildRequestBody();
 
     /**
+     * Chose the polling method.
+     */
+    request.polling();
+
+    /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
@@ -63,7 +68,7 @@ const createAuthorisationCode = async (identifierType, identifier) => {
 createAuthorisationCode('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
 ```
 
-### Example Output
+### Example Output - Callback
 ```javascript
 202
 
@@ -72,6 +77,19 @@ createAuthorisationCode('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER
   "status": "pending",
   "notificationMethod": "callback",
   "objectReference": "1056",
+  "pollLimit": 100
+}
+```
+
+### Example Output - Polling
+```javascript
+202
+
+{
+  "serverCorrelationId": "679b684e-9b2f-4140-b0b8-dc53d183ffaf",
+  "status": "pending",
+  "notificationMethod": "polling",
+  "objectReference": "1707",
   "pollLimit": 100
 }
 ```

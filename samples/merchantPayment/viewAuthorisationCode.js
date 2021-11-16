@@ -11,46 +11,14 @@ const mmapi = require('../../lib/index');
 const client = require('../../test/test_harness').client();
 
 /**
- * Create the request body parameter
- */
-const buildRequestBody = () => ({
-  "amount": "200.00",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "currency": "RWF"
-});
-
-/**
  * Set up your function to be invoked
  */
-const createMerchantTransaction = async (polling = false, debug = false) => {
+const viewAuthorisationCode = async (identifierType, identifier, authorisationCode, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.merchantPayment.createMerchantTransaction();
-
-    /**
-     * Set the request body parameter
-     */
-    request.data = buildRequestBody();
-
-    /**
-     * Chose the polling method.
-     */
-    if (polling) {
-      request.polling();
-    }
+    const request = new mmapi.merchantPayment.viewAuthorisationCode(identifierType, identifier, authorisationCode);
 
     /**
      * Call API with your client and get a response for your call
@@ -87,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createMerchantTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await viewAuthorisationCode('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-AUTHORISATION-CODE>>', true);
     } catch (err) {
     }
   })();
@@ -97,5 +65,8 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createMerchantTransaction
-}
+  viewAuthorisationCode
+};
+
+
+

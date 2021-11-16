@@ -33,7 +33,7 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createRefundTransaction = async (debug = false) => {
+const createRefundTransaction = async (polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -44,6 +44,13 @@ const createRefundTransaction = async (debug = false) => {
      * Set the request body parameter
      */
     request.data = buildRequestBody();
+
+    /**
+     * Chose the polling method.
+     */
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
@@ -80,7 +87,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createRefundTransaction(true);
+      await createRefundTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
