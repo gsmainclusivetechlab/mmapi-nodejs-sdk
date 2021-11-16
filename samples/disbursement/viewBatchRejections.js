@@ -18,7 +18,7 @@ const viewBatchRejections = async (batchId, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.ViewBatchRejectionsRequest(batchId);
+    const request = new mmapi.disbursement.viewBatchRejections(batchId);
 
     /**
      * Call API with your client and get a response for your call
