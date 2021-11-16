@@ -3,7 +3,7 @@ require('./test_helper');
 const client = require('./test_harness').client();
 
 const {
-  createANewQuotation,
+  createQuotation,
   createAIntTransferTransaction
 } = require('../samples/index').internationalTransfer;
 
@@ -22,7 +22,7 @@ describe('International Transfers', () => {
   describe('Perform an International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createANewQuotation(false);
+        const response = await createQuotation(false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -52,7 +52,7 @@ describe('International Transfers', () => {
   describe('Perform an Bilateral International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createANewQuotation(false);
+        const response = await createQuotation(false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

@@ -1,6 +1,6 @@
 const {
   createAIntTransferTransaction,
-  createANewQuotation,
+  createQuotation,
 } = require('../index').internationalTransfer;
 
 const {
@@ -18,7 +18,7 @@ const usecase1 = async () => {
   console.log("Perform an International Transfer...");
 
   console.log("POST Request a International Transfer Quotation")
-  await createANewQuotation(true);
+  await createQuotation(true);
 
   console.log("POST Perform an International Transfer")
   await createAIntTransferTransaction('REF-1636533162268', undefined, true);
@@ -28,7 +28,7 @@ const usecase2 = async () => {
   console.log("Perform an Bilateral International Transfer...");
 
   console.log("POST Request a International Transfer Quotation")
-  await createANewQuotation(true);
+  await createQuotation(true);
 
   console.log("POST Perform an International Transfer")
   await createAIntTransferTransaction('REF-1636533162268', undefined, true);
