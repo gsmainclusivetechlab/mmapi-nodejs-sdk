@@ -1,6 +1,6 @@
 # View Batch Rejections Request
 
-`Here, ViewBatchRejectionsRequest(batchId) creates a GET request to /batchtransactions/{batchId}/rejections`
+`Here, viewBatchRejections(batchId) creates a GET request to /batchtransactions/{batchId}/rejections`
 
 > `This endpoint returns rejected transactions for a specific batch`
 
@@ -14,7 +14,7 @@ const viewBatchRejections = async (batchId) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.ViewBatchRejectionsRequest(batchId);
+    const request = new mmapi.disbursement.viewBatchRejections(batchId);
 
     /**
      * Call API with your client and get a response for your call
@@ -41,7 +41,7 @@ const viewBatchRejections = async (batchId) => {
 /**
  * Invoke the function
  */
-viewBatchRejections('REPLACE-WITH-BATCH-ID');
+viewBatchRejections('<<REPLACE-WITH-BATCH-ID>>');
 ```
 
 ### Example Output

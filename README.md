@@ -50,68 +50,92 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 
 * [Merchant Payments](#merchant-payments) 
 * [Disbursements](#disbursements)
+* [International Transfers](#international-transfers)
 
 ### Merchant Payments
 * Payee-Initiated Merchant Payment
-    * [POST Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createAMerchantPayTransaction.Readme.md)
+    * [POST Payee Initiated Merchant Payment](/docs/merchantPayment/createMerchantTransaction.Readme.md)
 * Payee-Initiated Merchant Payment Failure
 * Payee-Initiated Merchant Payment using the Polling Method
-   * [POST Payee Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createAMerchantPayTransaction.Readme.md)
-   * loop [GET Poll to Determine the Request State](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewARequestState.Readme.md)
-   * optional [GET Retrieve a Transaction](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewATransaction.Readme.md)
+   * [POST Payee Initiated Merchant Payment](/docs/merchantPayment/createMerchantTransaction.Readme.md)
+   * loop [GET Poll to Determine the Request State](/docs/common/viewRequestState.Readme.md)
+   * optional [GET Retrieve a Transaction](/docs/common/viewTransaction.Readme.md)
 * Payer-Initiated Merchant Payment
-   * [POST Payer Initiated Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createAMerchantPayTransaction.Readme.md)
+   * [POST Payer Initiated Merchant Payment](/docs/merchantPayment/createMerchantTransaction.Readme.md)
 * Payer-Initiated Merchant Payment Failure
 * Payee-Initiated Merchant Payment using a Pre-authorised Payment Code
-   * [POST Obtain an Authorisation Code](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createAnAuthorisationCode.Readme.md)
-   * [POST Perform a Merchant Payment](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createAMerchantPayTransaction.Readme.md)
+   * [POST Obtain an Authorisation Code](/docs/merchantPayment/createAuthorisationCode.Readme.md)
+   * [POST Perform a Merchant Payment](/docs/merchantPayment/createMerchantTransaction.Readme.md)
+   * optional [GET View An Authorisation Code](/docs/merchantPayment/viewAuthorisationCode.Readme.md)
 * Merchant Payment Refund
-   * [POST Perform a Merchant Payment Refund](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/merchantPayment/createARefundTransaction.Readme.md)
+   * [POST Perform a Merchant Payment Refund](/docs/merchantPayment/createRefundTransaction.Readme.md)
 * Merchant Payment Reversal
-   * [POST Perform a Merchant Payment Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/createAReversal.Readme.md)
+   * [POST Perform a Merchant Payment Reversal](/docs/common/createReversal.Readme.md)
 * Obtain a Merchant Balance
-   * [GET Get an Account Balance](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountBalance.Readme.md)
+   * [GET Get an Account Balance](/docs/common/viewAccountBalance.Readme.md)
 * Retrieve Payments for a Merchant
-   * [GET Retrieve a Set of Transactions for an Account](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountSpecificTransaction.Readme.md)
+   * [GET Retrieve a Set of Transactions for an Account](/docs/common/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/checkApiAvailability.Readme.md)
+   * [GET Check for Service Availability](/docs/common/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResource.Readme.md)
- 
+   * [GET Retrieve a Missing Response](/docs/common/viewResponse.Readme.md)
+   * [GET Retrieve a Missing Resource](/docs/common/viewResource.Readme.md)
+
 ### Disbursements
 
 * Individual Disbursement
-    * [POST Perform an Individual Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/createADisbursementTransaction.Readme.md)
+    * [POST Perform an Individual Disbursement](/docs/disbursement/createDisbursementTransaction.Readme.md)
 * Individual Disbursement Failure
 * Bulk Disbursement
-    * [POST Perform a Bulk Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/createATransactionBatch.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have Completed](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/viewBatchCompletions.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have been Rejected](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/viewBatchRejections.Readme.md)
-    * optional [GET View A Transaction Batch](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/viewATransactionBatch.Readme.md)
+    * [POST Perform a Bulk Disbursement](/docs/disbursement/createBatchTransaction.Readme.md)
+    * optional [GET Retrieve Batch Transactions that have Completed](/docs/disbursement/viewBatchCompletions.Readme.md)
+    * optional [GET Retrieve Batch Transactions that have been Rejected](/docs/disbursement/viewBatchRejections.Readme.md)
+    * optional [GET View A Transaction Batch](/docs/disbursement/viewBatchTransaction.Readme.md)
 * Bulk Disbursement Failure
 * Bulk Disbursement with Maker / Checker
-    * [POST Perform a Bulk Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/createATransactionBatch.Readme.md)
-    * [PATCH Update A Transaction Batch](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/updateATransactionBatch.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have Completed](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/viewBatchCompletions.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have been Rejected](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/viewBatchRejections.Readme.md)
-    * optional [GET View A Transaction Batch](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/viewATransactionBatch.Readme.md)
+    * [POST Perform a Bulk Disbursement](/docs/disbursement/createBatchTransaction.Readme.md)
+    * [PATCH Update A Transaction Batch](/docs/disbursement/updateBatchTransaction.Readme.md)
+    * optional [GET Retrieve Batch Transactions that have Completed](/docs/disbursement/viewBatchCompletions.Readme.md)
+    * optional [GET Retrieve Batch Transactions that have been Rejected](/docs/disbursement/viewBatchRejections.Readme.md)
+    * optional [GET View A Transaction Batch](/docs/disbursement/viewBatchTransaction.Readme.md)
 * Individual Disbursement Using the Polling Method
-    * [POST Perform an Individual Disbursement](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/disbursement/createADisbursementTransaction.Readme.md)
-    * loop [GET Poll to Determine the Request State](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewARequestState.Readme.md)
-    * optional [GET Retrieve a Transaction](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewATransaction.Readme.md)
+    * [POST Perform an Individual Disbursement](/docs/disbursement/createDisbursementTransaction.Readme.md)
+    * loop [GET Poll to Determine the Request State](/docs/common/viewRequestState.Readme.md)
+    * optional [GET Retrieve a Transaction](/docs/common/viewTransaction.Readme.md)
 * Disbursement Reversal
-    * [POST Perform a Transaction Reversal](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/createAReversal.Readme.md)
+    * [POST Perform a Transaction Reversal](/docs/common/createReversal.Readme.md)
 * Obtain a Disbursement Organisation Balance
-    * [GET Get an Account Balance](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountBalance.Readme.md)
+    * [GET Get an Account Balance](/docs/common/viewAccountBalance.Readme.md)
 * Retrieve Transactions for a Disbursement Organisation
-    * [GET Retrieve a Set of Transactions for an Account](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountSpecificTransaction.Readme.md)
+    * [GET Retrieve a Set of Transactions for an Account](/docs/common/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/checkApiAvailability.Readme.md)
+   * [GET Check for Service Availability](/docs/common/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAResource.Readme.md)
+   * [GET Retrieve a Missing Response](/docs/common/viewResponse.Readme.md)
+   * [GET Retrieve a Missing Resource](/docs/common/viewResource.Readme.md)
 
+### International Transfers
+
+* International Transfer via Hub
+    * [POST Request a International Transfer Quotation](/docs/internationalTransfer/createQuotation.Readme.md)
+    * [POST Perform an International Transfer](/docs/internationalTransfer/createInternationalTransaction.Readme.md)
+    * optional [GET View A Quotation](/docs/internationalTransfer/viewQuotation.Readme.md)
+* Bilateral International Transfer
+    * [POST Request a International Transfer Quotation](/docs/internationalTransfer/createQuotation.Readme.md)
+    * [POST Perform an International Transfer](/docs/internationalTransfer/createInternationalTransaction.Readme.md)
+    * optional [GET View A Quotation](/docs/internationalTransfer/viewQuotation.Readme.md)
+* International Transfer Failure
+* International Transfer Reversal
+    * [POST Perform a Transaction Reversal](/docs/common/createReversal.Readme.md)
+* Obtain an FSP Balance
+    * [GET Get an Account Balance](/docs/common/viewAccountBalance.Readme.md)
+* Retrieve Transactions for an FSP
+    * [GET Retrieve a Set of Transactions for an Account](/docs/common/viewAccountTransactions.Readme.md)
+* Check for Service Availability
+   * [GET Check for Service Availability](/docs/common/viewServiceAvailability.Readme.md)
+* Retrieve a Missing API Response
+   * [GET Retrieve a Missing Response](/docs/common/viewResponse.Readme.md)
+   * [GET Retrieve a Missing Resource](/docs/common/viewResource.Readme.md)
 
 ## Test
 ```
@@ -120,19 +144,17 @@ $ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YO
 
 ```
 ## Samples
-Note: Update the samples/sample_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples. 
+Note: Update the test/test_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples. 
 
 **To run all usecase scenarios for a usecase (merchantpay, disbursements, etc)**
 
  ```
 $ npm install
-$ cd samples/merchantPayment
-$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node runAll.js
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node samples/merchantPayment/runAll.js
 ```
 ```
 $ npm install
-$ cd samples/merchantPayment
-$ node runAll.js
+$ node samples/merchantPayment/runAll.js
 ```
 *By default runAll.js will execute all usecase scenarios for the usecase*
 
@@ -150,12 +172,12 @@ $ node runAll.js
 *Replace the parameter with a value*
 
 ```javascript
-// createAMerchantPayTransaction.js
+// createMerchantTransaction.js
 
 if (require.main === module) {
   (async () => {
     try {
-      await createAMerchantPayTransaction('REPLACE-WITH-POLLING-TRUE-OR-FALSE', true);
+      await createMerchantTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
@@ -164,6 +186,5 @@ if (require.main === module) {
 
 ```
 $ npm install
-$ cd samples/merchantPayment
-$ node createAMerchantPayTransaction.js
+$ node samples/merchantPayment/createMerchantTransaction.js
 ```

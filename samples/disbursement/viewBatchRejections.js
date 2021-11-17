@@ -8,7 +8,7 @@ const mmapi = require('../../lib/index');
 /**
  * mobileMoneyApi HTTP client dependency
  */
-const client = require('../sample_harness').client();
+const client = require('../../test/test_harness').client();
 
 /**
  * Set up your function to be invoked
@@ -18,7 +18,7 @@ const viewBatchRejections = async (batchId, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.ViewBatchRejectionsRequest(batchId);
+    const request = new mmapi.disbursement.viewBatchRejections(batchId);
 
     /**
      * Call API with your client and get a response for your call
@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewBatchRejections('REPLACE-WITH-BATCH-ID', true);
+      await viewBatchRejections('<<REPLACE-WITH-BATCH-ID>>', true);
     } catch (err) {
     }
   })();

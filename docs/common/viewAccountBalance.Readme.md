@@ -1,6 +1,6 @@
 # View Account Balance
 
-`Here, ViewAccountBalanceRequest(identifierType, identifier) creates a GET request to /accounts/{identifierType}/{identifier}/balance`
+`Here, viewAccountBalance(identifierType, identifier) creates a GET request to /accounts/{identifierType}/{identifier}/balance`
 
 > `This endpoint returns the balance of an account.`
 
@@ -15,7 +15,7 @@ const viewAccountBalance = async (identifierType, identifier) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.ViewAccountBalanceRequest(identifierType, identifier);
+    const request = new mmapi.common.viewAccountBalance(identifierType, identifier);
 
     /**
      * Call API with your client and get a response for your call
@@ -42,7 +42,7 @@ const viewAccountBalance = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-viewAccountBalance('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER');
+viewAccountBalance('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>');
 ```
 
 ### Example Output
