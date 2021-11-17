@@ -75,7 +75,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Retrieve Payments for a Merchant
    * [GET Retrieve a Set of Transactions for an Account](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewServiceAvailability.Readme.md)
+   * [GET Check for Service Availability](/docs/common/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
    * [GET Retrieve a Missing Response](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewResponse.Readme.md)
    * [GET Retrieve a Missing Resource](https://github.com/gsmainclusivetechlab/mmapi-nodejs-sdk/blob/feature-disbursements/docs/common/viewResource.Readme.md)
