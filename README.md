@@ -144,26 +144,26 @@ $ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YO
 
 ```
 ## Samples
-Note: Update the samples/unit/test_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples. 
+Note: Update the samples/test_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples.
 
 **To run all usecase scenarios for a usecase (merchantpay, disbursements, etc)**
 
 ```
 $ npm install
-$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node samples/integration/merchantPayment.js
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node test/merchantPayment.js
 ```
 
 ```
 $ npm install
-$ node samples/integration/merchantPayment.js
+$ node test/merchantPayment.js
 ```
 
 *By default merchantPayment.js will execute all usecase scenarios for the usecase*
 
-> To select a specific use case scenario, edit the merchantPayment.js by passing the usecase number as shown below
+> To select a specific use case scenario, edit the test/merchantPayment.js by passing the usecase number as shown below
 
 ```javascript
-// runAll.js
+// merchantPayment.js
 (async () => {
  
 })(5);
@@ -188,5 +188,5 @@ if (require.main === module) {
 
 ```
 $ npm install
-$ node samples/integration/merchantPayment.js
+$ node test/merchantPayment.js
 ```
