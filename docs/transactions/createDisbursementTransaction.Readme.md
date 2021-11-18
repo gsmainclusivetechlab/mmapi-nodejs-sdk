@@ -35,7 +35,7 @@ const createDisbursementTransaction = async () => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.createDisbursementTransaction();
+    const request = new mmapi.transactions.createDisbursementTransaction();
 
     /**
      * Set the request body parameter

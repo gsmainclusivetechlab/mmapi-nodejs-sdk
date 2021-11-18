@@ -59,7 +59,7 @@ const createBatchTransaction = async () => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.createBatchTransaction();
+    const request = new mmapi.transactions.createBatchTransaction();
 
     /**
      * Set the request body parameter

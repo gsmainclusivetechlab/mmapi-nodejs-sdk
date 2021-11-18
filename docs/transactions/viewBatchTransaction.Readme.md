@@ -14,7 +14,7 @@ const viewBatchTransaction = async (batchId) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.viewBatchTransaction(batchId);
+    const request = new mmapi.transactions.viewBatchTransaction(batchId);
 
     /**
      * Call API with your client and get a response for your call

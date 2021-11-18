@@ -25,7 +25,7 @@ const updateBatchTransaction = async (batchId) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.updateBatchTransaction(batchId);
+    const request = new mmapi.transactions.updateBatchTransaction(batchId);
 
     /**
      * Set the request body parameter

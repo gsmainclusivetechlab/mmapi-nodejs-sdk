@@ -15,7 +15,7 @@ const viewAccountTransactions = async (identifierType, identifier) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.viewAccountTransactions(identifierType, identifier);
+    const request = new mmapi.accounts.viewAccountTransactions(identifierType, identifier);
 
     /**
      * Set the offset parameter

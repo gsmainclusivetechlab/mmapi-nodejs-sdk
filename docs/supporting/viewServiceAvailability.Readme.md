@@ -12,7 +12,7 @@ const viewServiceAvailability = async () => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.viewServiceAvailability();
+    const request = new mmapi.supporting.viewServiceAvailability();
 
     /**
      * Call API with your client and get a response for your call

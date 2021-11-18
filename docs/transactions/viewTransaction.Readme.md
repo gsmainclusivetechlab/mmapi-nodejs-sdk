@@ -14,7 +14,7 @@ const viewTransaction = async (transactionReference) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.common.viewTransaction(transactionReference);
+    const request = new mmapi.transactions.viewTransaction(transactionReference);
 
     /**
      * Call API with your client and get a response for your call

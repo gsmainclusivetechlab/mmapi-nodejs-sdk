@@ -37,7 +37,7 @@ const createRefundTransaction = async () => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.merchantPayment.createRefundTransaction();
+    const request = new mmapi.transactions.createRefundTransaction();
 
     /**
      * Set the request body parameter

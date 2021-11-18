@@ -25,7 +25,7 @@ const createAuthorisationCode = async (identifierType, identifier) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.merchantPayment.createAuthorisationCode(identifierType, identifier);
+    const request = new mmapi.accounts.createAuthorisationCode(identifierType, identifier);
 
     /**
      * Set the request body parameter

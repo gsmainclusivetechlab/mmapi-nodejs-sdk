@@ -36,7 +36,7 @@ const createMerchantTransaction = async () => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.merchantPayment.createMerchantTransaction();
+    const request = new mmapi.transactions.createMerchantTransaction();
 
     /**
      * Set the request body parameter
