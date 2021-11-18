@@ -5,9 +5,9 @@ const supporting = require('./supporting/index');
 const transactions = require('./transactions/index');
 
 module.exports = {
-  core,
-  accounts,
-  quotations,
-  supporting,
-  transactions,
+  ...core,
+  ...accounts,
+  ...quotations,
+  ...supporting,
+  ...transactions,
 };

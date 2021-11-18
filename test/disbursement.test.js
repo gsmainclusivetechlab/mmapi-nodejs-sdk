@@ -1,17 +1,10 @@
-require('./test_helper');
-
-const client = require('./test_harness').client();
-
 const {
   createDisbursementTransaction,
   createBatchTransaction,
   updateBatchTransaction,
   viewBatchTransaction,
   viewBatchCompletions,
-  viewBatchRejections
-} = require('../samples/index').disbursement;
-
-const {
+  viewBatchRejections,
   createReversal,
   viewAccountBalance,
   viewAccountTransactions,
@@ -20,7 +13,8 @@ const {
   viewRequestState,
   viewTransaction,
   viewResource
-} = require('../samples/index').common;
+} = require('../samples/unit/index')
+
 
 describe('Disbursements', () => {
   describe('Perform an Individual Disbursement', () => {
@@ -242,7 +236,7 @@ describe('Disbursements', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId);
+        const response = await viewRequestState(serverCorrelationId, true);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -258,7 +252,7 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewBatchTransaction(objectReference);
+        const response = await viewBatchTransaction(objectReference, true);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('batchId');

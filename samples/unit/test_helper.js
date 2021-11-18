@@ -1,0 +1,1 @@
+global.mmapi = require('../../lib/index');

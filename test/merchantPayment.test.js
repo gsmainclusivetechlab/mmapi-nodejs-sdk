@@ -1,15 +1,8 @@
-require('./test_helper');
-
-const client = require('./test_harness').client();
-
 const {
   createMerchantTransaction,
   createRefundTransaction,
   createAuthorisationCode,
-  viewAuthorisationCode
-} = require('../samples/index').merchantPayment;
-
-const {
+  viewAuthorisationCode,
   createReversal,
   viewAccountBalance,
   viewAccountTransactions,
@@ -18,7 +11,7 @@ const {
   viewRequestState,
   viewTransaction,
   viewResource
-} = require('../samples/index').common;
+} = require('../samples/unit/index')
 
 describe('Merchant Payments', () => {
   describe('Perform a Payee-Initiated Merchant Payment', () => {
