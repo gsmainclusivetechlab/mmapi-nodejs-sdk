@@ -3,9 +3,7 @@ require('./test_helper');
 const client = require('./test_harness').client();
 
 const {
-  createQuotation,
   createInternationalTransaction,
-  viewQuotation
 } = require('../samples/index').internationalTransfer;
 
 const {
@@ -16,7 +14,9 @@ const {
   viewResponse,
   viewRequestState,
   viewTransaction,
-  viewResource
+  viewResource,
+  createQuotation,
+  viewQuotation
 } = require('../samples/index').common;
 
 describe('International Transfers', () => {

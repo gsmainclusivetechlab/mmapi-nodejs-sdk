@@ -6,6 +6,9 @@ const { viewResponse } = require('./viewResponse');
 const { viewRequestState } = require('./viewRequestState');
 const { viewTransaction } = require('./viewTransaction');
 const { viewResource } = require('./viewResource');
+const { viewAccountName } = require('./viewAccountName');
+const { viewQuotation } = require('./viewQuotation');
+const { createQuotation } = require('./createQuotation');
 
 module.exports = {
   createReversal,
@@ -15,5 +18,8 @@ module.exports = {
   viewResponse,
   viewRequestState,
   viewTransaction,
-  viewResource
+  viewResource,
+  viewAccountName,
+  viewQuotation,
+  createQuotation,
 }

@@ -85,7 +85,7 @@ const createQuotation = async () => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.internationalTransfer.createQuotation();
+    const request = new mmapi.common.createQuotation();
 
     /**
      * Set the request body parameter

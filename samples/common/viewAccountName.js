@@ -13,12 +13,12 @@ const client = require('../../test/test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewQuotation = async (quotationReference, debug = false) => {
+const viewAccountName = async (identifierType, identifier, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.internationalTransfer.viewQuotation(quotationReference);
+    const request = new mmapi.common.viewAccountName(identifierType, identifier);
 
     /**
      * Call API with your client and get a response for your call
@@ -55,7 +55,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewQuotation('<<REPLACE-WITH-QUOTATION-REFERENCE>>', true);
+      await viewAccountName('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', true);
     } catch (err) {
     }
   })();
@@ -65,6 +65,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewQuotation
+  viewAccountName
 };
 

@@ -1,7 +1,5 @@
 const {
-  createInternationalTransaction,
-  createQuotation,
-  viewQuotation
+  createInternationalTransaction
 } = require('../index').internationalTransfer;
 
 const {
@@ -12,7 +10,9 @@ const {
   viewResponse,
   viewRequestState,
   viewTransaction,
-  viewResource
+  viewResource,
+  createQuotation,
+  viewQuotation
 } = require('../index').common;
 
 const usecase1 = async () => {
