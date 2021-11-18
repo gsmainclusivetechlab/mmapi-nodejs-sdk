@@ -3,7 +3,7 @@ require('dotenv').config()
 /**
  * MobileMoneyApi Node JS SDK dependency
  */
-const mmapi = require('../../lib/index');
+const mmapi = require('../lib/index');
 
 /**
  * Setting up and Returns MobileMoneyApi SDK environment with MobileMoneyApi Access credentials.

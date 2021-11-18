@@ -3,7 +3,7 @@ const {
   createQuotation,
   createTransferTransaction,
   viewRequestState
-} = require('../unit/index')
+} = require('../samples/index')
 
 const buildQuotationRequestBody = () => ({
   "creditParty": [

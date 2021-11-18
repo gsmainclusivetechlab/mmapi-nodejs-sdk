@@ -13,7 +13,7 @@ const {
   viewRequestState,
   viewTransaction,
   viewResource
-} = require('../samples/unit/index')
+} = require('../samples/index')
 
 
 describe('Disbursements', () => {

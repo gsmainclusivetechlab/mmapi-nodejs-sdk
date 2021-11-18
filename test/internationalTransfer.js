@@ -10,7 +10,7 @@ const {
   viewRequestState,
   viewTransaction,
   viewResource
-} = require('../unit/index')
+} = require('../samples/index')
 
 const usecase1 = async () => {
   console.log("Perform an International Transfer...");

@@ -1,6 +1,6 @@
 const {
   obtainAnAccessToken
-} = require('../samples/unit/index')
+} = require('../samples/index')
 
 describe('Obtain An Access Token Request', () => {
   it('Should return an access token if valid consumer key and consumer secret is sent via the authorization header', async () => {

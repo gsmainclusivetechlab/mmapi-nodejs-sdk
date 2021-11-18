@@ -3,7 +3,7 @@ const {
   createQuotation,
   createTransferTransaction,
   viewRequestState
-} = require('../samples/unit/index')
+} = require('../samples/index')
 
 describe('P2P Transfers', () => {
   describe('Perform a P2P Transfer via Switch', () => {
