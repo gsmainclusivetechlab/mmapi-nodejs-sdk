@@ -54,88 +54,88 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 
 ### Merchant Payments
 * Payee-Initiated Merchant Payment
-    * [POST Payee Initiated Merchant Payment](/docs/merchantPayment/createMerchantTransaction.Readme.md)
+    * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
 * Payee-Initiated Merchant Payment Failure
 * Payee-Initiated Merchant Payment using the Polling Method
-   * [POST Payee Initiated Merchant Payment](/docs/merchantPayment/createMerchantTransaction.Readme.md)
-   * loop [GET Poll to Determine the Request State](/docs/common/viewRequestState.Readme.md)
-   * optional [GET Retrieve a Transaction](/docs/common/viewTransaction.Readme.md)
+   * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
+   * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
+   * optional [GET Retrieve a Transaction](/docs/transactions/viewTransaction.Readme.md)
 * Payer-Initiated Merchant Payment
-   * [POST Payer Initiated Merchant Payment](/docs/merchantPayment/createMerchantTransaction.Readme.md)
+   * [POST Payer Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
 * Payer-Initiated Merchant Payment Failure
 * Payee-Initiated Merchant Payment using a Pre-authorised Payment Code
-   * [POST Obtain an Authorisation Code](/docs/merchantPayment/createAuthorisationCode.Readme.md)
-   * [POST Perform a Merchant Payment](/docs/merchantPayment/createMerchantTransaction.Readme.md)
-   * optional [GET View An Authorisation Code](/docs/merchantPayment/viewAuthorisationCode.Readme.md)
+   * [POST Obtain an Authorisation Code](/docs/accounts/createAuthorisationCode.Readme.md)
+   * [POST Perform a Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
+   * optional [GET View An Authorisation Code](/docs/accounts/viewAuthorisationCode.Readme.md)
 * Merchant Payment Refund
-   * [POST Perform a Merchant Payment Refund](/docs/merchantPayment/createRefundTransaction.Readme.md)
+   * [POST Perform a Merchant Payment Refund](/docs/transactions/createRefundTransaction.Readme.md)
 * Merchant Payment Reversal
-   * [POST Perform a Merchant Payment Reversal](/docs/common/createReversal.Readme.md)
+   * [POST Perform a Merchant Payment Reversal](/docs/transactions/createReversal.Readme.md)
 * Obtain a Merchant Balance
-   * [GET Get an Account Balance](/docs/common/viewAccountBalance.Readme.md)
+   * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
 * Retrieve Payments for a Merchant
-   * [GET Retrieve a Set of Transactions for an Account](/docs/common/viewAccountTransactions.Readme.md)
+   * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](/docs/common/viewServiceAvailability.Readme.md)
+   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](/docs/common/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](/docs/common/viewResource.Readme.md)
+   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
 ### Disbursements
 
 * Individual Disbursement
-    * [POST Perform an Individual Disbursement](/docs/disbursement/createDisbursementTransaction.Readme.md)
+    * [POST Perform an Individual Disbursement](/docs/transactions/createDisbursementTransaction.Readme.md)
 * Individual Disbursement Failure
 * Bulk Disbursement
-    * [POST Perform a Bulk Disbursement](/docs/disbursement/createBatchTransaction.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have Completed](/docs/disbursement/viewBatchCompletions.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have been Rejected](/docs/disbursement/viewBatchRejections.Readme.md)
-    * optional [GET View A Transaction Batch](/docs/disbursement/viewBatchTransaction.Readme.md)
+    * [POST Perform a Bulk Disbursement](/docs/transactions/createBatchTransaction.Readme.md)
+    * optional [GET Retrieve Batch Transactions that have Completed](/docs/transactions/viewBatchCompletions.Readme.md)
+    * optional [GET Retrieve Batch Transactions that have been Rejected](/docs/transactions/viewBatchRejections.Readme.md)
+    * optional [GET View A Transaction Batch](/docs/transactions/viewBatchTransaction.Readme.md)
 * Bulk Disbursement Failure
 * Bulk Disbursement with Maker / Checker
-    * [POST Perform a Bulk Disbursement](/docs/disbursement/createBatchTransaction.Readme.md)
-    * [PATCH Update A Transaction Batch](/docs/disbursement/updateBatchTransaction.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have Completed](/docs/disbursement/viewBatchCompletions.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have been Rejected](/docs/disbursement/viewBatchRejections.Readme.md)
-    * optional [GET View A Transaction Batch](/docs/disbursement/viewBatchTransaction.Readme.md)
+    * [POST Perform a Bulk Disbursement](/docs/transactions/createBatchTransaction.Readme.md)
+    * [PATCH Update A Transaction Batch](/docs/transactions/updateBatchTransaction.Readme.md)
+    * optional [GET Retrieve Batch Transactions that have Completed](/docs/transactions/viewBatchCompletions.Readme.md)
+    * optional [GET Retrieve Batch Transactions that have been Rejected](/docs/transactions/viewBatchRejections.Readme.md)
+    * optional [GET View A Transaction Batch](/docs/transactions/viewBatchTransaction.Readme.md)
 * Individual Disbursement Using the Polling Method
-    * [POST Perform an Individual Disbursement](/docs/disbursement/createDisbursementTransaction.Readme.md)
-    * loop [GET Poll to Determine the Request State](/docs/common/viewRequestState.Readme.md)
-    * optional [GET Retrieve a Transaction](/docs/common/viewTransaction.Readme.md)
+    * [POST Perform an Individual Disbursement](/docs/transactions/createDisbursementTransaction.Readme.md)
+    * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
+    * optional [GET Retrieve a Transaction](/docs/transactions/viewTransaction.Readme.md)
 * Disbursement Reversal
-    * [POST Perform a Transaction Reversal](/docs/common/createReversal.Readme.md)
+    * [POST Perform a Transaction Reversal](/docs/transactions/createReversal.Readme.md)
 * Obtain a Disbursement Organisation Balance
-    * [GET Get an Account Balance](/docs/common/viewAccountBalance.Readme.md)
+    * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
 * Retrieve Transactions for a Disbursement Organisation
-    * [GET Retrieve a Set of Transactions for an Account](/docs/common/viewAccountTransactions.Readme.md)
+    * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](/docs/common/viewServiceAvailability.Readme.md)
+   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](/docs/common/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](/docs/common/viewResource.Readme.md)
+   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
 ### International Transfers
 
 * International Transfer via Hub
-    * [POST Request a International Transfer Quotation](/docs/internationalTransfer/createQuotation.Readme.md)
-    * [POST Perform an International Transfer](/docs/internationalTransfer/createInternationalTransaction.Readme.md)
-    * optional [GET View A Quotation](/docs/internationalTransfer/viewQuotation.Readme.md)
+    * [POST Request a International Transfer Quotation](/docs/quotations/createQuotation.Readme.md)
+    * [POST Perform an International Transfer](/docs/transactions/createInternationalTransaction.Readme.md)
+    * optional [GET View A Quotation](/docs/quotations/viewQuotation.Readme.md)
 * Bilateral International Transfer
-    * [POST Request a International Transfer Quotation](/docs/internationalTransfer/createQuotation.Readme.md)
-    * [POST Perform an International Transfer](/docs/internationalTransfer/createInternationalTransaction.Readme.md)
-    * optional [GET View A Quotation](/docs/internationalTransfer/viewQuotation.Readme.md)
+    * [POST Request a International Transfer Quotation](/docs/quotations/createQuotation.Readme.md)
+    * [POST Perform an International Transfer](/docs/transactions/createInternationalTransaction.Readme.md)
+    * optional [GET View A Quotation](/docs/quotations/viewQuotation.Readme.md)
 * International Transfer Failure
 * International Transfer Reversal
-    * [POST Perform a Transaction Reversal](/docs/common/createReversal.Readme.md)
+    * [POST Perform a Transaction Reversal](/docs/transactions/createReversal.Readme.md)
 * Obtain an FSP Balance
-    * [GET Get an Account Balance](/docs/common/viewAccountBalance.Readme.md)
+    * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
 * Retrieve Transactions for an FSP
-    * [GET Retrieve a Set of Transactions for an Account](/docs/common/viewAccountTransactions.Readme.md)
+    * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](/docs/common/viewServiceAvailability.Readme.md)
+   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](/docs/common/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](/docs/common/viewResource.Readme.md)
+   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
 ## Test
 ```
@@ -144,21 +144,23 @@ $ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YO
 
 ```
 ## Samples
-Note: Update the test/test_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples. 
+Note: Update the samples/unit/test_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples. 
 
 **To run all usecase scenarios for a usecase (merchantpay, disbursements, etc)**
 
- ```
-$ npm install
-$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node samples/merchantPayment/runAll.js
-```
 ```
 $ npm install
-$ node samples/merchantPayment/runAll.js
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node samples/integration/merchantPayment.js
 ```
-*By default runAll.js will execute all usecase scenarios for the usecase*
 
-> To select a specific use case scenario, edit the runAll.js by passing the usecase number as shown below
+```
+$ npm install
+$ node samples/integration/merchantPayment.js
+```
+
+*By default merchantPayment.js will execute all usecase scenarios for the usecase*
+
+> To select a specific use case scenario, edit the merchantPayment.js by passing the usecase number as shown below
 
 ```javascript
 // runAll.js
@@ -186,5 +188,5 @@ if (require.main === module) {
 
 ```
 $ npm install
-$ node samples/merchantPayment/createMerchantTransaction.js
+$ node samples/integration/merchantPayment.js
 ```
