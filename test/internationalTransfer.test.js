@@ -12,7 +12,7 @@ const {
   viewResource
 } = require('../samples/index')
 
-const buildRequestBody = () => ({
+const buildQuotationRequestBody = () => ({
   "creditParty": [
     {
       "key": "accountid",
@@ -77,13 +77,13 @@ const buildRequestBody = () => ({
   "sendingServiceProviderCountry": "AD",
   "originCountry": "AD",
   "receivingCountry": "AD"
-});
+})
 
 describe('International Transfers', () => {
   describe('Perform an International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(buildRequestBody());
+        const response = await createQuotation(buildQuotationRequestBody());
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -111,7 +111,7 @@ describe('International Transfers', () => {
   describe('Perform an Bilateral International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(buildRequestBody());
+        const response = await createQuotation(buildQuotationRequestBody());
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -192,7 +192,7 @@ describe('International Transfers', () => {
 
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(buildRequestBody(), true);
+        const response = await createQuotation(buildQuotationRequestBody(), true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

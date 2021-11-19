@@ -10,7 +10,8 @@ const {
   viewResponse,
   viewRequestState,
   viewTransaction,
-  viewResource
+  viewResource,
+  createReversal
 } = require('../samples/index')
 
 const usecase1 = async () => {
@@ -89,7 +90,7 @@ const usecase8 = async () => {
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
-  console.log('GET Perform a Merchant Payment Reversal')
+  console.log('POST Perform a Merchant Payment Reversal')
   await createReversal(objectReference, true);
 }
 
