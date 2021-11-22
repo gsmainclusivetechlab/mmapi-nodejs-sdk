@@ -201,7 +201,7 @@ $ node test/merchantPayment.js
 *Replace the parameter with a value*
 
 ```javascript
-// createMerchantTransaction.js
+// samples/transactions/createMerchantTransaction.js
 
 if (require.main === module) {
   (async () => {
@@ -215,5 +215,5 @@ if (require.main === module) {
 
 ```
 $ npm install
-$ node test/merchantPayment.js
+$ node samples/transactions/createMerchantTransaction.js
 ```
