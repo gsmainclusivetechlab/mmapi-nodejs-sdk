@@ -3,7 +3,6 @@ const {
   createRefundTransaction,
   createAuthorisationCode,
   viewAuthorisationCode,
-  createReversal,
   viewAccountBalance,
   viewAccountTransactions,
   viewServiceAvailability,

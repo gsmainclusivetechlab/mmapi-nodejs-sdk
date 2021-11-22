@@ -51,6 +51,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * [Merchant Payments](#merchant-payments) 
 * [Disbursements](#disbursements)
 * [International Transfers](#international-transfers)
+* [P2P Transfers](#p2p-transfers)
 
 ### Merchant Payments
 * Payee-Initiated Merchant Payment
@@ -126,6 +127,32 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     * optional [GET View A Quotation](/docs/quotations/viewQuotation.Readme.md)
 * International Transfer Failure
 * International Transfer Reversal
+    * [POST Perform a Transaction Reversal](/docs/transactions/createReversal.Readme.md)
+* Obtain an FSP Balance
+    * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
+* Retrieve Transactions for an FSP
+    * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
+* Check for Service Availability
+   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
+* Retrieve a Missing API Response
+   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+
+### P2P Transfers
+
+* P2P Transfer via Switch
+    * [GET Retrieve the Name of the Recipient](/docs/accounts/viewAccountName.Readme.md)
+    * [POST Request a P2P Quotation](/docs/quotations/createQuotation.Readme.md)
+    * [POST Perform a P2P Transfer](/docs/transactions/createTransferTransaction.Readme.md)
+* Bilateral P2P Transfer
+    * [GET Retrieve the Name of the Recipient](/docs/accounts/viewAccountName.Readme.md)
+    * [POST Perform a P2P Transfer](/docs/transactions/createTransferTransaction.Readme.md)
+* ‘On-us’ P2P Transfer Initiated by a Third Party Provider
+    * [GET Retrieve the Name of the Recipient](/docs/accounts/viewAccountName.Readme.md)
+    * [POST Request a P2P Quotation](/docs/quotations/createQuotation.Readme.md)
+    * [POST Perform a P2P Transfer](/docs/transactions/createTransferTransaction.Readme.md)
+* P2P Transfer Failure
+* P2P Transfer Reversal
     * [POST Perform a Transaction Reversal](/docs/transactions/createReversal.Readme.md)
 * Obtain an FSP Balance
     * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
