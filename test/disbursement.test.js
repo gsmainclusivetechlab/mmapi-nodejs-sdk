@@ -1,17 +1,10 @@
-require('./test_helper');
-
-const client = require('./test_harness').client();
-
 const {
   createDisbursementTransaction,
   createBatchTransaction,
   updateBatchTransaction,
   viewBatchTransaction,
   viewBatchCompletions,
-  viewBatchRejections
-} = require('../samples/index').disbursement;
-
-const {
+  viewBatchRejections,
   createReversal,
   viewAccountBalance,
   viewAccountTransactions,
@@ -20,7 +13,8 @@ const {
   viewRequestState,
   viewTransaction,
   viewResource
-} = require('../samples/index').common;
+} = require('../samples/index')
+
 
 describe('Disbursements', () => {
   describe('Perform an Individual Disbursement', () => {

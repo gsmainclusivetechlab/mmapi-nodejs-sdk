@@ -1,11 +1,13 @@
-const common = require('./common/index')
-const merchantPayment = require('./merchantPayment/index');
-const disbursement = require('./disbursement/index');
-const internationalTransfer = require('./internationalTransfer/index');
+const core = require('./core/index');
+const accounts = require('./accounts/index')
+const quotations = require('./quotations/index');
+const supporting = require('./supporting/index');
+const transactions = require('./transactions/index');
 
 module.exports = {
-  common,
-  merchantPayment,
-  disbursement,
-  internationalTransfer
+  ...core,
+  ...accounts,
+  ...quotations,
+  ...supporting,
+  ...transactions,
 };
