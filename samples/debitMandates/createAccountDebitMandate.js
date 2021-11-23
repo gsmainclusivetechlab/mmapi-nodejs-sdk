@@ -13,17 +13,17 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const createMerchantTransaction = async (body, useCase, polling = false, debug = false) => {
+const createAccountDebitMandate = async (body, identifierType, identifier, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].createMerchantTransaction();
+    const request = new mmapi[useCase].createAccountDebitMandate(identifierType, identifier);
 
     /**
      * Set the request body parameter
      */
-    request.data = body;
+    request.data = body
 
     /**
      * Chose the polling method.
@@ -50,6 +50,7 @@ const createMerchantTransaction = async (body, useCase, polling = false, debug =
      * Handle any errors from the call
      */
     console.log(err);
+    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
 
     /**
      * Return an error response
@@ -67,7 +68,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createMerchantTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createAccountDebitMandate('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
@@ -77,5 +78,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createMerchantTransaction
-}
+  createAccountDebitMandate
+};
+

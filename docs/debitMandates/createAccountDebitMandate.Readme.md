@@ -1,9 +1,8 @@
+# Create A Debit Mandate
 
-# Create A MerchantPay Transaction
+`Here, createAccountDebitMandate(identifierType, identifier) creates a POST request to /accounts/{identifierType}/{identifier}/debitmandates`
 
-`Here, createMerchantTransaction() creates a POST request to /transactions/type/merchantpay`
-
-> `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'merchantpay' passed via the URL.`
+> `Provided with a valid object representation, this endpoint allows for a new debit mandate to be created for a specific account.`
 
 ### Usage/Examples
 
@@ -12,31 +11,36 @@
  * Create the request body parameter
  */
 const buildRequestBody = () => ({
-  "amount": "200.00",
-  "debitParty": [
+   "payee": [
     {
       "key": "accountid",
       "value": "2999"
     }
   ],
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "currency": "RWF"
+    "requestDate": "2018-07-03T10:43:27.405Z",
+    "startDate": "2018-07-03T10:43:27.405Z",
+    "currency": "GBP",
+    "amountLimit": "1000.00",
+    "endDate": "2028-07-03T10:43:27.405Z",
+    "numberOfPayments": "2",
+    "frequencyType": "sixmonths",
+    "customData": [
+        {
+        "key": "keytest",
+        "value": "keyvalue"
+        }
+    ]
 });
 
 /**
  * Set up your function to be invoked
  */
-const createMerchantTransaction = async (body) => {
+const createAccountDebitMandate = async (identifierType, identifier) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createMerchantTransaction();
+    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createAccountDebitMandate(identifierType, identifier);
 
     /**
      * Set the request body parameter
@@ -52,9 +56,6 @@ const createMerchantTransaction = async (body) => {
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-    console.log("Response Headers: ", response.headers);
 
     /**
      * Return a successful response
@@ -76,7 +77,7 @@ const createMerchantTransaction = async (body) => {
 /**
  * Invoke the function
  */
-createMerchantTransaction();
+createAccountDebitMandate('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>');
 ```
 
 ### Example Output - Callback
@@ -84,10 +85,10 @@ createMerchantTransaction();
 202
 
 {
-  "serverCorrelationId": "2e9ce6e1-8bbc-4938-9274-418c28e78f80",
+  "serverCorrelationId": "f2fbaf72-5ca7-46df-ba9d-e8cda6bd267d",
   "status": "pending",
   "notificationMethod": "callback",
-  "objectReference": "9122",
+  "objectReference": "153",
   "pollLimit": 100
 }
 ```
@@ -97,10 +98,10 @@ createMerchantTransaction();
 202
 
 {
-  "serverCorrelationId": "2e9ce6e1-8bbc-4938-9274-418c28e78f80",
+  "serverCorrelationId": "1bca17a5-fe2f-45cc-87dc-d65502507031",
   "status": "pending",
   "notificationMethod": "polling",
-  "objectReference": "9122",
+  "objectReference": "152",
   "pollLimit": 100
 }
 ```

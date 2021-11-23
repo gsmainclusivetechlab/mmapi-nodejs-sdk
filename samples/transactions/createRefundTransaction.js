@@ -11,39 +11,19 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
- * Create the request body parameter
- */
-const buildRequestBody = () => ({
-  "amount": "200.00",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "currency": "RWF"
-});
-
-/**
  * Set up your function to be invoked
  */
-const createRefundTransaction = async (polling = false, debug = false) => {
+const createRefundTransaction = async (body, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.transactions.createRefundTransaction();
+    const request = new mmapi[useCase].createRefundTransaction();
 
     /**
      * Set the request body parameter
      */
-    request.data = buildRequestBody();
+    request.data = body;
 
     /**
      * Chose the polling method.
@@ -87,7 +67,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createRefundTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createRefundTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

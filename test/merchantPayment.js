@@ -13,18 +13,52 @@ const {
   createReversal
 } = require('../samples/index')
 
+const buildMerchantTransactionRequestBody = () => ({
+  "amount": "200.00",
+  "debitParty": [
+    {
+      "key": "accountid",
+      "value": "2999"
+    }
+  ],
+  "creditParty": [
+    {
+      "key": "accountid",
+      "value": "2999"
+    }
+  ],
+  "currency": "RWF"
+});
+
+const buildRefundTransactionRequestBody = () => ({
+  "amount": "200.00",
+  "debitParty": [
+    {
+      "key": "accountid",
+      "value": "2999"
+    }
+  ],
+  "creditParty": [
+    {
+      "key": "accountid",
+      "value": "2999"
+    }
+  ],
+  "currency": "RWF"
+});
+
 const usecase1 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment...");
 
   console.log("POST Payee Initiated Merchant Payment")
-  await createMerchantTransaction(undefined, true);
+  await createMerchantTransaction(buildMerchantTransactionRequestBody(), 'merchantPayment', undefined, true);
 }
 
 const usecase2 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment via the Polling Method...")
 
   console.log('POST Payee Initiated Merchant Payment')
-  const { data: { serverCorrelationId } } = await createMerchantTransaction(true, true);
+  const { data: { serverCorrelationId } } = await createMerchantTransaction(buildMerchantTransactionRequestBody(), 'merchantPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
@@ -37,7 +71,7 @@ const usecase3 = async () => {
   console.log("Perform a Payer-Initiated Merchant Payment...")
 
   console.log('POST Payer Initiated Merchant Payment')
-  await createMerchantTransaction(undefined, true);
+  await createMerchantTransaction(buildMerchantTransactionRequestBody(), 'merchantPayment', undefined, true);
 }
 
 const usecase4 = async () => {
@@ -64,14 +98,14 @@ const usecase6 = async () => {
   console.log("Perform a Merchant Payment Refund...")
 
   console.log('POST Perform a Merchant Payment Refund')
-  await createRefundTransaction(undefined, true);
+  await createRefundTransaction(buildRefundTransactionRequestBody(), 'merchantPayment', undefined, true);
 }
 
 const usecase7 = async () => {
   console.log("Perform a Merchant Payment Refund Using the Polling Method...")
 
   console.log('POST Perform a Merchant Payment Refund')
-  const { data: { serverCorrelationId } } = await createRefundTransaction(true, true);
+  const { data: { serverCorrelationId } } = await createRefundTransaction(buildRefundTransactionRequestBody(), 'merchantPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
@@ -84,7 +118,7 @@ const usecase8 = async () => {
   console.log("Perform a Merchant Payment Reversal...")
 
   console.log('POST Payee Initiated Merchant Payment')
-  const { data: { serverCorrelationId } } = await createMerchantTransaction(undefined, true);
+  const { data: { serverCorrelationId } } = await createMerchantTransaction(buildMerchantTransactionRequestBody(), 'merchantPayment', undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
@@ -118,7 +152,7 @@ const usecase12 = async () => {
   console.log("Retrieve a Missing API Response from an API Provider...")
 
   console.log('POST Payee Initiated Merchant Payment');
-  const { config: { headers } } = await createMerchantTransaction(undefined, true);
+  const { config: { headers } } = await createMerchantTransaction(buildMerchantTransactionRequestBody(), 'merchantPayment', undefined, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewResponse(headers['X-CorrelationID'], true);
