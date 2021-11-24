@@ -44,18 +44,22 @@ const usecase3 = async () => {
   console.log("Perform a Bulk Disbursement with Maker / Checker...")
 
   console.log('POST Perform a Bulk Disbursement')
-  await createBatchTransaction(undefined, true);
+  const { data: { serverCorrelationId } } = await createBatchTransaction(true, true);
 
-  let batchId = "REF-1636656115835";
-
-  console.log('GET Retrieve Batch Transactions that have been Rejected')
-  await viewBatchRejections(batchId, true);
-
-  console.log('PATCH Approve The Transaction Batch')
-  await updateBatchTransaction(batchId, undefined, true);
+  console.log('GET Poll to Determine the Request State')
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
   console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(batchId, true);
+  const { data: { batchId } } = await viewBatchTransaction(objectReference, true);
+
+  console.log('PATCH Approve The Transaction Batch')
+  const { data: { serverCorrelationId: serverCorrelationId1 } } = await updateBatchTransaction(batchId, true, true);
+
+  console.log('GET Poll to Determine the Request State')
+  const { data: { objectReference: objectReference1 } } = await viewRequestState(serverCorrelationId1, true);
+
+  console.log('GET View A Transaction Batch')
+  await viewBatchTransaction(objectReference1, true);
 
   console.log('GET Retrieve Batch Transactions that have Completed')
   await viewBatchCompletions(batchId, true);
