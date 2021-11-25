@@ -52,10 +52,11 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * [Disbursements](#disbursements)
 * [International Transfers](#international-transfers)
 * [P2P Transfers](#p2p-transfers)
+* [Recurring Payments](#recurring-payments)
 
 ### Merchant Payments
 * Payee-Initiated Merchant Payment
-    * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
+   * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
 * Payee-Initiated Merchant Payment Failure
 * Payee-Initiated Merchant Payment using the Polling Method
    * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
@@ -110,10 +111,10 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Retrieve Transactions for a Disbursement Organisation
     * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
+    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
 ### International Transfers
 
@@ -133,10 +134,10 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Retrieve Transactions for an FSP
     * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
+    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
 ### P2P Transfers
 
@@ -159,38 +160,39 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Retrieve Transactions for an FSP
     * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
+    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
-| CATEGORY | METHOD | API | DESCRIPTION | USE CASE |
-|---|---|---|---|---|
-| Authorisation Codes | POST | /accounts/{identifierType}/{identifier}/authorisationcodes | [Create an Authorisation Code](/docs/accounts/createAuthorisationCode.Readme.md) | merchantPayment |
-|  | GET | /accounts/{identifierType}/{identifier}/authorisationcodes/{authorisationCode} | [View an Authorisation Code](/docs/accounts/viewAuthorisationCode.Readme.md) | merchantPayment |
-| Accounts | GET | /accounts/{identifierType}/{identifier}/balance | [View Account Balance](/docs/accounts/viewAccountBalance.Readme.md) | merchantPayment,  disbursement,  internationalTransfer,  p2pTransfer,  recurringPayment |
-|  | GET | /accounts/{identifierType}/{identifier}/accountname | [View Account Name](/docs/accounts/viewAccountName.Readme.md) | p2pTransfer |
-|  | GET | /accounts/{identifierType}/{identifier}/transactions | [View Account Specific Transaction](/docs/accounts/viewAccountTransactions.Readme.md) | merchantPayment,  disbursement,  internationalTransfer,  p2pTransfer,  recurringPayment |
-| Debit Mandates | POST | /accounts/{identifierType}/{identifier}/debitmandates | [Create A Debit Mandate](/docs/debitMandates/createAccountDebitMandate.Readme.md) | recurringPayment |
-|  | GET | /accounts/{identifierType}/{identifier}/debitmandates/{debitMandateReference} | [View A Debit Mandate](/docs/debitMandates/viewAccountDebitMandate.Readme.md) | recurringPayment |
-| Quotations | POST | /quotations | [Create A New Quotation](/docs/quotations/createQuotation.Readme.md) | internationalTransfer,  p2pTransfer |
-|  | GET | /quotations/{quotationReference} | [View A Quotation](/docs/quotations/viewQuotation.Readme.md) | internationalTransfer |
-| Supporting | GET | /heartbeat | [Check API availability](/docs/supporting/viewServiceAvailability.Readme.md) | merchantPayment,  disbursement,  internationalTransfer,  p2pTransfer,  recurringPayment |
-|  | GET | /requeststates/{serverCorrelationId} | [View A Request State](/docs/supporting/viewRequestState.Readme.md) | merchantPayment,  disbursement,  internationalTransfer,  p2pTransfer,  recurringPayment |
-|  | GET | /responses/{clientCorrelationId} | [View A Response](/docs/supporting/viewResponse.Readme.md) | merchantPayment,  disbursement,  internationalTransfer,  p2pTransfer,  recurringPayment |
-|  | GET | /{link} | [View A Resource](/docs/supporting/viewResource.Readme.md) | merchantPayment,  disbursement,  internationalTransfer,  p2pTransfer,  recurringPayment |
-| Transactions | POST | /batchtransactions | [Create A Transaction Batch](/docs/transactions/createBatchTransaction.Readme.md) | disbursement |
-|  | POST | /transactions/type/disbursement | [Create a Disbursement Transaction](/docs/transactions/createDisbursementTransaction.Readme.md) | disbursement |
-|  | POST | /transactions/type/inttransfer | [Create a International Transaction](/docs/transactions/createInternationalTransaction.Readme.md) | internationalTransfer |
-|  | POST | /transactions/type/merchantpay | [Create a Merchant Transaction](/docs/transactions/createMerchantTransaction.Readme.md) | merchantPayment, recurringPayment |
-|  | POST | /transactions/type/adjustment | [Create a Refund Transaction](/docs/transactions/createRefundTransaction.Readme.md) | merchantPayment, recurringPayment |
-|  | POST | /transactions/{transactionReference}/reversals | [Create A Reversal](/docs/transactions/createReversal.Readme.md) | merchantPayment,  disbursement,  internationalTransfer,  p2pTransfer,  recurringPayment |
-|  | POST | /transactions/type/transfer | [Create a Transfer Transaction](/docs/transactions/createTransferTransaction.Readme.md) | p2pTransfer |
-|  | PATCH | /batchtransactions/{batchId} | [Update A Transaction Batch](/docs/transactions/updateBatchTransaction.Readme.md) | disbursement |
-|  | GET | /batchtransactions/{batchId}/completions | [View Batch Completions](/docs/transactions/viewBatchCompletions.Readme.md) | disbursement |
-|  | GET | /batchtransactions/{batchId}/rejections | [View Batch Rejections](/docs/transactions/viewBatchRejections.Readme.md) | disbursement |
-|  | GET | /batchtransactions/{batchId} | [View A Transaction Batch](/docs/transactions/viewBatchTransaction.Readme.md) | disbursement |
-|  | GET | /transactions/{transactionReference} | [View A Transaction](/docs/transactions/viewTransaction.Readme.md) | merchantPayment,  disbursement,  internationalTransfer,  p2pTransfer,  recurringPayment |
+### Recurring Payments
+
+* Setup a Recurring Payment
+   * [POST Setup a Recurring Payment](/docs/debitMandates/createAccountDebitMandate.Readme.md)
+* Setup a Recurring Payment Failure
+* Take a Recurring Payment
+    * [POST Take a Recurring Payment](/docs/transactions/createMerchantTransaction.Readme.md)
+* Take a Recurring Payment Failure
+* Take a Recurring Payment using the Polling Method
+    * [POST Take a Recurring Payment](/docs/transactions/createMerchantTransaction.Readme.md)
+    * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
+    * optional [GET Retrieve a Transaction](/docs/transactions/viewTransaction.Readme.md)
+* Recurring Payment Refund
+    * [POST Perform a Recurring Payment Refund](/docs/transactions/createRefundTransaction.Readme.md)
+* Recurring Payment Reversal
+    * [POST Perform a Merchant Payment Reversal](/docs/transactions/createReversal.Readme.md)
+* Payer sets up a Recurring Payment using MMP Channel
+    * [POST Setup a Recurring Payment](/docs/debitMandates/createAccountDebitMandate.Readme.md)
+    * optional [GET View A Debit Mandate](/docs/debitMandates/viewAccountDebitMandate.Readme.md)
+* Obtain a Service Provider Balance
+    * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
+* Retrieve Payments for a Service Provider
+    * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
+* Check for Service Availability
+    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
+* Retrieve a Missing API Response
+    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
 ## Test
 ```
