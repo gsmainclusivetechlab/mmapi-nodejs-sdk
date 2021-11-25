@@ -1,16 +1,16 @@
 const {
+  viewAccountBalance,
+  viewServiceAvailability,
+  viewResponse,
+  viewResource,
   createAccountDebitMandate,
-  viewAccountDebitMandate,
-  viewRequestState,
   createMerchantTransaction,
+  viewRequestState,
   viewTransaction,
   createRefundTransaction,
   createReversal,
-  viewAccountBalance,
-  viewAccountTransactions,
-  viewServiceAvailability,
-  viewResource,
-  viewResponse
+  viewAccountDebitMandate,
+  viewAccountTransactions
 } = require('../samples/index')
 
 const buildAccountDebitMandateRequestBody = () => ({
@@ -83,7 +83,7 @@ const usecase2 = async () => {
   const { data: { serverCorrelationId } } = await createAccountDebitMandate(buildAccountDebitMandateRequestBody(), 'accountid', '2000', 'recurringPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'recurringPayment', true);
 
   console.log('GET View A Debit Mandate')
   await viewAccountDebitMandate('accountid', '2000', objectReference, 'recurringPayment', true);
@@ -96,7 +96,7 @@ const usecase3 = async () => {
   const { data: { serverCorrelationId } } = await createAccountDebitMandate(buildAccountDebitMandateRequestBody(), 'accountid', '2000', 'recurringPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'recurringPayment', true);
 
   console.log('GET View A Debit Mandate')
   const { data: { mandateReference } } = await viewAccountDebitMandate('accountid', '2000', objectReference, 'recurringPayment', true);
@@ -112,10 +112,10 @@ const usecase4 = async () => {
   const { data: { serverCorrelationId } } = await createMerchantTransaction(buildMerchantTransactionRequestBody('REF-1637670547701'), 'recurringPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'recurringPayment', true);
 
   console.log('GET Retrieve a Transaction')
-  await viewTransaction(objectReference, true);
+  await viewTransaction(objectReference, 'recurringPayment', true);
 }
 
 const usecase5 = async () => {
@@ -132,10 +132,10 @@ const usecase6 = async () => {
   const { data: { serverCorrelationId } } = await createMerchantTransaction(buildMerchantTransactionRequestBody('REF-1637670547701'), 'recurringPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'recurringPayment', true);
 
   console.log('POST Perform a Merchant Payment Reversal')
-  await createReversal(objectReference, true);
+  await createReversal(objectReference, 'recurringPayment', true);
 }
 
 const usecase7 = async () => {
@@ -145,7 +145,7 @@ const usecase7 = async () => {
   const { data: { serverCorrelationId } } = await createAccountDebitMandate(buildAccountDebitMandateRequestBody(), 'accountid', '2000', 'recurringPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'recurringPayment', true);
 
   console.log('GET View A Debit Mandate')
   await viewAccountDebitMandate('accountid', '2000', objectReference, 'recurringPayment', true);
@@ -155,21 +155,21 @@ const usecase8 = async () => {
   console.log("Obtain a Service Provider Balance ...");
 
   console.log('GET Get an Account Balance')
-  await viewAccountBalance('accountid', '2000', true);
+  await viewAccountBalance('accountid', '2000', 'recurringPayment', true);
 }
 
 const usecase9 = async () => {
   console.log("Retrieve Payments for a Service Provider ...");
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransactions('accountid', '2000', 0, 2, true);
+  await viewAccountTransactions('accountid', '2000', 0, 2, 'recurringPayment', true);
 }
 
 const usecase10 = async () => {
   console.log("Check for Service Availability...")
 
   console.log('GET Check for Service Availability')
-  await viewServiceAvailability(true);
+  await viewServiceAvailability('recurringPayment', true);
 }
 
 const usecase11 = async () => {
@@ -179,10 +179,10 @@ const usecase11 = async () => {
   const { config: { headers } } = await createMerchantTransaction(buildMerchantTransactionRequestBody('REF-1637670547701'), 'recurringPayment', undefined, true);
 
   console.log('GET Retrieve a Missing Response');
-  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], true);
+  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], 'recurringPayment', true);
 
   console.log('GET Retrieve a Missing Resource');
-  await viewResource(link, true);
+  await viewResource(link, 'recurringPayment', true);
 }
 
 (async (usecase) => {

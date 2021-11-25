@@ -1,19 +1,16 @@
 const {
-  viewAccountName,
-  createQuotation,
-  createTransferTransaction,
-  viewRequestState,
-  viewTransaction,
-  createReversal,
   viewAccountBalance,
-  viewAccountTransactions,
   viewServiceAvailability,
   viewResponse,
   viewResource,
   createAccountDebitMandate,
-  viewAccountDebitMandate,
   createMerchantTransaction,
-  createRefundTransaction
+  viewRequestState,
+  viewTransaction,
+  createRefundTransaction,
+  createReversal,
+  viewAccountDebitMandate,
+  viewAccountTransactions
 } = require('../samples/index')
 
 const buildAccountDebitMandateRequestBody = () => ({
@@ -109,7 +106,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId);
+        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -170,7 +167,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId);
+        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -186,7 +183,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference);
+        const response = await viewTransaction(objectReference, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -235,7 +232,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId);
+        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -251,7 +248,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Perform a Merchant Payment Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(objectReference);
+        const response = await createReversal(objectReference, 'recurringPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -284,7 +281,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId);
+        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -312,7 +309,7 @@ describe('Recurring Payments', () => {
   describe('Obtain a Service Provider Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance('accountid', '2000');
+        const response = await viewAccountBalance('accountid', '2000', 'recurringPayment');
 
         expect(response.status).toBe(200);
       });
@@ -322,7 +319,7 @@ describe('Recurring Payments', () => {
   describe('Retrieve Payments for a Service Provider', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions('accountid', '2000', 0, 20);
+        const response = await viewAccountTransactions('accountid', '2000', 0, 20, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);
@@ -335,7 +332,7 @@ describe('Recurring Payments', () => {
   describe('Check for Service Availability', () => {
     describe('GET Check for Service Availability', () => {
       it('should return the heartbeat object with status 200 to indicate the status available, unavailable or degraded', async () => {
-        const response = await viewServiceAvailability();
+        const response = await viewServiceAvailability('recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('serviceStatus');
@@ -365,7 +362,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Retrieve a Missing Response', () => {
       it('should return a response object with status 200 containing a link to the missing resource', async () => {
-        const response = await viewResponse(clientCorrelationId);
+        const response = await viewResponse(clientCorrelationId, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('link');
@@ -376,7 +373,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Retrieve a Missing Resource', () => {
       it('should return the requested object with status 200 containing a representation of the missing resource', async () => {
-        const response = await viewResource(link);
+        const response = await viewResource(link, 'recurringPayment');
 
         expect(response.status).toBe(200);
       });

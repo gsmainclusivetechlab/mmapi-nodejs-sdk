@@ -1,15 +1,15 @@
 const {
+  viewAccountBalance,
+  viewServiceAvailability,
+  viewResponse,
+  viewResource,
   viewAccountName,
   createQuotation,
   createTransferTransaction,
-  viewRequestState,
-  viewTransaction,
   createReversal,
-  viewAccountBalance,
   viewAccountTransactions,
-  viewServiceAvailability,
-  viewResponse,
-  viewResource
+  viewRequestState,
+  viewTransaction
 } = require('../samples/index')
 
 const buildQuotationRequestBody = () => ({
@@ -92,7 +92,7 @@ describe('P2P Transfers', () => {
   describe('Perform a P2P Transfer via Switch', () => {
     describe('GET Retrieve the Name of the Recipient', () => {
       it('should return the account holder name object with status 200', async () => {
-        const response = await viewAccountName('walletid', '1');
+        const response = await viewAccountName('walletid', '1', 'p2pTransfer');
 
         expect(response.status).toBe(200);
       });
@@ -100,7 +100,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Request a P2P Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(buildQuotationRequestBody());
+        const response = await createQuotation(buildQuotationRequestBody(), 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -113,7 +113,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'));
+        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'), 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -131,7 +131,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'), true)
+        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'), 'p2pTransfer', true)
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -146,7 +146,7 @@ describe('P2P Transfers', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId);
+        const response = await viewRequestState(serverCorrelationId, 'p2pTransfer');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -162,7 +162,7 @@ describe('P2P Transfers', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference);
+        const response = await viewTransaction(objectReference, 'p2pTransfer');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -178,7 +178,7 @@ describe('P2P Transfers', () => {
   describe('Perform a Bilateral P2P Transfer', () => {
     describe('GET Retrieve the Name of the Recipient', () => {
       it('should return the account holder name object with status 200', async () => {
-        const response = await viewAccountName('walletid', '1');
+        const response = await viewAccountName('walletid', '1', 'p2pTransfer');
 
         expect(response.status).toBe(200);
       });
@@ -186,7 +186,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildBilateralTransferTransactionRequestBody());
+        const response = await createTransferTransaction(buildBilateralTransferTransactionRequestBody(), 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -201,7 +201,7 @@ describe('P2P Transfers', () => {
   describe('Perform an ‘On-us’ P2P Transfer Initiated by a Third Party Provider', () => {
     describe('GET Retrieve the Name of the Recipient', () => {
       it('should return the account holder name object with status 200', async () => {
-        const response = await viewAccountName('walletid', '1');
+        const response = await viewAccountName('walletid', '1', 'p2pTransfer');
 
         expect(response.status).toBe(200);
       });
@@ -209,7 +209,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Request a P2P Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(buildQuotationRequestBody());
+        const response = await createQuotation(buildQuotationRequestBody(), 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -222,7 +222,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'));
+        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'), 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -240,7 +240,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'));
+        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'), 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -255,7 +255,7 @@ describe('P2P Transfers', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId);
+        const response = await viewRequestState(serverCorrelationId, 'p2pTransfer');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -271,7 +271,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(objectReference);
+        const response = await createReversal(objectReference, 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -286,7 +286,7 @@ describe('P2P Transfers', () => {
   describe('Obtain an FSP Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance('accountid', '2000');
+        const response = await viewAccountBalance('accountid', '2000', 'p2pTransfer');
 
         expect(response.status).toBe(200);
       });
@@ -296,7 +296,7 @@ describe('P2P Transfers', () => {
   describe('Retrieve Transactions for an FSP', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions('accountid', '2000', 0, 20);
+        const response = await viewAccountTransactions('accountid', '2000', 0, 20, 'p2pTransfer');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);
@@ -309,7 +309,7 @@ describe('P2P Transfers', () => {
   describe('Check for API Provider Service Availability', () => {
     describe('GET Check for Service Availability', () => {
       it('should return the heartbeat object with status 200 to indicate the status available, unavailable or degraded', async () => {
-        const response = await viewServiceAvailability();
+        const response = await viewServiceAvailability('p2pTransfer');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('serviceStatus');
@@ -324,7 +324,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'));
+        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'), 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -339,7 +339,7 @@ describe('P2P Transfers', () => {
 
     describe('GET Retrieve a Missing Response', () => {
       it('should return a response object with status 200 containing a link to the missing resource', async () => {
-        const response = await viewResponse(clientCorrelationId);
+        const response = await viewResponse(clientCorrelationId, 'p2pTransfer');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('link');
@@ -350,7 +350,7 @@ describe('P2P Transfers', () => {
 
     describe('GET Retrieve a Missing Resource', () => {
       it('should return the requested object with status 200 containing a representation of the missing resource', async () => {
-        const response = await viewResource(link);
+        const response = await viewResource(link, 'p2pTransfer');
 
         expect(response.status).toBe(200);
       });
