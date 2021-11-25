@@ -13,12 +13,12 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewResponse = async (clientCorrelationId, debug = false) => {
+const viewResponse = async (clientCorrelationId, useCase, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.supporting.viewResponse(clientCorrelationId);
+    const request = new mmapi[useCase].viewResponse(clientCorrelationId);
 
     /**
      * Call API with your client and get a response for your call
@@ -37,7 +37,9 @@ const viewResponse = async (clientCorrelationId, debug = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -55,7 +57,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewResponse('<<REPLACE-WITH-CLIENT-CORRELATION-ID>>', true);
+      await viewResponse('<<REPLACE-WITH-CLIENT-CORRELATION-ID>>', '<<REPLACE-WITH-USE-CASE>>', true);
     } catch (err) {
     }
   })();

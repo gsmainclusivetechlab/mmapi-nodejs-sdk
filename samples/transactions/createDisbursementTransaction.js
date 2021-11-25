@@ -33,12 +33,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createDisbursementTransaction = async (polling = false, debug = false) => {
+const createDisbursementTransaction = async (useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.transactions.createDisbursementTransaction();
+    const request = new mmapi[useCase].createDisbursementTransaction();
 
     /**
      * Set the request body parameter
@@ -69,7 +69,9 @@ const createDisbursementTransaction = async (polling = false, debug = false) => 
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -87,7 +89,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createDisbursementTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createDisbursementTransaction('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

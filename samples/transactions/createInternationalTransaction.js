@@ -84,12 +84,12 @@ const buildRequestBody = (quotationReference, quoteId) => ({
 /**
  * Set up your function to be invoked
  */
-const createInternationalTransaction = async (quotationReference, quoteId, polling = false, debug = false) => {
+const createInternationalTransaction = async (quotationReference, quoteId, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.transactions.createInternationalTransaction();
+    const request = new mmapi[useCase].createInternationalTransaction();
 
     /**
      * Set the request body parameter
@@ -120,7 +120,9 @@ const createInternationalTransaction = async (quotationReference, quoteId, polli
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -138,7 +140,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createInternationalTransaction('<<REPLACE-WITH-QUOTATION-REFERENCE>>', '<<REPLACE-WITH-QUOTE-ID>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createInternationalTransaction('<<REPLACE-WITH-QUOTATION-REFERENCE>>', '<<REPLACE-WITH-QUOTE-ID>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

@@ -14,7 +14,7 @@ const viewBatchCompletions = async (batchId) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.transactions.viewBatchCompletions(batchId);
+    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewBatchCompletions(batchId);
 
     /**
      * Call API with your client and get a response for your call

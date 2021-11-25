@@ -13,12 +13,12 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewAuthorisationCode = async (identifierType, identifier, authorisationCode, debug = false) => {
+const viewAuthorisationCode = async (identifierType, identifier, authorisationCode, useCase, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.accounts.viewAuthorisationCode(identifierType, identifier, authorisationCode);
+    const request = new mmapi[useCase].viewAuthorisationCode(identifierType, identifier, authorisationCode);
 
     /**
      * Call API with your client and get a response for your call
@@ -37,7 +37,9 @@ const viewAuthorisationCode = async (identifierType, identifier, authorisationCo
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -55,7 +57,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAuthorisationCode('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-AUTHORISATION-CODE>>', true);
+      await viewAuthorisationCode('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-AUTHORISATION-CODE>>', '<<REPLACE-WITH-USE-CASE>>', true);
     } catch (err) {
     }
   })();

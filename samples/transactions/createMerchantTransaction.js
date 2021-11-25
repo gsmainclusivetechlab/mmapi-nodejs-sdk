@@ -49,7 +49,9 @@ const createMerchantTransaction = async (body, useCase, polling = false, debug =
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response

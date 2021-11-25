@@ -37,8 +37,9 @@ const viewAccountDebitMandate = async (identifierType, identifier, debitMandateR
     /**
      * Handle any errors from the call
      */
-    console.log(err);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response

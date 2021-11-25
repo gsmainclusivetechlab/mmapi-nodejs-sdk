@@ -13,12 +13,12 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewBatchTransaction = async (batchId, debug = false) => {
+const viewBatchTransaction = async (batchId, useCase, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.transactions.viewBatchTransaction(batchId);
+    const request = new mmapi[useCase].viewBatchTransaction(batchId);
 
     /**
      * Call API with your client and get a response for your call
@@ -37,7 +37,9 @@ const viewBatchTransaction = async (batchId, debug = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -55,7 +57,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewBatchTransaction('<<REPLACE-WITH-BATCH-ID>>', true);
+      await viewBatchTransaction('<<REPLACE-WITH-BATCH-ID>>', '<<REPLACE-WITH-USE-CASE>>', true);
     } catch (err) {
     }
   })();

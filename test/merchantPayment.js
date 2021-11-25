@@ -1,16 +1,16 @@
 const {
-  createMerchantTransaction,
-  createRefundTransaction,
-  createAuthorisationCode,
-  viewAuthorisationCode,
   viewAccountBalance,
-  viewAccountTransactions,
   viewServiceAvailability,
   viewResponse,
+  viewResource,
+  createMerchantTransaction,
   viewRequestState,
   viewTransaction,
-  viewResource,
-  createReversal
+  createAuthorisationCode,
+  createRefundTransaction,
+  createReversal,
+  viewAccountTransactions,
+  viewAuthorisationCode
 } = require('../samples/index')
 
 const buildMerchantTransactionRequestBody = () => ({
@@ -61,10 +61,10 @@ const usecase2 = async () => {
   const { data: { serverCorrelationId } } = await createMerchantTransaction(buildMerchantTransactionRequestBody(), 'merchantPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
 
   console.log('GET Retrieve a Transaction')
-  await viewTransaction(objectReference, true);
+  await viewTransaction(objectReference, 'merchantPayment', true);
 }
 
 const usecase3 = async () => {
@@ -78,20 +78,20 @@ const usecase4 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code...")
 
   console.log('POST Obtain an Authorisation Code')
-  await createAuthorisationCode('accountid', '2000', undefined, true);
+  await createAuthorisationCode('accountid', '2000', 'merchantPayment', undefined, true);
 }
 
 const usecase5 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code Using the Polling Method...")
 
   console.log('POST Obtain an Authorisation Code')
-  const { data: { serverCorrelationId } } = await createAuthorisationCode('accountid', '2000', true, true);
+  const { data: { serverCorrelationId } } = await createAuthorisationCode('accountid', '2000', 'merchantPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
 
   console.log('GET View an Authorisation Code')
-  await viewAuthorisationCode('accountid', '2000', objectReference, true);
+  await viewAuthorisationCode('accountid', '2000', objectReference, 'merchantPayment', true);
 }
 
 const usecase6 = async () => {
@@ -108,10 +108,10 @@ const usecase7 = async () => {
   const { data: { serverCorrelationId } } = await createRefundTransaction(buildRefundTransactionRequestBody(), 'merchantPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
 
   console.log('GET Retrieve a Transaction')
-  await viewTransaction(objectReference, true);
+  await viewTransaction(objectReference, 'merchantPayment', true);
 }
 
 const usecase8 = async () => {
@@ -121,31 +121,31 @@ const usecase8 = async () => {
   const { data: { serverCorrelationId } } = await createMerchantTransaction(buildMerchantTransactionRequestBody(), 'merchantPayment', undefined, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
 
   console.log('POST Perform a Merchant Payment Reversal')
-  await createReversal(objectReference, true);
+  await createReversal(objectReference, 'merchantPayment', true);
 }
 
 const usecase9 = async () => {
   console.log("Obtain a Merchant Balance...")
 
   console.log('GET Get an Account Balance')
-  await viewAccountBalance('accountid', '2000', true);
+  await viewAccountBalance('accountid', '2000', 'merchantPayment', true);
 }
 
 const usecase10 = async () => {
   console.log("Retrieve Payments for a Merchant...")
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransactions('accountid', '2000', 0, 2, true);
+  await viewAccountTransactions('accountid', '2000', 0, 2, 'merchantPayment', true);
 }
 
 const usecase11 = async () => {
   console.log("Check for API Provider Service Availability...")
 
   console.log('GET Check for Service Availability')
-  await viewServiceAvailability(true);
+  await viewServiceAvailability('merchantPayment', true);
 }
 
 const usecase12 = async () => {
@@ -155,10 +155,10 @@ const usecase12 = async () => {
   const { config: { headers } } = await createMerchantTransaction(buildMerchantTransactionRequestBody(), 'merchantPayment', undefined, true);
 
   console.log('GET Retrieve a Missing Response');
-  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], true);
+  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], 'merchantPayment', true);
 
   console.log('GET Retrieve a Missing Resource');
-  await viewResource(link, true);
+  await viewResource(link, 'merchantPayment', true);
 }
 
 (async (usecase) => {
@@ -214,4 +214,3 @@ const usecase12 = async () => {
       await usecase12();
   }
 })();
-

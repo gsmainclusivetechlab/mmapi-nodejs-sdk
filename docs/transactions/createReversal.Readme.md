@@ -15,7 +15,7 @@ const createReversal = async (originalTransactionReference) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.transactions.createReversal(originalTransactionReference);
+    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createReversal(originalTransactionReference);
 
     /**
      * Call API with your client and get a response for your call

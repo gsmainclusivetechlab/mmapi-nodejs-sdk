@@ -14,7 +14,7 @@ const viewQuotation = async (quotationReference) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.quotations.viewQuotation(quotationReference);
+    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewQuotation(quotationReference);
 
     /**
      * Call API with your client and get a response for your call

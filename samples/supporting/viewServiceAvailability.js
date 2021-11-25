@@ -13,12 +13,12 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewServiceAvailability = async (debug = false) => {
+const viewServiceAvailability = async (useCase, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.supporting.viewServiceAvailability();
+    const request = new mmapi[useCase].viewServiceAvailability();
 
     /**
      * Call API with your client and get a response for your call
@@ -37,7 +37,9 @@ const viewServiceAvailability = async (debug = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -55,7 +57,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewServiceAvailability(true);
+      await viewServiceAvailability('<<REPLACE-WITH-USE-CASE>>', true);
     } catch (err) {
     }
   })();

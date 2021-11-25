@@ -15,7 +15,7 @@ const viewResource = async (link) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.supporting.viewResource(link);
+    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewResource(link);
 
     /**
      * Call API with your client and get a response for your call

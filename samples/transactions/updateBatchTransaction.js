@@ -24,12 +24,12 @@ const buildRequestBody = () => ([
 /**
  * Set up your function to be invoked
  */
-const updateBatchTransaction = async (batchId, polling = false, debug = false) => {
+const updateBatchTransaction = async (batchId, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.transactions.updateBatchTransaction(batchId);
+    const request = new mmapi[useCase].updateBatchTransaction(batchId);
 
     /**
      * Set the request body parameter
@@ -60,7 +60,9 @@ const updateBatchTransaction = async (batchId, polling = false, debug = false) =
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -78,7 +80,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await updateBatchTransaction('<<REPLACE-WITH-BATCH-ID>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await updateBatchTransaction('<<REPLACE-WITH-BATCH-ID>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
