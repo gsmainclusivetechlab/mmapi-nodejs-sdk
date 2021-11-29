@@ -1,93 +1,97 @@
 const {
+  viewAccountBalance,
+  viewServiceAvailability,
+  viewResponse,
+  viewResource,
   createDisbursementTransaction,
   createBatchTransaction,
-  updateBatchTransaction,
   viewBatchTransaction,
   viewBatchCompletions,
   viewBatchRejections,
-  createReversal,
-  viewAccountBalance,
-  viewAccountTransactions,
-  viewServiceAvailability,
-  viewResponse,
+  updateBatchTransaction,
   viewRequestState,
   viewTransaction,
-  viewResource
+  createReversal,
+  viewAccountTransactions,
 } = require('../samples/index')
 
 const usecase1 = async () => {
   console.log("Perform an Individual Disbursement...");
 
   console.log("POST Perform an Individual Disbursement")
-  await createDisbursementTransaction(undefined, true);
+  await createDisbursementTransaction('disbursement', undefined, true);
 }
 
 const usecase2 = async () => {
   console.log("Perform a Bulk Disbursement...")
 
   console.log('POST Perform a Bulk Disbursement')
-  await createBatchTransaction(undefined, true);
+  await createBatchTransaction('disbursement', undefined, true);
 
   let batchId = "REF-1636656115835";
 
   console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(batchId, true);
+  await viewBatchTransaction(batchId, 'disbursement', true);
 
   console.log('GET Retrieve Batch Transactions that have Completed')
-  await viewBatchCompletions(batchId, true);
+  await viewBatchCompletions(batchId, 'disbursement', true);
 
   console.log('GET Retrieve Batch Transactions that have been Rejected')
-  await viewBatchRejections(batchId, true);
+  await viewBatchRejections(batchId, 'disbursement', true);
 }
 
 const usecase3 = async () => {
   console.log("Perform a Bulk Disbursement with Maker / Checker...")
 
   console.log('POST Perform a Bulk Disbursement')
-  await createBatchTransaction(undefined, true);
+  const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', true, true);
 
-  let batchId = "REF-1636656115835";
-
-  console.log('GET Retrieve Batch Transactions that have been Rejected')
-  await viewBatchRejections(batchId, true);
-
-  console.log('PATCH Approve The Transaction Batch')
-  await updateBatchTransaction(batchId, undefined, true);
+  console.log('GET Poll to Determine the Request State')
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
 
   console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(batchId, true);
+  const { data: { batchId } } = await viewBatchTransaction(objectReference, 'disbursement', true);
+
+  console.log('PATCH Approve The Transaction Batch')
+  const { data: { serverCorrelationId: serverCorrelationId1 } } = await updateBatchTransaction(batchId, 'disbursement', true, true);
+
+  console.log('GET Poll to Determine the Request State')
+  const { data: { objectReference: objectReference1 } } = await viewRequestState(serverCorrelationId1, 'disbursement', true);
+
+  console.log('GET View A Transaction Batch')
+  await viewBatchTransaction(objectReference1, 'disbursement', true);
 
   console.log('GET Retrieve Batch Transactions that have Completed')
-  await viewBatchCompletions(batchId, true);
+  await viewBatchCompletions(batchId, 'disbursement', true);
 
   console.log('GET Retrieve Batch Transactions that have been Rejected')
-  await viewBatchRejections(batchId, true);
+  await viewBatchRejections(batchId, 'disbursement', true);
 }
 
 const usecase4 = async () => {
   console.log("Perform an Individual Disbursement Using the Polling Method...")
 
   console.log('POST Perform an Individual Disbursement')
-  const { data: { serverCorrelationId } } = await createDisbursementTransaction(true, true);
+  const { data: { serverCorrelationId } } = await createDisbursementTransaction('disbursement', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
 
   console.log('GET Retrieve a Transaction')
-  await viewTransaction(objectReference, true);
+  await viewTransaction(objectReference, 'disbursement', true);
 }
 
 const usecase5 = async () => {
   console.log("Perform a Bulk Disbursement Using the Polling Method...")
 
   console.log('POST Perform a Bulk Disbursement')
-  const { data: { serverCorrelationId } } = await createBatchTransaction(true, true);
+  const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
 
   console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(objectReference, true);
+  await viewBatchTransaction(objectReference, 'disbursement', true);
 }
 
 const usecase6 = async () => {
@@ -96,60 +100,60 @@ const usecase6 = async () => {
   let batchId = "REF-1636656115835";
 
   console.log('PATCH Approve The Transaction Batch')
-  const { data: { serverCorrelationId } } = await updateBatchTransaction(batchId, true, true);
+  const { data: { serverCorrelationId } } = await updateBatchTransaction(batchId, 'disbursement', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
 
   console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(objectReference, true);
+  await viewBatchTransaction(objectReference, 'disbursement', true);
 }
 
 const usecase7 = async () => {
   console.log("Perform a Transaction Reversal...")
 
   console.log('POST Perform an Individual Disbursement')
-  const { data: { serverCorrelationId } } = await createDisbursementTransaction(undefined, true);
+  const { data: { serverCorrelationId } } = await createDisbursementTransaction('disbursement', undefined, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
+  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
 
   console.log('POST Perform a Transaction Reversal')
-  await createReversal(objectReference, true);
+  await createReversal(objectReference, 'disbursement', true);
 }
 
 const usecase8 = async () => {
   console.log("Obtain a Disbursement Organisation Balance...")
 
   console.log('GET Get an Account Balance')
-  await viewAccountBalance('accountid', '2000', true);
+  await viewAccountBalance('accountid', '2000', 'disbursement', true);
 }
 
 const usecase9 = async () => {
   console.log("Retrieve Transactions for a Disbursement Organisation...")
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransactions('accountid', '2000', 0, 2, true);
+  await viewAccountTransactions('accountid', '2000', 0, 2, 'disbursement', true);
 }
 
 const usecase10 = async () => {
   console.log("Check for API Provider Service Availability...")
 
   console.log('GET Check for Service Availability')
-  await viewServiceAvailability(true);
+  await viewServiceAvailability('disbursement', true);
 }
 
 const usecase11 = async () => {
   console.log("Retrieve a Missing API Response from an API Provider...")
 
   console.log('POST Perform an Individual Disbursement');
-  const { config: { headers } } = await createDisbursementTransaction(undefined, true);
+  const { config: { headers } } = await createDisbursementTransaction('disbursement', undefined, true);
 
   console.log('GET Retrieve a Missing Response');
-  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], true);
+  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], 'disbursement', true);
 
   console.log('GET Retrieve a Missing Resource');
-  await viewResource(link, true);
+  await viewResource(link, 'disbursement', true);
 }
 
 (async (usecase) => {

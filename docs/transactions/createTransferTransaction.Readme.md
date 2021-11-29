@@ -47,7 +47,7 @@ const createTransferTransaction = async () => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.transactions.createTransferTransaction();
+    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createTransferTransaction();
 
     /**
      * Set the request body parameter

@@ -16,7 +16,7 @@ const viewAuthorisationCode = async (identifierType, identifier, authorisationCo
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.accounts.viewAuthorisationCode(identifierType, identifier, authorisationCode);
+    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewAuthorisationCode(identifierType, identifier, authorisationCode);
 
     /**
      * Call API with your client and get a response for your call

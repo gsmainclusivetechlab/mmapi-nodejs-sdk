@@ -85,7 +85,7 @@ const createQuotation = async () => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.quotations.createQuotation();
+    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createQuotation();
 
     /**
      * Set the request body parameter

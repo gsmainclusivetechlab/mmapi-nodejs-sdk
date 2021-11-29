@@ -15,7 +15,7 @@ const viewRequestState = async (serverCorrelationId) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.supporting.viewRequestState(serverCorrelationId);
+    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewRequestState(serverCorrelationId);
 
     /**
      * Call API with your client and get a response for your call

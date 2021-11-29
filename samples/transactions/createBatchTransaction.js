@@ -58,12 +58,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createBatchTransaction = async (polling = false, debug = false) => {
+const createBatchTransaction = async (useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.transactions.createBatchTransaction();
+    const request = new mmapi[useCase].createBatchTransaction();
 
     /**
      * Set the request body parameter
@@ -94,7 +94,9 @@ const createBatchTransaction = async (polling = false, debug = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -112,7 +114,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createBatchTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createBatchTransaction('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

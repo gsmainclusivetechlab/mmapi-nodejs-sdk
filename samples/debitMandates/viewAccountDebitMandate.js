@@ -13,12 +13,12 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewAuthorisationCode = async (identifierType, identifier, authorisationCode, useCase, debug = false) => {
+const viewAccountDebitMandate = async (identifierType, identifier, debitMandateReference, useCase, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].viewAuthorisationCode(identifierType, identifier, authorisationCode);
+    const request = new mmapi[useCase].viewAccountDebitMandate(identifierType, identifier, debitMandateReference);
 
     /**
      * Call API with your client and get a response for your call
@@ -57,7 +57,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAuthorisationCode('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-AUTHORISATION-CODE>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewAccountDebitMandate('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-DEBIT-MANDATE-REFERENCE>>', '<<REPLACE-WITH-USE-CASE>>', true);
     } catch (err) {
     }
   })();
@@ -67,8 +67,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAuthorisationCode
+  viewAccountDebitMandate
 };
-
-
 

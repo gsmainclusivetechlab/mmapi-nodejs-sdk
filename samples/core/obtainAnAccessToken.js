@@ -38,7 +38,9 @@ const obtainAnAccessToken = async (debug = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response

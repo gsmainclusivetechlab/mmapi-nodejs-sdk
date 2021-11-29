@@ -15,7 +15,7 @@ Configuration details include either sandbox for testing or live for production,
 
 In the directory where you installed the SDK,  include this code to make the SDK available and configure your environment with your application credentials for sandbox and live environments in the Developer Dashboard.
 
-```javascript 
+```javascript
 /**
  * MMAPI Node.js SDK dependency
 */
@@ -52,10 +52,11 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * [Disbursements](#disbursements)
 * [International Transfers](#international-transfers)
 * [P2P Transfers](#p2p-transfers)
+* [Recurring Payments](#recurring-payments)
 
 ### Merchant Payments
 * Payee-Initiated Merchant Payment
-    * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
+   * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
 * Payee-Initiated Merchant Payment Failure
 * Payee-Initiated Merchant Payment using the Polling Method
    * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
@@ -110,10 +111,10 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Retrieve Transactions for a Disbursement Organisation
     * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
+    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
 ### International Transfers
 
@@ -133,10 +134,10 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Retrieve Transactions for an FSP
     * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
+    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
 ### P2P Transfers
 
@@ -159,10 +160,39 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Retrieve Transactions for an FSP
     * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
 * Check for Service Availability
-   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
+    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
 * Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+
+### Recurring Payments
+
+* Setup a Recurring Payment
+   * [POST Setup a Recurring Payment](/docs/debitMandates/createAccountDebitMandate.Readme.md)
+* Setup a Recurring Payment Failure
+* Take a Recurring Payment
+    * [POST Take a Recurring Payment](/docs/transactions/createMerchantTransaction.Readme.md)
+* Take a Recurring Payment Failure
+* Take a Recurring Payment using the Polling Method
+    * [POST Take a Recurring Payment](/docs/transactions/createMerchantTransaction.Readme.md)
+    * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
+    * optional [GET Retrieve a Transaction](/docs/transactions/viewTransaction.Readme.md)
+* Recurring Payment Refund
+    * [POST Perform a Recurring Payment Refund](/docs/transactions/createRefundTransaction.Readme.md)
+* Recurring Payment Reversal
+    * [POST Perform a Merchant Payment Reversal](/docs/transactions/createReversal.Readme.md)
+* Payer sets up a Recurring Payment using MMP Channel
+    * [POST Setup a Recurring Payment](/docs/debitMandates/createAccountDebitMandate.Readme.md)
+    * optional [GET View A Debit Mandate](/docs/debitMandates/viewAccountDebitMandate.Readme.md)
+* Obtain a Service Provider Balance
+    * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
+* Retrieve Payments for a Service Provider
+    * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
+* Check for Service Availability
+    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
+* Retrieve a Missing API Response
+    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
 ## Test
 ```
@@ -206,7 +236,7 @@ $ node test/merchantPayment.js
 if (require.main === module) {
   (async () => {
     try {
-      await createMerchantTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createMerchantTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

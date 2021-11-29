@@ -86,7 +86,7 @@ const createInternationalTransaction = async () => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.transactions.createInternationalTransaction();
+    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createInternationalTransaction();
 
     /**
      * Set the request body parameter

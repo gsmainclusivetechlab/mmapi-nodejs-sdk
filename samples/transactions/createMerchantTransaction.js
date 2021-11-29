@@ -11,39 +11,19 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
- * Create the request body parameter
- */
-const buildRequestBody = () => ({
-  "amount": "200.00",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "currency": "RWF"
-});
-
-/**
  * Set up your function to be invoked
  */
-const createMerchantTransaction = async (polling = false, debug = false) => {
+const createMerchantTransaction = async (body, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.transactions.createMerchantTransaction();
+    const request = new mmapi[useCase].createMerchantTransaction();
 
     /**
      * Set the request body parameter
      */
-    request.data = buildRequestBody();
+    request.data = body;
 
     /**
      * Chose the polling method.
@@ -69,7 +49,9 @@ const createMerchantTransaction = async (polling = false, debug = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -87,7 +69,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createMerchantTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createMerchantTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

@@ -13,12 +13,24 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewAuthorisationCode = async (identifierType, identifier, authorisationCode, useCase, debug = false) => {
+const createAccountDebitMandate = async (body, identifierType, identifier, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].viewAuthorisationCode(identifierType, identifier, authorisationCode);
+    const request = new mmapi[useCase].createAccountDebitMandate(identifierType, identifier);
+
+    /**
+     * Set the request body parameter
+     */
+    request.data = body
+
+    /**
+     * Chose the polling method.
+     */
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
@@ -57,7 +69,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAuthorisationCode('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-AUTHORISATION-CODE>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await createAccountDebitMandate('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
@@ -67,8 +79,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAuthorisationCode
+  createAccountDebitMandate
 };
-
-
 

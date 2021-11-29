@@ -3,100 +3,77 @@ const {
   viewServiceAvailability,
   viewResponse,
   viewResource,
-  createQuotation,
-  createInternationalTransaction,
-  createReversal,
-  viewAccountTransactions,
-  viewQuotation,
+  createAccountDebitMandate,
+  createMerchantTransaction,
   viewRequestState,
-  viewTransaction
+  viewTransaction,
+  createRefundTransaction,
+  createReversal,
+  viewAccountDebitMandate,
+  viewAccountTransactions
 } = require('../samples/index')
 
-const buildQuotationRequestBody = () => ({
+const buildAccountDebitMandateRequestBody = () => ({
+  "payee": [
+    {
+      "key": "accountid",
+      "value": "2999"
+    }
+  ],
+  "requestDate": "2018-07-03T10:43:27.405Z",
+  "startDate": "2018-07-03T10:43:27.405Z",
+  "currency": "GBP",
+  "amountLimit": "1000.00",
+  "endDate": "2028-07-03T10:43:27.405Z",
+  "numberOfPayments": "2",
+  "frequencyType": "sixmonths",
+  "customData": [
+    {
+      "key": "keytest",
+      "value": "keyvalue"
+    }
+  ]
+});
+
+const buildMerchantTransactionRequestBody = (mandateReference) => ({
+  "amount": "200.00",
+  "debitParty": [
+    {
+      "key": "mandatereference",
+      "value": `${mandateReference}`
+    }
+  ],
   "creditParty": [
     {
       "key": "accountid",
-      "value": "2000"
+      "value": "2999"
     }
   ],
+  "currency": "RWF"
+});
+
+const buildRefundTransactionRequestBody = (mandateReference) => ({
+  "amount": "200.00",
   "debitParty": [
     {
       "key": "accountid",
       "value": "2999"
     }
   ],
-  "requestAmount": "75.30",
-  "requestCurrency": "RWF",
-  "requestDate": "2018-07-03T11:43:27.405Z",
-  "type": "inttransfer",
-  "subType": "abc",
-  "chosenDeliveryMethod": "agent",
-  "senderKyc": {
-    "nationality": "GB",
-    "dateOfBirth": "1970-07-03T11:43:27.405Z",
-    "occupation": "Manager",
-    "employerName": "MFX",
-    "contactPhone": "+447125588999",
-    "gender": "m",
-    "emailAddress": "luke.skywalkeraaabbb@gmail.com",
-    "birthCountry": "GB",
-    "idDocument": [
-      {
-        "idType": "nationalidcard",
-        "idNumber": "1234567",
-        "issueDate": "2018-07-03T11:43:27.405Z",
-        "expiryDate": "2021-07-03T11:43:27.405Z",
-        "issuer": "UKPA",
-        "issuerPlace": "GB",
-        "issuerCountry": "GB",
-        "otherIdDescription": "test"
-      }
-    ],
-    "postalAddress": {
-      "country": "GB",
-      "addressLine1": "111 ABC Street",
-      "city": "New York",
-      "stateProvince": "New York",
-      "postalCode": "ABCD"
-    },
-    "subjectName": {
-      "title": "Mr",
-      "firstName": "Luke",
-      "middleName": "R",
-      "lastName": "Skywalker",
-      "fullName": "Luke R Skywalker",
-      "nativeName": "ABC"
-    }
-  },
-  "customData": [
+  "creditParty": [
     {
-      "key": "keytest",
-      "value": "keyvalue"
+      "key": "mandateReference",
+      "value": `${mandateReference}`
     }
   ],
-  "sendingServiceProviderCountry": "AD",
-  "originCountry": "AD",
-  "receivingCountry": "AD"
-})
+  "currency": "RWF"
+});
 
-describe('International Transfers', () => {
-  describe('Perform an International Transfer', () => {
-    describe('POST Request a International Transfer Quotation', () => {
+describe('Recurring Payments', () => {
+  describe('Setup a Recurring Payment', () => {
+    describe('POST Setup a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(buildQuotationRequestBody(), 'internationalTransfer');
-
-        expect(response.status).toBe(202);
-        expect(response.data).toHaveProperty('status');
-        expect(response.data.status).toBe('pending');
-        expect(response.data).toHaveProperty('serverCorrelationId');
-        expect(response.data).toHaveProperty('notificationMethod');
-        expect(response.data.notificationMethod).toBe('callback');
-      });
-    })
-
-    describe('POST Perform an International Transfer', () => {
-      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('REF-1636533162268', undefined, 'internationalTransfer');
+        const response = await createAccountDebitMandate(buildAccountDebitMandateRequestBody(), 'accountid', '2000', 'recurringPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -108,41 +85,13 @@ describe('International Transfers', () => {
     })
   });
 
-  describe('Perform an Bilateral International Transfer', () => {
-    describe('POST Request a International Transfer Quotation', () => {
-      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(buildQuotationRequestBody(), 'internationalTransfer');
-
-        expect(response.status).toBe(202);
-        expect(response.data).toHaveProperty('status');
-        expect(response.data.status).toBe('pending');
-        expect(response.data).toHaveProperty('serverCorrelationId');
-        expect(response.data).toHaveProperty('notificationMethod');
-        expect(response.data.notificationMethod).toBe('callback');
-      });
-    })
-
-    describe('POST Perform an International Transfer', () => {
-      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('REF-1636533162268', undefined, 'internationalTransfer');
-
-        expect(response.status).toBe(202);
-        expect(response.data).toHaveProperty('status');
-        expect(response.data.status).toBe('pending');
-        expect(response.data).toHaveProperty('serverCorrelationId');
-        expect(response.data).toHaveProperty('notificationMethod');
-        expect(response.data.notificationMethod).toBe('callback');
-      });
-    })
-  });
-
-  describe('Perform an International Transfer Using the Polling Method', () => {
+  describe('Setup a Recurring Payment via the Polling Method', () => {
     let serverCorrelationId;
     let objectReference;
 
-    describe('POST Perform an International Transfer', () => {
+    describe('POST Setup a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('REF-1636533162268', undefined, 'internationalTransfer', true);
+        const response = await createAccountDebitMandate(buildAccountDebitMandateRequestBody(), 'accountid', '2000', 'recurringPayment', true)
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -157,7 +106,68 @@ describe('International Transfers', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'internationalTransfer');
+        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toMatch(/^(pending|completed|failed)$/);
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('polling');
+        expect(response.data).toHaveProperty('objectReference');
+
+        objectReference = response.data.objectReference;
+      });
+    })
+
+    describe('GET View A Debit Mandate', () => {
+      it('should return debit mandate object with status 200 for a given object reference', async () => {
+        const response = await viewAccountDebitMandate('accountid', '2000', objectReference, 'recurringPayment');
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('mandateReference');
+        expect(response.data).toHaveProperty('startDate');
+      });
+    })
+  });
+
+  describe('Take a Recurring Payment', () => {
+    describe('POST Take a Recurring Payment', () => {
+      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createMerchantTransaction(buildMerchantTransactionRequestBody('REF-1637669509954'), 'recurringPayment');
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('callback');
+      });
+    })
+  });
+
+  describe('Take a Recurring Payment via the Polling Method', () => {
+    let serverCorrelationId;
+    let objectReference;
+
+    describe('POST Take a Recurring Payment', () => {
+      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createMerchantTransaction(buildMerchantTransactionRequestBody('REF-1637669509954'), 'recurringPayment', true);
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('polling');
+
+        serverCorrelationId = response.data.serverCorrelationId
+      });
+    })
+
+    describe('GET Poll to Determine the Request State', () => {
+      it('should return the request state object with status 200 for a given server correlation id', async () => {
+        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -173,12 +183,12 @@ describe('International Transfers', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference, 'internationalTransfer');
+        const response = await viewTransaction(objectReference, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
         expect(response.data).toHaveProperty('type');
-        expect(response.data.type).toBe('inttransfer');
+        expect(response.data.type).toBe('merchantpay');
         expect(response.data).toHaveProperty('transactionStatus');
         expect(response.data).toHaveProperty('amount');
         expect(response.data).toHaveProperty('currency');
@@ -186,13 +196,28 @@ describe('International Transfers', () => {
     })
   });
 
-  describe('Request a International Transfer Quotation Using the Polling Method', () => {
+  describe('Recurring Payment Refund', () => {
+    describe('POST Perform a Recurring Payment Refund', () => {
+      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createRefundTransaction(buildRefundTransactionRequestBody('REF-1637670547701'), 'recurringPayment');
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('callback');
+      });
+    })
+  });
+
+  describe('Recurring Payment Reversal', () => {
     let serverCorrelationId;
     let objectReference;
 
-    describe('POST Request a International Transfer Quotation', () => {
+    describe('POST Take a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(buildQuotationRequestBody(), 'internationalTransfer', true);
+        const response = await createMerchantTransaction(buildMerchantTransactionRequestBody('REF-1637670547701'), 'recurringPayment', true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -207,7 +232,7 @@ describe('International Transfers', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'internationalTransfer');
+        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -221,27 +246,9 @@ describe('International Transfers', () => {
       });
     })
 
-    describe('GET View A Quotation', () => {
-      it('should return the quotation object with status 200', async () => {
-        const response = await viewQuotation(objectReference, 'internationalTransfer');
-
-        expect(response.status).toBe(200);
-        expect(response.data).toHaveProperty('quotationReference');
-        expect(response.data).toHaveProperty('creditParty');
-        expect(response.data).toHaveProperty('debitParty');
-        expect(response.data).toHaveProperty('requestAmount');
-        expect(response.data).toHaveProperty('requestCurrency');
-      });
-    })
-  });
-
-  describe('Perform a International Transfer Reversal', () => {
-    let serverCorrelationId;
-    let objectReference;
-
-    describe('POST Perform an International Transfer', () => {
+    describe('POST Perform a Merchant Payment Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('REF-1636533162268', undefined, 'internationalTransfer');
+        const response = await createReversal(objectReference, 'recurringPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -249,6 +256,24 @@ describe('International Transfers', () => {
         expect(response.data).toHaveProperty('serverCorrelationId');
         expect(response.data).toHaveProperty('notificationMethod');
         expect(response.data.notificationMethod).toBe('callback');
+      });
+    })
+  });
+
+  describe('Payer sets up a Recurring Payment using MMP Channel', () => {
+    let serverCorrelationId;
+    let objectReference;
+
+    describe('POST Setup a Recurring Payment', () => {
+      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createAccountDebitMandate(buildAccountDebitMandateRequestBody(), 'accountid', '2000', 'recurringPayment', true)
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('polling');
 
         serverCorrelationId = response.data.serverCorrelationId
       });
@@ -256,48 +281,45 @@ describe('International Transfers', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'internationalTransfer');
+        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
         expect(response.data.status).toMatch(/^(pending|completed|failed)$/);
         expect(response.data).toHaveProperty('serverCorrelationId');
         expect(response.data).toHaveProperty('notificationMethod');
-        expect(response.data.notificationMethod).toBe('callback');
+        expect(response.data.notificationMethod).toBe('polling');
         expect(response.data).toHaveProperty('objectReference');
 
         objectReference = response.data.objectReference;
       });
     })
 
-    describe('POST Perform a Transaction Reversal', () => {
-      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(objectReference, 'internationalTransfer');
+    describe('GET View A Debit Mandate', () => {
+      it('should return debit mandate object with status 200 for a given object reference', async () => {
+        const response = await viewAccountDebitMandate('accountid', '2000', objectReference, 'recurringPayment');
 
-        expect(response.status).toBe(202);
-        expect(response.data).toHaveProperty('status');
-        expect(response.data.status).toBe('pending');
-        expect(response.data).toHaveProperty('serverCorrelationId');
-        expect(response.data).toHaveProperty('notificationMethod');
-        expect(response.data.notificationMethod).toBe('callback');
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('mandateReference');
+        expect(response.data).toHaveProperty('startDate');
       });
     })
   });
 
-  describe('Obtain a Financial Service Provider Balance', () => {
+  describe('Obtain a Service Provider Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance('accountid', '2000', 'internationalTransfer');
+        const response = await viewAccountBalance('accountid', '2000', 'recurringPayment');
 
         expect(response.status).toBe(200);
       });
     })
   });
 
-  describe('Retrieve Transactions for a Financial Service Provider', () => {
+  describe('Retrieve Payments for a Service Provider', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions('accountid', '2000', 0, 20, 'internationalTransfer');
+        const response = await viewAccountTransactions('accountid', '2000', 0, 20, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);
@@ -307,10 +329,10 @@ describe('International Transfers', () => {
     })
   });
 
-  describe('Check for API Provider Service Availability', () => {
+  describe('Check for Service Availability', () => {
     describe('GET Check for Service Availability', () => {
       it('should return the heartbeat object with status 200 to indicate the status available, unavailable or degraded', async () => {
-        const response = await viewServiceAvailability('internationalTransfer');
+        const response = await viewServiceAvailability('recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('serviceStatus');
@@ -319,13 +341,13 @@ describe('International Transfers', () => {
     })
   });
 
-  describe('Retrieve a Missing API Response from an API Provider', () => {
+  describe('Retrieve a Missing API Response', () => {
     let clientCorrelationId;
     let link;
 
-    describe('POST Perform an International Transfer', () => {
+    describe('POST Take a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('REF-1636533162268', undefined, 'internationalTransfer');
+        const response = await createMerchantTransaction(buildMerchantTransactionRequestBody('REF-1637670547701'), 'recurringPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -340,7 +362,7 @@ describe('International Transfers', () => {
 
     describe('GET Retrieve a Missing Response', () => {
       it('should return a response object with status 200 containing a link to the missing resource', async () => {
-        const response = await viewResponse(clientCorrelationId, 'internationalTransfer');
+        const response = await viewResponse(clientCorrelationId, 'recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('link');
@@ -351,10 +373,14 @@ describe('International Transfers', () => {
 
     describe('GET Retrieve a Missing Resource', () => {
       it('should return the requested object with status 200 containing a representation of the missing resource', async () => {
-        const response = await viewResource(link, 'internationalTransfer');
+        const response = await viewResource(link, 'recurringPayment');
 
         expect(response.status).toBe(200);
       });
     })
   });
-})
+});
+
+
+
+

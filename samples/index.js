@@ -3,6 +3,7 @@ const accounts = require('./accounts/index')
 const quotations = require('./quotations/index');
 const supporting = require('./supporting/index');
 const transactions = require('./transactions/index');
+const debitMandates = require('./debitMandates/index');
 
 module.exports = {
   ...core,
@@ -10,4 +11,5 @@ module.exports = {
   ...quotations,
   ...supporting,
   ...transactions,
+  ...debitMandates
 };

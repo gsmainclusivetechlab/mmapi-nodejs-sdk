@@ -22,12 +22,12 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createAuthorisationCode = async (identifierType, identifier, polling = false, debug = false) => {
+const createAuthorisationCode = async (identifierType, identifier, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.accounts.createAuthorisationCode(identifierType, identifier);
+    const request = new mmapi[useCase].createAuthorisationCode(identifierType, identifier);
 
     /**
      * Set the request body parameter
@@ -58,7 +58,9 @@ const createAuthorisationCode = async (identifierType, identifier, polling = fal
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -76,7 +78,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAuthorisationCode('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createAuthorisationCode('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

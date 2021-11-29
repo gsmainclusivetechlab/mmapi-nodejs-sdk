@@ -15,7 +15,7 @@ const viewAccountName = async (identifierType, identifier) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.accounts.viewAccountName(identifierType, identifier);
+    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewAccountName(identifierType, identifier);
 
     /**
      * Call API with your client and get a response for your call
