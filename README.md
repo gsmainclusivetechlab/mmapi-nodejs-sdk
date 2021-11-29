@@ -15,7 +15,7 @@ Configuration details include either sandbox for testing or live for production,
 
 In the directory where you installed the SDK,  include this code to make the SDK available and configure your environment with your application credentials for sandbox and live environments in the Developer Dashboard.
 
-```javascript 
+```javascript
 /**
  * MMAPI Node.js SDK dependency
 */
@@ -236,7 +236,7 @@ $ node test/merchantPayment.js
 if (require.main === module) {
   (async () => {
     try {
-      await createMerchantTransaction('<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createMerchantTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
