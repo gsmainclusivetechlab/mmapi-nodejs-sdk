@@ -69,7 +69,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAccountLink('<<REPLACE-WITH-BODY>>', 'REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createAccountLink('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();

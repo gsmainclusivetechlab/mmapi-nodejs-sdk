@@ -57,7 +57,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAccountLink('REPLACE-WITH-IDENTIFIER-TYPE', 'REPLACE-WITH-IDENTIFIER', 'REPLACE-WITH-LINK-REFERENCE', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewAccountLink('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-LINK-REFERENCE>>', '<<REPLACE-WITH-USE-CASE>>', true);
     } catch (err) {
     }
   })();
