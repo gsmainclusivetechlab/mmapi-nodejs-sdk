@@ -87,12 +87,24 @@ createAccountLink('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER
 ```javascript
 202
 
-
+{
+    "serverCorrelationId": "c7789514-cce8-49fd-8ce7-a151fd53eeb2",
+    "status": "pending",
+    "notificationMethod": "callback",
+    "objectReference": "205",
+    "pollLimit": 100
+}
 ```
 
 ### Example Output - Polling
 ```javascript
 202
 
-
+{
+    "serverCorrelationId": "79a81038-7b58-4968-84f3-d148fe6c943c",
+    "status": "pending",
+    "notificationMethod": "polling",
+    "objectReference": "210",
+    "pollLimit": 100
+}
 ```
