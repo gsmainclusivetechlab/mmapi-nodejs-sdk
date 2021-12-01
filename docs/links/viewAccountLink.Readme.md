@@ -51,5 +51,59 @@ viewAccountLink('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>
 ```javascript
 200
 
-
+{
+    "linkReference": "REF-1638376731631",
+    "sourceAccountIdentifiers": [
+        {
+            "key": "accountid",
+            "value": "2999"
+        },
+        {
+            "key": "mandatereference",
+            "value": "REF-1637907197912"
+        },
+        {
+            "key": "mandatereference",
+            "value": "REF-1637907232832"
+        },
+        {
+            "key": "mandatereference",
+            "value": "REF-1637907265888"
+        },
+        {
+            "key": "mandatereference",
+            "value": "REF-1637907412029"
+        },
+        {
+            "key": "mandatereference",
+            "value": "REF-1637907483978"
+        },
+        {
+            "key": "mandatereference",
+            "value": "REF-1637909732171"
+        },
+        {
+            "key": "mandatereference",
+            "value": "REF-1638330257762"
+        },
+        {
+            "key": "mandatereference",
+            "value": "REF-1638360515423"
+        }
+    ],
+    "mode": "both",
+    "status": "active",
+    "requestingOrganisation": {
+        "requestingOrganisationIdentifierType": "organisationid",
+        "requestingOrganisationIdentifier": "12345"
+    },
+    "creationDate": "2021-12-01T16:38:52",
+    "modificationDate": "2021-12-01T16:38:52",
+    "customData": [
+        {
+            "key": "keytest",
+            "value": "keyvalue"
+        }
+    ]
+}
 ```
