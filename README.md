@@ -53,6 +53,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * [International Transfers](#international-transfers)
 * [P2P Transfers](#p2p-transfers)
 * [Recurring Payments](#recurring-payments)
+* [Account Linking](#account-linking)
 
 ### Merchant Payments
 * Payee-Initiated Merchant Payment
@@ -187,6 +188,31 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Obtain a Service Provider Balance
     * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
 * Retrieve Payments for a Service Provider
+    * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
+* Check for Service Availability
+    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
+* Retrieve a Missing API Response
+    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
+    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+
+### Account Linking
+
+* Setup an Account Link
+   * [POST Establish an Account to Account Link](/docs/links/createAccountLink.Readme.md)
+   * optional [GET View A Link](/docs/links/viewAccountLink.Readme.md)
+* Setup an Account Link Failure
+* Perform a Transfer for a Linked Account
+   * [POST Use a Link to make a Transfer](/docs/transactions/createTransferTransaction.Readme.md)
+* Perform a Transfer for a Linked Account - Failure
+* Perform a Transfer using an Account Link via the Polling Method
+    * [POST Use a Link to make a Transfer](/docs/transactions/createTransferTransaction.Readme.md)
+    * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
+    * optional [GET Retrieve a Transaction](/docs/transactions/viewTransaction.Readme.md)
+* Perform a Transfer Reversal
+    * [POST Perform a Transaction Reversal](/docs/transactions/createReversal.Readme.md)
+* Obtain a Financial Service Provider Balance
+    * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
+* Retrieve Transfers for a Financial Service Provider
     * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
 * Check for Service Availability
     * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
