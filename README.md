@@ -54,6 +54,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * [P2P Transfers](#p2p-transfers)
 * [Recurring Payments](#recurring-payments)
 * [Account Linking](#account-linking)
+* [Bill Payments](#bill-payments)
 
 ### Merchant Payments
 * Payee-Initiated Merchant Payment
@@ -219,6 +220,23 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * Retrieve a Missing API Response
     * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
     * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+
+### Bill Payments
+
+* Successful Retrieval of Bills
+    * [GET Retrieve a Set of Bills]()
+* Unsuccessful Retrieval of Bills
+* Make a Successful Bill Payment with Callback
+    * [POST Make a Bill Payment]()
+* Make an Unsuccessful Bill Payment with Callback
+* Make a Bill Payment with Polling
+    * [POST Make a Bill Payment Via the Polling Method]()
+    * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
+    * optional [GET Retrieve Bill Payments for a Given Bill]()
+* Retrieval of Bill Payments
+    * [GET Retrieve a Set of Bill Payments]()
+* Check for Service Availability
+    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
 
 ## Test
 ```
