@@ -68,9 +68,9 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
    * [POST Payer Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
 * Payer-Initiated Merchant Payment Failure
 * Payee-Initiated Merchant Payment using a Pre-authorised Payment Code
-   * [POST Obtain an Authorisation Code](/docs/accounts/createAuthorisationCode.Readme.md)
+   * [POST Obtain an Authorisation Code](/docs/authorisationCodes/createAuthorisationCode.Readme.md)
    * [POST Perform a Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
-   * optional [GET View An Authorisation Code](/docs/accounts/viewAuthorisationCode.Readme.md)
+   * optional [GET View An Authorisation Code](/docs/authorisationCodes/viewAuthorisationCode.Readme.md)
 * Merchant Payment Refund
    * [POST Perform a Merchant Payment Refund](/docs/transactions/createRefundTransaction.Readme.md)
 * Merchant Payment Reversal

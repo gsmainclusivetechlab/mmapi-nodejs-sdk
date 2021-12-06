@@ -11,15 +11,6 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
- * Create the request body parameter
- */
-const buildRequestBody = () => ({
-  requestDate: '2018-07-03T10:43:27.405Z',
-  currency: 'GBP',
-  amount: '1000.00',
-});
-
-/**
  * Set up your function to be invoked
  */
 const createAuthorisationCode = async (identifierType, identifier, useCase, polling = false, debug = false) => {
@@ -32,7 +23,9 @@ const createAuthorisationCode = async (identifierType, identifier, useCase, poll
     /**
      * Set the request body parameter
      */
-    request.data = buildRequestBody();
+    request.requestDate('2018-07-03T10:43:27.405Z');
+    request.currency('GBP');
+    request.amount('amount');
 
     /**
      * Chose the polling method.

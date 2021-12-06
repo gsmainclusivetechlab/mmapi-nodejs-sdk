@@ -6,36 +6,30 @@
 > `This endpoint allows allows a mobile money payer or payee to generate a code which when presented to the other party, can be redeemed for an amount set by the payer or payee, depending upon the use case.`
 
 ### Usage/Examples
-
 ```javascript
-/**
- * Create the request body parameter
- */
-const buildRequestBody = () => ({
-  requestDate: '2018-07-03T10:43:27.405Z',
-  currency: 'GBP',
-  amount: '1000.00',
-});
-
 /**
  * Set up your function to be invoked
  */
-const createAuthorisationCode = async (identifierType, identifier) => {
+const createAuthorisationCode = async (identifierType, identifier, polling = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createAuthorisationCode(identifierType, identifier);
+    const request = new mmapi.merchantPayment.createAuthorisationCode(identifierType, identifier);
 
     /**
      * Set the request body parameter
      */
-    request.data = buildRequestBody();
+    request.requestDate('2018-07-03T10:43:27.405Z');
+    request.currency('GBP');
+    request.amount('amount');
 
     /**
      * Chose the polling method.
      */
-    request.polling();
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
