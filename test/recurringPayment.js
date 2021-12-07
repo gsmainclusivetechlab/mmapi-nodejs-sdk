@@ -135,7 +135,7 @@ const usecase6 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'recurringPayment', true);
 
   console.log('POST Perform a Merchant Payment Reversal')
-  await createReversal(objectReference, 'recurringPayment', true);
+  await createReversal({}, objectReference, 'recurringPayment', true);
 }
 
 const usecase7 = async () => {

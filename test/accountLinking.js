@@ -100,7 +100,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
 
   console.log('POST Perform a Transaction Reversal')
-  await createReversal(objectReference, 'accountLinking', true);
+  await createReversal({}, objectReference, 'accountLinking', true);
 }
 
 const usecase6 = async () => {
@@ -177,4 +177,4 @@ const usecase9 = async () => {
       await usecase8();
       await usecase9();
   }
-})(1);
+})();

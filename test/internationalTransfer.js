@@ -143,7 +143,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'internationalTransfer', true);
 
   console.log('GET Perform a Merchant Payment Reversal')
-  await createReversal(objectReference, 'internationalTransfer', true);
+  await createReversal({}, objectReference, 'internationalTransfer', true);
 }
 
 const usecase6 = async () => {

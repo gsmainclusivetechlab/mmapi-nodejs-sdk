@@ -147,7 +147,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'p2pTransfer', true);
 
   console.log('POST Perform a Transaction Reversal')
-  await createReversal(objectReference, 'p2pTransfer', true);
+  await createReversal({}, objectReference, 'p2pTransfer', true);
 }
 
 const usecase6 = async () => {

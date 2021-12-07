@@ -2,7 +2,6 @@ const { createDisbursementTransaction } = require('./createDisbursementTransacti
 const { createInternationalTransaction } = require('./createInternationalTransaction');
 const { createMerchantTransaction } = require('./createMerchantTransaction');
 const { createRefundTransaction } = require('./createRefundTransaction');
-const { createReversal } = require('./createReversal');
 const { createTransferTransaction } = require('./createTransferTransaction');
 const { viewBatchCompletions } = require('./viewBatchCompletions');
 const { viewBatchRejections } = require('./viewBatchRejections');
@@ -13,7 +12,6 @@ module.exports = {
   createInternationalTransaction,
   createMerchantTransaction,
   createRefundTransaction,
-  createReversal,
   createTransferTransaction,
   viewBatchCompletions,
   viewBatchRejections,

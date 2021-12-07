@@ -272,7 +272,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(objectReference, 'internationalTransfer');
+        const response = await createReversal({}, objectReference, 'internationalTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

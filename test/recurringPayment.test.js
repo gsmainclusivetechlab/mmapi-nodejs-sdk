@@ -248,7 +248,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Perform a Merchant Payment Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(objectReference, 'recurringPayment');
+        const response = await createReversal({}, objectReference, 'recurringPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

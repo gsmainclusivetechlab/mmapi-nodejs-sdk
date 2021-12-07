@@ -5,6 +5,7 @@ const batchTransactions = require('./batchTransactions/index');
 const debitMandates = require('./debitMandates/index');
 const links = require('./links/index');
 const quotations = require('./quotations/index');
+const reversals = require('./reversals/index');
 const supporting = require('./supporting/index');
 const transactions = require('./transactions/index');
 
@@ -16,6 +17,7 @@ module.exports = {
   ...debitMandates,
   ...links,
   ...quotations,
+  ...reversals,
   ...supporting,
   ...transactions
 };

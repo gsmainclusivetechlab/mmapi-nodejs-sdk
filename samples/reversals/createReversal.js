@@ -13,12 +13,19 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const createReversal = async (originalTransactionReference, useCase, debug = false) => {
+const createReversal = async (body, originalTransactionReference, useCase, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
     const request = new mmapi[useCase].createReversal(originalTransactionReference);
+
+    /**
+     * Set the request body parameter
+     */
+    for (const property in body) {
+      request[property](body[property]);
+    }
 
     /**
      * Call API with your client and get a response for your call
@@ -57,7 +64,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createReversal('<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await createReversal('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>', '<<REPLACE-WITH-USE-CASE>>', true);
     } catch (err) {
     }
   })();

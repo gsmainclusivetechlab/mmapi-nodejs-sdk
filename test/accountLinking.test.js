@@ -216,7 +216,7 @@ describe('Account Linking', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(objectReference, 'accountLinking');
+        const response = await createReversal({}, objectReference, 'accountLinking');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
