@@ -23,7 +23,9 @@ const createAccountLink = async (body, identifierType, identifier, useCase, poll
     /**
      * Set the request body parameter
      */
-    request.data = body
+    for (const property in body) {
+      request[property](body[property]);
+    }
 
     /**
      * Chose the polling method.

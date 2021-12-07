@@ -11,64 +11,21 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
- * Create the request body parameter
- */
-const buildRequestBody = () => ({
-  "transactions": [
-    {
-      "amount": "200.00",
-      "type": "transfer",
-      "creditParty": [
-        {
-          "key": "accountid",
-          "value": "2000"
-        }
-      ],
-      "currency": "RWF",
-      "debitParty": [
-        {
-          "key": "accountid",
-          "value": "2999"
-        }
-      ]
-    },
-    {
-      "amount": "200.00",
-      "type": "transfer",
-      "creditParty": [
-        {
-          "key": "accountid",
-          "value": "2999"
-        }
-      ],
-      "currency": "RWF",
-      "debitParty": [
-        {
-          "key": "accountid",
-          "value": "2000"
-        }
-      ]
-    }
-  ],
-  "batchTitle": "Batch_Test",
-  "batchDescription": "Testing a Batch",
-  "scheduledStartDate": "2019-12-11T15:08:03.158Z"
-});
-
-/**
  * Set up your function to be invoked
  */
-const createBatchTransaction = async (useCase, polling = false, debug = false) => {
+const updateBatchTransaction = async (body, batchId, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].createBatchTransaction();
+    const request = new mmapi[useCase].updateBatchTransaction(batchId);
 
     /**
      * Set the request body parameter
      */
-    request.data = buildRequestBody();
+    for (const property in body) {
+      request[property](body[property]);
+    }
 
     /**
      * Chose the polling method.
@@ -114,7 +71,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createBatchTransaction('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await updateBatchTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-BATCH-ID>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
@@ -124,5 +81,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createBatchTransaction
+  updateBatchTransaction
 };
+
+

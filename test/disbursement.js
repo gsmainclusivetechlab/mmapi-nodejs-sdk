@@ -15,6 +15,56 @@ const {
   viewAccountTransactions,
 } = require('../samples/index')
 
+const buildBatchTransactionRequestBody = () => ({
+  "transactions": [
+    {
+      "amount": "200.00",
+      "type": "transfer",
+      "creditParty": [
+        {
+          "key": "accountid",
+          "value": "2000"
+        }
+      ],
+      "currency": "RWF",
+      "debitParty": [
+        {
+          "key": "accountid",
+          "value": "2999"
+        }
+      ]
+    },
+    {
+      "amount": "200.00",
+      "type": "transfer",
+      "creditParty": [
+        {
+          "key": "accountid",
+          "value": "2999"
+        }
+      ],
+      "currency": "RWF",
+      "debitParty": [
+        {
+          "key": "accountid",
+          "value": "2000"
+        }
+      ]
+    }
+  ],
+  "batchTitle": "Batch_Test",
+  "batchDescription": "Testing a Batch",
+  "scheduledStartDate": "2019-12-11T15:08:03.158Z"
+});
+
+const buildUpdateBatchTransactionRequestBody = () => ([
+  {
+    "op": "replace",
+    "path": "/batchStatus",
+    "value": "approved"
+  }
+]);
+
 const usecase1 = async () => {
   console.log("Perform an Individual Disbursement...");
 
@@ -26,7 +76,7 @@ const usecase2 = async () => {
   console.log("Perform a Bulk Disbursement...")
 
   console.log('POST Perform a Bulk Disbursement')
-  await createBatchTransaction('disbursement', undefined, true);
+  await createBatchTransaction(buildBatchTransactionRequestBody(), 'disbursement', undefined, true);
 
   let batchId = "REF-1636656115835";
 
@@ -44,7 +94,7 @@ const usecase3 = async () => {
   console.log("Perform a Bulk Disbursement with Maker / Checker...")
 
   console.log('POST Perform a Bulk Disbursement')
-  const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', true, true);
+  const { data: { serverCorrelationId } } = await createBatchTransaction(buildBatchTransactionRequestBody(), 'disbursement', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
@@ -53,7 +103,7 @@ const usecase3 = async () => {
   const { data: { batchId } } = await viewBatchTransaction(objectReference, 'disbursement', true);
 
   console.log('PATCH Approve The Transaction Batch')
-  const { data: { serverCorrelationId: serverCorrelationId1 } } = await updateBatchTransaction(batchId, 'disbursement', true, true);
+  const { data: { serverCorrelationId: serverCorrelationId1 } } = await updateBatchTransaction(buildUpdateBatchTransactionRequestBody(), batchId, 'disbursement', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference: objectReference1 } } = await viewRequestState(serverCorrelationId1, 'disbursement', true);
@@ -85,7 +135,7 @@ const usecase5 = async () => {
   console.log("Perform a Bulk Disbursement Using the Polling Method...")
 
   console.log('POST Perform a Bulk Disbursement')
-  const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', true, true);
+  const { data: { serverCorrelationId } } = await createBatchTransaction(buildBatchTransactionRequestBody(), 'disbursement', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
@@ -100,7 +150,7 @@ const usecase6 = async () => {
   let batchId = "REF-1636656115835";
 
   console.log('PATCH Approve The Transaction Batch')
-  const { data: { serverCorrelationId } } = await updateBatchTransaction(batchId, 'disbursement', true, true);
+  const { data: { serverCorrelationId } } = await updateBatchTransaction(buildUpdateBatchTransactionRequestBody(), batchId, 'disbursement', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);

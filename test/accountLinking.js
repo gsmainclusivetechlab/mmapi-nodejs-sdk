@@ -177,4 +177,4 @@ const usecase9 = async () => {
       await usecase8();
       await usecase9();
   }
-})();
+})(1);

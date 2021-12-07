@@ -23,7 +23,9 @@ const createQuotation = async (body, useCase, polling = false, debug = false) =>
     /**
      * Set the request body parameter
      */
-    request.data = body
+    for (const property in body) {
+      request[property](body[property]);
+    }
 
     /**
      * Chose the polling method.
