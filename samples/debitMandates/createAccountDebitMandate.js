@@ -23,7 +23,9 @@ const createAccountDebitMandate = async (body, identifierType, identifier, useCa
     /**
      * Set the request body parameter
      */
-    request.data = body
+    for (const property in body) {
+      request[property](body[property]);
+    }
 
     /**
      * Chose the polling method.
