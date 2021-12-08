@@ -13,7 +13,7 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const buildRequestBody = {
+const createDisbursementTransactionRequestBody = {
   disbursement: () => ({
     "amount": "16.00",
     "debitParty": [
@@ -35,7 +35,7 @@ const buildRequestBody = {
 /**
  * Set up your function to be invoked
  */
-const createDisbursementTransaction = async (useCase, polling = false, debug = false) => {
+const createDisbursementTransaction = async (body, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -45,8 +45,8 @@ const createDisbursementTransaction = async (useCase, polling = false, debug = f
     /**
      * Set the request body parameter
      */
-    for (const property in buildRequestBody[useCase]()) {
-      request[property](buildRequestBody[useCase]()[property]);
+    for (const property in body) {
+      request[property](body[property]);
     }
 
     /**
@@ -93,7 +93,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createDisbursementTransaction('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createDisbursementTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
@@ -103,6 +103,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createDisbursementTransaction
+  createDisbursementTransaction,
+  createDisbursementTransactionRequestBody
 };
 

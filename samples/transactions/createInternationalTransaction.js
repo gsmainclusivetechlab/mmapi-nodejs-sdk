@@ -13,7 +13,7 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const buildRequestBody = {
+const createInternationalTransactionRequestBody = {
   internationalTransfer: (quotationReference, quoteId) => ({
     "amount": "100.00",
     "creditParty": [
@@ -86,7 +86,7 @@ const buildRequestBody = {
 /**
  * Set up your function to be invoked
  */
-const createInternationalTransaction = async (quotationReference, quoteId, useCase, polling = false, debug = false) => {
+const createInternationalTransaction = async (body, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -96,8 +96,8 @@ const createInternationalTransaction = async (quotationReference, quoteId, useCa
     /**
      * Set the request body parameter
      */
-    for (const property in buildRequestBody[useCase](quotationReference, quoteId)) {
-      request[property](buildRequestBody[useCase](quotationReference, quoteId)[property]);
+    for (const property in body) {
+      request[property](body[property]);
     }
 
     /**
@@ -144,7 +144,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createInternationalTransaction('<<REPLACE-WITH-QUOTATION-REFERENCE>>', '<<REPLACE-WITH-QUOTE-ID>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createInternationalTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
@@ -154,6 +154,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createInternationalTransaction
+  createInternationalTransaction,
+  createInternationalTransactionRequestBody
 };
 
