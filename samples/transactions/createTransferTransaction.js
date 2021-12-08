@@ -11,6 +11,55 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const createTransferTransactionRequestBody = {
+  p2pTransfer: (quotationReference) => ({
+    "amount": "100.00",
+    "creditParty": [
+      {
+        "key": "accountid",
+        "value": "2000"
+      }
+    ],
+    "currency": "GBP",
+    "debitParty": [
+      {
+        "key": "accountid",
+        "value": "2999"
+      }
+    ],
+    "internationalTransferInformation": {
+      "originCountry": "AD",
+      "quotationReference": `${quotationReference}`,
+      // "quoteId": "{{quoteId}}",
+      "remittancePurpose": "personal",
+      "deliveryMethod": "agent"
+    },
+    "requestingOrganisation": {
+      "requestingOrganisationIdentifierType": "organisationid",
+      "requestingOrganisationIdentifier": "testorganisation"
+    }
+  }),
+  accountLinking: (linkReference) => ({
+    "amount": "200.00",
+    "creditParty": [
+      {
+        "key": "linkref",
+        "value": `${linkReference}`
+      }
+    ],
+    "currency": "RWF",
+    "debitParty": [
+      {
+        "key": "accountid",
+        "value": "2999"
+      }
+    ]
+  })
+}
+
+/**
  * Set up your function to be invoked
  */
 const createTransferTransaction = async (body, useCase, polling = false, debug = false) => {
@@ -23,7 +72,9 @@ const createTransferTransaction = async (body, useCase, polling = false, debug =
     /**
      * Set the request body parameter
      */
-    request.data = body
+    for (const property in body) {
+      request[property](body[property]);
+    }
 
     /**
      * Chose the polling method.
@@ -79,5 +130,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createTransferTransaction
+  createTransferTransaction,
+  createTransferTransactionRequestBody
 };

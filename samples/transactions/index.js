@@ -2,7 +2,7 @@ const { createDisbursementTransaction } = require('./createDisbursementTransacti
 const { createInternationalTransaction } = require('./createInternationalTransaction');
 const { createMerchantTransaction, createMerchantTransactionRequestBody } = require('./createMerchantTransaction');
 const { createRefundTransaction, createRefundTransactionRequestBody } = require('./createRefundTransaction');
-const { createTransferTransaction } = require('./createTransferTransaction');
+const { createTransferTransaction, createTransferTransactionRequestBody } = require('./createTransferTransaction');
 const { viewTransaction } = require('./viewTransaction');
 
 module.exports = {
@@ -13,5 +13,6 @@ module.exports = {
   createRefundTransaction,
   createRefundTransactionRequestBody,
   createTransferTransaction,
+  createTransferTransactionRequestBody,
   viewTransaction,
 }

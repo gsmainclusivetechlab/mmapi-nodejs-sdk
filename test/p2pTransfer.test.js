@@ -9,7 +9,9 @@ const {
   createReversal,
   viewAccountTransactions,
   viewRequestState,
-  viewTransaction
+  viewTransaction,
+
+  createTransferTransactionRequestBody
 } = require('../samples/index')
 
 const buildQuotationRequestBody = () => ({
@@ -37,34 +39,6 @@ const buildQuotationRequestBody = () => ({
       "value": "keyvalue"
     }
   ]
-});
-
-const buildTransferTransactionRequestBody = (quotationReference) => ({
-  "amount": "100.00",
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2000"
-    }
-  ],
-  "currency": "GBP",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "internationalTransferInformation": {
-    "originCountry": "AD",
-    "quotationReference": `${quotationReference}`,
-    // "quoteId": "{{quoteId}}",
-    "remittancePurpose": "personal",
-    "deliveryMethod": "agent"
-  },
-  "requestingOrganisation": {
-    "requestingOrganisationIdentifierType": "organisationid",
-    "requestingOrganisationIdentifier": "testorganisation"
-  }
 });
 
 const buildBilateralTransferTransactionRequestBody = () => ({
@@ -113,7 +87,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'), 'p2pTransfer');
+        const response = await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -131,7 +105,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'), 'p2pTransfer', true)
+        const response = await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', true)
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -222,7 +196,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'), 'p2pTransfer');
+        const response = await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -240,7 +214,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'), 'p2pTransfer');
+        const response = await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -324,7 +298,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1637249499739'), 'p2pTransfer');
+        const response = await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

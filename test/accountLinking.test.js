@@ -9,7 +9,9 @@ const {
   viewTransaction,
   createReversal,
   viewAccountTransactions,
-  viewAccountLink
+  viewAccountLink,
+
+  createTransferTransactionRequestBody
 } = require('../samples/index')
 
 const buildAccountLinkRequestBody = () => ({
@@ -31,23 +33,6 @@ const buildAccountLinkRequestBody = () => ({
     "requestingOrganisationIdentifierType": "organisationid",
     "requestingOrganisationIdentifier": "12345"
   }
-});
-
-const buildTransferTransactionRequestBody = (linkReference) => ({
-  "amount": "200.00",
-  "creditParty": [
-    {
-      "key": "linkref",
-      "value": `${linkReference}`
-    }
-  ],
-  "currency": "RWF",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ]
 });
 
 describe('Account Linking', () => {
@@ -117,7 +102,7 @@ describe('Account Linking', () => {
   describe('Perform a Transfer for a Linked Account', () => {
     describe('POST Use a Link to make a Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking');
+        const response = await createTransferTransaction(createTransferTransactionRequestBody['accountLinking']('REF-1638280960220'), 'accountLinking');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -135,7 +120,7 @@ describe('Account Linking', () => {
 
     describe('POST Use a Link to make a Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking', true);
+        const response = await createTransferTransaction(createTransferTransactionRequestBody['accountLinking']('REF-1638280960220'), 'accountLinking', true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -185,7 +170,7 @@ describe('Account Linking', () => {
 
     describe('POST Use a Link to make a Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking');
+        const response = await createTransferTransaction(createTransferTransactionRequestBody['accountLinking']('REF-1638280960220'), 'accountLinking');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

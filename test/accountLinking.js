@@ -9,7 +9,9 @@ const {
   viewTransaction,
   createReversal,
   viewAccountTransactions,
-  viewAccountLink
+  viewAccountLink,
+
+  createTransferTransactionRequestBody
 } = require('../samples/index');
 
 const buildAccountLinkRequestBody = () => ({
@@ -31,23 +33,6 @@ const buildAccountLinkRequestBody = () => ({
     "requestingOrganisationIdentifierType": "organisationid",
     "requestingOrganisationIdentifier": "12345"
   }
-});
-
-const buildTransferTransactionRequestBody = (linkReference) => ({
-  "amount": "200.00",
-  "creditParty": [
-    {
-      "key": "linkref",
-      "value": `${linkReference}`
-    }
-  ],
-  "currency": "RWF",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ]
 });
 
 const usecase1 = async () => {
@@ -74,14 +59,14 @@ const usecase3 = async () => {
   console.log("Perform a Transfer for a Linked Account...");
 
   console.log("POST Use a Link to make a Transfer");
-  await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking', undefined, true);
+  await createTransferTransaction(createTransferTransactionRequestBody['accountLinking']('REF-1638280960220'), 'accountLinking', undefined, true);
 }
 
 const usecase4 = async () => {
   console.log("Perform a Transfer using an Account Link via the Polling Method...");
 
   console.log('POST Use a Link to make a Transfer')
-  const { data: { serverCorrelationId } } = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking', true, true);
+  const { data: { serverCorrelationId } } = await createTransferTransaction(createTransferTransactionRequestBody['accountLinking']('REF-1638280960220'), 'accountLinking', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
@@ -94,7 +79,7 @@ const usecase5 = async () => {
   console.log("Perform a Transfer Reversal...")
 
   console.log("POST Use a Link to make a Transfer");
-  const { data: { serverCorrelationId } } = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking', undefined, true);
+  const { data: { serverCorrelationId } } = await createTransferTransaction(createTransferTransactionRequestBody['accountLinking']('REF-1638280960220'), 'accountLinking', undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
