@@ -12,25 +12,9 @@ const {
   viewAccountTransactions,
   viewAuthorisationCode,
 
-  createMerchantTransactionRequestBody
+  createMerchantTransactionRequestBody,
+  createRefundTransactionRequestBody
 } = require('../samples/index')
-
-const buildRefundTransactionRequestBody = () => ({
-  "amount": "200.00",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "currency": "RWF"
-});
 
 const usecase1 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment...");
@@ -83,14 +67,14 @@ const usecase6 = async () => {
   console.log("Perform a Merchant Payment Refund...")
 
   console.log('POST Perform a Merchant Payment Refund')
-  await createRefundTransaction(buildRefundTransactionRequestBody(), 'merchantPayment', undefined, true);
+  await createRefundTransaction(createRefundTransactionRequestBody['merchantPayment'](), 'merchantPayment', undefined, true);
 }
 
 const usecase7 = async () => {
   console.log("Perform a Merchant Payment Refund Using the Polling Method...")
 
   console.log('POST Perform a Merchant Payment Refund')
-  const { data: { serverCorrelationId } } = await createRefundTransaction(buildRefundTransactionRequestBody(), 'merchantPayment', true, true);
+  const { data: { serverCorrelationId } } = await createRefundTransaction(createRefundTransactionRequestBody['merchantPayment'](), 'merchantPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);

@@ -11,6 +11,44 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const createRefundTransactionRequestBody = {
+  merchantPayment: () => ({
+    "amount": "200.00",
+    "debitParty": [
+      {
+        "key": "accountid",
+        "value": "2999"
+      }
+    ],
+    "creditParty": [
+      {
+        "key": "accountid",
+        "value": "2999"
+      }
+    ],
+    "currency": "RWF"
+  }),
+  recurringPayment: (mandateReference) => ({
+    "amount": "200.00",
+    "debitParty": [
+      {
+        "key": "accountid",
+        "value": "2999"
+      }
+    ],
+    "creditParty": [
+      {
+        "key": "mandateReference",
+        "value": `${mandateReference}`
+      }
+    ],
+    "currency": "RWF"
+  })
+}
+
+/**
  * Set up your function to be invoked
  */
 const createRefundTransaction = async (body, useCase, polling = false, debug = false) => {
@@ -23,7 +61,9 @@ const createRefundTransaction = async (body, useCase, polling = false, debug = f
     /**
      * Set the request body parameter
      */
-    request.data = body;
+    for (const property in body) {
+      request[property](body[property]);
+    }
 
     /**
      * Chose the polling method.
@@ -79,5 +119,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createRefundTransaction
+  createRefundTransaction,
+  createRefundTransactionRequestBody
 };

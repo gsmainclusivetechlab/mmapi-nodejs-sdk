@@ -12,7 +12,8 @@ const {
   viewAccountDebitMandate,
   viewAccountTransactions,
 
-  createMerchantTransactionRequestBody
+  createMerchantTransactionRequestBody,
+  createRefundTransactionRequestBody
 } = require('../samples/index')
 
 const buildAccountDebitMandateRequestBody = () => ({
@@ -35,23 +36,6 @@ const buildAccountDebitMandateRequestBody = () => ({
       "value": "keyvalue"
     }
   ]
-});
-
-const buildRefundTransactionRequestBody = (mandateReference) => ({
-  "amount": "200.00",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "creditParty": [
-    {
-      "key": "mandateReference",
-      "value": `${mandateReference}`
-    }
-  ],
-  "currency": "RWF"
 });
 
 const usecase1 = async () => {
@@ -107,7 +91,7 @@ const usecase5 = async () => {
   console.log("Recurring Payment Refund ...");
 
   console.log("POST Perform a Recurring Payment Refund");
-  await createRefundTransaction(buildRefundTransactionRequestBody('REF-1637670547701'), 'recurringPayment', undefined, true);
+  await createRefundTransaction(createRefundTransactionRequestBody['recurringPayment']('REF-1637670547701'), 'recurringPayment', undefined, true);
 }
 
 const usecase6 = async () => {

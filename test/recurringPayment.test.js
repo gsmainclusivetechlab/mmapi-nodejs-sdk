@@ -12,7 +12,8 @@ const {
   viewAccountDebitMandate,
   viewAccountTransactions,
 
-  createMerchantTransactionRequestBody
+  createMerchantTransactionRequestBody,
+  createRefundTransactionRequestBody
 } = require('../samples/index')
 
 const buildAccountDebitMandateRequestBody = () => ({
@@ -35,23 +36,6 @@ const buildAccountDebitMandateRequestBody = () => ({
       "value": "keyvalue"
     }
   ]
-});
-
-const buildRefundTransactionRequestBody = (mandateReference) => ({
-  "amount": "200.00",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "creditParty": [
-    {
-      "key": "mandateReference",
-      "value": `${mandateReference}`
-    }
-  ],
-  "currency": "RWF"
 });
 
 describe('Recurring Payments', () => {
@@ -184,7 +168,7 @@ describe('Recurring Payments', () => {
   describe('Recurring Payment Refund', () => {
     describe('POST Perform a Recurring Payment Refund', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createRefundTransaction(buildRefundTransactionRequestBody('REF-1637670547701'), 'recurringPayment');
+        const response = await createRefundTransaction(createRefundTransactionRequestBody['recurringPayment']('REF-1637670547701'), 'recurringPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
