@@ -13,22 +13,24 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const buildRequestBody = () => ({
-  "amount": "200.00",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "currency": "RWF"
-});
+const buildRequestBody = {
+  disbursement: () => ({
+    "amount": "16.00",
+    "debitParty": [
+      {
+        "key": "walletid",
+        "value": "1"
+      }
+    ],
+    "creditParty": [
+      {
+        "key": "msisdn",
+        "value": "+44012345678"
+      }
+    ],
+    "currency": "USD"
+  })
+}
 
 /**
  * Set up your function to be invoked
@@ -43,7 +45,9 @@ const createDisbursementTransaction = async (useCase, polling = false, debug = f
     /**
      * Set the request body parameter
      */
-    request.data = buildRequestBody();
+    for (const property in buildRequestBody[useCase]()) {
+      request[property](buildRequestBody[useCase]()[property]);
+    }
 
     /**
      * Chose the polling method.
