@@ -15,20 +15,20 @@ const client = require('../test_harness').client();
  */
 const createMerchantTransactionRequestBody = {
   merchantPayment: () => ({
-    "amount": "200.00",
+    "amount": "16.00",
     "debitParty": [
       {
-        "key": "accountid",
-        "value": "2999"
+        "key": "walletid",
+        "value": "1"
       }
     ],
     "creditParty": [
       {
-        "key": "accountid",
-        "value": "2999"
+        "key": "msisdn",
+        "value": "+44012345678"
       }
     ],
-    "currency": "RWF"
+    "currency": "USD"
   }),
   recurringPayment: (mandateReference) => ({
     "amount": "200.00",

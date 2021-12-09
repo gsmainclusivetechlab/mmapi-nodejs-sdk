@@ -6,47 +6,41 @@
 > `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'merchantpay' passed via the URL.`
 
 ### Usage/Examples
-
 ```javascript
-/**
- * Create the request body parameter
- */
-const buildRequestBody = () => ({
-  "amount": "200.00",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "currency": "RWF"
-});
-
 /**
  * Set up your function to be invoked
  */
-const createMerchantTransaction = async (body) => {
+const createMerchantTransaction = async (polling = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createMerchantTransaction();
+    const request = new mmapi.merchantPayment.createMerchantTransaction();
 
     /**
      * Set the request body parameter
      */
-    request.data = buildRequestBody();
+    request.amount("16.00");
+    request.debitParty([
+        {
+            "key": "walletid",
+            "value": "1"
+        }
+    ]);
+    request.creditParty([
+        {
+            "key": "msisdn",
+            "value": "+44012345678"
+        }
+    ]);
+    request.currency("USD");
 
     /**
      * Chose the polling method.
      */
-    request.polling();
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
