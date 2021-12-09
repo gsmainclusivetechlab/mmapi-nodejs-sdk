@@ -10,15 +10,21 @@ require('../test_helper');
  */
 const client = require('../test_harness').client();
 
+const body = {
+  'msisdn': '+44012345678'
+}
+
 /**
  * Set up your function to be invoked
  */
-const viewAccountBalance = async (identifierType, identifier, useCase, debug = false) => {
+const viewAccountBalance = async (accountIdentifiers, useCase, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].viewAccountBalance(identifierType, identifier);
+    const request = new mmapi[useCase].viewAccountBalance(accountIdentifiers);
+
+    console.log('request', request);
 
     /**
      * Call API with your client and get a response for your call
