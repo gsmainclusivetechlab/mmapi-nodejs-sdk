@@ -11,56 +11,10 @@ const {
   viewRequestState,
   viewTransaction,
 
-  createTransferTransactionRequestBody
+  createTransferTransactionRequestBody,
+  createReversalRequestBody,
+  createQuotationRequestBody
 } = require('../samples/index')
-
-const buildQuotationRequestBody = () => ({
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2000"
-    }
-  ],
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "requestAmount": "75.30",
-  "requestCurrency": "RWF",
-  "requestDate": "2018-07-03T11:43:27.405Z",
-  "type": "transfer",
-  "subType": "abc",
-  "chosenDeliveryMethod": "directtoaccount",
-  "customData": [
-    {
-      "key": "keytest",
-      "value": "keyvalue"
-    }
-  ]
-});
-
-const buildBilateralTransferTransactionRequestBody = () => ({
-  "amount": "100.00",
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2000"
-    }
-  ],
-  "currency": "GBP",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "requestingOrganisation": {
-    "requestingOrganisationIdentifierType": "organisationid",
-    "requestingOrganisationIdentifier": "testorganisation"
-  }
-})
 
 const usecase1 = async () => {
   console.log("Perform a P2P Transfer via Switch...");
@@ -69,7 +23,7 @@ const usecase1 = async () => {
   await viewAccountName('walletid', '1', 'p2pTransfer', true);
 
   console.log("POST Request a P2P Quotation");
-  await createQuotation(buildQuotationRequestBody(), 'p2pTransfer', undefined, true);
+  await createQuotation(createQuotationRequestBody['p2pTransfer'](), 'p2pTransfer', undefined, true);
 
   console.log("POST Perform a P2P Transfer");
   await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', undefined, true);
@@ -95,7 +49,7 @@ const usecase3 = async () => {
   await viewAccountName('walletid', '1', 'p2pTransfer', true);
 
   console.log("POST Perform a P2P Transfer");
-  await createTransferTransaction(buildBilateralTransferTransactionRequestBody(), 'p2pTransfer', undefined, true);
+  await createTransferTransaction(createTransferTransactionRequestBody['p2pTransferBilateral'](), 'p2pTransfer', undefined, true);
 }
 
 const usecase4 = async () => {
@@ -105,7 +59,7 @@ const usecase4 = async () => {
   await viewAccountName('walletid', '1', 'p2pTransfer', true);
 
   console.log("POST Request a P2P Quotation");
-  await createQuotation(buildQuotationRequestBody(), 'p2pTransfer', undefined, true);
+  await createQuotation(createQuotationRequestBody['p2pTransfer'](), 'p2pTransfer', undefined, true);
 
   console.log("POST Perform a P2P Transfer");
   await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', undefined, true);
@@ -121,7 +75,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'p2pTransfer', true);
 
   console.log('POST Perform a Transaction Reversal')
-  await createReversal({}, objectReference, 'p2pTransfer', true);
+  await createReversal(createReversalRequestBody['p2pTransfer'](), objectReference, 'p2pTransfer', true);
 }
 
 const usecase6 = async () => {

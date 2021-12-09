@@ -41,6 +41,26 @@ const createTransferTransactionRequestBody = {
       "requestingOrganisationIdentifier": "testorganisation"
     }
   }),
+  p2pTransferBilateral: () => ({
+    "amount": "100.00",
+    "creditParty": [
+      {
+        "key": "accountid",
+        "value": "2000"
+      }
+    ],
+    "currency": "GBP",
+    "debitParty": [
+      {
+        "key": "accountid",
+        "value": "2999"
+      }
+    ],
+    "requestingOrganisation": {
+      "requestingOrganisationIdentifierType": "organisationid",
+      "requestingOrganisationIdentifier": "testorganisation"
+    }
+  }),
   accountLinking: (linkReference) => ({
     "amount": "200.00",
     "creditParty": [

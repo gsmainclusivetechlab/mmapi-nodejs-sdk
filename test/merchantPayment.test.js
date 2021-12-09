@@ -13,7 +13,9 @@ const {
   viewAuthorisationCode,
 
   createMerchantTransactionRequestBody,
-  createRefundTransactionRequestBody
+  createRefundTransactionRequestBody,
+  createReversalRequestBody,
+  createAuthorisationCodeRequestBody
 } = require('../samples/index')
 
 describe('Merchant Payments', () => {
@@ -100,7 +102,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code', () => {
     describe('POST Obtain an Authorisation Code', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAuthorisationCode('accountid', '2000', 'merchantPayment');
+        const response = await createAuthorisationCode(createAuthorisationCodeRequestBody['merchantPayment'](), 'accountid', '2000', 'merchantPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -118,7 +120,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Obtain an Authorisation Code', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAuthorisationCode('accountid', '2000', 'merchantPayment', true);
+        const response = await createAuthorisationCode(createAuthorisationCodeRequestBody['merchantPayment'](), 'accountid', '2000', 'merchantPayment', true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -260,7 +262,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Perform a Merchant Payment Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal({}, objectReference, 'merchantPayment');
+        const response = await createReversal(createReversalRequestBody['merchantPayment'](), objectReference, 'merchantPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

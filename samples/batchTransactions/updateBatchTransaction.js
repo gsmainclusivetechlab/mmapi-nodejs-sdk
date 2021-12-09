@@ -11,6 +11,17 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const updateBatchTransactionRequestBody = {
+  disbursement: () => ({
+    "op": "replace",
+    "path": "/batchStatus",
+    "value": "approved"
+  })
+}
+
+/**
  * Set up your function to be invoked
  */
 const updateBatchTransaction = async (body, batchId, useCase, polling = false, debug = false) => {
@@ -81,7 +92,8 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  updateBatchTransaction
+  updateBatchTransaction,
+  updateBatchTransactionRequestBody
 };
 
 

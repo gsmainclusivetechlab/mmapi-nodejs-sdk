@@ -11,81 +11,16 @@ const {
   viewRequestState,
   viewTransaction,
 
-  createInternationalTransactionRequestBody
+  createInternationalTransactionRequestBody,
+  createReversalRequestBody,
+  createQuotationRequestBody
 } = require('../samples/index')
-
-const buildQuotationRequestBody = () => ({
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2000"
-    }
-  ],
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "requestAmount": "75.30",
-  "requestCurrency": "RWF",
-  "requestDate": "2018-07-03T11:43:27.405Z",
-  "type": "inttransfer",
-  "subType": "abc",
-  "chosenDeliveryMethod": "agent",
-  "senderKyc": {
-    "nationality": "GB",
-    "dateOfBirth": "1970-07-03T11:43:27.405Z",
-    "occupation": "Manager",
-    "employerName": "MFX",
-    "contactPhone": "+447125588999",
-    "gender": "m",
-    "emailAddress": "luke.skywalkeraaabbb@gmail.com",
-    "birthCountry": "GB",
-    "idDocument": [
-      {
-        "idType": "nationalidcard",
-        "idNumber": "1234567",
-        "issueDate": "2018-07-03T11:43:27.405Z",
-        "expiryDate": "2021-07-03T11:43:27.405Z",
-        "issuer": "UKPA",
-        "issuerPlace": "GB",
-        "issuerCountry": "GB",
-        "otherIdDescription": "test"
-      }
-    ],
-    "postalAddress": {
-      "country": "GB",
-      "addressLine1": "111 ABC Street",
-      "city": "New York",
-      "stateProvince": "New York",
-      "postalCode": "ABCD"
-    },
-    "subjectName": {
-      "title": "Mr",
-      "firstName": "Luke",
-      "middleName": "R",
-      "lastName": "Skywalker",
-      "fullName": "Luke R Skywalker",
-      "nativeName": "ABC"
-    }
-  },
-  "customData": [
-    {
-      "key": "keytest",
-      "value": "keyvalue"
-    }
-  ],
-  "sendingServiceProviderCountry": "AD",
-  "originCountry": "AD",
-  "receivingCountry": "AD"
-})
 
 const usecase1 = async () => {
   console.log("Perform an International Transfer...");
 
   console.log("POST Request a International Transfer Quotation")
-  await createQuotation(buildQuotationRequestBody(), 'internationalTransfer', undefined, true);
+  await createQuotation(createQuotationRequestBody['internationalTransfer'](), 'internationalTransfer', undefined, true);
 
   console.log("POST Perform an International Transfer")
   await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer', undefined, true);
@@ -95,7 +30,7 @@ const usecase2 = async () => {
   console.log("Perform an Bilateral International Transfer...");
 
   console.log("POST Request a International Transfer Quotation")
-  await createQuotation(buildQuotationRequestBody(), 'internationalTransfer', undefined, true);
+  await createQuotation(createQuotationRequestBody['internationalTransfer'](), 'internationalTransfer', undefined, true);
 
   console.log("POST Perform an International Transfer")
   await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer', undefined, true);
@@ -118,7 +53,7 @@ const usecase4 = async () => {
   console.log("Request a International Transfer Quotation via the Polling Method...");
 
   console.log("POST Request a International Transfer Quotation")
-  let { data: { serverCorrelationId, pollLimit } } = await createQuotation(buildQuotationRequestBody(), 'internationalTransfer', true, true);
+  let { data: { serverCorrelationId, pollLimit } } = await createQuotation(createQuotationRequestBody['internationalTransfer'](), 'internationalTransfer', true, true);
 
   pollLimit = 3
 
@@ -145,7 +80,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'internationalTransfer', true);
 
   console.log('GET Perform a Merchant Payment Reversal')
-  await createReversal({}, objectReference, 'internationalTransfer', true);
+  await createReversal(createReversalRequestBody['internationalTransfer'](), objectReference, 'internationalTransfer', true);
 }
 
 const usecase6 = async () => {

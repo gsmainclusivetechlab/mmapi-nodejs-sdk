@@ -14,58 +14,11 @@ const {
   createReversal,
   viewAccountTransactions,
 
-  createDisbursementTransactionRequestBody
+  createDisbursementTransactionRequestBody,
+  createReversalRequestBody,
+  createBatchTransactionRequestBody,
+  updateBatchTransactionRequestBody
 } = require('../samples/index')
-
-const buildBatchTransactionRequestBody = () => ({
-  "transactions": [
-    {
-      "amount": "200.00",
-      "type": "transfer",
-      "creditParty": [
-        {
-          "key": "accountid",
-          "value": "2000"
-        }
-      ],
-      "currency": "RWF",
-      "debitParty": [
-        {
-          "key": "accountid",
-          "value": "2999"
-        }
-      ]
-    },
-    {
-      "amount": "200.00",
-      "type": "transfer",
-      "creditParty": [
-        {
-          "key": "accountid",
-          "value": "2999"
-        }
-      ],
-      "currency": "RWF",
-      "debitParty": [
-        {
-          "key": "accountid",
-          "value": "2000"
-        }
-      ]
-    }
-  ],
-  "batchTitle": "Batch_Test",
-  "batchDescription": "Testing a Batch",
-  "scheduledStartDate": "2019-12-11T15:08:03.158Z"
-});
-
-const buildUpdateBatchTransactionRequestBody = () => ([
-  {
-    "op": "replace",
-    "path": "/batchStatus",
-    "value": "approved"
-  }
-]);
 
 describe('Disbursements', () => {
   describe('Perform an Individual Disbursement', () => {
@@ -86,7 +39,7 @@ describe('Disbursements', () => {
   describe('Perform a Bulk Disbursement', () => {
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBatchTransaction(buildBatchTransactionRequestBody(), 'disbursement');
+        const response = await createBatchTransaction(createBatchTransactionRequestBody['disbursement'](), 'disbursement');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -140,7 +93,7 @@ describe('Disbursements', () => {
   describe('Perform a Bulk Disbursement with Maker / Checker', () => {
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBatchTransaction(buildBatchTransactionRequestBody(), 'disbursement');
+        const response = await createBatchTransaction(createBatchTransactionRequestBody['disbursement'](), 'disbursement');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -155,7 +108,7 @@ describe('Disbursements', () => {
 
     describe('PATCH Approve The Transaction Batch', () => {
       it('should return the request state object with status 202 to indicate that the request is completed', async () => {
-        const response = await updateBatchTransaction(buildUpdateBatchTransactionRequestBody(), batchId, 'disbursement');
+        const response = await updateBatchTransaction(updateBatchTransactionRequestBody['disbursement'](), batchId, 'disbursement');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -260,7 +213,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBatchTransaction(buildBatchTransactionRequestBody(), 'disbursement', true);
+        const response = await createBatchTransaction(createBatchTransactionRequestBody['disbursement'](), 'disbursement', true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -308,7 +261,7 @@ describe('Disbursements', () => {
 
     describe('PATCH Approve The Transaction Batch', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await updateBatchTransaction(buildUpdateBatchTransactionRequestBody(), "REF-1636656115835", 'disbursement', true);
+        const response = await updateBatchTransaction(updateBatchTransactionRequestBody['disbursement'](), "REF-1636656115835", 'disbursement', true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -387,7 +340,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal({}, objectReference, 'disbursement');
+        const response = await createReversal(createReversalRequestBody['disbursement'](), objectReference, 'disbursement');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

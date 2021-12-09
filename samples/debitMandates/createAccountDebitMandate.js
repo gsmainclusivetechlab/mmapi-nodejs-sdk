@@ -11,6 +11,33 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const createAccountDebitMandateRequestBody = {
+  recurringPayment: () => ({
+    "payee": [
+      {
+        "key": "accountid",
+        "value": "2999"
+      }
+    ],
+    "requestDate": "2018-07-03T10:43:27.405Z",
+    "startDate": "2018-07-03T10:43:27.405Z",
+    "currency": "GBP",
+    "amountLimit": "1000.00",
+    "endDate": "2028-07-03T10:43:27.405Z",
+    "numberOfPayments": "2",
+    "frequencyType": "sixmonths",
+    "customData": [
+      {
+        "key": "keytest",
+        "value": "keyvalue"
+      }
+    ]
+  })
+}
+
+/**
  * Set up your function to be invoked
  */
 const createAccountDebitMandate = async (body, identifierType, identifier, useCase, polling = false, debug = false) => {
@@ -81,6 +108,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createAccountDebitMandate
+  createAccountDebitMandate,
+  createAccountDebitMandateRequestBody
 };
 

@@ -11,35 +11,16 @@ const {
   viewAccountTransactions,
   viewAccountLink,
 
-  createTransferTransactionRequestBody
+  createTransferTransactionRequestBody,
+  createReversalRequestBody,
+  createAccountLinkRequestBody
 } = require('../samples/index')
-
-const buildAccountLinkRequestBody = () => ({
-  "sourceAccountIdentifiers": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "status": "active",
-  "mode": "both",
-  "customData": [
-    {
-      "key": "keytest",
-      "value": "keyvalue"
-    }
-  ],
-  "requestingOrganisation": {
-    "requestingOrganisationIdentifierType": "organisationid",
-    "requestingOrganisationIdentifier": "12345"
-  }
-});
 
 describe('Account Linking', () => {
   describe('Setup an Account Link', () => {
     describe('POST Establish an Account to Account Link', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking');
+        const response = await createAccountLink(createAccountLinkRequestBody['accountLinking'](), 'accountid', '2000', 'accountLinking');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -57,7 +38,7 @@ describe('Account Linking', () => {
 
     describe('POST Establish an Account to Account Link', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking', true);
+        const response = await createAccountLink(createAccountLinkRequestBody['accountLinking'](), 'accountid', '2000', 'accountLinking', true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -201,7 +182,7 @@ describe('Account Linking', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal({}, objectReference, 'accountLinking');
+        const response = await createReversal(createReversalRequestBody['accountLinking'](), objectReference, 'accountLinking');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -254,7 +235,7 @@ describe('Account Linking', () => {
 
     describe('POST Establish an Account to Account Link', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking');
+        const response = await createAccountLink(createAccountLinkRequestBody['accountLinking'](), 'accountid', '2000', 'accountLinking');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

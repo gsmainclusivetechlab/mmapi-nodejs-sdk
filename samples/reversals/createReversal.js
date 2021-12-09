@@ -11,6 +11,18 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const createReversalRequestBody = {
+  merchantPayment: () => ({}),
+  disbursement: () => ({}),
+  internationalTransfer: () => ({}),
+  p2pTransfer: () => ({}),
+  recurringPayment: () => ({}),
+  accountLinking: () => ({})
+}
+
+/**
  * Set up your function to be invoked
  */
 const createReversal = async (body, originalTransactionReference, useCase, debug = false) => {
@@ -74,6 +86,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createReversal
+  createReversal,
+  createReversalRequestBody
 };
 

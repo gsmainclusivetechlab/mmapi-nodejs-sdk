@@ -11,6 +11,32 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const createAccountLinkRequestBody = {
+  accountLinking: () => ({
+    "sourceAccountIdentifiers": [
+      {
+        "key": "accountid",
+        "value": "2999"
+      }
+    ],
+    "status": "active",
+    "mode": "both",
+    "customData": [
+      {
+        "key": "keytest",
+        "value": "keyvalue"
+      }
+    ],
+    "requestingOrganisation": {
+      "requestingOrganisationIdentifierType": "organisationid",
+      "requestingOrganisationIdentifier": "12345"
+    }
+  })
+}
+
+/**
  * Set up your function to be invoked
  */
 const createAccountLink = async (body, identifierType, identifier, useCase, polling = false, debug = false) => {
@@ -81,6 +107,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createAccountLink
+  createAccountLink,
+  createAccountLinkRequestBody
 };
 

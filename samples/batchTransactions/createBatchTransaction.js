@@ -11,6 +11,53 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const createBatchTransactionRequestBody = {
+  disbursement: () => ({
+    "transactions": [
+      {
+        "amount": "200.00",
+        "type": "transfer",
+        "creditParty": [
+          {
+            "key": "accountid",
+            "value": "2000"
+          }
+        ],
+        "currency": "RWF",
+        "debitParty": [
+          {
+            "key": "accountid",
+            "value": "2999"
+          }
+        ]
+      },
+      {
+        "amount": "200.00",
+        "type": "transfer",
+        "creditParty": [
+          {
+            "key": "accountid",
+            "value": "2999"
+          }
+        ],
+        "currency": "RWF",
+        "debitParty": [
+          {
+            "key": "accountid",
+            "value": "2000"
+          }
+        ]
+      }
+    ],
+    "batchTitle": "Batch_Test",
+    "batchDescription": "Testing a Batch",
+    "scheduledStartDate": "2019-12-11T15:08:03.158Z"
+  })
+}
+
+/**
  * Set up your function to be invoked
  */
 const createBatchTransaction = async (body, useCase, polling = false, debug = false) => {
@@ -81,5 +128,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createBatchTransaction
+  createBatchTransaction,
+  createBatchTransactionRequestBody
 };

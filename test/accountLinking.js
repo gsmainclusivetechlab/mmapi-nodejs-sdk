@@ -11,42 +11,23 @@ const {
   viewAccountTransactions,
   viewAccountLink,
 
-  createTransferTransactionRequestBody
+  createTransferTransactionRequestBody,
+  createReversalRequestBody,
+  createAccountLinkRequestBody
 } = require('../samples/index');
-
-const buildAccountLinkRequestBody = () => ({
-  "sourceAccountIdentifiers": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "status": "active",
-  "mode": "both",
-  "customData": [
-    {
-      "key": "keytest",
-      "value": "keyvalue"
-    }
-  ],
-  "requestingOrganisation": {
-    "requestingOrganisationIdentifierType": "organisationid",
-    "requestingOrganisationIdentifier": "12345"
-  }
-});
 
 const usecase1 = async () => {
   console.log("Setup an Account Link...");
 
   console.log("POST Establish an Account to Account Link")
-  await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking', undefined, true);
+  await createAccountLink(createAccountLinkRequestBody['accountLinking'](), 'accountid', '2000', 'accountLinking', undefined, true);
 }
 
 const usecase2 = async () => {
   console.log("Setup an Account Link using the Polling Method...");
 
   console.log("POST Establish an Account to Account Link");
-  const { data: { serverCorrelationId } } = await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking', true, true);
+  const { data: { serverCorrelationId } } = await createAccountLink(createAccountLinkRequestBody['accountLinking'](), 'accountid', '2000', 'accountLinking', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
@@ -85,7 +66,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
 
   console.log('POST Perform a Transaction Reversal')
-  await createReversal({}, objectReference, 'accountLinking', true);
+  await createReversal(createReversalRequestBody['accountLinking'](), objectReference, 'accountLinking', true);
 }
 
 const usecase6 = async () => {
@@ -113,7 +94,7 @@ const usecase9 = async () => {
   console.log("Retrieve a Missing API Response...")
 
   console.log("POST Establish an Account to Account Link");
-  const { config: { headers } } = await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking', undefined, true);
+  const { config: { headers } } = await createAccountLink(createAccountLinkRequestBody['accountLinking'](), 'accountid', '2000', 'accountLinking', undefined, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewResponse(headers['X-CorrelationID'], 'accountLinking', true);

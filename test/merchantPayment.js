@@ -13,7 +13,9 @@ const {
   viewAuthorisationCode,
 
   createMerchantTransactionRequestBody,
-  createRefundTransactionRequestBody
+  createRefundTransactionRequestBody,
+  createReversalRequestBody,
+  createAuthorisationCodeRequestBody
 } = require('../samples/index')
 
 const usecase1 = async () => {
@@ -47,14 +49,14 @@ const usecase4 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code...")
 
   console.log('POST Obtain an Authorisation Code')
-  await createAuthorisationCode('accountid', '2000', 'merchantPayment', undefined, true);
+  await createAuthorisationCode(createAuthorisationCodeRequestBody['merchantPayment'](), 'accountid', '2000', 'merchantPayment', undefined, true);
 }
 
 const usecase5 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code Using the Polling Method...")
 
   console.log('POST Obtain an Authorisation Code')
-  const { data: { serverCorrelationId } } = await createAuthorisationCode('accountid', '2000', 'merchantPayment', true, true);
+  const { data: { serverCorrelationId } } = await createAuthorisationCode(createAuthorisationCodeRequestBody['merchantPayment'](), 'accountid', '2000', 'merchantPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
@@ -93,7 +95,7 @@ const usecase8 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
 
   console.log('POST Perform a Merchant Payment Reversal')
-  await createReversal({}, objectReference, 'merchantPayment', true);
+  await createReversal(createReversalRequestBody['merchantPayment'](), objectReference, 'merchantPayment', true);
 }
 
 const usecase9 = async () => {

@@ -11,9 +11,20 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const createAuthorisationCodeRequestBody = {
+  merchantPayment: () => ({
+    "requestDate": "2018-07-03T10:43:27.405Z",
+    "currency": "GBP",
+    "amount": "1000.00"
+  })
+}
+
+/**
  * Set up your function to be invoked
  */
-const createAuthorisationCode = async (identifierType, identifier, useCase, polling = false, debug = false) => {
+const createAuthorisationCode = async (body, identifierType, identifier, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -23,9 +34,9 @@ const createAuthorisationCode = async (identifierType, identifier, useCase, poll
     /**
      * Set the request body parameter
      */
-    request.requestDate('2018-07-03T10:43:27.405Z');
-    request.currency('GBP');
-    request.amount('amount');
+    for (const property in body) {
+      request[property](body[property]);
+    }
 
     /**
      * Chose the polling method.
@@ -71,7 +82,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAuthorisationCode('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createAuthorisationCode('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
@@ -80,5 +91,8 @@ if (require.main === module) {
 /**
  * Exports the function. If needed this can be invoked from the other modules.
  */
-module.exports = { createAuthorisationCode };
+module.exports = {
+  createAuthorisationCode,
+  createAuthorisationCodeRequestBody
+};
 
