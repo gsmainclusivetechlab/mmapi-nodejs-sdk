@@ -15,12 +15,14 @@ const viewAccountName = async (identifierType, identifier) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewAccountName(identifierType, identifier);
+    const request = new mmapi.p2pTransfer.viewAccountName(identifierType, identifier);
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
+    console.log("Response Status: ", response.status);
+    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
 
     /**
      * Return a successful response

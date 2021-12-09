@@ -37,8 +37,8 @@ const viewAccountTransactions = async (identifierType, identifier, offset, limit
     if (debug) {
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-      console.log("Response x-records-available-count", response.headers['x-records-available-count']);
-      console.log("Response x-records-returned-count", response.headers['x-records-returned-count']);
+      console.log("Response X-Records-Available-Count", response.headers['x-records-available-count']);
+      console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
     }
 
     /**

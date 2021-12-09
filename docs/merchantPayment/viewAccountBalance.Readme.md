@@ -23,7 +23,6 @@ const viewAccountBalance = async (identifierType, identifier) => {
     const response = await client.execute(request);
     console.log("Response Status: ", response.status);
     console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-    console.log("Response Headers: ", response.headers);
 
     /**
      * Return a successful response

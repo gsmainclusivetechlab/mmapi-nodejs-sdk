@@ -10,27 +10,31 @@
 /**
  * Set up your function to be invoked
  */
-const viewAccountTransactions = async (identifierType, identifier) => {
+const viewAccountTransactions = async (identifierType, identifier, offset, limit) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewAccountTransactions(identifierType, identifier);
+    const request = new mmapi.merchantPayment.viewAccountTransactions(identifierType, identifier);
 
     /**
      * Set the offset parameter
      */
-    request.offset('<<REPLACE-WITH-OFFSET>>');
+    request.offset(offset);
 
     /**
      * Set the limit parameter
      */
-    request.limit('<<REPLACE-WITH-LIMIT>>');
+    request.limit(limit);
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
+    console.log("Response Status: ", response.status);
+    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    console.log("Response X-Records-Available-Count", response.headers['x-records-available-count']);
+    console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
 
     /**
      * Return a successful response
@@ -52,7 +56,7 @@ const viewAccountTransactions = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-viewAccountTransactions('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>');
+viewAccountTransactions('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-OFFSET>>', '<<REPLACE-WITH-LIMIT>>');
 ```
 
 ### Example Output
@@ -60,7 +64,7 @@ viewAccountTransactions('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDEN
 ```javascript
 200
 
-[  
+[
     {
         "transactionReference": "REF-1620028406917",
         "creditParty": [
