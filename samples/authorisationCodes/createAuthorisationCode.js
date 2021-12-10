@@ -22,14 +22,21 @@ const createAuthorisationCodeRequestBody = {
 }
 
 /**
+ * Create the request path parameter
+ */
+const createAuthorisationCodeRequestPath = {
+  'msisdn': '+44012345678'
+}
+
+/**
  * Set up your function to be invoked
  */
-const createAuthorisationCode = async (body, identifierType, identifier, useCase, polling = false, debug = false) => {
+const createAuthorisationCode = async (body, accountIdentifiers, useCase, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].createAuthorisationCode(identifierType, identifier);
+    const request = new mmapi[useCase].createAuthorisationCode(accountIdentifiers);
 
     /**
      * Set the request body parameter
@@ -82,7 +89,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAuthorisationCode('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createAuthorisationCode('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
     } catch (err) {
     }
   })();
@@ -93,6 +100,7 @@ if (require.main === module) {
  */
 module.exports = {
   createAuthorisationCode,
-  createAuthorisationCodeRequestBody
+  createAuthorisationCodeRequestBody,
+  createAuthorisationCodeRequestPath
 };
 

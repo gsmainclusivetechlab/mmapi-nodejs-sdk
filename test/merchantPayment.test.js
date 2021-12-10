@@ -17,7 +17,8 @@ const {
   createReversalRequestBody,
   createAuthorisationCodeRequestBody,
   viewAccountBalanceRequestPath,
-  viewAccountTransactionsRequestPath
+  viewAccountTransactionsRequestPath,
+  createAuthorisationCodeRequestPath
 } = require('../samples/index')
 
 describe('Merchant Payments', () => {
@@ -104,7 +105,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code', () => {
     describe('POST Obtain an Authorisation Code', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAuthorisationCode(createAuthorisationCodeRequestBody['merchantPayment'](), 'accountid', '2000', 'merchantPayment');
+        const response = await createAuthorisationCode(createAuthorisationCodeRequestBody['merchantPayment'](), createAuthorisationCodeRequestPath, 'merchantPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -122,7 +123,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Obtain an Authorisation Code', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAuthorisationCode(createAuthorisationCodeRequestBody['merchantPayment'](), 'accountid', '2000', 'merchantPayment', true);
+        const response = await createAuthorisationCode(createAuthorisationCodeRequestBody['merchantPayment'](), createAuthorisationCodeRequestPath, 'merchantPayment', true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
