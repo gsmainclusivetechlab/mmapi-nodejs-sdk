@@ -10,7 +10,10 @@ require('../test_helper');
  */
 const client = require('../test_harness').client();
 
-const body = {
+/**
+ * Set up the request path parameters
+ */
+const viewAccountBalanceRequestPath = {
   'msisdn': '+44012345678'
 }
 
@@ -23,8 +26,6 @@ const viewAccountBalance = async (accountIdentifiers, useCase, debug = false) =>
      * Construct a request object and set desired parameters
      */
     const request = new mmapi[useCase].viewAccountBalance(accountIdentifiers);
-
-    console.log('request', request);
 
     /**
      * Call API with your client and get a response for your call
@@ -63,7 +64,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAccountBalance('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewAccountBalance('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-USE-CASE>>', true);
     } catch (err) {
     }
   })();
@@ -73,7 +74,8 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAccountBalance
+  viewAccountBalance,
+  viewAccountBalanceRequestPath
 };
 
 

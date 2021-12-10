@@ -15,7 +15,9 @@ const {
   createMerchantTransactionRequestBody,
   createRefundTransactionRequestBody,
   createReversalRequestBody,
-  createAuthorisationCodeRequestBody
+  createAuthorisationCodeRequestBody,
+  viewAccountBalanceRequestPath,
+  viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
 describe('Merchant Payments', () => {
@@ -277,7 +279,7 @@ describe('Merchant Payments', () => {
   describe('Obtain a Merchant Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance('accountid', '2000', 'merchantPayment');
+        const response = await viewAccountBalance(viewAccountBalanceRequestPath, 'merchantPayment');
 
         expect(response.status).toBe(200);
       });
@@ -287,7 +289,7 @@ describe('Merchant Payments', () => {
   describe('Retrieve Payments for a Merchant', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions('accountid', '2000', 0, 20, 'merchantPayment');
+        const response = await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 20, 'merchantPayment');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);

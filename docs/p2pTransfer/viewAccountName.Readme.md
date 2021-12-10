@@ -1,6 +1,10 @@
 # View Account Name
 
-`Here, viewAccountName(identifierType, identifier) creates a GET request to /accounts/{identifierType}/{identifier}/accountname`
+`Here, viewAccountName({ identifierType: identifier }) creates a GET request to /accounts/{identifierType}/{identifier}/accountname`
+
+> `This endpoint returns the name of an account holder.`
+
+`Here, viewAccountName({ identifierType1: identifier1, identifierType2: identifier2, identifierType3: identifier3 }) creates a GET request to  GET /accounts/{AccountIdentifiers}/accountname`
 
 > `This endpoint returns the name of an account holder.`
 
@@ -10,12 +14,12 @@
 /**
  * Set up your function to be invoked
  */
-const viewAccountName = async (identifierType, identifier) => {
+const viewAccountName = async (accountIdentifiers) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.p2pTransfer.viewAccountName(identifierType, identifier);
+    const request = new mmapi.p2pTransfer.viewAccountName(accountIdentifiers);
 
     /**
      * Call API with your client and get a response for your call
@@ -44,7 +48,7 @@ const viewAccountName = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-viewAccountName('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>');
+viewAccountName('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>');
 ```
 
 ### Example Output

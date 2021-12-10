@@ -15,7 +15,9 @@ const {
   createMerchantTransactionRequestBody,
   createRefundTransactionRequestBody,
   createReversalRequestBody,
-  createAuthorisationCodeRequestBody
+  createAuthorisationCodeRequestBody,
+  viewAccountBalanceRequestPath,
+  viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
 const usecase1 = async () => {
@@ -102,14 +104,14 @@ const usecase9 = async () => {
   console.log("Obtain a Merchant Balance...")
 
   console.log('GET Get an Account Balance')
-  await viewAccountBalance('accountid', '2000', 'merchantPayment', true);
+  await viewAccountBalance(viewAccountBalanceRequestPath, 'merchantPayment', true);
 }
 
 const usecase10 = async () => {
   console.log("Retrieve Payments for a Merchant...")
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransactions('accountid', '2000', 0, 2, 'merchantPayment', true);
+  await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 2, 'merchantPayment', true);
 }
 
 const usecase11 = async () => {

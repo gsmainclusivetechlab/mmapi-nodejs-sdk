@@ -11,14 +11,21 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Set up the request path parameters
+ */
+const viewAccountTransactionsRequestPath = {
+  'accountid': '2000'
+}
+
+/**
  * Set up your function to be invoked
  */
-const viewAccountTransactions = async (identifierType, identifier, offset, limit, useCase, debug = false) => {
+const viewAccountTransactions = async (accountIdentifiers, offset, limit, useCase, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].viewAccountTransactions(identifierType, identifier);
+    const request = new mmapi[useCase].viewAccountTransactions(accountIdentifiers);
 
     /**
      * Set the offset parameter
@@ -69,7 +76,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAccountTransactions('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', 0, 20, '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewAccountTransactions('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', 0, 20, '<<REPLACE-WITH-USE-CASE>>', true);
     } catch (err) {
     }
   })();
@@ -79,7 +86,8 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAccountTransactions
+  viewAccountTransactions,
+  viewAccountTransactionsRequestPath
 };
 
 

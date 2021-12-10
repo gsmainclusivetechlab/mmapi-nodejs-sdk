@@ -13,7 +13,9 @@ const {
 
   createInternationalTransactionRequestBody,
   createReversalRequestBody,
-  createQuotationRequestBody
+  createQuotationRequestBody,
+  viewAccountBalanceRequestPath,
+  viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
 describe('International Transfers', () => {
@@ -224,7 +226,7 @@ describe('International Transfers', () => {
   describe('Obtain a Financial Service Provider Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance('accountid', '2000', 'internationalTransfer');
+        const response = await viewAccountBalance(viewAccountBalanceRequestPath, 'internationalTransfer');
 
         expect(response.status).toBe(200);
       });
@@ -234,7 +236,7 @@ describe('International Transfers', () => {
   describe('Retrieve Transactions for a Financial Service Provider', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions('accountid', '2000', 0, 20, 'internationalTransfer');
+        const response = await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 20, 'internationalTransfer');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);

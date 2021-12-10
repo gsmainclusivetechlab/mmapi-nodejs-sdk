@@ -11,14 +11,21 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Set up the request path parameters
+ */
+const viewAccountNameRequestPath = {
+  'walletid': '1'
+}
+
+/**
  * Set up your function to be invoked
  */
-const viewAccountName = async (identifierType, identifier, useCase, debug = false) => {
+const viewAccountName = async (accountIdentifiers, useCase, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].viewAccountName(identifierType, identifier);
+    const request = new mmapi[useCase].viewAccountName(accountIdentifiers);
 
     /**
      * Call API with your client and get a response for your call
@@ -57,7 +64,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAccountName('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewAccountName('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-USE-CASE>>', true);
     } catch (err) {
     }
   })();
@@ -67,6 +74,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAccountName
+  viewAccountName,
+  viewAccountNameRequestPath
 };
 

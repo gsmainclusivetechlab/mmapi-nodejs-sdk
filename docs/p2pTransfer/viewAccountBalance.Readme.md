@@ -1,8 +1,16 @@
 # View Account Balance
 
-`Here, viewAccountBalance(identifierType, identifier) creates a GET request to /accounts/{identifierType}/{identifier}/balance`
+1) `Here, viewAccountBalance({ identifierType: identifier }) creates a GET request to /accounts/{identifierType}/{identifier}/balance`
 
-> `This endpoint returns the balance of an account.`
+> `This endpoint returns the balance of an account where one identifier suffices to uniquely identify an account.`
+
+2) `Here, viewAccountBalance({ identifierType1: identifier1, identifierType2: identifier2, identifierType3: identifier3 }) creates a GET request to /accounts/{AccountIdentifiers}/balance`
+
+> `This endpoint returns the balance of an account where a single identifier is not sufficient to identify an account.`
+
+3) `Here, viewAccountBalance() creates a GET request to /accounts/balance`
+
+> `This endpoint returns the balance of an account. As the account is not passed as a parameter, the account is assumed to be that of the calling client.`
 
 ### Usage/Examples
 
@@ -10,12 +18,12 @@
 /**
  * Set up your function to be invoked
  */
-const viewAccountBalance = async (identifierType, identifier) => {
+const viewAccountBalance = async (accountIdentifiers) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.p2pTransfer.viewAccountBalance(identifierType, identifier);
+    const request = new mmapi.p2pTransfer.viewAccountBalance(accountIdentifiers);
 
     /**
      * Call API with your client and get a response for your call
@@ -44,7 +52,7 @@ const viewAccountBalance = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-viewAccountBalance('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>');
+viewAccountBalance('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>');
 ```
 
 ### Example Output

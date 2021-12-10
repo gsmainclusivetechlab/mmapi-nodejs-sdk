@@ -13,7 +13,9 @@ const {
 
   createTransferTransactionRequestBody,
   createReversalRequestBody,
-  createAccountLinkRequestBody
+  createAccountLinkRequestBody,
+  viewAccountBalanceRequestPath,
+  viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
 describe('Account Linking', () => {
@@ -197,7 +199,7 @@ describe('Account Linking', () => {
   describe('Obtain a Financial Service Provider Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance('accountid', '2000', 'accountLinking');
+        const response = await viewAccountBalance(viewAccountBalanceRequestPath, 'accountLinking');
 
         expect(response.status).toBe(200);
       });
@@ -207,7 +209,7 @@ describe('Account Linking', () => {
   describe('Retrieve Transfers for a Financial Service Provider', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions('accountid', '2000', 0, 20, 'accountLinking');
+        const response = await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 20, 'accountLinking');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);

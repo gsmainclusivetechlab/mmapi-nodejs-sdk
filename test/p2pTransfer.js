@@ -13,14 +13,17 @@ const {
 
   createTransferTransactionRequestBody,
   createReversalRequestBody,
-  createQuotationRequestBody
+  createQuotationRequestBody,
+  viewAccountNameRequestPath,
+  viewAccountBalanceRequestPath,
+  viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
 const usecase1 = async () => {
   console.log("Perform a P2P Transfer via Switch...");
 
   console.log("GET Retrieve the Name of the Recipient");
-  await viewAccountName('walletid', '1', 'p2pTransfer', true);
+  await viewAccountName(viewAccountNameRequestPath, 'p2pTransfer', true);
 
   console.log("POST Request a P2P Quotation");
   await createQuotation(createQuotationRequestBody['p2pTransfer'](), 'p2pTransfer', undefined, true);
@@ -46,7 +49,7 @@ const usecase3 = async () => {
   console.log("Perform a Bilateral P2P Transfer...");
 
   console.log("GET Retrieve the Name of the Recipient");
-  await viewAccountName('walletid', '1', 'p2pTransfer', true);
+  await viewAccountName(viewAccountNameRequestPath, 'p2pTransfer', true);
 
   console.log("POST Perform a P2P Transfer");
   await createTransferTransaction(createTransferTransactionRequestBody['p2pTransferBilateral'](), 'p2pTransfer', undefined, true);
@@ -56,7 +59,7 @@ const usecase4 = async () => {
   console.log("Perform an ‘On-us’ P2P Transfer Initiated by a Third Party Provider...");
 
   console.log("GET Retrieve the Name of the Recipient");
-  await viewAccountName('walletid', '1', 'p2pTransfer', true);
+  await viewAccountName(viewAccountNameRequestPath, 'p2pTransfer', true);
 
   console.log("POST Request a P2P Quotation");
   await createQuotation(createQuotationRequestBody['p2pTransfer'](), 'p2pTransfer', undefined, true);
@@ -82,14 +85,14 @@ const usecase6 = async () => {
   console.log("Obtain an FSP Balance...")
 
   console.log('GET Get an Account Balance')
-  await viewAccountBalance('accountid', '2000', 'p2pTransfer', true);
+  await viewAccountBalance(viewAccountBalanceRequestPath, 'p2pTransfer', true);
 }
 
 const usecase7 = async () => {
   console.log("Retrieve Transactions for an FSP...")
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransactions('accountid', '2000', 0, 2, 'p2pTransfer', true);
+  await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 2, 'p2pTransfer', true);
 }
 
 const usecase8 = async () => {

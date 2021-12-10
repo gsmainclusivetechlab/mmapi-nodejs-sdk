@@ -13,7 +13,9 @@ const {
 
   createInternationalTransactionRequestBody,
   createReversalRequestBody,
-  createQuotationRequestBody
+  createQuotationRequestBody,
+  viewAccountBalanceRequestPath,
+  viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
 const usecase1 = async () => {
@@ -87,14 +89,14 @@ const usecase6 = async () => {
   console.log("Obtain a Financial Service Provider Balance...");
 
   console.log('GET Get an Account Balance')
-  await viewAccountBalance('accountid', '2000', 'internationalTransfer', true);
+  await viewAccountBalance(viewAccountBalanceRequestPath, 'internationalTransfer', true);
 }
 
 const usecase7 = async () => {
   console.log("Retrieve Transactions for a Financial Service Provider...");
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransactions('accountid', '2000', 0, 2, 'internationalTransfer', true);
+  await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 2, 'internationalTransfer', true);
 }
 
 const usecase8 = async () => {
