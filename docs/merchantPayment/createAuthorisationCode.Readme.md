@@ -3,11 +3,11 @@
 
 `Here, createAuthorisationCode({ identifierType1: identifier1 }) creates a POST request to /accounts/{identifierType}/{identifier}/authorisationcodes`
 
-> `This endpoint allows allows a mobile money payer or payee to generate a code which when presented to the other party, can be redeemed for an amount set by the payer or payee, depending upon the use case.`
+> `This endpoint allows a mobile money payer or payee to generate a code which when presented to the other party, can be redeemed for an amount set by the payer or payee, depending upon the use case where one identifier suffices to uniquely identify an account.`
 
 `Here, createAuthorisationCode({ identifierType1: identifier1, identifierType2: identifier2, identifierType3: identifier3 }) creates a POST request to /accounts/{AccountIdentifiers}/authorisationcodes`
 
-> `This endpoint allows allows a mobile money payer or payee to generate a code which when presented to the other party, can be redeemed for an amount set by the payer or payee, depending upon the use case.`
+> `This endpoint allows a mobile money payer or payee to generate a code which when presented to the other party, can be redeemed for an amount set by the payer or payee, depending upon the use case where a single identifier is not sufficient to identify an account.`
 
 ### Usage/Examples
 
@@ -15,7 +15,7 @@
 /**
  * Set up your function to be invoked
  */
-const createAuthorisationCode = async (accountIdentifiers, polling = false) => {
+const createAuthorisationCode = async (body, accountIdentifiers, polling = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -26,9 +26,9 @@ const createAuthorisationCode = async (accountIdentifiers, polling = false) => {
     /**
      * Set the request body parameter
      */
-    request.requestDate('2018-07-03T10:43:27.405Z');
-    request.currency('GBP');
-    request.amount('amount');
+    request.requestDate(body.requestDate);
+    request.currency(body.currency);
+    request.amount(body.amount);
 
     /**
      * Chose the polling method.
@@ -64,10 +64,11 @@ const createAuthorisationCode = async (accountIdentifiers, polling = false) => {
 /**
  * Invoke the function
  */
-createAuthorisationCode('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>');
+createAuthorisationCode('<<REPLACE-WITH-REQUEST-BODY>>', '<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>');
 ```
 
 ### Example Output - Callback
+
 ```javascript
 202
 
@@ -81,6 +82,7 @@ createAuthorisationCode('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>');
 ```
 
 ### Example Output - Polling
+
 ```javascript
 202
 

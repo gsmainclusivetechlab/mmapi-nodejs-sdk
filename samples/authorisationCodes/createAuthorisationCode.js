@@ -13,25 +13,23 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const createAuthorisationCodeRequestBody = {
-  merchantPayment: () => ({
-    "requestDate": "2018-07-03T10:43:27.405Z",
-    "currency": "GBP",
-    "amount": "1000.00"
-  })
-}
+const buildRequestBody = () => ({
+  "requestDate": "2018-07-03T10:43:27.405Z",
+  "currency": "GBP",
+  "amount": "1000.00"
+})
 
 /**
  * Create the request path parameter
  */
-const createAuthorisationCodeRequestPath = {
+const buildAccountIdentifiers = () => ({
   'msisdn': '+44012345678'
-}
+})
 
 /**
  * Set up your function to be invoked
  */
-const createAuthorisationCode = async (body, accountIdentifiers, useCase, polling = false, debug = false) => {
+const createAuthorisationCode = async (useCase, body = buildRequestBody(), accountIdentifiers = buildAccountIdentifiers(), polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -89,7 +87,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAuthorisationCode('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createAuthorisationCode('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, undefined, true);
     } catch (err) {
     }
   })();
@@ -99,8 +97,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createAuthorisationCode,
-  createAuthorisationCodeRequestBody,
-  createAuthorisationCodeRequestPath
+  createAuthorisationCode
 };
 
