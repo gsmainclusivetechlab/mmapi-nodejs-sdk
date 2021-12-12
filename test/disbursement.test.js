@@ -17,8 +17,7 @@ const {
   createDisbursementTransactionRequestBody,
   createReversalRequestBody,
   createBatchTransactionRequestBody,
-  updateBatchTransactionRequestBody,
-  viewAccountTransactionsRequestPath
+  updateBatchTransactionRequestBody
 } = require('../samples/index')
 
 describe('Disbursements', () => {
@@ -366,7 +365,7 @@ describe('Disbursements', () => {
   describe('Retrieve Transactions for a Disbursement Organisation', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 20, 'disbursement');
+        const response = await viewAccountTransactions('disbursement');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);

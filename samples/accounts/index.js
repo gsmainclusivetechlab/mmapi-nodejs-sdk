@@ -5,6 +5,5 @@ const { viewAccountTransactions } = require('./viewAccountTransactions');
 module.exports = {
   viewAccountBalance,
   viewAccountName,
-  viewAccountTransactions,
-  viewAccountTransactionsRequestPath
+  viewAccountTransactions
 }

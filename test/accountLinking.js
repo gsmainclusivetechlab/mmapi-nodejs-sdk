@@ -14,7 +14,6 @@ const {
   createTransferTransactionRequestBody,
   createReversalRequestBody,
   createAccountLinkRequestBody,
-  viewAccountTransactionsRequestPath
 } = require('../samples/index');
 
 const usecase1 = async () => {
@@ -81,7 +80,7 @@ const usecase7 = async () => {
   console.log("Retrieve Transfers for a Financial Service Provider...")
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 2, 'accountLinking', true);
+  await viewAccountTransactions('accountLinking', undefined, undefined, undefined, true);
 }
 
 const usecase8 = async () => {

@@ -18,7 +18,6 @@ const {
   createReversalRequestBody,
   createBatchTransactionRequestBody,
   updateBatchTransactionRequestBody,
-  viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
 const usecase1 = async () => {
@@ -139,7 +138,7 @@ const usecase9 = async () => {
   console.log("Retrieve Transactions for a Disbursement Organisation...")
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 2, 'disbursement', true);
+  await viewAccountTransactions('disbursement', undefined, undefined, undefined, true);
 }
 
 const usecase10 = async () => {

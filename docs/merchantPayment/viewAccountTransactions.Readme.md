@@ -2,11 +2,11 @@
 
 `Here, viewAccountTransactions({ identifierType1: identifier1 }) creates a GET request to /accounts/{identifierType}/{identifier}/transactions`
 
-> `This endpoint returns transactions linked to a specific account.`
+> `This endpoint returns transactions linked to a specific account where one identifier suffices to uniquely identify an account.`
 
 `Here, viewAccountTransactions({ identifierType1: identifier1, identifierType2: identifier2, identifierType3: identifier3 }) creates a GET request to /accounts/{AccountIdentifiers}/transactions.`
 
-> `This endpoint returns transactions linked to a specific account.`
+> `This endpoint returns transactions linked to a specific account where a single identifier is not sufficient to identify an account.`
 
 ### Usage/Examples
 

@@ -14,7 +14,6 @@ const {
   createInternationalTransactionRequestBody,
   createReversalRequestBody,
   createQuotationRequestBody,
-  viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
 const usecase1 = async () => {
@@ -95,7 +94,7 @@ const usecase7 = async () => {
   console.log("Retrieve Transactions for a Financial Service Provider...");
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 2, 'internationalTransfer', true);
+  await viewAccountTransactions('internationalTransfer', undefined, undefined, undefined, true);
 }
 
 const usecase8 = async () => {

@@ -90,7 +90,7 @@ const usecase7 = async () => {
   console.log("Retrieve Transactions for an FSP...")
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 2, 'p2pTransfer', true);
+  await viewAccountTransactions('p2pTransfer', undefined, undefined, undefined, true);
 }
 
 const usecase8 = async () => {

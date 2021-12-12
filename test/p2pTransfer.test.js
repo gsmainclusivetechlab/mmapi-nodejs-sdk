@@ -13,9 +13,7 @@ const {
 
   createTransferTransactionRequestBody,
   createReversalRequestBody,
-  createQuotationRequestBody,
-  viewAccountNameRequestPath,
-  viewAccountTransactionsRequestPath
+  createQuotationRequestBody
 } = require('../samples/index')
 
 describe('P2P Transfers', () => {
@@ -226,7 +224,7 @@ describe('P2P Transfers', () => {
   describe('Retrieve Transactions for an FSP', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 20, 'p2pTransfer');
+        const response = await viewAccountTransactions('p2pTransfer');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);

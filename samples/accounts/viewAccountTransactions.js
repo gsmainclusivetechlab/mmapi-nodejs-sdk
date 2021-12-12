@@ -13,14 +13,24 @@ const client = require('../test_harness').client();
 /**
  * Set up the request path parameters
  */
-const viewAccountTransactionsRequestPath = {
-  'accountid': '2000'
-}
+const buildAccountIdentifiers = () => ({
+  'walletid': '1'
+})
+
+/**
+ * Set up the request query parameters
+ */
+const buildOffset = () => 0;
+
+/**
+ * Set up the request query parameters
+ */
+const buildLimit = () => 20;
 
 /**
  * Set up your function to be invoked
  */
-const viewAccountTransactions = async (accountIdentifiers, offset, limit, useCase, debug = false) => {
+const viewAccountTransactions = async (useCase, accountIdentifiers = buildAccountIdentifiers(), offset = buildOffset(), limit = buildLimit(), debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -76,7 +86,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAccountTransactions('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', 0, 20, '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewAccountTransactions('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, undefined, true);
     } catch (err) {
     }
   })();
@@ -86,8 +96,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAccountTransactions,
-  viewAccountTransactionsRequestPath
+  viewAccountTransactions
 };
 
 

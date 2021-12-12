@@ -16,7 +16,6 @@ const {
   createRefundTransactionRequestBody,
   createReversalRequestBody,
   createAuthorisationCodeRequestBody,
-  viewAccountTransactionsRequestPath,
   createAuthorisationCodeRequestPath
 } = require('../samples/index')
 
@@ -289,7 +288,7 @@ describe('Merchant Payments', () => {
   describe('Retrieve Payments for a Merchant', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 20, 'merchantPayment');
+        const response = await viewAccountTransactions('merchantPayment');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);

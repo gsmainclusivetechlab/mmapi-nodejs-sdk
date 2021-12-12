@@ -15,8 +15,7 @@ const {
   createMerchantTransactionRequestBody,
   createRefundTransactionRequestBody,
   createReversalRequestBody,
-  createAccountDebitMandateRequestBody,
-  viewAccountTransactionsRequestPath
+  createAccountDebitMandateRequestBody
 } = require('../samples/index')
 
 describe('Recurring Payments', () => {
@@ -269,7 +268,7 @@ describe('Recurring Payments', () => {
   describe('Retrieve Payments for a Service Provider', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions(viewAccountTransactionsRequestPath, 0, 20, 'recurringPayment');
+        const response = await viewAccountTransactions('recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);
