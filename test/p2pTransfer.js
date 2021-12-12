@@ -15,7 +15,6 @@ const {
   createReversalRequestBody,
   createQuotationRequestBody,
   viewAccountNameRequestPath,
-  viewAccountBalanceRequestPath,
   viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
@@ -85,7 +84,7 @@ const usecase6 = async () => {
   console.log("Obtain an FSP Balance...")
 
   console.log('GET Get an Account Balance')
-  await viewAccountBalance(viewAccountBalanceRequestPath, 'p2pTransfer', true);
+  await viewAccountBalance('p2pTransfer', undefined, true);
 }
 
 const usecase7 = async () => {

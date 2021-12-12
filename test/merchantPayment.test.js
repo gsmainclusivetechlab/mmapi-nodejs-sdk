@@ -16,7 +16,6 @@ const {
   createRefundTransactionRequestBody,
   createReversalRequestBody,
   createAuthorisationCodeRequestBody,
-  viewAccountBalanceRequestPath,
   viewAccountTransactionsRequestPath,
   createAuthorisationCodeRequestPath
 } = require('../samples/index')
@@ -280,7 +279,7 @@ describe('Merchant Payments', () => {
   describe('Obtain a Merchant Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance(viewAccountBalanceRequestPath, 'merchantPayment');
+        const response = await viewAccountBalance('merchantPayment');
 
         expect(response.status).toBe(200);
       });

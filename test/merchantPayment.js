@@ -16,7 +16,6 @@ const {
   createRefundTransactionRequestBody,
   createReversalRequestBody,
   createAuthorisationCodeRequestBody,
-  viewAccountBalanceRequestPath,
   viewAccountTransactionsRequestPath,
   createAuthorisationCodeRequestPath
 } = require('../samples/index')
@@ -105,7 +104,7 @@ const usecase9 = async () => {
   console.log("Obtain a Merchant Balance...")
 
   console.log('GET Get an Account Balance')
-  await viewAccountBalance(viewAccountBalanceRequestPath, 'merchantPayment', true);
+  await viewAccountBalance('merchantPayment', undefined, true);
 }
 
 const usecase10 = async () => {

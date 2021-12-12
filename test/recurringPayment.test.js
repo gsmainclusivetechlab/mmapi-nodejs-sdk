@@ -16,7 +16,6 @@ const {
   createRefundTransactionRequestBody,
   createReversalRequestBody,
   createAccountDebitMandateRequestBody,
-  viewAccountBalanceRequestPath,
   viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
@@ -260,7 +259,7 @@ describe('Recurring Payments', () => {
   describe('Obtain a Service Provider Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance(viewAccountBalanceRequestPath, 'recurringPayment');
+        const response = await viewAccountBalance('recurringPayment');
 
         expect(response.status).toBe(200);
       });

@@ -14,7 +14,6 @@ const {
   createInternationalTransactionRequestBody,
   createReversalRequestBody,
   createQuotationRequestBody,
-  viewAccountBalanceRequestPath,
   viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
@@ -226,7 +225,7 @@ describe('International Transfers', () => {
   describe('Obtain a Financial Service Provider Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance(viewAccountBalanceRequestPath, 'internationalTransfer');
+        const response = await viewAccountBalance('internationalTransfer');
 
         expect(response.status).toBe(200);
       });

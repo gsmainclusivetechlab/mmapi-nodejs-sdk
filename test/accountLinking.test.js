@@ -14,7 +14,6 @@ const {
   createTransferTransactionRequestBody,
   createReversalRequestBody,
   createAccountLinkRequestBody,
-  viewAccountBalanceRequestPath,
   viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
@@ -199,7 +198,7 @@ describe('Account Linking', () => {
   describe('Obtain a Financial Service Provider Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance(viewAccountBalanceRequestPath, 'accountLinking');
+        const response = await viewAccountBalance('accountLinking');
 
         expect(response.status).toBe(200);
       });

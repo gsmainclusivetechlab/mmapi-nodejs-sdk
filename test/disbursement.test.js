@@ -18,7 +18,6 @@ const {
   createReversalRequestBody,
   createBatchTransactionRequestBody,
   updateBatchTransactionRequestBody,
-  viewAccountBalanceRequestPath,
   viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
@@ -357,7 +356,7 @@ describe('Disbursements', () => {
   describe('Obtain a Disbursement Organisation Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance(viewAccountBalanceRequestPath, 'disbursement');
+        const response = await viewAccountBalance('disbursement');
 
         expect(response.status).toBe(200);
       });

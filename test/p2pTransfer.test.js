@@ -15,7 +15,6 @@ const {
   createReversalRequestBody,
   createQuotationRequestBody,
   viewAccountNameRequestPath,
-  viewAccountBalanceRequestPath,
   viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
@@ -217,7 +216,7 @@ describe('P2P Transfers', () => {
   describe('Obtain an FSP Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance(viewAccountBalanceRequestPath, 'p2pTransfer');
+        const response = await viewAccountBalance('p2pTransfer');
 
         expect(response.status).toBe(200);
       });
