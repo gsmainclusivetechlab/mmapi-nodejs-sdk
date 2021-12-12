@@ -22,7 +22,7 @@ describe('P2P Transfers', () => {
   describe('Perform a P2P Transfer via Switch', () => {
     describe('GET Retrieve the Name of the Recipient', () => {
       it('should return the account holder name object with status 200', async () => {
-        const response = await viewAccountName('walletid', '1', 'p2pTransfer');
+        const response = await viewAccountName('p2pTransfer');
 
         expect(response.status).toBe(200);
       });
@@ -108,7 +108,7 @@ describe('P2P Transfers', () => {
   describe('Perform a Bilateral P2P Transfer', () => {
     describe('GET Retrieve the Name of the Recipient', () => {
       it('should return the account holder name object with status 200', async () => {
-        const response = await viewAccountName('walletid', '1', 'p2pTransfer');
+        const response = await viewAccountName('p2pTransfer');
 
         expect(response.status).toBe(200);
       });
@@ -131,7 +131,7 @@ describe('P2P Transfers', () => {
   describe('Perform an ‘On-us’ P2P Transfer Initiated by a Third Party Provider', () => {
     describe('GET Retrieve the Name of the Recipient', () => {
       it('should return the account holder name object with status 200', async () => {
-        const response = await viewAccountName('walletid', '1', 'p2pTransfer');
+        const response = await viewAccountName('p2pTransfer');
 
         expect(response.status).toBe(200);
       });

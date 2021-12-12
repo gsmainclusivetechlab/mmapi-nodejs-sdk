@@ -13,14 +13,14 @@ const client = require('../test_harness').client();
 /**
  * Set up the request path parameters
  */
-const viewAccountNameRequestPath = {
+const buildAccountIdentifiers = () => ({
   'walletid': '1'
-}
+})
 
 /**
  * Set up your function to be invoked
  */
-const viewAccountName = async (accountIdentifiers, useCase, debug = false) => {
+const viewAccountName = async (useCase, accountIdentifiers = buildAccountIdentifiers(), debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -64,7 +64,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAccountName('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewAccountName('<<REPLACE-WITH-USE-CASE>>', undefined, true);
     } catch (err) {
     }
   })();
@@ -74,7 +74,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  viewAccountName,
-  viewAccountNameRequestPath
+  viewAccountName
 };
 

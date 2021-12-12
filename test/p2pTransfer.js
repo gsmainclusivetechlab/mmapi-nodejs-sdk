@@ -14,7 +14,6 @@ const {
   createTransferTransactionRequestBody,
   createReversalRequestBody,
   createQuotationRequestBody,
-  viewAccountNameRequestPath,
   viewAccountTransactionsRequestPath
 } = require('../samples/index')
 
@@ -22,7 +21,7 @@ const usecase1 = async () => {
   console.log("Perform a P2P Transfer via Switch...");
 
   console.log("GET Retrieve the Name of the Recipient");
-  await viewAccountName(viewAccountNameRequestPath, 'p2pTransfer', true);
+  await viewAccountName('p2pTransfer', undefined, true);
 
   console.log("POST Request a P2P Quotation");
   await createQuotation(createQuotationRequestBody['p2pTransfer'](), 'p2pTransfer', undefined, true);
@@ -48,7 +47,7 @@ const usecase3 = async () => {
   console.log("Perform a Bilateral P2P Transfer...");
 
   console.log("GET Retrieve the Name of the Recipient");
-  await viewAccountName(viewAccountNameRequestPath, 'p2pTransfer', true);
+  await viewAccountName('p2pTransfer', undefined, true);
 
   console.log("POST Perform a P2P Transfer");
   await createTransferTransaction(createTransferTransactionRequestBody['p2pTransferBilateral'](), 'p2pTransfer', undefined, true);
@@ -58,7 +57,7 @@ const usecase4 = async () => {
   console.log("Perform an ‘On-us’ P2P Transfer Initiated by a Third Party Provider...");
 
   console.log("GET Retrieve the Name of the Recipient");
-  await viewAccountName(viewAccountNameRequestPath, 'p2pTransfer', true);
+  await viewAccountName('p2pTransfer', undefined, true);
 
   console.log("POST Request a P2P Quotation");
   await createQuotation(createQuotationRequestBody['p2pTransfer'](), 'p2pTransfer', undefined, true);

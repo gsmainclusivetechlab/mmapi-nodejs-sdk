@@ -2,11 +2,11 @@
 
 `Here, viewAccountName({ identifierType: identifier }) creates a GET request to /accounts/{identifierType}/{identifier}/accountname`
 
-> `This endpoint returns the name of an account holder.`
+> `This endpoint returns the name of an account holder where one identifier suffices to uniquely identify an account.`
 
 `Here, viewAccountName({ identifierType1: identifier1, identifierType2: identifier2, identifierType3: identifier3 }) creates a GET request to  GET /accounts/{AccountIdentifiers}/accountname`
 
-> `This endpoint returns the name of an account holder.`
+> `This endpoint returns the name of an account holder where a single identifier is not sufficient to identify an account.`
 
 ### Usage/Examples
 
