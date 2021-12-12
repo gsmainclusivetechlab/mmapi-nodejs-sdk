@@ -1,22 +1,25 @@
-
-
 # View An Authorisation Code
 
-`Here, viewAuthorisationCode(identifierType, identifier, authorisationCode) creates a GET request to /accounts/{identifierType}/{identifier}/authorisationcodes/{authorisationCode}`
+`Here, viewAuthorisationCode({ identifierType1: identifier1 }, authorisationCode) creates a GET request to /accounts/{identifierType}/{identifier}/authorisationcodes/{authorisationCode}`
+
+> `This endpoint returns a specific Authorisation Code linked to an account.`
+
+`Here, viewAuthorisationCode({ identifierType1: identifier1, identifierType2: identifier2, identifierType3: identifier3 }, authorisationCode) creates a GET request to /accounts/{RequestorAccountIdentifiers}/authorisationcodes/{authorisationCode}`
 
 > `This endpoint returns a specific Authorisation Code linked to an account.`
 
 ### Usage/Examples
+
 ```javascript
 /**
  * Set up your function to be invoked
  */
-const viewAuthorisationCode = async (identifierType, identifier, authorisationCode) => {
+const viewAuthorisationCode = async (accountIdentifiers, authorisationCode) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewAuthorisationCode(identifierType, identifier, authorisationCode);
+    const request = new mmapi.merchantPayment.viewAuthorisationCode(accountIdentifiers, authorisationCode);
 
     /**
      * Call API with your client and get a response for your call
@@ -24,7 +27,6 @@ const viewAuthorisationCode = async (identifierType, identifier, authorisationCo
     const response = await client.execute(request);
     console.log("Response Status: ", response.status);
     console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-    console.log("Response Headers: ", response.headers);
 
     /**
      * Return a successful response
@@ -46,10 +48,11 @@ const viewAuthorisationCode = async (identifierType, identifier, authorisationCo
 /**
  * Invoke the function
  */
-viewAuthorisationCode('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-AUTHORISATION-CODE>>');
+viewAuthorisationCode('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-AUTHORISATION-CODE>>');
 ```
 
 ### Example Output
+
 ```javascript
 200
 

@@ -65,7 +65,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
 
   console.log('GET View an Authorisation Code')
-  await viewAuthorisationCode('accountid', '2000', objectReference, 'merchantPayment', true);
+  await viewAuthorisationCode(objectReference, 'merchantPayment', undefined, true);
 }
 
 const usecase6 = async () => {

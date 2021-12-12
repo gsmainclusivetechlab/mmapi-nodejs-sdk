@@ -11,14 +11,21 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request path parameter
+ */
+const buildAccountIdentifiers = () => ({
+  'msisdn': '+44012345678'
+})
+
+/**
  * Set up your function to be invoked
  */
-const viewAuthorisationCode = async (identifierType, identifier, authorisationCode, useCase, debug = false) => {
+const viewAuthorisationCode = async (authorisationCode, useCase, accountIdentifiers = buildAccountIdentifiers(), debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].viewAuthorisationCode(identifierType, identifier, authorisationCode);
+    const request = new mmapi[useCase].viewAuthorisationCode(accountIdentifiers, authorisationCode);
 
     /**
      * Call API with your client and get a response for your call
@@ -57,7 +64,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAuthorisationCode('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-AUTHORISATION-CODE>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewAuthorisationCode('<<REPLACE-WITH-AUTHORISATION-CODE>>', '<<REPLACE-WITH-USE-CASE>>', undefined, true);
     } catch (err) {
     }
   })();

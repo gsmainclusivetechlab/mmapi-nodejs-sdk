@@ -154,7 +154,7 @@ describe('Merchant Payments', () => {
 
     describe('GET View an Authorisation Code', () => {
       it('should return authorisation code object with status 200 for a given identifierType, identifier and authorisationCode', async () => {
-        const response = await viewAuthorisationCode('accountid', '2000', objectReference, 'merchantPayment');
+        const response = await viewAuthorisationCode(objectReference, 'merchantPayment');
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('authorisationCode');
