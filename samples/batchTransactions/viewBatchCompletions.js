@@ -11,14 +11,32 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Set up the request query parameters
+ */
+const buildRequestQuery = () => ({
+  limit: 0,
+  offset: 20
+})
+
+/**
  * Set up your function to be invoked
  */
-const viewBatchCompletions = async (batchId, useCase, debug = false) => {
+const viewBatchCompletions = async (useCase, batchId, query = buildRequestQuery(), debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
     const request = new mmapi[useCase].viewBatchCompletions(batchId);
+
+    /**
+     * Set the offset query parameter
+     */
+    request.offset(query.offset);
+
+    /**
+     * Set the limit query parameter
+     */
+    request.limit(query.limit);
 
     /**
      * Call API with your client and get a response for your call
@@ -27,6 +45,8 @@ const viewBatchCompletions = async (batchId, useCase, debug = false) => {
     if (debug) {
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+      console.log("Response X-Records-Available-Count", response.headers['x-records-available-count']);
+      console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
     }
 
     /**
@@ -57,7 +77,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewBatchCompletions('<<REPLACE-WITH-BATCH-ID>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewBatchCompletions('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-BATCH-ID>>', undefined, true);
     } catch (err) {
     }
   })();

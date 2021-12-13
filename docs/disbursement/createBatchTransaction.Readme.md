@@ -1,80 +1,44 @@
-# Create A Transaction Batch Request
+# Create A Transaction Batch
 
 `Here, createBatchTransaction() creates a POST request to /batchtransactions`
 
 > `Provided with a valid object representation, this endpoint allows for a new transaction batch to be created`
 
 ### Usage/Examples
-```javascript
-/**
- * Create the request body parameter
- */
-const buildRequestBody = () => ({
-  "transactions": [
-    {
-      "amount": "200.00",
-      "type": "transfer",
-      "creditParty": [
-        {
-          "key": "accountid",
-          "value": "2000"
-        }
-      ],
-      "currency": "RWF",
-      "debitParty": [
-        {
-          "key": "accountid",
-          "value": "2999"
-        }
-      ]
-    },
-    {
-      "amount": "200.00",
-      "type": "transfer",
-      "creditParty": [
-        {
-          "key": "accountid",
-          "value": "2999"
-        }
-      ],
-      "currency": "RWF",
-      "debitParty": [
-        {
-          "key": "accountid",
-          "value": "2000"
-        }
-      ]
-    }
-  ],
-  "batchTitle": "Batch_Test",
-  "batchDescription": "Testing a Batch",
-  "scheduledStartDate": "2019-12-11T15:08:03.158Z"
-});
 
+```javascript
 /**
  * Set up your function to be invoked
  */
-const createBatchTransaction = async () => {
+const createBatchTransaction = async (body, polling = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createBatchTransaction();
+    const request = new mmapi.disbursement.createBatchTransaction();
+    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
      * Set the request body parameter
      */
-    request.data = buildRequestBody();
+    request.transactions(body.transactions);
+    request.batchTitle(body.batchTitle);
+    request.batchDescription(body.batchDescription);
+    request.scheduledStartDate(body.scheduledStartDate);
 
     /**
      * Chose the polling method.
      */
-    request.polling();
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
+    console.log("Response Status: ", response.status);
+    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
 
     /**
      * Return a successful response
@@ -96,10 +60,11 @@ const createBatchTransaction = async () => {
 /**
  * Invoke the function
  */
-createBatchTransaction();
+createBatchTransaction('<<REPLACE-WITH-REQUEST-BODY>>');
 ```
 
 ### Example Output - Callback
+
 ```javascript
 202
 
@@ -113,6 +78,7 @@ createBatchTransaction();
 ```
 
 ### Example Output - Polling
+
 ```javascript
 202
 

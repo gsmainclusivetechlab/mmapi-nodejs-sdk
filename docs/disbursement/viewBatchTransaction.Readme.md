@@ -5,6 +5,7 @@
 > `This endpoint returns the current status of a batch transaction.`
 
 ### Usage / Examples
+
 ```javascript
 /**
  * Set up your function to be invoked
@@ -14,12 +15,15 @@ const viewBatchTransaction = async (batchId) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewBatchTransaction(batchId);
+    const request = new mmapi.disbursement.viewBatchTransaction(batchId);
+    console.log("Request: ", request);
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
+    console.log("Response Status: ", response.status);
+    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
 
     /**
      * Return a successful response
@@ -45,6 +49,7 @@ viewBatchTransaction('<<REPLACE-WITH-BATCH-ID>>');
 ```
 
 ### Example Output
+
 ```javascript
 200
 

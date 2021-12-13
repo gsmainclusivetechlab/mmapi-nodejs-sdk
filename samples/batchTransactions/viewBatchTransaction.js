@@ -13,7 +13,7 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewBatchTransaction = async (batchId, useCase, debug = false) => {
+const viewBatchTransaction = async (useCase, batchId, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -57,7 +57,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewBatchTransaction('<<REPLACE-WITH-BATCH-ID>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewBatchTransaction('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-BATCH-ID>>', true);
     } catch (err) {
     }
   })();

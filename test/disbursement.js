@@ -15,9 +15,7 @@ const {
   viewAccountTransactions,
 
   createDisbursementTransactionRequestBody,
-  createReversalRequestBody,
-  createBatchTransactionRequestBody,
-  updateBatchTransactionRequestBody,
+  createReversalRequestBody
 } = require('../samples/index')
 
 const usecase1 = async () => {
@@ -31,46 +29,46 @@ const usecase2 = async () => {
   console.log("Perform a Bulk Disbursement...")
 
   console.log('POST Perform a Bulk Disbursement')
-  await createBatchTransaction(createBatchTransactionRequestBody['disbursement'](), 'disbursement', undefined, true);
+  await createBatchTransaction('disbursement', undefined, undefined, true);
 
   let batchId = "REF-1636656115835";
 
   console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(batchId, 'disbursement', true);
+  await viewBatchTransaction('disbursement', batchId, true);
 
   console.log('GET Retrieve Batch Transactions that have Completed')
-  await viewBatchCompletions(batchId, 'disbursement', true);
+  await viewBatchCompletions('disbursement', batchId, undefined, true);
 
   console.log('GET Retrieve Batch Transactions that have been Rejected')
-  await viewBatchRejections(batchId, 'disbursement', true);
+  await viewBatchRejections('disbursement', batchId, undefined, true);
 }
 
 const usecase3 = async () => {
   console.log("Perform a Bulk Disbursement with Maker / Checker...")
 
   console.log('POST Perform a Bulk Disbursement')
-  const { data: { serverCorrelationId } } = await createBatchTransaction(createBatchTransactionRequestBody['disbursement'](), 'disbursement', true, true);
+  const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', undefined, true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
 
   console.log('GET View A Transaction Batch')
-  const { data: { batchId } } = await viewBatchTransaction(objectReference, 'disbursement', true);
+  const { data: { batchId } } = await viewBatchTransaction('disbursement', objectReference, true);
 
   console.log('PATCH Approve The Transaction Batch')
-  const { data: { serverCorrelationId: serverCorrelationId1 } } = await updateBatchTransaction(updateBatchTransactionRequestBody['disbursement'](), batchId, 'disbursement', true, true);
+  const { data: { serverCorrelationId: serverCorrelationId1 } } = await updateBatchTransaction('disbursement', batchId, true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference: objectReference1 } } = await viewRequestState(serverCorrelationId1, 'disbursement', true);
 
   console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(objectReference1, 'disbursement', true);
+  await viewBatchTransaction('disbursement', objectReference1, true);
 
   console.log('GET Retrieve Batch Transactions that have Completed')
-  await viewBatchCompletions(batchId, 'disbursement', true);
+  await viewBatchCompletions('disbursement', batchId, undefined, true);
 
   console.log('GET Retrieve Batch Transactions that have been Rejected')
-  await viewBatchRejections(batchId, 'disbursement', true);
+  await viewBatchRejections('disbursement', batchId, undefined, true);
 }
 
 const usecase4 = async () => {
@@ -90,13 +88,13 @@ const usecase5 = async () => {
   console.log("Perform a Bulk Disbursement Using the Polling Method...")
 
   console.log('POST Perform a Bulk Disbursement')
-  const { data: { serverCorrelationId } } = await createBatchTransaction(createBatchTransactionRequestBody['disbursement'](), 'disbursement', true, true);
+  const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', undefined, true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
 
   console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(objectReference, 'disbursement', true);
+  await viewBatchTransaction('disbursement', objectReference, true);
 }
 
 const usecase6 = async () => {
@@ -105,13 +103,13 @@ const usecase6 = async () => {
   let batchId = "REF-1636656115835";
 
   console.log('PATCH Approve The Transaction Batch')
-  const { data: { serverCorrelationId } } = await updateBatchTransaction(updateBatchTransactionRequestBody['disbursement'](), batchId, 'disbursement', true, true);
+  const { data: { serverCorrelationId } } = await updateBatchTransaction('disbursement', batchId, true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
 
   console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(objectReference, 'disbursement', true);
+  await viewBatchTransaction('disbursement', objectReference, true);
 }
 
 const usecase7 = async () => {

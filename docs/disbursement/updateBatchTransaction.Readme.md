@@ -1,46 +1,36 @@
-## Update A Transaction Batch
+# Update A Transaction Batch
 
 `Here, updateBatchTransaction(batchId) creates a PATCH request to /batchtransactions/{batchId}`
 
-> `This endpoint updates a specific transaction batch. Only the batchStatus field can be modified.`
+> `This endpoint updates a specific transaction batch. Only the batchStatus field can be modified. The Batch Status is set to 'approved'`
 
 ### Usage / Examples
-```javascript
-/**
- * Create the request body parameter
- */
-const buildRequestBody = () => ([
-  {
-    "op": "replace",
-    "path": "/batchStatus",
-    "value": "approved"
-  }
-]);
 
+```javascript
 /**
  * Set up your function to be invoked
  */
-const updateBatchTransaction = async (batchId) => {
+const updateBatchTransaction = async (batchId, polling = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.updateBatchTransaction(batchId);
-
-    /**
-     * Set the request body parameter
-     */
-    request.data = buildRequestBody();
+    const request = new mmapi.disbursement.updateBatchTransaction(batchId);
+    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
      * Chose the polling method.
      */
-    request.polling();
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
+    console.log("Response Status: ", response.status);
+    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
 
     /**
      * Return a successful response
@@ -63,6 +53,7 @@ updateBatchTransaction('<<REPLACE-WITH-BATCH-ID>>');
 ```
 
 ### Example Output - Callback
+
 ```javascript
 202
 
@@ -76,6 +67,7 @@ updateBatchTransaction('<<REPLACE-WITH-BATCH-ID>>');
 ```
 
 ### Example Output - Polling
+
 ```javascript
 202
 

@@ -15,9 +15,7 @@ const {
   viewAccountTransactions,
 
   createDisbursementTransactionRequestBody,
-  createReversalRequestBody,
-  createBatchTransactionRequestBody,
-  updateBatchTransactionRequestBody
+  createReversalRequestBody
 } = require('../samples/index')
 
 describe('Disbursements', () => {
@@ -39,7 +37,7 @@ describe('Disbursements', () => {
   describe('Perform a Bulk Disbursement', () => {
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBatchTransaction(createBatchTransactionRequestBody['disbursement'](), 'disbursement');
+        const response = await createBatchTransaction('disbursement');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -54,7 +52,7 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewBatchTransaction(batchId, 'disbursement');
+        const response = await viewBatchTransaction('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('batchId');
@@ -66,7 +64,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have Completed', () => {
       it('should return the batch completions object with status 200', async () => {
-        const response = await viewBatchCompletions(batchId, 'disbursement');
+        const response = await viewBatchCompletions('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -79,7 +77,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have been Rejected', () => {
       it('should return the batch rejections object with status 200', async () => {
-        const response = await viewBatchRejections(batchId, 'disbursement');
+        const response = await viewBatchRejections('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('creditParty');
@@ -93,7 +91,7 @@ describe('Disbursements', () => {
   describe('Perform a Bulk Disbursement with Maker / Checker', () => {
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBatchTransaction(createBatchTransactionRequestBody['disbursement'](), 'disbursement');
+        const response = await createBatchTransaction('disbursement');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -108,7 +106,7 @@ describe('Disbursements', () => {
 
     describe('PATCH Approve The Transaction Batch', () => {
       it('should return the request state object with status 202 to indicate that the request is completed', async () => {
-        const response = await updateBatchTransaction(updateBatchTransactionRequestBody['disbursement'](), batchId, 'disbursement');
+        const response = await updateBatchTransaction('disbursement', batchId);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -121,7 +119,7 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewBatchTransaction(batchId, 'disbursement');
+        const response = await viewBatchTransaction('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('batchId');
@@ -133,7 +131,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have Completed', () => {
       it('should return the batch completions object with status 200', async () => {
-        const response = await viewBatchCompletions(batchId, 'disbursement');
+        const response = await viewBatchCompletions('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -146,7 +144,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have been Rejected', () => {
       it('should return the batch rejections object with status 200', async () => {
-        const response = await viewBatchRejections(batchId, 'disbursement');
+        const response = await viewBatchRejections('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('creditParty');
@@ -213,7 +211,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBatchTransaction(createBatchTransactionRequestBody['disbursement'](), 'disbursement', true);
+        const response = await createBatchTransaction('disbursement', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -244,7 +242,7 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewBatchTransaction(objectReference, 'disbursement');
+        const response = await viewBatchTransaction('disbursement', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('batchId');
@@ -261,7 +259,7 @@ describe('Disbursements', () => {
 
     describe('PATCH Approve The Transaction Batch', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await updateBatchTransaction(updateBatchTransactionRequestBody['disbursement'](), "REF-1636656115835", 'disbursement', true);
+        const response = await updateBatchTransaction('disbursement', "REF-1636656115835", true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -292,7 +290,7 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewBatchTransaction(objectReference, 'disbursement');
+        const response = await viewBatchTransaction('disbursement', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('batchId');

@@ -11,32 +11,14 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
- * Create the request body parameter
- */
-const updateBatchTransactionRequestBody = {
-  disbursement: () => ({
-    "op": "replace",
-    "path": "/batchStatus",
-    "value": "approved"
-  })
-}
-
-/**
  * Set up your function to be invoked
  */
-const updateBatchTransaction = async (body, batchId, useCase, polling = false, debug = false) => {
+const updateBatchTransaction = async (useCase, batchId, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
     const request = new mmapi[useCase].updateBatchTransaction(batchId);
-
-    /**
-     * Set the request body parameter
-     */
-    for (const property in body) {
-      request[property](body[property]);
-    }
 
     /**
      * Chose the polling method.
@@ -82,7 +64,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await updateBatchTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-BATCH-ID>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await updateBatchTransaction('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-BATCH-ID>>', undefined, true);
     } catch (err) {
     }
   })();
@@ -92,8 +74,7 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  updateBatchTransaction,
-  updateBatchTransactionRequestBody
+  updateBatchTransaction
 };
 
 
