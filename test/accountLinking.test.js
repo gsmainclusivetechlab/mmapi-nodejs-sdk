@@ -12,15 +12,14 @@ const {
   viewAccountLink,
 
   createTransferTransactionRequestBody,
-  createReversalRequestBody,
-  createAccountLinkRequestBody,
+  createReversalRequestBody
 } = require('../samples/index')
 
 describe('Account Linking', () => {
   describe('Setup an Account Link', () => {
     describe('POST Establish an Account to Account Link', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountLink(createAccountLinkRequestBody['accountLinking'](), 'accountid', '2000', 'accountLinking');
+        const response = await createAccountLink('accountLinking');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -38,7 +37,7 @@ describe('Account Linking', () => {
 
     describe('POST Establish an Account to Account Link', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountLink(createAccountLinkRequestBody['accountLinking'](), 'accountid', '2000', 'accountLinking', true);
+        const response = await createAccountLink('accountLinking', undefined, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -69,7 +68,7 @@ describe('Account Linking', () => {
 
     describe('GET View A Link', () => {
       it('should return link object with status 200 for a given object reference', async () => {
-        const response = await viewAccountLink('accountid', '2000', objectReference, 'accountLinking');
+        const response = await viewAccountLink('accountLinking', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('linkReference');
@@ -235,7 +234,7 @@ describe('Account Linking', () => {
 
     describe('POST Establish an Account to Account Link', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountLink(createAccountLinkRequestBody['accountLinking'](), 'accountid', '2000', 'accountLinking');
+        const response = await createAccountLink('accountLinking');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

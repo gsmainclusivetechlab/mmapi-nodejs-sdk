@@ -13,38 +13,43 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const createAccountLinkRequestBody = {
-  accountLinking: () => ({
-    "sourceAccountIdentifiers": [
-      {
-        "key": "accountid",
-        "value": "2999"
-      }
-    ],
-    "status": "active",
-    "mode": "both",
-    "customData": [
-      {
-        "key": "keytest",
-        "value": "keyvalue"
-      }
-    ],
-    "requestingOrganisation": {
-      "requestingOrganisationIdentifierType": "organisationid",
-      "requestingOrganisationIdentifier": "12345"
+const buildRequestBody = () => ({
+  "sourceAccountIdentifiers": [
+    {
+      "key": "walletid",
+      "value": "1"
     }
-  })
-}
+  ],
+  "status": "active",
+  "mode": "both",
+  "customData": [
+    {
+      "key": "keytest",
+      "value": "keyvalue"
+    }
+  ],
+  "requestingOrganisation": {
+    "requestingOrganisationIdentifierType": "organisationid",
+    "requestingOrganisationIdentifier": "12345"
+  }
+})
+
+/**
+ * Create the request path parameter
+ */
+const buildAccountIdentifiers = () => ({
+  "msisdn": '+44012345678'
+})
 
 /**
  * Set up your function to be invoked
  */
-const createAccountLink = async (body, identifierType, identifier, useCase, polling = false, debug = false) => {
+const createAccountLink = async (useCase, body = buildRequestBody(), accountIdentifiers = buildAccountIdentifiers(), polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].createAccountLink(identifierType, identifier);
+    const request = new mmapi[useCase].createAccountLink(accountIdentifiers);
 
     /**
      * Set the request body parameter
@@ -97,7 +102,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAccountLink('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createAccountLink('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, undefined, true);
     } catch (err) {
     }
   })();
@@ -107,7 +112,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createAccountLink,
-  createAccountLinkRequestBody
+  createAccountLink
 };
 

@@ -1,20 +1,26 @@
 # View A Link
 
-`Here, viewAccountLink(identifierType, identifier, linkReference) creates a GET request to /accounts/{identifierType}/{identifier}/links/{linkReference}`
+`Here, viewAccountLink({ identifierType1: identifier1 }) creates a GET request to /accounts/{identifierType}/{identifier}/links/{linkReference}`
 
-> `This endpoint returns a specific link for a given account.`
+> `This endpoint returns a specific link for a given account where one identifier suffices to uniquely identify an account. Note that to identify the accounts that are to be linked, the target account is specified in the path whereas the source account is specified in the link object.`
+
+`Here, viewAccountLink({ identifierType1: identifier1, identifierType2: identifier2, identifierType3: identifier3 }) creates a GET request to /accounts/{AccountIdentifiers}/links/{linkReference}`
+
+> `This endpoint returns a specific link for a given account where a single identifier is not sufficient to identify an account. Note that to identify the accounts that are to be linked, the target account is specified in the path whereas the source account is specified in the link object.`
 
 ### Usage/Examples
+
 ```javascript
 /**
  * Set up your function to be invoked
  */
-const viewAccountLink = async (identifierType, identifier, linkReference) => {
+const viewAccountLink = async (accountIdentifiers, linkReference) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewAccountLink(identifierType, identifier, linkReference);
+    const request = new mmapi.accountLinking.viewAccountLink(accountIdentifiers, linkReference);
+    console.log('Request: ', request);
 
     /**
      * Call API with your client and get a response for your call
@@ -22,7 +28,6 @@ const viewAccountLink = async (identifierType, identifier, linkReference) => {
     const response = await client.execute(request);
     console.log("Response Status: ", response.status);
     console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-    console.log("Response Headers: ", response.headers);
 
     /**
      * Return a successful response
@@ -44,10 +49,11 @@ const viewAccountLink = async (identifierType, identifier, linkReference) => {
 /**
  * Invoke the function
  */
-viewAccountLink('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-LINK-REFERENCE>>');
+viewAccountLink('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-LINK-REFERENCE>>');
 ```
 
 ### Example Output
+
 ```javascript
 200
 

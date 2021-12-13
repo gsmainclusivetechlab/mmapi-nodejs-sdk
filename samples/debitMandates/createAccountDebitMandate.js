@@ -13,39 +13,44 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const createAccountDebitMandateRequestBody = {
-  recurringPayment: () => ({
-    "payee": [
-      {
-        "key": "accountid",
-        "value": "2999"
-      }
-    ],
-    "requestDate": "2018-07-03T10:43:27.405Z",
-    "startDate": "2018-07-03T10:43:27.405Z",
-    "currency": "GBP",
-    "amountLimit": "1000.00",
-    "endDate": "2028-07-03T10:43:27.405Z",
-    "numberOfPayments": "2",
-    "frequencyType": "sixmonths",
-    "customData": [
-      {
-        "key": "keytest",
-        "value": "keyvalue"
-      }
-    ]
-  })
-}
+const buildRequestBody = () => ({
+  "payee": [
+    {
+      "key": "msisdn",
+      "value": "+44012345678"
+    }
+  ],
+  "requestDate": "2018-07-03T10:43:27.405Z",
+  "startDate": "2018-07-03T10:43:27.405Z",
+  "currency": "GBP",
+  "amountLimit": "1000.00",
+  "endDate": "2028-07-03T10:43:27.405Z",
+  "numberOfPayments": "2",
+  "frequencyType": "sixmonths",
+  "customData": [
+    {
+      "key": "keytest",
+      "value": "keyvalue"
+    }
+  ]
+})
+
+/**
+ * Create the request path parameter
+ */
+const buildAccountIdentifiers = () => ({
+  "walletid": '1'
+})
 
 /**
  * Set up your function to be invoked
  */
-const createAccountDebitMandate = async (body, identifierType, identifier, useCase, polling = false, debug = false) => {
+const createAccountDebitMandate = async (useCase, body = buildRequestBody(), accountIdentifiers = buildAccountIdentifiers(), polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].createAccountDebitMandate(identifierType, identifier);
+    const request = new mmapi[useCase].createAccountDebitMandate(accountIdentifiers);
 
     /**
      * Set the request body parameter
@@ -98,7 +103,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createAccountDebitMandate('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createAccountDebitMandate('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, undefined, true);
     } catch (err) {
     }
   })();
@@ -108,7 +113,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createAccountDebitMandate,
-  createAccountDebitMandateRequestBody
+  createAccountDebitMandate
 };
 

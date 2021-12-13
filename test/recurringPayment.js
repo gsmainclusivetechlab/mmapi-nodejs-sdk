@@ -13,41 +13,40 @@ const {
   viewAccountTransactions,
 
   createMerchantTransactionRequestBody,
-  createRefundTransactionRequestBody,
-  createAccountDebitMandateRequestBody
+  createRefundTransactionRequestBody
 } = require('../samples/index')
 
 const usecase1 = async () => {
   console.log("Setup a Recurring Payment...");
 
   console.log("POST Setup a Recurring Payment");
-  await createAccountDebitMandate(createAccountDebitMandateRequestBody['recurringPayment'](), 'accountid', '2000', 'recurringPayment', undefined, true);
+  await createAccountDebitMandate('recurringPayment', undefined, undefined, undefined, true);
 }
 
 const usecase2 = async () => {
   console.log("Setup a Recurring Payment using the Polling Method...");
 
   console.log("POST Setup a Recurring Payment");
-  const { data: { serverCorrelationId } } = await createAccountDebitMandate(createAccountDebitMandateRequestBody['recurringPayment'](), 'accountid', '2000', 'recurringPayment', true, true);
+  const { data: { serverCorrelationId } } = await createAccountDebitMandate('recurringPayment', undefined, undefined, true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'recurringPayment', true);
 
   console.log('GET View A Debit Mandate')
-  await viewAccountDebitMandate('accountid', '2000', objectReference, 'recurringPayment', true);
+  await viewAccountDebitMandate('recurringPayment', objectReference, undefined, true);
 }
 
 const usecase3 = async () => {
   console.log("Take a Recurring Payment...");
 
   console.log("POST Setup a Recurring Payment");
-  const { data: { serverCorrelationId } } = await createAccountDebitMandate(createAccountDebitMandateRequestBody['recurringPayment'](), 'accountid', '2000', 'recurringPayment', true, true);
+  const { data: { serverCorrelationId } } = await createAccountDebitMandate('recurringPayment', undefined, undefined, true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'recurringPayment', true);
 
   console.log('GET View A Debit Mandate')
-  const { data: { mandateReference } } = await viewAccountDebitMandate('accountid', '2000', objectReference, 'recurringPayment', true);
+  const { data: { mandateReference } } = await viewAccountDebitMandate('recurringPayment', objectReference, undefined, true);
 
   console.log("POST Take a Recurring Payment");
   await createMerchantTransaction(createMerchantTransactionRequestBody['recurringPayment'](mandateReference), 'recurringPayment', undefined, true);
@@ -90,13 +89,13 @@ const usecase7 = async () => {
   console.log("Payer sets up a Recurring Payment using MMP Channel ...");
 
   console.log("POST Setup a Recurring Payment");
-  const { data: { serverCorrelationId } } = await createAccountDebitMandate(createAccountDebitMandateRequestBody['recurringPayment'](), 'accountid', '2000', 'recurringPayment', true, true);
+  const { data: { serverCorrelationId } } = await createAccountDebitMandate('recurringPayment', undefined, undefined, true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'recurringPayment', true);
 
   console.log('GET View A Debit Mandate')
-  await viewAccountDebitMandate('accountid', '2000', objectReference, 'recurringPayment', true);
+  await viewAccountDebitMandate('recurringPayment', objectReference, undefined, true);
 }
 
 const usecase8 = async () => {

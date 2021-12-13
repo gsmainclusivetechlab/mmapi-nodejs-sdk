@@ -1,61 +1,55 @@
 # Create A Debit Mandate
 
-`Here, createAccountDebitMandate(identifierType, identifier) creates a POST request to /accounts/{identifierType}/{identifier}/debitmandates`
+`Here, createAccountDebitMandate({ identifierType1: identifier1 }) creates a POST request to /accounts/{identifierType}/{identifier}/debitmandates`
 
-> `Provided with a valid object representation, this endpoint allows for a new debit mandate to be created for a specific account.`
+> `Provided with a valid object representation, this endpoint allows for a new debit mandate to be created for a specific account where one identifier suffices to uniquely identify an account. Note that the payer account is identified in the path whereas the payee account is identified in the request body.`
+
+`Here, createAccountDebitMandate({ identifierType1: identifier1, identifierType2: identifier2, identifierType3: identifier3 }) creates a POST request to /accounts/{AccountIdentifiers}/debitmandates`
+
+> `Provided with a valid object representation, this endpoint allows for a new debit mandate to be created for a specific account where a single identifier is not sufficient to identify an account. Note that the payer account is identified in the path whereas the payee account is identified in the request body.`
 
 ### Usage/Examples
 
 ```javascript
 /**
- * Create the request body parameter
- */
-const buildRequestBody = () => ({
-   "payee": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-    "requestDate": "2018-07-03T10:43:27.405Z",
-    "startDate": "2018-07-03T10:43:27.405Z",
-    "currency": "GBP",
-    "amountLimit": "1000.00",
-    "endDate": "2028-07-03T10:43:27.405Z",
-    "numberOfPayments": "2",
-    "frequencyType": "sixmonths",
-    "customData": [
-        {
-        "key": "keytest",
-        "value": "keyvalue"
-        }
-    ]
-});
-
-/**
  * Set up your function to be invoked
  */
-const createAccountDebitMandate = async (identifierType, identifier) => {
+const createAccountDebitMandate = async (body, accountIdentifiers, polling = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createAccountDebitMandate(identifierType, identifier);
+    const request = new mmapi.recurringPayment.createAccountDebitMandate(accountIdentifiers);
+    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
      * Set the request body parameter
      */
-    request.data = buildRequestBody();
+    request.payee(body.payee);
+    request.requestDate(body.requestDate);
+    request.startDate(body.startDate);
+    request.currency(body.currency);
+    request.amountLimit(body.amountLimit);
+    request.endDate(body.endDate);
+    request.numberOfPayments(body.numberOfPayments);
+    request.frequencyType(body.frequencyType);
+    request.customData(body.customData);
+    request.requestingOrganisation(body.requestingOrganisation);
+    request.mandateStatus(body.mandateStatus);
 
     /**
      * Chose the polling method.
      */
-    request.polling();
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
+    console.log("Response Status: ", response.status);
+    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
 
     /**
      * Return a successful response
@@ -77,10 +71,11 @@ const createAccountDebitMandate = async (identifierType, identifier) => {
 /**
  * Invoke the function
  */
-createAccountDebitMandate('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>');
+createAccountDebitMandate('<<REPLACE-WITH-REQUEST-BODY>>', '<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>');
 ```
 
 ### Example Output - Callback
+
 ```javascript
 202
 
@@ -94,6 +89,7 @@ createAccountDebitMandate('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-ID
 ```
 
 ### Example Output - Polling
+
 ```javascript
 202
 

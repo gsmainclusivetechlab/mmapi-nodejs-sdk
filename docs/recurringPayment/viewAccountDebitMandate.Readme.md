@@ -1,8 +1,12 @@
 # View A Debit Mandate
 
-`Here, viewAccountDebitMandate(identifierType, identifier, debitMandateReference) creates a GET request to /accounts/{identifierType}/{identifier}/debitmandates/{debitMandateReference}`
+`Here, viewAccountDebitMandate({ identifierType1: identifier1 }) creates a GET request to /accounts/{identifierType}/{identifier}/debitmandates/{debitMandateReference}`
 
-> `This endpoint returns a specific debit mandate linked to an account.`
+> `This endpoint returns a specific debit mandate linked to an account where one identifier suffices to uniquely identify an account. Note that the payer account is identified in the path.`
+
+`Here, viewAccountDebitMandate({ identifierType1: identifier1, identifierType2: identifier2, identifierType3: identifier3 }) creates a GET request to /accounts/{AccountIdentifiers}/debitmandates/{debitMandateReference}`
+
+> `This endpoint returns a specific debit mandate linked to an account where a single identifier is not sufficient to identify an account. Note that the payer account is identified in the path.`
 
 ### Usage/Examples
 
@@ -10,17 +14,20 @@
 /**
  * Set up your function to be invoked
  */
-const viewAccountDebitMandate = async (identifierType, identifier, debitMandateReference) => {
+const viewAccountDebitMandate = async (accountIdentifiers, debitMandateReference) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewAccountDebitMandate(identifierType, identifier, debitMandateReference);
+    const request = new mmapi.recurringPayment.viewAccountDebitMandate(accountIdentifiers, debitMandateReference);
+    console.log('Request: ', request);
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
+    console.log("Response Status: ", response.status);
+    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
 
     /**
      * Return a successful response
@@ -42,10 +49,11 @@ const viewAccountDebitMandate = async (identifierType, identifier, debitMandateR
 /**
  * Invoke the function
  */
-viewAccountDebitMandate('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-DEBIT-MANDATE-REFERENCE>>');
+viewAccountDebitMandate('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-DEBIT-MANDATE-REFERENCE>>');
 ```
 
 ### Example Output
+
 ```javascript
 202
 
