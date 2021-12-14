@@ -104,10 +104,10 @@ const usecase9 = async () => {
   const { config: { headers } } = await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', undefined, true);
 
   console.log('GET Retrieve a Missing Response');
-  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], 'p2pTransfer', true);
+  const { data: { link } } = await viewResponse('p2pTransfer', headers['X-CorrelationID'], true);
 
   console.log('GET Retrieve a Missing Resource');
-  await viewResource(link, 'p2pTransfer', true);
+  await viewResource('p2pTransfer', link, true);
 }
 
 (async (usecase) => {

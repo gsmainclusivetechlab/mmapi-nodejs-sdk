@@ -152,10 +152,10 @@ const usecase11 = async () => {
   const { config: { headers } } = await createDisbursementTransaction(createDisbursementTransactionRequestBody['disbursement'](), 'disbursement', undefined, true);
 
   console.log('GET Retrieve a Missing Response');
-  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], 'disbursement', true);
+  const { data: { link } } = await viewResponse('disbursement', headers['X-CorrelationID'], true);
 
   console.log('GET Retrieve a Missing Resource');
-  await viewResource(link, 'disbursement', true);
+  await viewResource('disbursement', link, true);
 }
 
 (async (usecase) => {

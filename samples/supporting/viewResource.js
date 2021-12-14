@@ -13,7 +13,7 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewResource = async (link, useCase, debug = false) => {
+const viewResource = async (useCase, link, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -57,7 +57,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewResource('<<REPLACE-WITH-LINK>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewResource('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-LINK>>', true);
     } catch (err) {
     }
   })();

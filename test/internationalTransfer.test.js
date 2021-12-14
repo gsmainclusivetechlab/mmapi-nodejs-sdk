@@ -275,7 +275,7 @@ describe('International Transfers', () => {
 
     describe('GET Retrieve a Missing Response', () => {
       it('should return a response object with status 200 containing a link to the missing resource', async () => {
-        const response = await viewResponse(clientCorrelationId, 'internationalTransfer');
+        const response = await viewResponse('internationalTransfer', clientCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('link');
@@ -286,7 +286,7 @@ describe('International Transfers', () => {
 
     describe('GET Retrieve a Missing Resource', () => {
       it('should return the requested object with status 200 containing a representation of the missing resource', async () => {
-        const response = await viewResource(link, 'internationalTransfer');
+        const response = await viewResource('internationalTransfer', link);
 
         expect(response.status).toBe(200);
       });

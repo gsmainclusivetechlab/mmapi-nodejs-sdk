@@ -109,10 +109,10 @@ const usecase9 = async () => {
   const { config: { headers } } = await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer', undefined, true);
 
   console.log('GET Retrieve a Missing Response');
-  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], 'internationalTransfer', true);
+  const { data: { link } } = await viewResponse('internationalTransfer', headers['X-CorrelationID'], true);
 
   console.log('GET Retrieve a Missing Resource');
-  await viewResource(link, 'internationalTransfer', true);
+  await viewResource('internationalTransfer', link, true);
 }
 
 (async (usecase) => {

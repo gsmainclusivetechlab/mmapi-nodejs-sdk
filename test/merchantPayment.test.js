@@ -328,7 +328,7 @@ describe('Merchant Payments', () => {
 
     describe('GET Retrieve a Missing Response', () => {
       it('should return a response object with status 200 containing a link to the missing resource', async () => {
-        const response = await viewResponse(clientCorrelationId, 'merchantPayment');
+        const response = await viewResponse('merchantPayment', clientCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('link');
@@ -339,7 +339,7 @@ describe('Merchant Payments', () => {
 
     describe('GET Retrieve a Missing Resource', () => {
       it('should return the requested object with status 200 containing a representation of the missing resource', async () => {
-        const response = await viewResource(link, 'merchantPayment');
+        const response = await viewResource('merchantPayment', link);
 
         expect(response.status).toBe(200);
       });

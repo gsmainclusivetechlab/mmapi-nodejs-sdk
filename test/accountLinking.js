@@ -95,10 +95,10 @@ const usecase9 = async () => {
   const { config: { headers } } = await createAccountLink('accountLinking', undefined, undefined, undefined, true);
 
   console.log('GET Retrieve a Missing Response');
-  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], 'accountLinking', true);
+  const { data: { link } } = await viewResponse('accountLinking', headers['X-CorrelationID'], true);
 
   console.log('GET Retrieve a Missing Resource');
-  await viewResource(link, 'accountLinking', true);
+  await viewResource('accountLinking', link, true);
 }
 
 (async (usecase) => {

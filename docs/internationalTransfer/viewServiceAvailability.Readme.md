@@ -12,7 +12,8 @@ const viewServiceAvailability = async () => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewServiceAvailability();
+    const request = new mmapi.internationalTransfer.viewServiceAvailability();
+    console.log("Request: ", request);
 
     /**
      * Call API with your client and get a response for your call
@@ -20,7 +21,6 @@ const viewServiceAvailability = async () => {
     const response = await client.execute(request);
     console.log("Response Status: ", response.status);
     console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-    console.log("Response Headers: ", response.headers);
 
     /**
      * Return a successful response

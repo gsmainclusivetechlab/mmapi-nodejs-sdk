@@ -15,12 +15,15 @@ const viewResponse = async (clientCorrelationId) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewResponse(clientCorrelationId);
+    const request = new mmapi.accountLinking.viewResponse(clientCorrelationId);
+    console.log("Request: ", request);
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
+    console.log("Response Status: ", response.status);
+    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
 
     /**
      * Return a successful response

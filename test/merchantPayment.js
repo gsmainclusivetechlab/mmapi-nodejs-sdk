@@ -124,10 +124,10 @@ const usecase12 = async () => {
   const { config: { headers } } = await createMerchantTransaction(createMerchantTransactionRequestBody['merchantPayment'](), 'merchantPayment', undefined, true);
 
   console.log('GET Retrieve a Missing Response');
-  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], 'merchantPayment', true);
+  const { data: { link } } = await viewResponse('merchantPayment', headers['X-CorrelationID'], true);
 
   console.log('GET Retrieve a Missing Resource');
-  await viewResource(link, 'merchantPayment', true);
+  await viewResource('merchantPayment', link, true);
 }
 
 (async (usecase) => {

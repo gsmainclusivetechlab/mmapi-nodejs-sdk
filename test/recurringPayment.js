@@ -126,10 +126,10 @@ const usecase11 = async () => {
   const { config: { headers } } = await createMerchantTransaction(createMerchantTransactionRequestBody['recurringPayment']('REF-1637670547701'), 'recurringPayment', undefined, true);
 
   console.log('GET Retrieve a Missing Response');
-  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], 'recurringPayment', true);
+  const { data: { link } } = await viewResponse('recurringPayment', headers['X-CorrelationID'], true);
 
   console.log('GET Retrieve a Missing Resource');
-  await viewResource(link, 'recurringPayment', true);
+  await viewResource('recurringPayment', link, true);
 }
 
 (async (usecase) => {

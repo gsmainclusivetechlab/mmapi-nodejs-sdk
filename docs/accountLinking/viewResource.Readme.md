@@ -1,4 +1,4 @@
-# View A Resource Request
+# View A Resource
 
 `Here, viewResource(link) creates a GET request to /{link}`
 
@@ -15,12 +15,15 @@ const viewResource = async (link) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewResource(link);
+    const request = new mmapi.accountLinking.viewResource(link);
+    console.log("Request: ", request);
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
+    console.log("Response Status: ", response.status);
+    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
 
     /**
      * Return a successful response
