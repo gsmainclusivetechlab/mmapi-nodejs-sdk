@@ -14,8 +14,8 @@ const client = require('../test_harness').client();
  * Set up the request query parameters
  */
 const buildRequestQuery = () => ({
-  limit: 0,
-  offset: 20
+  // limit: 0,
+  // offset: 20
 })
 
 /**

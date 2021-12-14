@@ -79,8 +79,8 @@ const createTransferTransaction = async (useCase, bodyProperties = {}, polling =
     /**
      * Set the request body parameter
      */
-    for (const property in buildRequestBody[useCase](bodyProperties)) {
-      request[property](buildRequestBody[useCase](bodyProperties)[property]);
+    for (const property in buildRequestBody()[useCase](bodyProperties)) {
+      request[property](buildRequestBody()[useCase](bodyProperties)[property]);
     }
 
     /**
