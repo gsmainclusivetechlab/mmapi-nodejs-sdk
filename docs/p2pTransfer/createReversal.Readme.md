@@ -10,12 +10,38 @@
 /**
  * Set up your function to be invoked
  */
-const createReversal = async (originalTransactionReference) => {
+const createReversal = async (body, originalTransactionReference, polling = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createReversal(originalTransactionReference);
+    const request = new mmapi.p2pTransfer.createReversal(originalTransactionReference);
+    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
+
+    /**
+     * Set the request body parameter
+     */
+    request.creditParty(body.creditParty);
+    request.debitParty(body.debitParty);
+    request.type(body.type);
+    request.subType(body.subType);
+    request.amount(body.amount);
+    request.currency(body.currency);
+    request.descriptionText(body.descriptionText);
+    request.fees(body.fees);
+    request.geoCode(body.geoCode);
+    request.requestingOrganisation(body.requestingOrganisation);
+    request.servicingIdentity(body.servicingIdentity);
+    request.requestDate(body.requestDate);
+    request.customData(body.customData);
+    request.metadata(body.metadata);
+
+    /**
+     * Chose the polling method.
+     */
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
@@ -23,7 +49,6 @@ const createReversal = async (originalTransactionReference) => {
     const response = await client.execute(request);
     console.log("Response Status: ", response.status);
     console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-    console.log("Response Headers: ", response.headers);
 
     /**
      * Return a successful response
@@ -45,7 +70,7 @@ const createReversal = async (originalTransactionReference) => {
 /**
  * Invoke the function
  */
-createReversal('<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>');
+createReversal('<<REPLACE-WITH-REQUEST-BODY>>', '<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>');
 ```
 
 ### Example Output

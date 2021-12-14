@@ -1,6 +1,5 @@
-const { createReversal, createReversalRequestBody } = require('./createReversal');
+const { createReversal } = require('./createReversal');
 
 module.exports = {
-  createReversal,
-  createReversalRequestBody
+  createReversal
 }

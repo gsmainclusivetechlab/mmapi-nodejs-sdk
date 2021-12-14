@@ -11,10 +11,7 @@ const {
   viewRequestState,
   viewTransaction,
 
-  createTransferTransactionRequestBody,
-  createReversalRequestBody,
-  createQuotationRequestBody,
-  viewAccountTransactionsRequestPath
+  createTransferTransactionRequestBody
 } = require('../samples/index')
 
 const usecase1 = async () => {
@@ -24,7 +21,7 @@ const usecase1 = async () => {
   await viewAccountName('p2pTransfer', undefined, true);
 
   console.log("POST Request a P2P Quotation");
-  await createQuotation(createQuotationRequestBody['p2pTransfer'](), 'p2pTransfer', undefined, true);
+  await createQuotation('p2pTransfer', undefined, undefined, true);
 
   console.log("POST Perform a P2P Transfer");
   await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', undefined, true);
@@ -60,7 +57,7 @@ const usecase4 = async () => {
   await viewAccountName('p2pTransfer', undefined, true);
 
   console.log("POST Request a P2P Quotation");
-  await createQuotation(createQuotationRequestBody['p2pTransfer'](), 'p2pTransfer', undefined, true);
+  await createQuotation('p2pTransfer', undefined, undefined, true);
 
   console.log("POST Perform a P2P Transfer");
   await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', undefined, true);
@@ -76,7 +73,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'p2pTransfer', true);
 
   console.log('POST Perform a Transaction Reversal')
-  await createReversal(createReversalRequestBody['p2pTransfer'](), objectReference, 'p2pTransfer', true);
+  await createReversal('p2pTransfer', objectReference, undefined, undefined, true);
 }
 
 const usecase6 = async () => {

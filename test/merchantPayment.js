@@ -13,8 +13,7 @@ const {
   viewAuthorisationCode,
 
   createMerchantTransactionRequestBody,
-  createRefundTransactionRequestBody,
-  createReversalRequestBody
+  createRefundTransactionRequestBody
 } = require('../samples/index')
 
 const usecase1 = async () => {
@@ -94,7 +93,7 @@ const usecase8 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
 
   console.log('POST Perform a Merchant Payment Reversal')
-  await createReversal(createReversalRequestBody['merchantPayment'](), objectReference, 'merchantPayment', true);
+  await createReversal('merchantPayment', objectReference, undefined, undefined, true);
 }
 
 const usecase9 = async () => {

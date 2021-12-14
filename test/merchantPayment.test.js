@@ -13,8 +13,7 @@ const {
   viewAuthorisationCode,
 
   createMerchantTransactionRequestBody,
-  createRefundTransactionRequestBody,
-  createReversalRequestBody
+  createRefundTransactionRequestBody
 } = require('../samples/index')
 
 describe('Merchant Payments', () => {
@@ -261,7 +260,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Perform a Merchant Payment Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(createReversalRequestBody['merchantPayment'](), objectReference, 'merchantPayment');
+        const response = await createReversal('merchantPayment', objectReference);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

@@ -11,8 +11,7 @@ const {
   viewAccountTransactions,
   viewAccountLink,
 
-  createTransferTransactionRequestBody,
-  createReversalRequestBody
+  createTransferTransactionRequestBody
 } = require('../samples/index');
 
 const usecase1 = async () => {
@@ -65,7 +64,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
 
   console.log('POST Perform a Transaction Reversal')
-  await createReversal(createReversalRequestBody['accountLinking'](), objectReference, 'accountLinking', true);
+  await createReversal('accountLinking', objectReference, undefined, undefined, true);
 }
 
 const usecase6 = async () => {

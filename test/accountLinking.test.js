@@ -11,8 +11,7 @@ const {
   viewAccountTransactions,
   viewAccountLink,
 
-  createTransferTransactionRequestBody,
-  createReversalRequestBody
+  createTransferTransactionRequestBody
 } = require('../samples/index')
 
 describe('Account Linking', () => {
@@ -181,7 +180,7 @@ describe('Account Linking', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(createReversalRequestBody['accountLinking'](), objectReference, 'accountLinking');
+        const response = await createReversal('accountLinking', objectReference);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

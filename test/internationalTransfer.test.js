@@ -11,16 +11,14 @@ const {
   viewRequestState,
   viewTransaction,
 
-  createInternationalTransactionRequestBody,
-  createReversalRequestBody,
-  createQuotationRequestBody
+  createInternationalTransactionRequestBody
 } = require('../samples/index')
 
 describe('International Transfers', () => {
   describe('Perform an International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(createQuotationRequestBody['internationalTransfer'](), 'internationalTransfer');
+        const response = await createQuotation('internationalTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -48,7 +46,7 @@ describe('International Transfers', () => {
   describe('Perform an Bilateral International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(createQuotationRequestBody['internationalTransfer'](), 'internationalTransfer');
+        const response = await createQuotation('internationalTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -129,7 +127,7 @@ describe('International Transfers', () => {
 
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(createQuotationRequestBody['internationalTransfer'](), 'internationalTransfer', true);
+        const response = await createQuotation('internationalTransfer', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -160,7 +158,7 @@ describe('International Transfers', () => {
 
     describe('GET View A Quotation', () => {
       it('should return the quotation object with status 200', async () => {
-        const response = await viewQuotation(objectReference, 'internationalTransfer');
+        const response = await viewQuotation('internationalTransfer', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('quotationReference');
@@ -209,7 +207,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(createReversalRequestBody['internationalTransfer'](), objectReference, 'internationalTransfer');
+        const response = await createReversal('internationalTransfer', objectReference);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

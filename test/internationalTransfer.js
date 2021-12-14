@@ -11,16 +11,14 @@ const {
   viewRequestState,
   viewTransaction,
 
-  createInternationalTransactionRequestBody,
-  createReversalRequestBody,
-  createQuotationRequestBody,
+  createInternationalTransactionRequestBody
 } = require('../samples/index')
 
 const usecase1 = async () => {
   console.log("Perform an International Transfer...");
 
   console.log("POST Request a International Transfer Quotation")
-  await createQuotation(createQuotationRequestBody['internationalTransfer'](), 'internationalTransfer', undefined, true);
+  await createQuotation('internationalTransfer', undefined, undefined, true);
 
   console.log("POST Perform an International Transfer")
   await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer', undefined, true);
@@ -30,7 +28,7 @@ const usecase2 = async () => {
   console.log("Perform an Bilateral International Transfer...");
 
   console.log("POST Request a International Transfer Quotation")
-  await createQuotation(createQuotationRequestBody['internationalTransfer'](), 'internationalTransfer', undefined, true);
+  await createQuotation('internationalTransfer', undefined, undefined, true);
 
   console.log("POST Perform an International Transfer")
   await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer', undefined, true);
@@ -53,7 +51,7 @@ const usecase4 = async () => {
   console.log("Request a International Transfer Quotation via the Polling Method...");
 
   console.log("POST Request a International Transfer Quotation")
-  let { data: { serverCorrelationId, pollLimit } } = await createQuotation(createQuotationRequestBody['internationalTransfer'](), 'internationalTransfer', true, true);
+  let { data: { serverCorrelationId, pollLimit } } = await createQuotation('internationalTransfer', undefined, true, true);
 
   pollLimit = 3
 
@@ -63,7 +61,7 @@ const usecase4 = async () => {
 
     if (status === 'completed') {
       console.log('GET View A Quotation')
-      await viewQuotation(objectReference, 'internationalTransfer', true);
+      await viewQuotation('internationalTransfer', objectReference, true);
 
       break;
     }
@@ -80,7 +78,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'internationalTransfer', true);
 
   console.log('GET Perform a Merchant Payment Reversal')
-  await createReversal(createReversalRequestBody['internationalTransfer'](), objectReference, 'internationalTransfer', true);
+  await createReversal('internationalTransfer', objectReference, undefined, undefined, true);
 }
 
 const usecase6 = async () => {

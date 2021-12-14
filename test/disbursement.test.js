@@ -14,8 +14,7 @@ const {
   createReversal,
   viewAccountTransactions,
 
-  createDisbursementTransactionRequestBody,
-  createReversalRequestBody
+  createDisbursementTransactionRequestBody
 } = require('../samples/index')
 
 describe('Disbursements', () => {
@@ -338,7 +337,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(createReversalRequestBody['disbursement'](), objectReference, 'disbursement');
+        const response = await createReversal('disbursement', objectReference);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

@@ -13,22 +13,22 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const createQuotationRequestBody = {
+const buildRequestBody = () => ({
   internationalTransfer: () => ({
     "creditParty": [
       {
-        "key": "accountid",
-        "value": "2000"
+        "key": "msisdn",
+        "value": "+44012345678"
       }
     ],
     "debitParty": [
       {
-        "key": "accountid",
-        "value": "2999"
+        "key": "walletid",
+        "value": "1"
       }
     ],
-    "requestAmount": "75.30",
-    "requestCurrency": "RWF",
+    "requestAmount": "16.00",
+    "requestCurrency": "USD",
     "requestDate": "2018-07-03T11:43:27.405Z",
     "type": "inttransfer",
     "subType": "abc",
@@ -83,18 +83,18 @@ const createQuotationRequestBody = {
   p2pTransfer: () => ({
     "creditParty": [
       {
-        "key": "accountid",
-        "value": "2000"
+        "key": "msisdn",
+        "value": "+44012345678"
       }
     ],
     "debitParty": [
       {
-        "key": "accountid",
-        "value": "2999"
+        "key": "walletid",
+        "value": "1"
       }
     ],
-    "requestAmount": "75.30",
-    "requestCurrency": "RWF",
+    "requestAmount": "16.00",
+    "requestCurrency": "USD",
     "requestDate": "2018-07-03T11:43:27.405Z",
     "type": "transfer",
     "subType": "abc",
@@ -106,12 +106,12 @@ const createQuotationRequestBody = {
       }
     ]
   })
-}
+})
 
 /**
  * Set up your function to be invoked
  */
-const createQuotation = async (body, useCase, polling = false, debug = false) => {
+const createQuotation = async (useCase, body = buildRequestBody(), polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -121,8 +121,8 @@ const createQuotation = async (body, useCase, polling = false, debug = false) =>
     /**
      * Set the request body parameter
      */
-    for (const property in body) {
-      request[property](body[property]);
+    for (const property in body[useCase]()) {
+      request[property](body[useCase]()[property]);
     }
 
     /**
@@ -169,7 +169,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createQuotation('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createQuotation('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, true);
     } catch (err) {
     }
   })();
@@ -179,7 +179,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createQuotation,
-  createQuotationRequestBody
+  createQuotation
 };
 

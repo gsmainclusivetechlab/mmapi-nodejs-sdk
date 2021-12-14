@@ -11,9 +11,7 @@ const {
   viewRequestState,
   viewTransaction,
 
-  createTransferTransactionRequestBody,
-  createReversalRequestBody,
-  createQuotationRequestBody
+  createTransferTransactionRequestBody
 } = require('../samples/index')
 
 describe('P2P Transfers', () => {
@@ -28,7 +26,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Request a P2P Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(createQuotationRequestBody['p2pTransfer'](), 'p2pTransfer');
+        const response = await createQuotation('p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -137,7 +135,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Request a P2P Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(createQuotationRequestBody['p2pTransfer'](), 'p2pTransfer');
+        const response = await createQuotation('p2pTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -199,7 +197,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(createReversalRequestBody['p2pTransfer'](), objectReference, 'p2pTransfer');
+        const response = await createReversal('p2pTransfer', objectReference);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

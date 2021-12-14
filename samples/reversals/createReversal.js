@@ -13,19 +13,14 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const createReversalRequestBody = {
-  merchantPayment: () => ({}),
-  disbursement: () => ({}),
-  internationalTransfer: () => ({}),
-  p2pTransfer: () => ({}),
-  recurringPayment: () => ({}),
-  accountLinking: () => ({})
-}
+const buildRequestBody = () => ({
+  type: 'reversal'
+})
 
 /**
  * Set up your function to be invoked
  */
-const createReversal = async (body, originalTransactionReference, useCase, debug = false) => {
+const createReversal = async (useCase, originalTransactionReference, body = buildRequestBody(), polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -37,6 +32,13 @@ const createReversal = async (body, originalTransactionReference, useCase, debug
      */
     for (const property in body) {
       request[property](body[property]);
+    }
+
+    /**
+     * Chose the polling method.
+     */
+    if (polling) {
+      request.polling();
     }
 
     /**
@@ -76,7 +78,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createReversal('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await createReversal('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>', undefined, undefined, true);
     } catch (err) {
     }
   })();
@@ -86,7 +88,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createReversal,
-  createReversalRequestBody
+  createReversal
 };
 
