@@ -12,16 +12,14 @@ const {
   viewRequestState,
   viewTransaction,
   createReversal,
-  viewAccountTransactions,
-
-  createDisbursementTransactionRequestBody
+  viewAccountTransactions
 } = require('../samples/index')
 
 describe('Disbursements', () => {
   describe('Perform an Individual Disbursement', () => {
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createDisbursementTransaction(createDisbursementTransactionRequestBody['disbursement'](), 'disbursement');
+        const response = await createDisbursementTransaction('disbursement');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -160,7 +158,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createDisbursementTransaction(createDisbursementTransactionRequestBody['disbursement'](), 'disbursement', true);
+        const response = await createDisbursementTransaction('disbursement', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -191,7 +189,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference, 'disbursement');
+        const response = await viewTransaction('disbursement', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -306,7 +304,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createDisbursementTransaction(createDisbursementTransactionRequestBody['disbursement'](), 'disbursement');
+        const response = await createDisbursementTransaction('disbursement');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -390,7 +388,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createDisbursementTransaction(createDisbursementTransactionRequestBody['disbursement'](), 'disbursement');
+        const response = await createDisbursementTransaction('disbursement');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

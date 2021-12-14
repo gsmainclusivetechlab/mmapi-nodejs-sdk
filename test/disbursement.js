@@ -12,16 +12,14 @@ const {
   viewRequestState,
   viewTransaction,
   createReversal,
-  viewAccountTransactions,
-
-  createDisbursementTransactionRequestBody
+  viewAccountTransactions
 } = require('../samples/index')
 
 const usecase1 = async () => {
   console.log("Perform an Individual Disbursement...");
 
   console.log("POST Perform an Individual Disbursement")
-  await createDisbursementTransaction(createDisbursementTransactionRequestBody['disbursement'](), 'disbursement', undefined, true);
+  await createDisbursementTransaction('disbursement', undefined, undefined, true);
 }
 
 const usecase2 = async () => {
@@ -74,13 +72,13 @@ const usecase4 = async () => {
   console.log("Perform an Individual Disbursement Using the Polling Method...")
 
   console.log('POST Perform an Individual Disbursement')
-  const { data: { serverCorrelationId } } = await createDisbursementTransaction(createDisbursementTransactionRequestBody['disbursement'](), 'disbursement', true, true);
+  const { data: { serverCorrelationId } } = await createDisbursementTransaction('disbursement', undefined, true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
-  await viewTransaction(objectReference, 'disbursement', true);
+  await viewTransaction('disbursement', objectReference, true);
 }
 
 const usecase5 = async () => {
@@ -115,7 +113,7 @@ const usecase7 = async () => {
   console.log("Perform a Transaction Reversal...")
 
   console.log('POST Perform an Individual Disbursement')
-  const { data: { serverCorrelationId } } = await createDisbursementTransaction(createDisbursementTransactionRequestBody['disbursement'](), 'disbursement', undefined, true);
+  const { data: { serverCorrelationId } } = await createDisbursementTransaction('disbursement', undefined, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
@@ -149,7 +147,7 @@ const usecase11 = async () => {
   console.log("Retrieve a Missing API Response from an API Provider...")
 
   console.log('POST Perform an Individual Disbursement');
-  const { config: { headers } } = await createDisbursementTransaction(createDisbursementTransactionRequestBody['disbursement'](), 'disbursement', undefined, true);
+  const { config: { headers } } = await createDisbursementTransaction('disbursement', undefined, undefined, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewResponse('disbursement', headers['X-CorrelationID'], true);

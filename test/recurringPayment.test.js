@@ -10,10 +10,7 @@ const {
   createRefundTransaction,
   createReversal,
   viewAccountDebitMandate,
-  viewAccountTransactions,
-
-  createMerchantTransactionRequestBody,
-  createRefundTransactionRequestBody
+  viewAccountTransactions
 } = require('../samples/index')
 
 describe('Recurring Payments', () => {
@@ -81,7 +78,7 @@ describe('Recurring Payments', () => {
   describe('Take a Recurring Payment', () => {
     describe('POST Take a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(createMerchantTransactionRequestBody['recurringPayment']('REF-1637669509954'), 'recurringPayment');
+        const response = await createMerchantTransaction('recurringPayment', 'mandatereference', 'REF-1637669509954');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -99,7 +96,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Take a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(createMerchantTransactionRequestBody['recurringPayment']('REF-1637669509954'), 'recurringPayment', true);
+        const response = await createMerchantTransaction('recurringPayment', 'mandatereference', 'REF-1637669509954', true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -130,7 +127,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference, 'recurringPayment');
+        const response = await viewTransaction('recurringPayment', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -146,7 +143,7 @@ describe('Recurring Payments', () => {
   describe('Recurring Payment Refund', () => {
     describe('POST Perform a Recurring Payment Refund', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createRefundTransaction(createRefundTransactionRequestBody['recurringPayment']('REF-1637670547701'), 'recurringPayment');
+        const response = await createRefundTransaction('recurringPayment', 'mandatereference', 'REF-1637670547701');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -164,7 +161,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Take a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(createMerchantTransactionRequestBody['recurringPayment']('REF-1637670547701'), 'recurringPayment', true);
+        const response = await createMerchantTransaction('recurringPayment', 'mandatereference', 'REF-1637670547701', true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -294,7 +291,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Take a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(createMerchantTransactionRequestBody['recurringPayment']('REF-1637670547701'), 'recurringPayment');
+        const response = await createMerchantTransaction('recurringPayment', 'mandatereference', 'REF-1637670547701');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

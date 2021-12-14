@@ -10,17 +10,14 @@ const {
   createRefundTransaction,
   createReversal,
   viewAccountTransactions,
-  viewAuthorisationCode,
-
-  createMerchantTransactionRequestBody,
-  createRefundTransactionRequestBody
+  viewAuthorisationCode
 } = require('../samples/index')
 
 describe('Merchant Payments', () => {
   describe('Perform a Payee-Initiated Merchant Payment', () => {
     describe('POST Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(createMerchantTransactionRequestBody['merchantPayment'](), 'merchantPayment');
+        const response = await createMerchantTransaction('merchantPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -38,7 +35,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(createMerchantTransactionRequestBody['merchantPayment'](), 'merchantPayment', true);
+        const response = await createMerchantTransaction('merchantPayment', undefined, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -69,7 +66,7 @@ describe('Merchant Payments', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference, 'merchantPayment');
+        const response = await viewTransaction('merchantPayment', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -85,7 +82,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Payer-Initiated Merchant Payment', () => {
     describe('POST Payer Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(createMerchantTransactionRequestBody['merchantPayment'](), 'merchantPayment');
+        const response = await createMerchantTransaction('merchantPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -161,7 +158,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Merchant Payment Refund', () => {
     describe('POST Perform a Merchant Payment Refund', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createRefundTransaction(createRefundTransactionRequestBody['merchantPayment'](), 'merchantPayment');
+        const response = await createRefundTransaction('merchantPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -179,7 +176,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Perform a Merchant Payment Refund', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createRefundTransaction(createRefundTransactionRequestBody['merchantPayment'](), 'merchantPayment', true);
+        const response = await createRefundTransaction('merchantPayment', undefined, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -210,7 +207,7 @@ describe('Merchant Payments', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference, 'merchantPayment');
+        const response = await viewTransaction('merchantPayment', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -229,7 +226,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(createMerchantTransactionRequestBody['merchantPayment'](), 'merchantPayment');
+        const response = await createMerchantTransaction('merchantPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -313,7 +310,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(createMerchantTransactionRequestBody['merchantPayment'](), 'merchantPayment');
+        const response = await createMerchantTransaction('merchantPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

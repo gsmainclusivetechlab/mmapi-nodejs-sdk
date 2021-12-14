@@ -10,10 +10,7 @@ const {
   createRefundTransaction,
   createReversal,
   viewAccountDebitMandate,
-  viewAccountTransactions,
-
-  createMerchantTransactionRequestBody,
-  createRefundTransactionRequestBody
+  viewAccountTransactions
 } = require('../samples/index')
 
 const usecase1 = async () => {
@@ -49,34 +46,34 @@ const usecase3 = async () => {
   const { data: { mandateReference } } = await viewAccountDebitMandate('recurringPayment', objectReference, undefined, true);
 
   console.log("POST Take a Recurring Payment");
-  await createMerchantTransaction(createMerchantTransactionRequestBody['recurringPayment'](mandateReference), 'recurringPayment', undefined, true);
+  await createMerchantTransaction('recurringPayment', 'mandatereference', mandateReference, undefined, true);
 }
 
 const usecase4 = async () => {
   console.log("Take a Recurring Payment using the Polling Method ...");
 
   console.log("POST Take a Recurring Payment");
-  const { data: { serverCorrelationId } } = await createMerchantTransaction(createMerchantTransactionRequestBody['recurringPayment']('REF-1637670547701'), 'recurringPayment', true, true);
+  const { data: { serverCorrelationId } } = await createMerchantTransaction('recurringPayment', 'mandatereference', 'REF-1637670547701', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('recurringPayment', serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
-  await viewTransaction(objectReference, 'recurringPayment', true);
+  await viewTransaction('recurringPayment', objectReference, true);
 }
 
 const usecase5 = async () => {
   console.log("Recurring Payment Refund ...");
 
   console.log("POST Perform a Recurring Payment Refund");
-  await createRefundTransaction(createRefundTransactionRequestBody['recurringPayment']('REF-1637670547701'), 'recurringPayment', undefined, true);
+  await createRefundTransaction('recurringPayment', 'mandatereference', 'REF-1637670547701', undefined, true);
 }
 
 const usecase6 = async () => {
   console.log("Recurring Payment Reversal ...");
 
   console.log('POST Take a Recurring Payment')
-  const { data: { serverCorrelationId } } = await createMerchantTransaction(createMerchantTransactionRequestBody['recurringPayment']('REF-1637670547701'), 'recurringPayment', true, true);
+  const { data: { serverCorrelationId } } = await createMerchantTransaction('recurringPayment', 'mandatereference', 'REF-1637670547701', true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('recurringPayment', serverCorrelationId, true);
@@ -123,7 +120,7 @@ const usecase11 = async () => {
   console.log("Retrieve a Missing API Response ...")
 
   console.log('POST Take a Recurring Payment')
-  const { config: { headers } } = await createMerchantTransaction(createMerchantTransactionRequestBody['recurringPayment']('REF-1637670547701'), 'recurringPayment', undefined, true);
+  const { config: { headers } } = await createMerchantTransaction('recurringPayment', 'mandatereference', 'REF-1637670547701', undefined, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewResponse('recurringPayment', headers['X-CorrelationID'], true);

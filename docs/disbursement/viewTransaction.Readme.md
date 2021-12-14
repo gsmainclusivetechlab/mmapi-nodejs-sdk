@@ -5,6 +5,7 @@
 > `This endpoint returns the details of a transaction`
 
 ### Usage/Examples
+
 ```javascript
 /**
  * Set up your function to be invoked
@@ -14,12 +15,15 @@ const viewTransaction = async (transactionReference) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.viewTransaction(transactionReference);
+    const request = new mmapi.disbursement.viewTransaction(transactionReference);
+    console.log("Request: ", request);
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
+    console.log("Response Status: ", response.status);
+    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
 
     /**
      * Return a successful response
@@ -45,6 +49,7 @@ viewTransaction('<<REPLACE-WITH-TRANSACTION-REFERENCE>>');
 ```
 
 ### Example Output
+
 ```javascript
 200
 

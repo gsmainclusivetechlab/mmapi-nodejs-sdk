@@ -13,7 +13,7 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewTransaction = async (transactionReference, useCase, debug = false) => {
+const viewTransaction = async (useCase, transactionReference, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -57,7 +57,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewTransaction('<<REPLACE-WITH-TRANSACTION-REFERENCE>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewTransaction('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-TRANSACTION-REFERENCE>>', true);
     } catch (err) {
     }
   })();

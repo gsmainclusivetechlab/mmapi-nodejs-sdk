@@ -10,44 +10,46 @@
 
 ```javascript
 /**
- * Create the request body parameter
- */
-const buildRequestBody = () => ({
-  "amount": "200.00",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "currency": "RWF"
-});
-
-/**
  * Set up your function to be invoked
  */
-const createRefundTransaction = async () => {
+const createRefundTransaction = async (body, polling = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.'<<REPLACE-WITH-USE-CASE>>'.createRefundTransaction();
+    const request = new mmapi.recurringPayment.createRefundTransaction();
+    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
      * Set the request body parameter
      */
-    request.data = buildRequestBody();
+    request.requestingOrganisationTransactionReference(body.requestingOrganisationTransactionReference);
+    request.originalTransactionReference(body.originalTransactionReference);
+    request.creditParty(body.creditParty);
+    request.debitParty(body.debitParty);
+    request.type(body.type);
+    request.subType(body.subType);
+    request.amount(body.amount);
+    request.currency(body.currency);
+    request.descriptionText(body.descriptionText);
+    request.fees(body.fees);
+    request.geoCode(body.geoCode);
+    request.internationalTransferInformation(body.internationalTransferInformation);
+    request.oneTimeCode(body.oneTimeCode);
+    request.recipientKyc(body.recipientKyc);
+    request.senderKyc(body.senderKyc);
+    request.requestingOrganisation(body.requestingOrganisation);
+    request.servicingIdentity(body.servicingIdentity);
+    request.requestDate(body.requestDate);
+    request.customData(body.customData);
+    request.metadata(body.metadata);
 
     /**
      * Chose the polling method.
      */
-    request.polling();
+    if (polling) {
+      request.polling();
+    }
 
     /**
      * Call API with your client and get a response for your call
@@ -55,7 +57,6 @@ const createRefundTransaction = async () => {
     const response = await client.execute(request);
     console.log("Response Status: ", response.status);
     console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-    console.log("Response Headers: ", response.headers);
 
     /**
      * Return a successful response
@@ -77,10 +78,11 @@ const createRefundTransaction = async () => {
 /**
  * Invoke the function
  */
-createRefundTransaction();
+createRefundTransaction('<<REPLACE-WITH-REQUEST-BODY>>');
 ```
 
 ### Example Output - Callback
+
 ```javascript
 202
 
@@ -94,6 +96,7 @@ createRefundTransaction();
 ```
 
 ### Example Output - Polling
+
 ```javascript
 202
 

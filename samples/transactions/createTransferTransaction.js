@@ -13,76 +13,63 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const createTransferTransactionRequestBody = {
-  p2pTransfer: (quotationReference) => ({
-    "amount": "100.00",
-    "creditParty": [
-      {
-        "key": "accountid",
-        "value": "2000"
-      }
-    ],
-    "currency": "GBP",
-    "debitParty": [
-      {
-        "key": "accountid",
-        "value": "2999"
-      }
-    ],
-    "internationalTransferInformation": {
-      "originCountry": "AD",
-      "quotationReference": `${quotationReference}`,
-      // "quoteId": "{{quoteId}}",
-      "remittancePurpose": "personal",
-      "deliveryMethod": "agent"
-    },
-    "requestingOrganisation": {
-      "requestingOrganisationIdentifierType": "organisationid",
-      "requestingOrganisationIdentifier": "testorganisation"
-    }
-  }),
-  p2pTransferBilateral: () => ({
-    "amount": "100.00",
-    "creditParty": [
-      {
-        "key": "accountid",
-        "value": "2000"
-      }
-    ],
-    "currency": "GBP",
-    "debitParty": [
-      {
-        "key": "accountid",
-        "value": "2999"
-      }
-    ],
-    "requestingOrganisation": {
-      "requestingOrganisationIdentifierType": "organisationid",
-      "requestingOrganisationIdentifier": "testorganisation"
-    }
-  }),
-  accountLinking: (linkReference) => ({
-    "amount": "200.00",
+const buildRequestBody = () => ({
+  accountLinking: ({ linkReference }) => ({
+    "amount": "16.00",
     "creditParty": [
       {
         "key": "linkref",
         "value": `${linkReference}`
       }
     ],
-    "currency": "RWF",
+    "currency": "USD",
     "debitParty": [
       {
-        "key": "accountid",
-        "value": "2999"
+        "key": "walletid",
+        "value": "1"
       }
     ]
-  })
-}
+  }),
+  p2pTransfer: ({ quotationReference, quoteId }) => {
+    let body = {
+      "amount": "16.00",
+      "creditParty": [
+        {
+          "key": "msisdn",
+          "value": "+44012345678"
+        }
+      ],
+      "currency": "USD",
+      "debitParty": [
+        {
+          "key": "walletid",
+          "value": "1"
+        }
+      ],
+      "requestingOrganisation": {
+        "requestingOrganisationIdentifierType": "organisationid",
+        "requestingOrganisationIdentifier": "testorganisation"
+      }
+    }
+
+    if (quotationReference) {
+      body.internationalTransferInformation = {
+        "originCountry": "AD",
+        "quotationReference": `${quotationReference}`,
+        // "quoteId": `${quoteId}`,
+        "remittancePurpose": "personal",
+        "deliveryMethod": "agent"
+      }
+    }
+
+    return body;
+  }
+})
 
 /**
  * Set up your function to be invoked
  */
-const createTransferTransaction = async (body, useCase, polling = false, debug = false) => {
+const createTransferTransaction = async (useCase, bodyProperties = {}, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -92,8 +79,8 @@ const createTransferTransaction = async (body, useCase, polling = false, debug =
     /**
      * Set the request body parameter
      */
-    for (const property in body) {
-      request[property](body[property]);
+    for (const property in buildRequestBody[useCase](bodyProperties)) {
+      request[property](buildRequestBody[useCase](bodyProperties)[property]);
     }
 
     /**
@@ -140,7 +127,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createTransferTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createTransferTransaction('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, true);
     } catch (err) {
     }
   })();
@@ -150,6 +137,5 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createTransferTransaction,
-  createTransferTransactionRequestBody
+  createTransferTransaction
 };

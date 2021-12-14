@@ -13,45 +13,27 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const createMerchantTransactionRequestBody = {
-  merchantPayment: () => ({
-    "amount": "16.00",
-    "debitParty": [
-      {
-        "key": "walletid",
-        "value": "1"
-      }
-    ],
-    "creditParty": [
-      {
-        "key": "msisdn",
-        "value": "+44012345678"
-      }
-    ],
-    "currency": "USD"
-  }),
-  recurringPayment: (mandateReference) => ({
-    "amount": "200.00",
-    "debitParty": [
-      {
-        "key": "mandatereference",
-        "value": `${mandateReference}`
-      }
-    ],
-    "creditParty": [
-      {
-        "key": "accountid",
-        "value": "2999"
-      }
-    ],
-    "currency": "RWF"
-  })
-}
+const buildRequestBody = (debitPartyKey, debitPartyValue) => ({
+  "amount": "16.00",
+  "debitParty": [
+    {
+      "key": `${debitPartyKey}`,
+      "value": `${debitPartyValue}`
+    }
+  ],
+  "creditParty": [
+    {
+      "key": "msisdn",
+      "value": "+44012345678"
+    }
+  ],
+  "currency": "USD"
+})
 
 /**
  * Set up your function to be invoked
  */
-const createMerchantTransaction = async (body, useCase, polling = false, debug = false) => {
+const createMerchantTransaction = async (useCase, debitPartyKey = 'walletid', debitPartyValue = '1', polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -61,8 +43,8 @@ const createMerchantTransaction = async (body, useCase, polling = false, debug =
     /**
      * Set the request body parameter
      */
-    for (const property in body) {
-      request[property](body[property]);
+    for (const property in buildRequestBody(debitPartyKey, debitPartyValue)) {
+      request[property](buildRequestBody(debitPartyKey, debitPartyValue)[property]);
     }
 
     /**
@@ -109,7 +91,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createMerchantTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createMerchantTransaction('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, undefined, true);
     } catch (err) {
     }
   })();
@@ -119,6 +101,5 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createMerchantTransaction,
-  createMerchantTransactionRequestBody
+  createMerchantTransaction
 }

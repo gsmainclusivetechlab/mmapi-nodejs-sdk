@@ -9,9 +9,7 @@ const {
   createReversal,
   viewAccountTransactions,
   viewRequestState,
-  viewTransaction,
-
-  createTransferTransactionRequestBody
+  viewTransaction
 } = require('../samples/index')
 
 const usecase1 = async () => {
@@ -24,20 +22,20 @@ const usecase1 = async () => {
   await createQuotation('p2pTransfer', undefined, undefined, true);
 
   console.log("POST Perform a P2P Transfer");
-  await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', undefined, true);
+  await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined }, undefined, true);
 }
 
 const usecase2 = async () => {
   console.log("POST Perform a P2P Transfer Using the Polling Method...");
 
   console.log('POST Perform a P2P Transfer')
-  const { data: { serverCorrelationId } } = await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', true, true);
+  const { data: { serverCorrelationId } } = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined }, true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('p2pTransfer', serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
-  await viewTransaction(objectReference, 'p2pTransfer', true);
+  await viewTransaction('p2pTransfer', objectReference, true);
 }
 
 const usecase3 = async () => {
@@ -47,7 +45,7 @@ const usecase3 = async () => {
   await viewAccountName('p2pTransfer', undefined, true);
 
   console.log("POST Perform a P2P Transfer");
-  await createTransferTransaction(createTransferTransactionRequestBody['p2pTransferBilateral'](), 'p2pTransfer', undefined, true);
+  await createTransferTransaction('p2pTransfer', undefined, undefined, true);
 }
 
 const usecase4 = async () => {
@@ -60,14 +58,14 @@ const usecase4 = async () => {
   await createQuotation('p2pTransfer', undefined, undefined, true);
 
   console.log("POST Perform a P2P Transfer");
-  await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', undefined, true);
+  await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined }, undefined, true);
 }
 
 const usecase5 = async () => {
   console.log("Perform a Transaction Reversal...")
 
   console.log("POST Perform a P2P Transfer");
-  const { data: { serverCorrelationId } } = await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', undefined, true);
+  const { data: { serverCorrelationId } } = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined }, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('p2pTransfer', serverCorrelationId, true);
@@ -101,7 +99,7 @@ const usecase9 = async () => {
   console.log("Retrieve a Missing API Response from an API Provider...")
 
   console.log('POST Perform a P2P Transfer');
-  const { config: { headers } } = await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', undefined, true);
+  const { config: { headers } } = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined }, undefined, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewResponse('p2pTransfer', headers['X-CorrelationID'], true);

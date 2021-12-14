@@ -6,34 +6,42 @@
 > `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'merchantpay' passed via the URL.`
 
 ### Usage/Examples
+
 ```javascript
 /**
  * Set up your function to be invoked
  */
-const createMerchantTransaction = async (polling = false) => {
+const createMerchantTransaction = async (body, polling = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
     const request = new mmapi.merchantPayment.createMerchantTransaction();
+    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
      * Set the request body parameter
      */
-    request.amount("16.00");
-    request.debitParty([
-        {
-            "key": "walletid",
-            "value": "1"
-        }
-    ]);
-    request.creditParty([
-        {
-            "key": "msisdn",
-            "value": "+44012345678"
-        }
-    ]);
-    request.currency("USD");
+    request.requestingOrganisationTransactionReference(body.requestingOrganisationTransactionReference);
+    request.originalTransactionReference(body.originalTransactionReference);
+    request.creditParty(body.creditParty);
+    request.debitParty(body.debitParty);
+    request.type(body.type);
+    request.subType(body.subType);
+    request.amount(body.amount);
+    request.currency(body.currency);
+    request.descriptionText(body.descriptionText);
+    request.fees(body.fees);
+    request.geoCode(body.geoCode);
+    request.internationalTransferInformation(body.internationalTransferInformation);
+    request.oneTimeCode(body.oneTimeCode);
+    request.recipientKyc(body.recipientKyc);
+    request.senderKyc(body.senderKyc);
+    request.requestingOrganisation(body.requestingOrganisation);
+    request.servicingIdentity(body.servicingIdentity);
+    request.requestDate(body.requestDate);
+    request.customData(body.customData);
+    request.metadata(body.metadata);
 
     /**
      * Chose the polling method.
@@ -48,7 +56,6 @@ const createMerchantTransaction = async (polling = false) => {
     const response = await client.execute(request);
     console.log("Response Status: ", response.status);
     console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-    console.log("Response Headers: ", response.headers);
 
     /**
      * Return a successful response
@@ -70,10 +77,11 @@ const createMerchantTransaction = async (polling = false) => {
 /**
  * Invoke the function
  */
-createMerchantTransaction();
+createMerchantTransaction('<<REPLACE-WITH-REQUEST-BODY>>');
 ```
 
 ### Example Output - Callback
+
 ```javascript
 202
 
@@ -87,6 +95,7 @@ createMerchantTransaction();
 ```
 
 ### Example Output - Polling
+
 ```javascript
 202
 

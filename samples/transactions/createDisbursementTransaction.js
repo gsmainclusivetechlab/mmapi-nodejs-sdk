@@ -13,29 +13,27 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const createDisbursementTransactionRequestBody = {
-  disbursement: () => ({
-    "amount": "16.00",
-    "debitParty": [
-      {
-        "key": "walletid",
-        "value": "1"
-      }
-    ],
-    "creditParty": [
-      {
-        "key": "msisdn",
-        "value": "+44012345678"
-      }
-    ],
-    "currency": "USD"
-  })
-}
+const buildRequestBody = () => ({
+  "amount": "16.00",
+  "debitParty": [
+    {
+      "key": "walletid",
+      "value": "1"
+    }
+  ],
+  "creditParty": [
+    {
+      "key": "msisdn",
+      "value": "+44012345678"
+    }
+  ],
+  "currency": "USD"
+})
 
 /**
  * Set up your function to be invoked
  */
-const createDisbursementTransaction = async (body, useCase, polling = false, debug = false) => {
+const createDisbursementTransaction = async (useCase, body = buildRequestBody(), polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -93,7 +91,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createDisbursementTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createDisbursementTransaction('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, true);
     } catch (err) {
     }
   })();
@@ -103,7 +101,6 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createDisbursementTransaction,
-  createDisbursementTransactionRequestBody
+  createDisbursementTransaction
 };
 

@@ -9,9 +9,7 @@ const {
   viewAccountTransactions,
   viewQuotation,
   viewRequestState,
-  viewTransaction,
-
-  createInternationalTransactionRequestBody
+  viewTransaction
 } = require('../samples/index')
 
 describe('International Transfers', () => {
@@ -31,7 +29,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer');
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -59,7 +57,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer');
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -77,7 +75,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer', true);
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -108,7 +106,7 @@ describe('International Transfers', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference, 'internationalTransfer');
+        const response = await viewTransaction('internationalTransfer', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -176,7 +174,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer');
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -260,7 +258,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer');
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

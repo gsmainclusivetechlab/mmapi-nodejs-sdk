@@ -13,45 +13,27 @@ const client = require('../test_harness').client();
 /**
  * Create the request body parameter
  */
-const createRefundTransactionRequestBody = {
-  merchantPayment: () => ({
-    "amount": "200.00",
-    "debitParty": [
-      {
-        "key": "accountid",
-        "value": "2999"
-      }
-    ],
-    "creditParty": [
-      {
-        "key": "accountid",
-        "value": "2999"
-      }
-    ],
-    "currency": "RWF"
-  }),
-  recurringPayment: (mandateReference) => ({
-    "amount": "200.00",
-    "debitParty": [
-      {
-        "key": "accountid",
-        "value": "2999"
-      }
-    ],
-    "creditParty": [
-      {
-        "key": "mandateReference",
-        "value": `${mandateReference}`
-      }
-    ],
-    "currency": "RWF"
-  })
-}
+const buildRequestBody = (creditPartyKey, creditPartyValue) => ({
+  "amount": "16.00",
+  "debitParty": [
+    {
+      "key": "walletid",
+      "value": "1"
+    }
+  ],
+  "creditParty": [
+    {
+      "key": `${creditPartyKey}`,
+      "value": `${creditPartyValue}`
+    }
+  ],
+  "currency": "USD"
+})
 
 /**
  * Set up your function to be invoked
  */
-const createRefundTransaction = async (body, useCase, polling = false, debug = false) => {
+const createRefundTransaction = async (useCase, creditPartyKey = 'msisdn', creditPartyValue = '+44012345678', polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -61,8 +43,8 @@ const createRefundTransaction = async (body, useCase, polling = false, debug = f
     /**
      * Set the request body parameter
      */
-    for (const property in body) {
-      request[property](body[property]);
+    for (const property in buildRequestBody(creditPartyKey, creditPartyValue)) {
+      request[property](buildRequestBody(creditPartyKey, creditPartyValue)[property]);
     }
 
     /**
@@ -109,7 +91,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createRefundTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createRefundTransaction('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, undefined, true);
     } catch (err) {
     }
   })();
@@ -119,6 +101,5 @@ if (require.main === module) {
  * Exports the function. If needed this can be invoked from the other modules.
  */
 module.exports = {
-  createRefundTransaction,
-  createRefundTransactionRequestBody
+  createRefundTransaction
 };
