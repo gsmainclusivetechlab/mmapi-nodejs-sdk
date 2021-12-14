@@ -30,7 +30,7 @@ const usecase2 = async () => {
   const { data: { serverCorrelationId } } = await createMerchantTransaction(createMerchantTransactionRequestBody['merchantPayment'](), 'merchantPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
+  const { data: { objectReference } } = await viewRequestState('merchantPayment', serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
   await viewTransaction(objectReference, 'merchantPayment', true);
@@ -57,7 +57,7 @@ const usecase5 = async () => {
   const { data: { serverCorrelationId } } = await createAuthorisationCode('merchantPayment', undefined, undefined, true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
+  const { data: { objectReference } } = await viewRequestState('merchantPayment', serverCorrelationId, true);
 
   console.log('GET View an Authorisation Code')
   await viewAuthorisationCode(objectReference, 'merchantPayment', undefined, true);
@@ -77,7 +77,7 @@ const usecase7 = async () => {
   const { data: { serverCorrelationId } } = await createRefundTransaction(createRefundTransactionRequestBody['merchantPayment'](), 'merchantPayment', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
+  const { data: { objectReference } } = await viewRequestState('merchantPayment', serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
   await viewTransaction(objectReference, 'merchantPayment', true);
@@ -90,7 +90,7 @@ const usecase8 = async () => {
   const { data: { serverCorrelationId } } = await createMerchantTransaction(createMerchantTransactionRequestBody['merchantPayment'](), 'merchantPayment', undefined, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'merchantPayment', true);
+  const { data: { objectReference } } = await viewRequestState('merchantPayment', serverCorrelationId, true);
 
   console.log('POST Perform a Merchant Payment Reversal')
   await createReversal('merchantPayment', objectReference, undefined, undefined, true);

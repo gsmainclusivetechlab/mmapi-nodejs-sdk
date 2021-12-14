@@ -175,7 +175,7 @@ describe('Disbursements', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'disbursement');
+        const response = await viewRequestState('disbursement', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -225,7 +225,7 @@ describe('Disbursements', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'disbursement');
+        const response = await viewRequestState('disbursement', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -273,7 +273,7 @@ describe('Disbursements', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'disbursement');
+        const response = await viewRequestState('disbursement', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -321,7 +321,7 @@ describe('Disbursements', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'disbursement');
+        const response = await viewRequestState('disbursement', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');

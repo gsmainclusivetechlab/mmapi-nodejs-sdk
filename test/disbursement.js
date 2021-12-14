@@ -49,7 +49,7 @@ const usecase3 = async () => {
   const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', undefined, true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
+  const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
 
   console.log('GET View A Transaction Batch')
   const { data: { batchId } } = await viewBatchTransaction('disbursement', objectReference, true);
@@ -58,7 +58,7 @@ const usecase3 = async () => {
   const { data: { serverCorrelationId: serverCorrelationId1 } } = await updateBatchTransaction('disbursement', batchId, true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference: objectReference1 } } = await viewRequestState(serverCorrelationId1, 'disbursement', true);
+  const { data: { objectReference: objectReference1 } } = await viewRequestState('disbursement', serverCorrelationId1, true);
 
   console.log('GET View A Transaction Batch')
   await viewBatchTransaction('disbursement', objectReference1, true);
@@ -77,7 +77,7 @@ const usecase4 = async () => {
   const { data: { serverCorrelationId } } = await createDisbursementTransaction(createDisbursementTransactionRequestBody['disbursement'](), 'disbursement', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
+  const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
   await viewTransaction(objectReference, 'disbursement', true);
@@ -90,7 +90,7 @@ const usecase5 = async () => {
   const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', undefined, true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
+  const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
 
   console.log('GET View A Transaction Batch')
   await viewBatchTransaction('disbursement', objectReference, true);
@@ -105,7 +105,7 @@ const usecase6 = async () => {
   const { data: { serverCorrelationId } } = await updateBatchTransaction('disbursement', batchId, true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
+  const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
 
   console.log('GET View A Transaction Batch')
   await viewBatchTransaction('disbursement', objectReference, true);
@@ -118,7 +118,7 @@ const usecase7 = async () => {
   const { data: { serverCorrelationId } } = await createDisbursementTransaction(createDisbursementTransactionRequestBody['disbursement'](), 'disbursement', undefined, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'disbursement', true);
+  const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
 
   console.log('POST Perform a Transaction Reversal')
   await createReversal('disbursement', objectReference, undefined, undefined, true);

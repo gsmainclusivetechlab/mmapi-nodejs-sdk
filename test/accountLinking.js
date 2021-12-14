@@ -28,7 +28,7 @@ const usecase2 = async () => {
   const { data: { serverCorrelationId } } = await createAccountLink('accountLinking', undefined, undefined, true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
+  const { data: { objectReference } } = await viewRequestState('accountLinking', serverCorrelationId, true);
 
   console.log('GET View A Link');
   await viewAccountLink('accountLinking', objectReference, undefined, true);
@@ -48,7 +48,7 @@ const usecase4 = async () => {
   const { data: { serverCorrelationId } } = await createTransferTransaction(createTransferTransactionRequestBody['accountLinking']('REF-1638280960220'), 'accountLinking', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
+  const { data: { objectReference } } = await viewRequestState('accountLinking', serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
   await viewTransaction(objectReference, 'accountLinking', true);
@@ -61,7 +61,7 @@ const usecase5 = async () => {
   const { data: { serverCorrelationId } } = await createTransferTransaction(createTransferTransactionRequestBody['accountLinking']('REF-1638280960220'), 'accountLinking', undefined, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
+  const { data: { objectReference } } = await viewRequestState('accountLinking', serverCorrelationId, true);
 
   console.log('POST Perform a Transaction Reversal')
   await createReversal('accountLinking', objectReference, undefined, undefined, true);

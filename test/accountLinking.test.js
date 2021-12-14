@@ -51,7 +51,7 @@ describe('Account Linking', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'accountLinking');
+        const response = await viewRequestState('accountLinking', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -114,7 +114,7 @@ describe('Account Linking', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'accountLinking');
+        const response = await viewRequestState('accountLinking', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -164,7 +164,7 @@ describe('Account Linking', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'accountLinking');
+        const response = await viewRequestState('accountLinking', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');

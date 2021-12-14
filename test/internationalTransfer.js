@@ -41,7 +41,7 @@ const usecase3 = async () => {
   let { data: { serverCorrelationId } } = await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'internationalTransfer', true);
+  const { data: { objectReference } } = await viewRequestState('internationalTransfer', serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
   await viewTransaction(objectReference, 'internationalTransfer', true)
@@ -57,7 +57,7 @@ const usecase4 = async () => {
 
   for (let [index] of [...Array(pollLimit)].entries()) {
     console.log('GET Poll to Determine the Request State', index)
-    const { data: { objectReference, status } } = await viewRequestState(serverCorrelationId, 'internationalTransfer', true);
+    const { data: { objectReference, status } } = await viewRequestState('internationalTransfer', serverCorrelationId, true);
 
     if (status === 'completed') {
       console.log('GET View A Quotation')
@@ -75,7 +75,7 @@ const usecase5 = async () => {
   const { data: { serverCorrelationId } } = await createInternationalTransaction(createInternationalTransactionRequestBody['internationalTransfer']('REF-1636533162268', undefined), 'internationalTransfer', undefined, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'internationalTransfer', true);
+  const { data: { objectReference } } = await viewRequestState('internationalTransfer', serverCorrelationId, true);
 
   console.log('GET Perform a Merchant Payment Reversal')
   await createReversal('internationalTransfer', objectReference, undefined, undefined, true);

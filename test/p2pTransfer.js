@@ -34,7 +34,7 @@ const usecase2 = async () => {
   const { data: { serverCorrelationId } } = await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'p2pTransfer', true);
+  const { data: { objectReference } } = await viewRequestState('p2pTransfer', serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
   await viewTransaction(objectReference, 'p2pTransfer', true);
@@ -70,7 +70,7 @@ const usecase5 = async () => {
   const { data: { serverCorrelationId } } = await createTransferTransaction(createTransferTransactionRequestBody['p2pTransfer']('REF-1637249499739'), 'p2pTransfer', undefined, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'p2pTransfer', true);
+  const { data: { objectReference } } = await viewRequestState('p2pTransfer', serverCorrelationId, true);
 
   console.log('POST Perform a Transaction Reversal')
   await createReversal('p2pTransfer', objectReference, undefined, undefined, true);

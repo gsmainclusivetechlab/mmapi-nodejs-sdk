@@ -13,7 +13,7 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewRequestState = async (serverCorrelationId, useCase, debug = false) => {
+const viewRequestState = async (useCase, serverCorrelationId, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -57,7 +57,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewRequestState('<<REPLACE-WITH-SERVER-CORRELATION-ID>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewRequestState('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-SERVER-CORRELATION-ID>>', true);
     } catch (err) {
     }
   })();
