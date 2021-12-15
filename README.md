@@ -148,8 +148,6 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td>viewResponse</td>
     <td>clientCorrelationId</td>
   </tr>
-  <tr>
-    <td>Retrieve a Missing API Resource</td>
     <td><a href="/docs/merchantPayment/viewResource.Readme.md">Retrieve Representation a Missing Resource</a></td>
     <td>viewResource</td>
     <td>link</td>
@@ -171,76 +169,76 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 <tbody>
   <tr>
     <td>Individual Disbursement</td>
-    <td><a href="/docs/disbursement/createDisbursementTransaction.md">Perform an Individual Disbursement</a></td>
+    <td><a href="/docs/disbursement/createDisbursementTransaction.Readme.md">Create A Disbursement Transaction</a></td>
     <td>createDisbursementTransaction</td>
     <td></td>
   </tr>
   <tr>
     <td rowspan="4">Bulk Disbursement</td>
-    <td><a href="/docs/disbursement/createBatchTransaction.md">Create A Transaction Batch</a></td>
+    <td><a href="/docs/disbursement/createBatchTransaction.Readme.md">Create A Transaction Batch</a></td>
     <td>createBatchTransaction</td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewBatchTransaction.md">View A Transaction Batch</a></td>
+    <td><a href="/docs/disbursement/viewBatchTransaction.Readme.md">View A Transaction Batch</a></td>
     <td>viewBatchTransaction</td>
     <td>batchId</td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewBatchCompletions.md">View Batch Completions</a></td>
+    <td><a href="/docs/disbursement/viewBatchCompletions.Readme.md">View Batch Completions</a></td>
     <td>viewBatchCompletions</td>
     <td>batchId</td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewBatchRejections.md">View Batch Rejections</a></td>
+    <td><a href="/docs/disbursement/viewBatchRejections.Readme.md">View Batch Rejections</a></td>
     <td>viewBatchRejections</td>
     <td>batchId</td>
   </tr>
   <tr>
     <td rowspan="5">Bulk Disbursement with Maker / Checker</td>
-    <td><a href="/docs/disbursement/createBatchTransaction.md">Create A Transaction Batch</a></td>
+    <td><a href="/docs/disbursement/createBatchTransaction.Readme.md">Create A Transaction Batch</a></td>
     <td>createBatchTransaction</td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/updateBatchTransaction.md">Update A Transaction Batch</a></td>
+    <td><a href="/docs/disbursement/updateBatchTransaction.Readme.md">Update A Transaction Batch</a></td>
     <td>updateBatchTransaction</td>
     <td>batchId</td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewBatchTransaction.md">View A Transaction Batch</a></td>
+    <td><a href="/docs/disbursement/viewBatchTransaction.Readme.md">View A Transaction Batch</a></td>
     <td>viewBatchTransaction</td>
     <td>batchId</td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewBatchCompletions.md">View Batch Completions</a></td>
+    <td><a href="/docs/disbursement/viewBatchCompletions.Readme.md">View Batch Completions</a></td>
     <td>viewBatchCompletions</td>
     <td>batchId</td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewBatchRejections.md">View Batch Rejections</a></td>
+    <td><a href="/docs/disbursement/viewBatchRejections.Readme.md">View Batch Rejections</a></td>
     <td>viewBatchRejections</td>
     <td>batchId</td>
   </tr>
   <tr>
     <td rowspan="3">Individual Disbursement Using the Polling Method</td>
-    <td><a href="/docs/disbursement/createDisbursementTransaction.md">Create a Individual Disbursement request </a></td>
+    <td><a href="/docs/disbursement/createDisbursementTransaction.Readme.md">Create a Individual Disbursement request </a></td>
     <td>createDisbursementTransaction</td>
     <td></td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
+    <td><a href="/docs/disbursement/viewRequestState.Readme.Readme.md">Poll to Determine the Request State</a></td>
     <td>viewRequestState</td>
     <td>serverCorrelationId</td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
+    <td><a href="/docs/disbursement/viewTransaction.Readme.Readme.md">Retrieve a Transaction</a></td>
     <td>viewTransaction</td>
     <td>transactionReference</td>
   </tr>
   <tr>
     <td>Disbursement Reversal</td>
-    <td><a href="/docs/disbursement/createReversal.Readme.md">Perform a Disbursement Reversal</a></td>
+    <td><a href="/docs/disbursement/createReversal.Readme.Readme.md">Perform a Disbursement Reversal</a></td>
     <td>createReversal</td>
     <td>originalTransactionReference</td>
   </tr>
@@ -269,7 +267,6 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td>clientCorrelationId</td>
   </tr>
   <tr>
-    <td>Retrieve a Missing API Resource</td>
     <td><a href="/docs/disbursement/viewResource.Readme.md">Retrieve Representation a Missing Resource</a></td>
     <td>viewResource</td>
     <td>link</td>
@@ -293,69 +290,72 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td rowspan="3">International Transfer via Hub</td>
     <td><a href="/docs/internationalTransfer/createQuotation.Readme.md">Request a International Transfer Quotation</a></td>
     <td>createQuotation</td>
-    <td>NotificationMethod, string callBackUrl="",Quotation quotationRequest,RequestStateInterface requestStateInterface</td>
+    <td></td>
   </tr>
   <tr>
     <td><a href="/docs/internationalTransfer/createInternationalTransaction.Readme.md">Perform an International Transfer</a></td>
     <td>createInternationalTransaction</td>
-    <td>NotificationMethod, string callBackUrl="",Transaction transactionRequest ,RequestStateInterface requestStateInterface</td>
+    <td></td>
   </tr>
   <tr>
     <td>Optional <a href="/docs/internationalTransfer/viewQuotation.Readme.md">View A Quotation</a></td>
     <td>viewQuotation</td>
-    <td>String transactionReference,TransactionInterface transactionInterface</td>
+    <td>quotationReference</td>
   </tr>
   <tr>
     <td rowspan="3">Bilateral International Transfer</td>
     <td><a href="/docs/internationalTransfer/createQuotation.Readme.md">Request a International Transfer Quotation</a></td>
     <td>createQuotation</td>
-    <td>NotificationMethod, string callBackUrl="",Quotation quotationRequest,RequestStateInterface requestStateInterface</td>
+    <td></td>
   </tr>
-
- <tr>
+  <tr>
     <td><a href="/docs/internationalTransfer/createInternationalTransaction.Readme.md">Perform an International Transfer</a></td>
     <td>createInternationalTransaction</td>
-    <td>NotificationMethod, string callBackUrl="",Transaction transactionRequest ,RequestStateInterface requestStateInterface</td>
+    <td></td>
   </tr>
   <tr>
     <td>Optional <a href="/docs/internationalTransfer/viewQuotation.Readme.md">View A Quotation</a></td>
     <td>viewQuotation</td>
-    <td>String transactionReference,TransactionInterface transactionInterface</td>
+    <td>quotationReference</td>
   </tr>
   <tr>
   <tr>
     <td>International Transfer Reversal</td>
     <td><a href="/docs/internationalTransfer/createReversal.Readme.md">Perform a Transaction Reversal</a></td>
     <td>createReversal</td>
-    <td>NotificationMethod, string callBackUrl="",String referenceId,Reversal reversal,RequestStateInterface requestStateInterface</td>
+    <td>originalTransactionReference</td>
   </tr>
   <tr>
     <td>Obtain an FSP Balance</td>
     <td><a href="/docs/internationalTransfer/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
     <td>viewAccountBalance</td>
-    <td>ArrayList<Identifier> identifierList,BalanceInterface balanceInterface</td>
+    <td>{ identifierType: identifier }</td>
   </tr>
   <tr>
     <td>Retrieve Transactions for an FSP</td>
     <td><a href="/docs/internationalTransfer/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
     <td>viewAccountTransactions</td>
-    <td>ArrayList<Identifier> identifierList,TransactionFilter filter,RetrieveTransactionInterface retrieveTransactionInterface</td>
+    <td>{ identifierType: identifier }</td>
   </tr>
   <tr>
     <td>Check for Service Availability</td>
     <td><a href="/docs/internationalTransfer/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
     <td>viewServiceAvailability</td>
-    <td>NA</td>
+    <td></td>
   </tr>
   <tr>
-    <td>Retrieve a Missing API Response</td>
+    <td rowspan="2">Retrieve a Missing API Response</td>
     <td><a href="/docs/internationalTransfer/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
     <td>viewResponse</td>
-    <td>String correlationId</td>
+    <td>clientCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/internationalTransfer/viewResource.Readme.md">Retrieve Representation a Missing Resource</a></td>
+    <td>viewResource</td>
+    <td>link</td>
   </tr>
 </tbody>
 </table>
-
 
 ### P2P Transfers
 
