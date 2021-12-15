@@ -359,6 +359,104 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 
 ### P2P Transfers
 
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="3">P2P Transfer via Switch</td>
+    <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
+    <td>viewAccountName</td>
+    <td>{ identifierType: identifier }</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/p2pTransfer/createQuotation.Readme.md">Request a P2P Quotation</a></td>
+    <td>createQuotation</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Optional <a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
+    <td>createTransferTransaction</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td rowspan="2">Bilateral P2P Transfer</td>
+    <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
+    <td>viewAccountName</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
+    <td>createTransferTransaction</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>‘On-us’ P2P Transfer Initiated by a Third Party Provider</td>
+    <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
+    <td>viewAccountName</td>
+    <td>{ identifierType: identifier }</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/p2pTransfer/createQuotation.Readme.md">Request a P2P Quotation</a></td>
+    <td>createQuotation</td>
+    <td>{ identifierType: identifier }</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
+    <td>createTransferTransaction</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>P2P Transfer Reversal</td>
+    <td><a href="/docs/p2pTransfer/createReversal.Readme.md">Perform a Transaction Reversal</a></td>
+    <td>createReversal</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>Obtain an FSP Balance</td>
+    <td><a href="/docs/p2pTransfer/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td></td>
+  </tr>
+
+   <tr>
+    <td>Retrieve Transactions for an FSP</td>
+    <td><a href="/docs/p2pTransfer/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountBalance</td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="/docs/p2pTransfer/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Retrieve a Missing API Response</td>
+    <td><a href="/docs/p2pTransfer/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>clientCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/p2pTransfer/viewResource.Readme.md">Retrieve Representation a Missing Resource</a></td>
+    <td>viewResource</td>
+    <td>link</td>
+  </tr>
+
+</tbody>
+</table>
+
 * P2P Transfer via Switch
     * [GET Retrieve the Name of the Recipient](/docs/accounts/viewAccountName.Readme.md)
     * [POST Request a P2P Quotation](/docs/quotations/createQuotation.Readme.md)
