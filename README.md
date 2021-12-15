@@ -12,6 +12,8 @@ The MMAPI SDK for Node.js enables Node.js developers to easily work with [GSMA M
 
 The SDK provides separate use cases to handle necessary MMAPI functionality including Merchant Payments, Disbursements, International Transfers, P2P Transfers, Recurring Payments, Account Linking, Bill Payments and Agent Services (including Cash-In and Cash-Out). Each use case exposes Mobile Money APIs to customize your application integrations as needed. The SDK also includes a Samples, so you can test interactions before integration.
 
+## Index
+
 This document contains the following sections:
 
 -  [Requirements](#requirements)
@@ -25,7 +27,7 @@ This document contains the following sections:
 
 -  Node.js 16.13.1 LTS or higher
 
-## Getting Started
+## Get Started
 Create a Node.js project in your directory, then run the following command to install the Mobile Money Api Node.js SDK.
 
 ```javascript 
@@ -74,9 +76,6 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * [Disbursements](#disbursements)
 * [International Transfers](#international-transfers)
 * [P2P Transfers](#p2p-transfers)
-* [Recurring Payments](#recurring-payments)
-* [Account Linking](#account-linking)
-* [Bill Payments](#bill-payments)
 
 ### Merchant Payments
 <table>
@@ -469,77 +468,6 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
   </tr>
 </tbody>
 </table>
-
-### Recurring Payments
-
-* Setup a Recurring Payment
-   * [POST Setup a Recurring Payment](/docs/debitMandates/createAccountDebitMandate.Readme.md)
-* Setup a Recurring Payment Failure
-* Take a Recurring Payment
-    * [POST Take a Recurring Payment](/docs/transactions/createMerchantTransaction.Readme.md)
-* Take a Recurring Payment Failure
-* Take a Recurring Payment using the Polling Method
-    * [POST Take a Recurring Payment](/docs/transactions/createMerchantTransaction.Readme.md)
-    * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
-    * optional [GET Retrieve a Transaction](/docs/transactions/viewTransaction.Readme.md)
-* Recurring Payment Refund
-    * [POST Perform a Recurring Payment Refund](/docs/transactions/createRefundTransaction.Readme.md)
-* Recurring Payment Reversal
-    * [POST Perform a Merchant Payment Reversal](/docs/transactions/createReversal.Readme.md)
-* Payer sets up a Recurring Payment using MMP Channel
-    * [POST Setup a Recurring Payment](/docs/debitMandates/createAccountDebitMandate.Readme.md)
-    * optional [GET View A Debit Mandate](/docs/debitMandates/viewAccountDebitMandate.Readme.md)
-* Obtain a Service Provider Balance
-    * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
-* Retrieve Payments for a Service Provider
-    * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
-* Check for Service Availability
-    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
-* Retrieve a Missing API Response
-    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
-
-### Account Linking
-
-* Setup an Account Link
-   * [POST Establish an Account to Account Link](/docs/links/createAccountLink.Readme.md)
-   * optional [GET View A Link](/docs/links/viewAccountLink.Readme.md)
-* Setup an Account Link Failure
-* Perform a Transfer for a Linked Account
-   * [POST Use a Link to make a Transfer](/docs/transactions/createTransferTransaction.Readme.md)
-* Perform a Transfer for a Linked Account - Failure
-* Perform a Transfer using an Account Link via the Polling Method
-    * [POST Use a Link to make a Transfer](/docs/transactions/createTransferTransaction.Readme.md)
-    * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
-    * optional [GET Retrieve a Transaction](/docs/transactions/viewTransaction.Readme.md)
-* Perform a Transfer Reversal
-    * [POST Perform a Transaction Reversal](/docs/transactions/createReversal.Readme.md)
-* Obtain a Financial Service Provider Balance
-    * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
-* Retrieve Transfers for a Financial Service Provider
-    * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
-* Check for Service Availability
-    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
-* Retrieve a Missing API Response
-    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
-
-### Bill Payments
-
-* Successful Retrieval of Bills
-    * [GET Retrieve a Set of Bills]()
-* Unsuccessful Retrieval of Bills
-* Make a Successful Bill Payment with Callback
-    * [POST Make a Bill Payment]()
-* Make an Unsuccessful Bill Payment with Callback
-* Make a Bill Payment with Polling
-    * [POST Make a Bill Payment Via the Polling Method]()
-    * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
-    * optional [GET Retrieve Bill Payments for a Given Bill]()
-* Retrieval of Bill Payments
-    * [GET Retrieve a Set of Bill Payments]()
-* Check for Service Availability
-    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
 
 ## Test
 ```
