@@ -385,19 +385,17 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td>createTransferTransaction</td>
     <td></td>
   </tr>
-
   <tr>
     <td rowspan="2">Bilateral P2P Transfer</td>
     <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
     <td>viewAccountName</td>
-    <td></td>
+    <td>{ identifierType: identifier }</td>
   </tr>
   <tr>
     <td><a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
     <td>createTransferTransaction</td>
     <td></td>
   </tr>
-
   <tr>
     <td rowspan="3">‘On-us’ P2P Transfer Initiated by a Third Party Provider</td>
     <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
@@ -407,35 +405,31 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
   <tr>
     <td><a href="/docs/p2pTransfer/createQuotation.Readme.md">Request a P2P Quotation</a></td>
     <td>createQuotation</td>
-    <td>{ identifierType: identifier }</td>
+    <td></td>
   </tr>
   <tr>
     <td><a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
     <td>createTransferTransaction</td>
     <td></td>
   </tr>
-
   <tr>
     <td>P2P Transfer Reversal</td>
     <td><a href="/docs/p2pTransfer/createReversal.Readme.md">Perform a Transaction Reversal</a></td>
     <td>createReversal</td>
-    <td></td>
+    <td>originalTransactionReference</td>
   </tr>
-
   <tr>
     <td>Obtain an FSP Balance</td>
     <td><a href="/docs/p2pTransfer/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
     <td>viewAccountBalance</td>
-    <td></td>
+    <td>{ identifierType: identifier }</td>
   </tr>
-
    <tr>
     <td>Retrieve Transactions for an FSP</td>
     <td><a href="/docs/p2pTransfer/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
-    <td>viewAccountBalance</td>
-    <td></td>
+    <td>viewAccountTransactions</td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
-
   <tr>
     <td>Check for Service Availability</td>
     <td><a href="/docs/p2pTransfer/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
@@ -453,33 +447,8 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td>viewResource</td>
     <td>link</td>
   </tr>
-
 </tbody>
 </table>
-
-* P2P Transfer via Switch
-    * [GET Retrieve the Name of the Recipient](/docs/accounts/viewAccountName.Readme.md)
-    * [POST Request a P2P Quotation](/docs/quotations/createQuotation.Readme.md)
-    * [POST Perform a P2P Transfer](/docs/transactions/createTransferTransaction.Readme.md)
-* Bilateral P2P Transfer
-    * [GET Retrieve the Name of the Recipient](/docs/accounts/viewAccountName.Readme.md)
-    * [POST Perform a P2P Transfer](/docs/transactions/createTransferTransaction.Readme.md)
-* ‘On-us’ P2P Transfer Initiated by a Third Party Provider
-    * [GET Retrieve the Name of the Recipient](/docs/accounts/viewAccountName.Readme.md)
-    * [POST Request a P2P Quotation](/docs/quotations/createQuotation.Readme.md)
-    * [POST Perform a P2P Transfer](/docs/transactions/createTransferTransaction.Readme.md)
-* P2P Transfer Failure
-* P2P Transfer Reversal
-    * [POST Perform a Transaction Reversal](/docs/transactions/createReversal.Readme.md)
-* Obtain an FSP Balance
-    * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
-* Retrieve Transactions for an FSP
-    * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
-* Check for Service Availability
-    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
-* Retrieve a Missing API Response
-    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
 ### Recurring Payments
 
