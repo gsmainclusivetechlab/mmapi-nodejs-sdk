@@ -1,8 +1,31 @@
 # mmapi-nodejs-sdk
 
-Use the MMAPI Node.js SDK to get started quickly with the [GSMA Mobile Money API](https://developer.mobilemoneyapi.io/1.2).
+**What is Mobile Money API?**
 
-## Install the SDK
+The Mobile Money API is an initiative developed through collaboration between the mobile money industry and the GSMA, which provides a harmonized API Specification for all the common mobile money use cases which is both easy to use and secure.
+
+[Learn more »](https://developer.mobilemoneyapi.io/)
+
+**What is Mobile Money API Node.js SDK?**
+
+The MMAPI SDK for Node.js enables Node.js developers to easily work with [GSMA Mobile Money API Specification 1.2.0](https://developer.mobilemoneyapi.io/1.2).
+
+The SDK provides separate use cases to handle necessary MMAPI functionality including Merchant Payments, Disbursements, International Transfers, P2P Transfers, Recurring Payments, Account Linking, Bill Payments and Agent Services (including Cash-In and Cash-Out). Each use case exposes Mobile Money APIs to customize your application integrations as needed. The SDK also includes a Samples, so you can test interactions before integration.
+
+This document contains the following sections:
+
+-  [Requirements](#requirements)
+-  [Get Started](#get-started)
+-  [Set Up The Environment](#set-up-the-environment)
+-  [Use Cases](#use-cases)
+-  [Test](#test)
+-  [Samples](#samples)
+
+## Requirements
+
+-  Node.js 16.13.1 LTS or higher
+
+## Getting Started
 Create a Node.js project in your directory, then run the following command to install the Mobile Money Api Node.js SDK.
 
 ```javascript 
@@ -45,7 +68,6 @@ environment = new mmapi.core.SandboxEnvironment(consumerKey, consumerSecret, api
 let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 ```
 
-
 ## Use Cases
 
 * [Merchant Payments](#merchant-payments)
@@ -57,7 +79,6 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * [Bill Payments](#bill-payments)
 
 ### Merchant Payments
-
 <table>
 <thead>
   <tr>
@@ -156,7 +177,6 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 </table>
 
 ### Disbursements
-
 <table>
 <thead>
   <tr>
@@ -227,18 +247,18 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td></td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewRequestState.Readme.Readme.md">Poll to Determine the Request State</a></td>
+    <td><a href="/docs/disbursement/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
     <td>viewRequestState</td>
     <td>serverCorrelationId</td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewTransaction.Readme.Readme.md">Retrieve a Transaction</a></td>
+    <td><a href="/docs/disbursement/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
     <td>viewTransaction</td>
     <td>transactionReference</td>
   </tr>
   <tr>
     <td>Disbursement Reversal</td>
-    <td><a href="/docs/disbursement/createReversal.Readme.Readme.md">Perform a Disbursement Reversal</a></td>
+    <td><a href="/docs/disbursement/createReversal.Readme.md">Perform a Disbursement Reversal</a></td>
     <td>createReversal</td>
     <td>originalTransactionReference</td>
   </tr>
@@ -563,7 +583,7 @@ $ node test/merchantPayment.js
 if (require.main === module) {
   (async () => {
     try {
-      await createMerchantTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createMerchantTransaction('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, undefined, true);
     } catch (err) {
     }
   })();
