@@ -48,7 +48,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 
 ## Use Cases
 
-* [Merchant Payments](#merchant-payments) 
+* [Merchant Payments](#merchant-payments)
 * [Disbursements](#disbursements)
 * [International Transfers](#international-transfers)
 * [P2P Transfers](#p2p-transfers)
@@ -57,89 +57,305 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * [Bill Payments](#bill-payments)
 
 ### Merchant Payments
-* Payee-Initiated Merchant Payment
-   * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
-* Payee-Initiated Merchant Payment Failure
-* Payee-Initiated Merchant Payment using the Polling Method
-   * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
-   * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
-   * optional [GET Retrieve a Transaction](/docs/transactions/viewTransaction.Readme.md)
-* Payer-Initiated Merchant Payment
-   * [POST Payer Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
-* Payer-Initiated Merchant Payment Failure
-* Payee-Initiated Merchant Payment using a Pre-authorised Payment Code
-   * [POST Obtain an Authorisation Code](/docs/authorisationCodes/createAuthorisationCode.Readme.md)
-   * [POST Perform a Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
-   * optional [GET View An Authorisation Code](/docs/authorisationCodes/viewAuthorisationCode.Readme.md)
-* Merchant Payment Refund
-   * [POST Perform a Merchant Payment Refund](/docs/transactions/createRefundTransaction.Readme.md)
-* Merchant Payment Reversal
-   * [POST Perform a Merchant Payment Reversal](/docs/transactions/createReversal.Readme.md)
-* Obtain a Merchant Balance
-   * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
-* Retrieve Payments for a Merchant
-   * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
-* Check for Service Availability
-   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
-* Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Payee-Initiated Merchant Payment</td>
+    <td><a href="/docs/merchantPayment/createMerchantTransaction.Readme.md">Payee Initiated Merchant Payment</a></td>
+    <td>createMerchantTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="3">Payee-Initiated Merchant Payment using the Polling Method</td>
+    <td><a href="/docs/merchantPayment/createMerchantTransaction.Readme.md">Payee Initiated Merchant Payment</a></td>
+    <td>createMerchantTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="/docs/merchantPayment/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
+    <td>viewRequestState</td>
+    <td>serverCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/merchantPayment/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
+    <td>viewTransaction</td>
+    <td>transactionReference</td>
+  </tr>
+  <tr>
+    <td>Payer-Initiated Merchant Payment</td>
+    <td><a href="/docs/merchantPayment/createMerchantTransaction.Readme.md">Payer Initiated Merchant Payment</a></td>
+    <td>createMerchantTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="3">Payee-Initiated Merchant Payment using a Pre-authorised Payment Code</td>
+    <td><a href="/docs/merchantPayment/createAuthorisationCode.Readme.md">Obtain an Authorisation Code</a></td>
+    <td>createAuthorisationCode</td>
+    <td>{ identifierType1: identifier1 }</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/merchantPayment/createMerchantTransaction.Readme.md">Perform a Merchant Payment</a></td>
+    <td>createMerchantTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="/docs/merchantPayment/viewAuthorisationCode.Readme.md">View An Authorisation Code</a></td>
+    <td>viewAuthorisationCode</td>
+    <td>{ identifierType1: identifier1 }</td>
+  </tr>
+  <tr>
+    <td>Merchant Payment Refund</td>
+    <td><a href="/docs/merchantPayment/createRefundTransaction.Readme.md">Perform a Merchant Payment Refund</a></td>
+    <td>createRefundTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Merchant Payment Reversal</td>
+    <td><a href="/docs/merchantPayment/createReversal.Readme.md">Perform a Merchant Payment Reversal</a></td>
+    <td>createReversal</td>
+    <td>originalTransactionReference</td>
+  </tr>
+  <tr>
+    <td>Obtain a Merchant Balance</td>
+    <td><a href="docs/merchantPayment/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td>{ identifierType: identifier }</td>
+  </tr>
+  <tr>
+    <td>Retrieve Payments for a Merchant</td>
+    <td><a href="/docs/merchantPayment/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountTransactions</td>
+    <td>{ identifierType: identifier }</td>
+  </tr>
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="/docs/merchantPayment/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Retrieve a Missing API Response</td>
+    <td><a href="/docs/merchantPayment/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>clientCorrelationId</td>
+  </tr>
+  <tr>
+    <td>Retrieve a Missing API Resource</td>
+    <td><a href="/docs/merchantPayment/viewResource.Readme.md">Retrieve Representation a Missing Resource</a></td>
+    <td>viewResource</td>
+    <td>link</td>
+  </tr>
+</tbody>
+</table>
 
 ### Disbursements
 
-* Individual Disbursement
-    * [POST Perform an Individual Disbursement](/docs/transactions/createDisbursementTransaction.Readme.md)
-* Individual Disbursement Failure
-* Bulk Disbursement
-    * [POST Perform a Bulk Disbursement](/docs/transactions/createBatchTransaction.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have Completed](/docs/transactions/viewBatchCompletions.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have been Rejected](/docs/transactions/viewBatchRejections.Readme.md)
-    * optional [GET View A Transaction Batch](/docs/transactions/viewBatchTransaction.Readme.md)
-* Bulk Disbursement Failure
-* Bulk Disbursement with Maker / Checker
-    * [POST Perform a Bulk Disbursement](/docs/transactions/createBatchTransaction.Readme.md)
-    * [PATCH Update A Transaction Batch](/docs/transactions/updateBatchTransaction.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have Completed](/docs/transactions/viewBatchCompletions.Readme.md)
-    * optional [GET Retrieve Batch Transactions that have been Rejected](/docs/transactions/viewBatchRejections.Readme.md)
-    * optional [GET View A Transaction Batch](/docs/transactions/viewBatchTransaction.Readme.md)
-* Individual Disbursement Using the Polling Method
-    * [POST Perform an Individual Disbursement](/docs/transactions/createDisbursementTransaction.Readme.md)
-    * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
-    * optional [GET Retrieve a Transaction](/docs/transactions/viewTransaction.Readme.md)
-* Disbursement Reversal
-    * [POST Perform a Transaction Reversal](/docs/transactions/createReversal.Readme.md)
-* Obtain a Disbursement Organisation Balance
-    * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
-* Retrieve Transactions for a Disbursement Organisation
-    * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
-* Check for Service Availability
-    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
-* Retrieve a Missing API Response
-    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Individual Disbursement</td>
+    <td><a href="/docs/disbursement/createDisbursementTransaction.md">Perform an Individual Disbursement</a></td>
+    <td>createDisbursementTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="4">Bulk Disbursement</td>
+    <td><a href="/docs/disbursement/createBatchTransaction.md">Create A Transaction Batch</a></td>
+    <td>createBatchTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="/docs/disbursement/viewBatchTransaction.md">View A Transaction Batch</a></td>
+    <td>viewBatchTransaction</td>
+    <td>batchId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/disbursement/viewBatchCompletions.md">View Batch Completions</a></td>
+    <td>viewBatchCompletions</td>
+    <td>batchId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/disbursement/viewBatchRejections.md">View Batch Rejections</a></td>
+    <td>viewBatchRejections</td>
+    <td>batchId</td>
+  </tr>
+  <tr>
+    <td rowspan="5">Bulk Disbursement with Maker / Checker</td>
+    <td><a href="/docs/disbursement/createBatchTransaction.md">Create A Transaction Batch</a></td>
+    <td>createBatchTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="/docs/disbursement/updateBatchTransaction.md">Update A Transaction Batch</a></td>
+    <td>updateBatchTransaction</td>
+    <td>batchId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/disbursement/viewBatchTransaction.md">View A Transaction Batch</a></td>
+    <td>viewBatchTransaction</td>
+    <td>batchId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/disbursement/viewBatchCompletions.md">View Batch Completions</a></td>
+    <td>viewBatchCompletions</td>
+    <td>batchId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/disbursement/viewBatchRejections.md">View Batch Rejections</a></td>
+    <td>viewBatchRejections</td>
+    <td>batchId</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Individual Disbursement Using the Polling Method</td>
+    <td><a href="/docs/disbursement/createDisbursementTransaction.md">Create a Individual Disbursement request </a></td>
+    <td>createDisbursementTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="/docs/disbursement/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
+    <td>viewRequestState</td>
+    <td>serverCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/disbursement/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
+    <td>viewTransaction</td>
+    <td>transactionReference</td>
+  </tr>
+  <tr>
+    <td>Disbursement Reversal</td>
+    <td><a href="/docs/disbursement/createReversal.Readme.md">Perform a Disbursement Reversal</a></td>
+    <td>createReversal</td>
+    <td>originalTransactionReference</td>
+  </tr>
+  <tr>
+    <td>Obtain a Disbursement Organisation Balance</td>
+    <td><a href="/docs/disbursement/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td>{ identifierType: identifier }</td>
+  </tr>
+  <tr>
+    <td>Retrieve Transactions for a Disbursement Organisation</td>
+    <td><a href="/docs/disbursement/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountTransactions</td>
+    <td>{ identifierType1: identifier1 }</td>
+  </tr>
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="/docs/disbursement/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Retrieve a Missing API Response</td>
+    <td><a href="/docs/disbursement/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>clientCorrelationId</td>
+  </tr>
+  <tr>
+    <td>Retrieve a Missing API Resource</td>
+    <td><a href="/docs/disbursement/viewResource.Readme.md">Retrieve Representation a Missing Resource</a></td>
+    <td>viewResource</td>
+    <td>link</td>
+  </tr>
+</tbody>
+</table>
 
 ### International Transfers
 
-* International Transfer via Hub
-    * [POST Request a International Transfer Quotation](/docs/quotations/createQuotation.Readme.md)
-    * [POST Perform an International Transfer](/docs/transactions/createInternationalTransaction.Readme.md)
-    * optional [GET View A Quotation](/docs/quotations/viewQuotation.Readme.md)
-* Bilateral International Transfer
-    * [POST Request a International Transfer Quotation](/docs/quotations/createQuotation.Readme.md)
-    * [POST Perform an International Transfer](/docs/transactions/createInternationalTransaction.Readme.md)
-    * optional [GET View A Quotation](/docs/quotations/viewQuotation.Readme.md)
-* International Transfer Failure
-* International Transfer Reversal
-    * [POST Perform a Transaction Reversal](/docs/transactions/createReversal.Readme.md)
-* Obtain an FSP Balance
-    * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
-* Retrieve Transactions for an FSP
-    * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
-* Check for Service Availability
-    * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
-* Retrieve a Missing API Response
-    * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-    * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="3">International Transfer via Hub</td>
+    <td><a href="/docs/internationalTransfer/createQuotation.Readme.md">Request a International Transfer Quotation</a></td>
+    <td>createQuotation</td>
+    <td>NotificationMethod, string callBackUrl="",Quotation quotationRequest,RequestStateInterface requestStateInterface</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/internationalTransfer/createInternationalTransaction.Readme.md">Perform an International Transfer</a></td>
+    <td>createInternationalTransaction</td>
+    <td>NotificationMethod, string callBackUrl="",Transaction transactionRequest ,RequestStateInterface requestStateInterface</td>
+  </tr>
+  <tr>
+    <td>Optional <a href="/docs/internationalTransfer/viewQuotation.Readme.md">View A Quotation</a></td>
+    <td>viewQuotation</td>
+    <td>String transactionReference,TransactionInterface transactionInterface</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Bilateral International Transfer</td>
+    <td><a href="/docs/internationalTransfer/createQuotation.Readme.md">Request a International Transfer Quotation</a></td>
+    <td>createQuotation</td>
+    <td>NotificationMethod, string callBackUrl="",Quotation quotationRequest,RequestStateInterface requestStateInterface</td>
+  </tr>
+
+ <tr>
+    <td><a href="/docs/internationalTransfer/createInternationalTransaction.Readme.md">Perform an International Transfer</a></td>
+    <td>createInternationalTransaction</td>
+    <td>NotificationMethod, string callBackUrl="",Transaction transactionRequest ,RequestStateInterface requestStateInterface</td>
+  </tr>
+  <tr>
+    <td>Optional <a href="/docs/internationalTransfer/viewQuotation.Readme.md">View A Quotation</a></td>
+    <td>viewQuotation</td>
+    <td>String transactionReference,TransactionInterface transactionInterface</td>
+  </tr>
+  <tr>
+  <tr>
+    <td>International Transfer Reversal</td>
+    <td><a href="/docs/internationalTransfer/createReversal.Readme.md">Perform a Transaction Reversal</a></td>
+    <td>createReversal</td>
+    <td>NotificationMethod, string callBackUrl="",String referenceId,Reversal reversal,RequestStateInterface requestStateInterface</td>
+  </tr>
+  <tr>
+    <td>Obtain an FSP Balance</td>
+    <td><a href="/docs/internationalTransfer/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td>ArrayList<Identifier> identifierList,BalanceInterface balanceInterface</td>
+  </tr>
+  <tr>
+    <td>Retrieve Transactions for an FSP</td>
+    <td><a href="/docs/internationalTransfer/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountTransactions</td>
+    <td>ArrayList<Identifier> identifierList,TransactionFilter filter,RetrieveTransactionInterface retrieveTransactionInterface</td>
+  </tr>
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="/docs/internationalTransfer/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td>NA</td>
+  </tr>
+  <tr>
+    <td>Retrieve a Missing API Response</td>
+    <td><a href="/docs/internationalTransfer/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>String correlationId</td>
+  </tr>
+</tbody>
+</table>
+
 
 ### P2P Transfers
 
