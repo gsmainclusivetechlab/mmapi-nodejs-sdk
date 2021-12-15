@@ -399,7 +399,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
   </tr>
 
   <tr>
-    <td>‘On-us’ P2P Transfer Initiated by a Third Party Provider</td>
+    <td rowspan="3">‘On-us’ P2P Transfer Initiated by a Third Party Provider</td>
     <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
     <td>viewAccountName</td>
     <td>{ identifierType: identifier }</td>
