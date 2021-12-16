@@ -1,13 +1,5 @@
 # mmapi-nodejs-sdk
 
-**What is Mobile Money API?**
-
-The Mobile Money API is an initiative developed through collaboration between the mobile money industry and the GSMA, which provides a harmonized API Specification for all the common mobile money use cases which is both easy to use and secure.
-
-[Learn more »](https://developer.mobilemoneyapi.io/)
-
-**What is Mobile Money API Node.js SDK?**
-
 The MMAPI SDK for Node.js enables Node.js developers to easily work with [GSMA Mobile Money API Specification 1.2.0](https://developer.mobilemoneyapi.io/1.2).
 
 The SDK provides separate use cases to handle necessary MMAPI functionality including Merchant Payments, Disbursements, International Transfers, P2P Transfers, Recurring Payments, Account Linking, Bill Payments and Agent Services (including Cash-In and Cash-Out). Each use case exposes use case scenarios
