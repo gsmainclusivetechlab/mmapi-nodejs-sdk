@@ -10,24 +10,42 @@ to customize your application integrations as needed. The SDK also includes a Sa
 This document contains the following sections:
 
 -  [Requirements](#requirements)
--  [Get Started](#get-started)
--  [Set Up The Environment](#set-up-the-environment)
+-  [Getting Started](#getting-started)
+      -  [Installation](#installation)
+      -  [Development And Testing](#development-and-testing)
+-  [Setting Up](#setting-up)
 -  [Use Cases](#use-cases)
--  [Test](#test)
 -  [Samples](#samples)
 
 ## Requirements
 
 -  Node.js 16.13.1 LTS or higher
 
-## Get Started
+## Getting Started
+
+#### Installation
+
 Create a Node.js project in your directory, then run the following command to install the Mobile Money Api Node.js SDK.
 
 ```javascript 
 npm install mmapi-nodejs-sdk
 ```
 
-## Set up the environment
+#### Development And Testing
+
+It is not mandatory to fork this repository for using the MMAPI SDK. You can refer Setting Up for configuring and working with SDK without forking this code.
+
+For contributing or referring the samples, you can fork/refer this repository.
+
+To run integration tests using your consumer key, consumer secret and api key, clone this repository and run the following command:
+
+```
+$ npm install
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL npm run test
+
+```
+
+## Setting Up
 After you install the SDK, make it available to your app and configure your environment. 
 Configuration details include either sandbox for testing or live for production, and your consumer key, consumer secret, api key, security option  and callback url for your app.
 
@@ -452,16 +470,6 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
   </tr>
 </tbody>
 </table>
-
-## Test
-
-To run integration tests using your consumer key, consumer secret and api key, clone this repository and run the following command:
-
-```
-$ npm install
-$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL npm run test
-
-```
 
 ## Samples
 
