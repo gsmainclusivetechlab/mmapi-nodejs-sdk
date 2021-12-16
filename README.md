@@ -400,7 +400,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td></td>
   </tr>
   <tr>
-    <td>Optional <a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
+    <td><a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
     <td>createTransferTransaction</td>
     <td></td>
   </tr>
