@@ -10,7 +10,8 @@ The Mobile Money API is an initiative developed through collaboration between th
 
 The MMAPI SDK for Node.js enables Node.js developers to easily work with [GSMA Mobile Money API Specification 1.2.0](https://developer.mobilemoneyapi.io/1.2).
 
-The SDK provides separate use cases to handle necessary MMAPI functionality including Merchant Payments, Disbursements, International Transfers, P2P Transfers, Recurring Payments, Account Linking, Bill Payments and Agent Services (including Cash-In and Cash-Out). Each use case exposes Mobile Money APIs to customize your application integrations as needed. The SDK also includes a Samples, so you can test interactions before integration.
+The SDK provides separate use cases to handle necessary MMAPI functionality including Merchant Payments, Disbursements, International Transfers, P2P Transfers, Recurring Payments, Account Linking, Bill Payments and Agent Services (including Cash-In and Cash-Out). Each use case exposes use case scenarios
+to customize your application integrations as needed. The SDK also includes a Samples, so you can test interactions before integration.
 
 ## Index
 
@@ -52,7 +53,7 @@ const mmapi = require('mmapi-nodejs-sdk');
 const consumerKey = process.env.CONSUMER_KEY
 const consumerSecret = process.env.CONSUMER_SECRET;
 const apiKey = process.env.API_KEY;
-const securityOption = process.env.SECURITY_OPTION; // optional  DEVELOPMENT_LEVEL, STANDARD_LEVEL, ENHANCED_LEVEL
+const securityOption = process.env.SECURITY_OPTION; // DEVELOPMENT_LEVEL, STANDARD_LEVEL, ENHANCED_LEVEL
 const callbackUrl = process.env.CALLBACK_URL;
 
 let environment;
@@ -306,7 +307,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 </thead>
 <tbody>
   <tr>
-    <td rowspan="3">International Transfer via Hub</td>
+    <td rowspan="2">International Transfer via Hub</td>
     <td><a href="/docs/internationalTransfer/createQuotation.Readme.md">Request a International Transfer Quotation</a></td>
     <td>createQuotation</td>
     <td></td>
@@ -317,12 +318,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td></td>
   </tr>
   <tr>
-    <td>Optional <a href="/docs/internationalTransfer/viewQuotation.Readme.md">View A Quotation</a></td>
-    <td>viewQuotation</td>
-    <td>quotationReference</td>
-  </tr>
-  <tr>
-    <td rowspan="3">Bilateral International Transfer</td>
+    <td rowspan="2">Bilateral International Transfer</td>
     <td><a href="/docs/internationalTransfer/createQuotation.Readme.md">Request a International Transfer Quotation</a></td>
     <td>createQuotation</td>
     <td></td>
@@ -331,11 +327,6 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td><a href="/docs/internationalTransfer/createInternationalTransaction.Readme.md">Perform an International Transfer</a></td>
     <td>createInternationalTransaction</td>
     <td></td>
-  </tr>
-  <tr>
-    <td>Optional <a href="/docs/internationalTransfer/viewQuotation.Readme.md">View A Quotation</a></td>
-    <td>viewQuotation</td>
-    <td>quotationReference</td>
   </tr>
   <tr>
   <tr>
@@ -470,13 +461,20 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 </table>
 
 ## Test
+
+To run integration tests using your consumer key, consumer secret and api key, clone this repository and run the following command:
+
 ```
 $ npm install
 $ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL npm run test
 
 ```
+
 ## Samples
-Note: Update the samples/test_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples.
+
+You can test interactions before integration by by trying out different samples.
+
+Note: Clone this repository and update the samples/test_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples.
 
 **To run all usecase scenarios for a usecase (merchantpay, disbursements, etc)**
 
