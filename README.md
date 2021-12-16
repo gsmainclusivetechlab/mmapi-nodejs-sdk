@@ -189,13 +189,13 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 <tbody>
   <tr>
     <td>Individual Disbursement</td>
-    <td><a href="/docs/disbursement/createDisbursementTransaction.Readme.md">Create A Disbursement Transaction</a></td>
+    <td><a href="/docs/disbursement/createDisbursementTransaction.Readme.md">Perform an Individual Disbursement</a></td>
     <td>createDisbursementTransaction</td>
     <td></td>
   </tr>
   <tr>
     <td rowspan="4">Bulk Disbursement</td>
-    <td><a href="/docs/disbursement/createBatchTransaction.Readme.md">Create A Transaction Batch</a></td>
+    <td><a href="/docs/disbursement/createBatchTransaction.Readme.md">Perform a Bulk Disbursement</a></td>
     <td>createBatchTransaction</td>
     <td></td>
   </tr>
@@ -205,18 +205,19 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td>batchId</td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewBatchCompletions.Readme.md">View Batch Completions</a></td>
+    <td><a href="/docs/disbursement/viewBatchCompletions.Readme.md">Retrieve Batch Transactions that have Completed</a></td>
     <td>viewBatchCompletions</td>
     <td>batchId</td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewBatchRejections.Readme.md">View Batch Rejections</a></td>
+    <td><a href="/docs/disbursement/viewBatchRejections.Readme.md">Retrieve Batch Transactions that have been Rejected
+</a></td>
     <td>viewBatchRejections</td>
     <td>batchId</td>
   </tr>
   <tr>
     <td rowspan="5">Bulk Disbursement with Maker / Checker</td>
-    <td><a href="/docs/disbursement/createBatchTransaction.Readme.md">Create A Transaction Batch</a></td>
+    <td><a href="/docs/disbursement/createBatchTransaction.Readme.md">Perform a Bulk Disbursement</a></td>
     <td>createBatchTransaction</td>
     <td></td>
   </tr>
@@ -231,18 +232,18 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td>batchId</td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewBatchCompletions.Readme.md">View Batch Completions</a></td>
+    <td><a href="/docs/disbursement/viewBatchCompletions.Readme.md">Retrieve Batch Transactions that have Completed</a></td>
     <td>viewBatchCompletions</td>
     <td>batchId</td>
   </tr>
   <tr>
-    <td><a href="/docs/disbursement/viewBatchRejections.Readme.md">View Batch Rejections</a></td>
+    <td><a href="/docs/disbursement/viewBatchRejections.Readme.md">Retrieve Batch Transactions that have been Rejected</a></td>
     <td>viewBatchRejections</td>
     <td>batchId</td>
   </tr>
   <tr>
     <td rowspan="3">Individual Disbursement Using the Polling Method</td>
-    <td><a href="/docs/disbursement/createDisbursementTransaction.Readme.md">Create a Individual Disbursement request </a></td>
+    <td><a href="/docs/disbursement/createDisbursementTransaction.Readme.md">Perform an Individual Disbursement</a></td>
     <td>createDisbursementTransaction</td>
     <td></td>
   </tr>
@@ -258,7 +259,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
   </tr>
   <tr>
     <td>Disbursement Reversal</td>
-    <td><a href="/docs/disbursement/createReversal.Readme.md">Perform a Disbursement Reversal</a></td>
+    <td><a href="/docs/disbursement/createReversal.Readme.md">Perform a Transaction Reversal</a></td>
     <td>createReversal</td>
     <td>originalTransactionReference</td>
   </tr>
@@ -472,9 +473,9 @@ $ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YO
 
 ## Samples
 
-You can test interactions before integration by by trying out different samples.
+To test interactions before integration by by trying out different samples, clone this repository and run the following command:
 
-Note: Clone this repository and update the samples/test_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples.
+Note: Update the samples/test_harness.js with your sandbox client credentials or pass your client credentials as environment variable while executing the samples.
 
 **To run all usecase scenarios for a usecase (merchantpay, disbursements, etc)**
 
