@@ -31,7 +31,7 @@ const createAuthorisationCode = async (body, accountIdentifiers, polling = false
     request.amount(body.amount);
 
     /**
-     * Chose the polling method.
+     * Chose the polling method. If not chosen callback method will be used.
      */
     if (polling) {
       request.polling();
@@ -94,3 +94,11 @@ createAuthorisationCode('<<REPLACE-WITH-REQUEST-BODY>>', '<<REPLACE-WITH-ACCOUNT
   "pollLimit": 100
 }
 ```
+
+---
+
+**NOTE**
+
+In asynchronous flows, a callback mechanism or polling mechanism is utilised to allow the client to determine the request's final state. Use the [viewRequestState()](viewRequestState.Readme.md) function for the polling mechanism to receive the status of a request, and the [viewAuthorisationCode()](viewAuthorisationCode.Readme.md) function to acquire the final representation of the Authorisation Code object.
+
+---
