@@ -102,3 +102,11 @@ createQuotation('<<REPLACE-WITH-REQUEST-BODY>>');
   "pollLimit": 100
 }
 ```
+
+---
+
+**NOTE**
+
+In asynchronous flows, a callback mechanism or polling mechanism is utilised to allow the client to determine the request's final state. Use the [viewRequestState()](viewRequestState.Readme.md) function for the polling mechanism to receive the status of a request, and the [viewQuotation()](viewQuotation.Readme.md) function to acquire the final representation of the Quotation object.
+
+---

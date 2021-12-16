@@ -8,6 +8,7 @@ const {
   createTransferTransaction,
   createReversal,
   viewAccountTransactions,
+  viewQuotation,
   viewRequestState,
   viewTransaction
 } = require('../samples/index')
