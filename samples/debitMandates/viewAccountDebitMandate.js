@@ -11,14 +11,21 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request path parameter
+ */
+const buildAccountIdentifiers = () => ({
+  "walletid": '1'
+})
+
+/**
  * Set up your function to be invoked
  */
-const viewAccountDebitMandate = async (identifierType, identifier, debitMandateReference, useCase, debug = false) => {
+const viewAccountDebitMandate = async (useCase, debitMandateReference, accountIdentifiers = buildAccountIdentifiers(), debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].viewAccountDebitMandate(identifierType, identifier, debitMandateReference);
+    const request = new mmapi[useCase].viewAccountDebitMandate(accountIdentifiers, debitMandateReference);
 
     /**
      * Call API with your client and get a response for your call
@@ -57,7 +64,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAccountDebitMandate('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-DEBIT-MANDATE-REFERENCE>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewAccountDebitMandate('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-DEBIT-MANDATE-REFERENCE>>', undefined, true);
     } catch (err) {
     }
   })();

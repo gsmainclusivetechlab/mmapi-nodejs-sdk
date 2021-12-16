@@ -13,7 +13,7 @@ const client = require('../test_harness').client();
 /**
  * Set up your function to be invoked
  */
-const viewQuotation = async (quotationReference, useCase, debug = false) => {
+const viewQuotation = async (useCase, quotationReference, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -57,7 +57,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewQuotation('<<REPLACE-WITH-QUOTATION-REFERENCE>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewQuotation('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-QUOTATION-REFERENCE>>', true);
     } catch (err) {
     }
   })();

@@ -12,7 +12,7 @@ const {
   viewRequestState,
   viewTransaction,
   createReversal,
-  viewAccountTransactions,
+  viewAccountTransactions
 } = require('../samples/index')
 
 describe('Disbursements', () => {
@@ -49,7 +49,7 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewBatchTransaction(batchId, 'disbursement');
+        const response = await viewBatchTransaction('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('batchId');
@@ -61,7 +61,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have Completed', () => {
       it('should return the batch completions object with status 200', async () => {
-        const response = await viewBatchCompletions(batchId, 'disbursement');
+        const response = await viewBatchCompletions('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -74,7 +74,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have been Rejected', () => {
       it('should return the batch rejections object with status 200', async () => {
-        const response = await viewBatchRejections(batchId, 'disbursement');
+        const response = await viewBatchRejections('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('creditParty');
@@ -103,7 +103,7 @@ describe('Disbursements', () => {
 
     describe('PATCH Approve The Transaction Batch', () => {
       it('should return the request state object with status 202 to indicate that the request is completed', async () => {
-        const response = await updateBatchTransaction(batchId, 'disbursement');
+        const response = await updateBatchTransaction('disbursement', batchId);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -116,7 +116,7 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewBatchTransaction(batchId, 'disbursement');
+        const response = await viewBatchTransaction('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('batchId');
@@ -128,7 +128,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have Completed', () => {
       it('should return the batch completions object with status 200', async () => {
-        const response = await viewBatchCompletions(batchId, 'disbursement');
+        const response = await viewBatchCompletions('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -141,7 +141,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve Batch Transactions that have been Rejected', () => {
       it('should return the batch rejections object with status 200', async () => {
-        const response = await viewBatchRejections(batchId, 'disbursement');
+        const response = await viewBatchRejections('disbursement', batchId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('creditParty');
@@ -158,7 +158,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createDisbursementTransaction('disbursement', true);
+        const response = await createDisbursementTransaction('disbursement', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -173,7 +173,7 @@ describe('Disbursements', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'disbursement');
+        const response = await viewRequestState('disbursement', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -189,7 +189,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference, 'disbursement');
+        const response = await viewTransaction('disbursement', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -208,7 +208,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBatchTransaction('disbursement', true);
+        const response = await createBatchTransaction('disbursement', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -223,7 +223,7 @@ describe('Disbursements', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'disbursement');
+        const response = await viewRequestState('disbursement', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -239,7 +239,7 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewBatchTransaction(objectReference, 'disbursement');
+        const response = await viewBatchTransaction('disbursement', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('batchId');
@@ -256,7 +256,7 @@ describe('Disbursements', () => {
 
     describe('PATCH Approve The Transaction Batch', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await updateBatchTransaction("REF-1636656115835", 'disbursement', true);
+        const response = await updateBatchTransaction('disbursement', "REF-1636656115835", true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -271,7 +271,7 @@ describe('Disbursements', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'disbursement');
+        const response = await viewRequestState('disbursement', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -287,7 +287,7 @@ describe('Disbursements', () => {
 
     describe('GET View A Transaction Batch', () => {
       it('should return the batch transactions object with status 200', async () => {
-        const response = await viewBatchTransaction(objectReference, 'disbursement');
+        const response = await viewBatchTransaction('disbursement', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('batchId');
@@ -319,7 +319,7 @@ describe('Disbursements', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'disbursement');
+        const response = await viewRequestState('disbursement', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -335,7 +335,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(objectReference, 'disbursement');
+        const response = await createReversal('disbursement', objectReference);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -350,7 +350,7 @@ describe('Disbursements', () => {
   describe('Obtain a Disbursement Organisation Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance('accountid', '2000', 'disbursement');
+        const response = await viewAccountBalance('disbursement');
 
         expect(response.status).toBe(200);
       });
@@ -360,7 +360,7 @@ describe('Disbursements', () => {
   describe('Retrieve Transactions for a Disbursement Organisation', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions('accountid', '2000', 0, 20, 'disbursement');
+        const response = await viewAccountTransactions('disbursement');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);
@@ -403,7 +403,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve a Missing Response', () => {
       it('should return a response object with status 200 containing a link to the missing resource', async () => {
-        const response = await viewResponse(clientCorrelationId, 'disbursement');
+        const response = await viewResponse('disbursement', clientCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('link');
@@ -414,7 +414,7 @@ describe('Disbursements', () => {
 
     describe('GET Retrieve a Missing Resource', () => {
       it('should return the requested object with status 200 containing a representation of the missing resource', async () => {
-        const response = await viewResource(link, 'disbursement');
+        const response = await viewResource('disbursement', link);
 
         expect(response.status).toBe(200);
       });

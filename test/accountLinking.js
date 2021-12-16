@@ -12,109 +12,71 @@ const {
   viewAccountLink
 } = require('../samples/index');
 
-const buildAccountLinkRequestBody = () => ({
-  "sourceAccountIdentifiers": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "status": "active",
-  "mode": "both",
-  "customData": [
-    {
-      "key": "keytest",
-      "value": "keyvalue"
-    }
-  ],
-  "requestingOrganisation": {
-    "requestingOrganisationIdentifierType": "organisationid",
-    "requestingOrganisationIdentifier": "12345"
-  }
-});
-
-const buildTransferTransactionRequestBody = (linkReference) => ({
-  "amount": "200.00",
-  "creditParty": [
-    {
-      "key": "linkref",
-      "value": `${linkReference}`
-    }
-  ],
-  "currency": "RWF",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ]
-});
-
 const usecase1 = async () => {
   console.log("Setup an Account Link...");
 
   console.log("POST Establish an Account to Account Link")
-  await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking', undefined, true);
+  await createAccountLink('accountLinking', undefined, undefined, undefined, true);
 }
 
 const usecase2 = async () => {
   console.log("Setup an Account Link using the Polling Method...");
 
   console.log("POST Establish an Account to Account Link");
-  const { data: { serverCorrelationId } } = await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking', true, true);
+  const { data: { serverCorrelationId } } = await createAccountLink('accountLinking', undefined, undefined, true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
+  const { data: { objectReference } } = await viewRequestState('accountLinking', serverCorrelationId, true);
 
   console.log('GET View A Link');
-  await viewAccountLink('accountid', '2000', objectReference, 'accountLinking', true);
+  await viewAccountLink('accountLinking', objectReference, undefined, true);
 }
 
 const usecase3 = async () => {
   console.log("Perform a Transfer for a Linked Account...");
 
   console.log("POST Use a Link to make a Transfer");
-  await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking', undefined, true);
+  await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' }, undefined, true);
 }
 
 const usecase4 = async () => {
   console.log("Perform a Transfer using an Account Link via the Polling Method...");
 
   console.log('POST Use a Link to make a Transfer')
-  const { data: { serverCorrelationId } } = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking', true, true);
+  const { data: { serverCorrelationId } } = await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' }, true, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
+  const { data: { objectReference } } = await viewRequestState('accountLinking', serverCorrelationId, true);
 
   console.log('GET Retrieve a Transaction')
-  await viewTransaction(objectReference, 'accountLinking', true);
+  await viewTransaction('accountLinking', objectReference, true);
 }
 
 const usecase5 = async () => {
   console.log("Perform a Transfer Reversal...")
 
   console.log("POST Use a Link to make a Transfer");
-  const { data: { serverCorrelationId } } = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking', undefined, true);
+  const { data: { serverCorrelationId } } = await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' }, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
-  const { data: { objectReference } } = await viewRequestState(serverCorrelationId, 'accountLinking', true);
+  const { data: { objectReference } } = await viewRequestState('accountLinking', serverCorrelationId, true);
 
   console.log('POST Perform a Transaction Reversal')
-  await createReversal(objectReference, 'accountLinking', true);
+  await createReversal('accountLinking', objectReference, undefined, undefined, true);
 }
 
 const usecase6 = async () => {
   console.log("Obtain a Financial Service Provider Balance...")
 
   console.log('GET Get an Account Balance')
-  await viewAccountBalance('accountid', '2000', 'accountLinking', true);
+  await viewAccountBalance('accountLinking', undefined, true);
 }
 
 const usecase7 = async () => {
   console.log("Retrieve Transfers for a Financial Service Provider...")
 
   console.log('GET Retrieve a Set of Transactions for an Account')
-  await viewAccountTransactions('accountid', '2000', 0, 2, 'accountLinking', true);
+  await viewAccountTransactions('accountLinking', undefined, undefined, undefined, true);
 }
 
 const usecase8 = async () => {
@@ -128,13 +90,13 @@ const usecase9 = async () => {
   console.log("Retrieve a Missing API Response...")
 
   console.log("POST Establish an Account to Account Link");
-  const { config: { headers } } = await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking', undefined, true);
+  const { config: { headers } } = await createAccountLink('accountLinking', undefined, undefined, undefined, true);
 
   console.log('GET Retrieve a Missing Response');
-  const { data: { link } } = await viewResponse(headers['X-CorrelationID'], 'accountLinking', true);
+  const { data: { link } } = await viewResponse('accountLinking', headers['X-CorrelationID'], true);
 
   console.log('GET Retrieve a Missing Resource');
-  await viewResource(link, 'accountLinking', true);
+  await viewResource('accountLinking', link, true);
 }
 
 (async (usecase) => {

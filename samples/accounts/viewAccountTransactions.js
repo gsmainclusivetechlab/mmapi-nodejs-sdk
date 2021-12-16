@@ -11,14 +11,31 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Set up the request path parameters
+ */
+const buildAccountIdentifiers = () => ({
+  'walletid': '1'
+})
+
+/**
+ * Set up the request query parameters
+ */
+const buildOffset = () => 0;
+
+/**
+ * Set up the request query parameters
+ */
+const buildLimit = () => 20;
+
+/**
  * Set up your function to be invoked
  */
-const viewAccountTransactions = async (identifierType, identifier, offset, limit, useCase, debug = false) => {
+const viewAccountTransactions = async (useCase, accountIdentifiers = buildAccountIdentifiers(), offset = buildOffset(), limit = buildLimit(), debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].viewAccountTransactions(identifierType, identifier);
+    const request = new mmapi[useCase].viewAccountTransactions(accountIdentifiers);
 
     /**
      * Set the offset parameter
@@ -37,8 +54,8 @@ const viewAccountTransactions = async (identifierType, identifier, offset, limit
     if (debug) {
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-      console.log("Response x-records-available-count", response.headers['x-records-available-count']);
-      console.log("Response x-records-returned-count", response.headers['x-records-returned-count']);
+      console.log("Response X-Records-Available-Count", response.headers['x-records-available-count']);
+      console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
     }
 
     /**
@@ -69,7 +86,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAccountTransactions('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', 0, 20, '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewAccountTransactions('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, undefined, true);
     } catch (err) {
     }
   })();

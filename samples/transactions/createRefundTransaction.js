@@ -11,9 +11,29 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const buildRequestBody = (creditPartyKey, creditPartyValue) => ({
+  "amount": "16.00",
+  "debitParty": [
+    {
+      "key": "walletid",
+      "value": "1"
+    }
+  ],
+  "creditParty": [
+    {
+      "key": `${creditPartyKey}`,
+      "value": `${creditPartyValue}`
+    }
+  ],
+  "currency": "USD"
+})
+
+/**
  * Set up your function to be invoked
  */
-const createRefundTransaction = async (body, useCase, polling = false, debug = false) => {
+const createRefundTransaction = async (useCase, creditPartyKey = 'msisdn', creditPartyValue = '+44012345678', polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -23,7 +43,9 @@ const createRefundTransaction = async (body, useCase, polling = false, debug = f
     /**
      * Set the request body parameter
      */
-    request.data = body;
+    for (const property in buildRequestBody(creditPartyKey, creditPartyValue)) {
+      request[property](buildRequestBody(creditPartyKey, creditPartyValue)[property]);
+    }
 
     /**
      * Chose the polling method.
@@ -69,7 +91,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createRefundTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createRefundTransaction('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, undefined, true);
     } catch (err) {
     }
   })();

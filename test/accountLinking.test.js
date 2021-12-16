@@ -12,49 +12,11 @@ const {
   viewAccountLink
 } = require('../samples/index')
 
-const buildAccountLinkRequestBody = () => ({
-  "sourceAccountIdentifiers": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "status": "active",
-  "mode": "both",
-  "customData": [
-    {
-      "key": "keytest",
-      "value": "keyvalue"
-    }
-  ],
-  "requestingOrganisation": {
-    "requestingOrganisationIdentifierType": "organisationid",
-    "requestingOrganisationIdentifier": "12345"
-  }
-});
-
-const buildTransferTransactionRequestBody = (linkReference) => ({
-  "amount": "200.00",
-  "creditParty": [
-    {
-      "key": "linkref",
-      "value": `${linkReference}`
-    }
-  ],
-  "currency": "RWF",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ]
-});
-
 describe('Account Linking', () => {
   describe('Setup an Account Link', () => {
     describe('POST Establish an Account to Account Link', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking');
+        const response = await createAccountLink('accountLinking');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -72,7 +34,7 @@ describe('Account Linking', () => {
 
     describe('POST Establish an Account to Account Link', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking', true);
+        const response = await createAccountLink('accountLinking', undefined, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -87,7 +49,7 @@ describe('Account Linking', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'accountLinking');
+        const response = await viewRequestState('accountLinking', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -103,7 +65,7 @@ describe('Account Linking', () => {
 
     describe('GET View A Link', () => {
       it('should return link object with status 200 for a given object reference', async () => {
-        const response = await viewAccountLink('accountid', '2000', objectReference, 'accountLinking');
+        const response = await viewAccountLink('accountLinking', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('linkReference');
@@ -117,7 +79,7 @@ describe('Account Linking', () => {
   describe('Perform a Transfer for a Linked Account', () => {
     describe('POST Use a Link to make a Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking');
+        const response = await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' });
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -135,7 +97,7 @@ describe('Account Linking', () => {
 
     describe('POST Use a Link to make a Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking', true);
+        const response = await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' }, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -150,7 +112,7 @@ describe('Account Linking', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'accountLinking');
+        const response = await viewRequestState('accountLinking', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -166,7 +128,7 @@ describe('Account Linking', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference, 'accountLinking');
+        const response = await viewTransaction('accountLinking', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -185,7 +147,7 @@ describe('Account Linking', () => {
 
     describe('POST Use a Link to make a Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction(buildTransferTransactionRequestBody('REF-1638280960220'), 'accountLinking');
+        const response = await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' });
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -200,7 +162,7 @@ describe('Account Linking', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'accountLinking');
+        const response = await viewRequestState('accountLinking', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -216,7 +178,7 @@ describe('Account Linking', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(objectReference, 'accountLinking');
+        const response = await createReversal('accountLinking', objectReference);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -231,7 +193,7 @@ describe('Account Linking', () => {
   describe('Obtain a Financial Service Provider Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance('accountid', '2000', 'accountLinking');
+        const response = await viewAccountBalance('accountLinking');
 
         expect(response.status).toBe(200);
       });
@@ -241,7 +203,7 @@ describe('Account Linking', () => {
   describe('Retrieve Transfers for a Financial Service Provider', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions('accountid', '2000', 0, 20, 'accountLinking');
+        const response = await viewAccountTransactions('accountLinking');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);
@@ -269,7 +231,7 @@ describe('Account Linking', () => {
 
     describe('POST Establish an Account to Account Link', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountLink(buildAccountLinkRequestBody(), 'accountid', '2000', 'accountLinking');
+        const response = await createAccountLink('accountLinking');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -284,7 +246,7 @@ describe('Account Linking', () => {
 
     describe('GET Retrieve a Missing Response', () => {
       it('should return a response object with status 200 containing a link to the missing resource', async () => {
-        const response = await viewResponse(clientCorrelationId, 'accountLinking');
+        const response = await viewResponse('accountLinking', clientCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('link');
@@ -295,7 +257,7 @@ describe('Account Linking', () => {
 
     describe('GET Retrieve a Missing Resource', () => {
       it('should return the requested object with status 200 containing a representation of the missing resource', async () => {
-        const response = await viewResource(link, 'accountLinking');
+        const response = await viewResource('accountLinking', link);
 
         expect(response.status).toBe(200);
       });

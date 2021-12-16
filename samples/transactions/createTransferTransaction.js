@@ -11,9 +11,65 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request body parameter
+ */
+const buildRequestBody = () => ({
+  accountLinking: ({ linkReference }) => ({
+    "amount": "16.00",
+    "creditParty": [
+      {
+        "key": "linkref",
+        "value": `${linkReference}`
+      }
+    ],
+    "currency": "USD",
+    "debitParty": [
+      {
+        "key": "walletid",
+        "value": "1"
+      }
+    ]
+  }),
+  p2pTransfer: ({ quotationReference, quoteId }) => {
+    let body = {
+      "amount": "16.00",
+      "creditParty": [
+        {
+          "key": "msisdn",
+          "value": "+44012345678"
+        }
+      ],
+      "currency": "USD",
+      "debitParty": [
+        {
+          "key": "walletid",
+          "value": "1"
+        }
+      ],
+      "requestingOrganisation": {
+        "requestingOrganisationIdentifierType": "organisationid",
+        "requestingOrganisationIdentifier": "testorganisation"
+      }
+    }
+
+    if (quotationReference) {
+      body.internationalTransferInformation = {
+        "originCountry": "AD",
+        "quotationReference": `${quotationReference}`,
+        // "quoteId": `${quoteId}`,
+        "remittancePurpose": "personal",
+        "deliveryMethod": "agent"
+      }
+    }
+
+    return body;
+  }
+})
+
+/**
  * Set up your function to be invoked
  */
-const createTransferTransaction = async (body, useCase, polling = false, debug = false) => {
+const createTransferTransaction = async (useCase, bodyProperties = {}, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -23,7 +79,9 @@ const createTransferTransaction = async (body, useCase, polling = false, debug =
     /**
      * Set the request body parameter
      */
-    request.data = body
+    for (const property in buildRequestBody()[useCase](bodyProperties)) {
+      request[property](buildRequestBody()[useCase](bodyProperties)[property]);
+    }
 
     /**
      * Chose the polling method.
@@ -69,7 +127,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createTransferTransaction('<<REPLACE-WITH-BODY>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createTransferTransaction('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, true);
     } catch (err) {
     }
   })();

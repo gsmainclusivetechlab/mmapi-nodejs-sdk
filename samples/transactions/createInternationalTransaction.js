@@ -79,12 +79,12 @@ const buildRequestBody = (quotationReference, quoteId) => ({
     "requestingOrganisationIdentifierType": "organisationid",
     "requestingOrganisationIdentifier": "testorganisation"
   }
-});
+})
 
 /**
  * Set up your function to be invoked
  */
-const createInternationalTransaction = async (quotationReference, quoteId, useCase, polling = false, debug = false) => {
+const createInternationalTransaction = async (useCase, quotationReference, quoteId, polling = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -94,7 +94,9 @@ const createInternationalTransaction = async (quotationReference, quoteId, useCa
     /**
      * Set the request body parameter
      */
-    request.data = buildRequestBody(quotationReference, quoteId);
+    for (const property in buildRequestBody(quotationReference, quoteId)) {
+      request[property](buildRequestBody(quotationReference, quoteId)[property]);
+    }
 
     /**
      * Chose the polling method.
@@ -140,7 +142,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createInternationalTransaction('<<REPLACE-WITH-QUOTATION-REFERENCE>>', '<<REPLACE-WITH-QUOTE-ID>>', '<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-POLLING-TRUE-OR-FALSE>>', true);
+      await createInternationalTransaction('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-QUOTATION-REFERENCE>>', undefined, undefined, true);
     } catch (err) {
     }
   })();

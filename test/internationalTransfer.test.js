@@ -12,78 +12,11 @@ const {
   viewTransaction
 } = require('../samples/index')
 
-const buildQuotationRequestBody = () => ({
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2000"
-    }
-  ],
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "requestAmount": "75.30",
-  "requestCurrency": "RWF",
-  "requestDate": "2018-07-03T11:43:27.405Z",
-  "type": "inttransfer",
-  "subType": "abc",
-  "chosenDeliveryMethod": "agent",
-  "senderKyc": {
-    "nationality": "GB",
-    "dateOfBirth": "1970-07-03T11:43:27.405Z",
-    "occupation": "Manager",
-    "employerName": "MFX",
-    "contactPhone": "+447125588999",
-    "gender": "m",
-    "emailAddress": "luke.skywalkeraaabbb@gmail.com",
-    "birthCountry": "GB",
-    "idDocument": [
-      {
-        "idType": "nationalidcard",
-        "idNumber": "1234567",
-        "issueDate": "2018-07-03T11:43:27.405Z",
-        "expiryDate": "2021-07-03T11:43:27.405Z",
-        "issuer": "UKPA",
-        "issuerPlace": "GB",
-        "issuerCountry": "GB",
-        "otherIdDescription": "test"
-      }
-    ],
-    "postalAddress": {
-      "country": "GB",
-      "addressLine1": "111 ABC Street",
-      "city": "New York",
-      "stateProvince": "New York",
-      "postalCode": "ABCD"
-    },
-    "subjectName": {
-      "title": "Mr",
-      "firstName": "Luke",
-      "middleName": "R",
-      "lastName": "Skywalker",
-      "fullName": "Luke R Skywalker",
-      "nativeName": "ABC"
-    }
-  },
-  "customData": [
-    {
-      "key": "keytest",
-      "value": "keyvalue"
-    }
-  ],
-  "sendingServiceProviderCountry": "AD",
-  "originCountry": "AD",
-  "receivingCountry": "AD"
-})
-
 describe('International Transfers', () => {
   describe('Perform an International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(buildQuotationRequestBody(), 'internationalTransfer');
+        const response = await createQuotation('internationalTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -96,7 +29,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('REF-1636533162268', undefined, 'internationalTransfer');
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -111,7 +44,7 @@ describe('International Transfers', () => {
   describe('Perform an Bilateral International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(buildQuotationRequestBody(), 'internationalTransfer');
+        const response = await createQuotation('internationalTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -124,7 +57,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('REF-1636533162268', undefined, 'internationalTransfer');
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -142,7 +75,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('REF-1636533162268', undefined, 'internationalTransfer', true);
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -157,7 +90,7 @@ describe('International Transfers', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'internationalTransfer');
+        const response = await viewRequestState('internationalTransfer', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -173,7 +106,7 @@ describe('International Transfers', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference, 'internationalTransfer');
+        const response = await viewTransaction('internationalTransfer', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -192,7 +125,7 @@ describe('International Transfers', () => {
 
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation(buildQuotationRequestBody(), 'internationalTransfer', true);
+        const response = await createQuotation('internationalTransfer', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -207,7 +140,7 @@ describe('International Transfers', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'internationalTransfer');
+        const response = await viewRequestState('internationalTransfer', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -223,7 +156,7 @@ describe('International Transfers', () => {
 
     describe('GET View A Quotation', () => {
       it('should return the quotation object with status 200', async () => {
-        const response = await viewQuotation(objectReference, 'internationalTransfer');
+        const response = await viewQuotation('internationalTransfer', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('quotationReference');
@@ -241,7 +174,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('REF-1636533162268', undefined, 'internationalTransfer');
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -256,7 +189,7 @@ describe('International Transfers', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'internationalTransfer');
+        const response = await viewRequestState('internationalTransfer', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -272,7 +205,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(objectReference, 'internationalTransfer');
+        const response = await createReversal('internationalTransfer', objectReference);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -287,7 +220,7 @@ describe('International Transfers', () => {
   describe('Obtain a Financial Service Provider Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance('accountid', '2000', 'internationalTransfer');
+        const response = await viewAccountBalance('internationalTransfer');
 
         expect(response.status).toBe(200);
       });
@@ -297,7 +230,7 @@ describe('International Transfers', () => {
   describe('Retrieve Transactions for a Financial Service Provider', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions('accountid', '2000', 0, 20, 'internationalTransfer');
+        const response = await viewAccountTransactions('internationalTransfer');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);
@@ -325,7 +258,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('REF-1636533162268', undefined, 'internationalTransfer');
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -340,7 +273,7 @@ describe('International Transfers', () => {
 
     describe('GET Retrieve a Missing Response', () => {
       it('should return a response object with status 200 containing a link to the missing resource', async () => {
-        const response = await viewResponse(clientCorrelationId, 'internationalTransfer');
+        const response = await viewResponse('internationalTransfer', clientCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('link');
@@ -351,7 +284,7 @@ describe('International Transfers', () => {
 
     describe('GET Retrieve a Missing Resource', () => {
       it('should return the requested object with status 200 containing a representation of the missing resource', async () => {
-        const response = await viewResource(link, 'internationalTransfer');
+        const response = await viewResource('internationalTransfer', link);
 
         expect(response.status).toBe(200);
       });

@@ -11,14 +11,21 @@ require('../test_helper');
 const client = require('../test_harness').client();
 
 /**
+ * Create the request path parameter
+ */
+const buildAccountIdentifiers = () => ({
+  "msisdn": '+44012345678'
+})
+
+/**
  * Set up your function to be invoked
  */
-const viewAccountLink = async (identifierType, identifier, linkReference, useCase, debug = false) => {
+const viewAccountLink = async (useCase, linkReference, accountIdentifiers = buildAccountIdentifiers(), debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi[useCase].viewAccountLink(identifierType, identifier, linkReference);
+    const request = new mmapi[useCase].viewAccountLink(accountIdentifiers, linkReference);
 
     /**
      * Call API with your client and get a response for your call
@@ -57,7 +64,7 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await viewAccountLink('<<REPLACE-WITH-IDENTIFIER-TYPE>>', '<<REPLACE-WITH-IDENTIFIER>>', '<<REPLACE-WITH-LINK-REFERENCE>>', '<<REPLACE-WITH-USE-CASE>>', true);
+      await viewAccountLink('<<REPLACE-WITH-USE-CASE>>', '<<REPLACE-WITH-LINK-REFERENCE>>', undefined, true);
     } catch (err) {
     }
   })();

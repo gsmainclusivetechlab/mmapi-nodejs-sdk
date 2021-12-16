@@ -13,67 +13,11 @@ const {
   viewAccountTransactions
 } = require('../samples/index')
 
-const buildAccountDebitMandateRequestBody = () => ({
-  "payee": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "requestDate": "2018-07-03T10:43:27.405Z",
-  "startDate": "2018-07-03T10:43:27.405Z",
-  "currency": "GBP",
-  "amountLimit": "1000.00",
-  "endDate": "2028-07-03T10:43:27.405Z",
-  "numberOfPayments": "2",
-  "frequencyType": "sixmonths",
-  "customData": [
-    {
-      "key": "keytest",
-      "value": "keyvalue"
-    }
-  ]
-});
-
-const buildMerchantTransactionRequestBody = (mandateReference) => ({
-  "amount": "200.00",
-  "debitParty": [
-    {
-      "key": "mandatereference",
-      "value": `${mandateReference}`
-    }
-  ],
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "currency": "RWF"
-});
-
-const buildRefundTransactionRequestBody = (mandateReference) => ({
-  "amount": "200.00",
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "creditParty": [
-    {
-      "key": "mandateReference",
-      "value": `${mandateReference}`
-    }
-  ],
-  "currency": "RWF"
-});
-
 describe('Recurring Payments', () => {
   describe('Setup a Recurring Payment', () => {
     describe('POST Setup a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountDebitMandate(buildAccountDebitMandateRequestBody(), 'accountid', '2000', 'recurringPayment');
+        const response = await createAccountDebitMandate('recurringPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -91,7 +35,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Setup a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountDebitMandate(buildAccountDebitMandateRequestBody(), 'accountid', '2000', 'recurringPayment', true)
+        const response = await createAccountDebitMandate('recurringPayment', undefined, undefined, true)
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -106,7 +50,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
+        const response = await viewRequestState('recurringPayment', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -122,7 +66,7 @@ describe('Recurring Payments', () => {
 
     describe('GET View A Debit Mandate', () => {
       it('should return debit mandate object with status 200 for a given object reference', async () => {
-        const response = await viewAccountDebitMandate('accountid', '2000', objectReference, 'recurringPayment');
+        const response = await viewAccountDebitMandate('recurringPayment', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('mandateReference');
@@ -134,7 +78,7 @@ describe('Recurring Payments', () => {
   describe('Take a Recurring Payment', () => {
     describe('POST Take a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(buildMerchantTransactionRequestBody('REF-1637669509954'), 'recurringPayment');
+        const response = await createMerchantTransaction('recurringPayment', 'mandatereference', 'REF-1637669509954');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -152,7 +96,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Take a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(buildMerchantTransactionRequestBody('REF-1637669509954'), 'recurringPayment', true);
+        const response = await createMerchantTransaction('recurringPayment', 'mandatereference', 'REF-1637669509954', true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -167,7 +111,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
+        const response = await viewRequestState('recurringPayment', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -183,7 +127,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction(objectReference, 'recurringPayment');
+        const response = await viewTransaction('recurringPayment', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
@@ -199,7 +143,7 @@ describe('Recurring Payments', () => {
   describe('Recurring Payment Refund', () => {
     describe('POST Perform a Recurring Payment Refund', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createRefundTransaction(buildRefundTransactionRequestBody('REF-1637670547701'), 'recurringPayment');
+        const response = await createRefundTransaction('recurringPayment', 'mandatereference', 'REF-1637670547701');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -217,7 +161,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Take a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(buildMerchantTransactionRequestBody('REF-1637670547701'), 'recurringPayment', true);
+        const response = await createMerchantTransaction('recurringPayment', 'mandatereference', 'REF-1637670547701', true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -232,7 +176,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
+        const response = await viewRequestState('recurringPayment', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -248,7 +192,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Perform a Merchant Payment Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(objectReference, 'recurringPayment');
+        const response = await createReversal('recurringPayment', objectReference);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -266,7 +210,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Setup a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountDebitMandate(buildAccountDebitMandateRequestBody(), 'accountid', '2000', 'recurringPayment', true)
+        const response = await createAccountDebitMandate('recurringPayment', undefined, undefined, true)
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -281,7 +225,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, 'recurringPayment');
+        const response = await viewRequestState('recurringPayment', serverCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -297,7 +241,7 @@ describe('Recurring Payments', () => {
 
     describe('GET View A Debit Mandate', () => {
       it('should return debit mandate object with status 200 for a given object reference', async () => {
-        const response = await viewAccountDebitMandate('accountid', '2000', objectReference, 'recurringPayment');
+        const response = await viewAccountDebitMandate('recurringPayment', objectReference);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('mandateReference');
@@ -309,7 +253,7 @@ describe('Recurring Payments', () => {
   describe('Obtain a Service Provider Balance', () => {
     describe('GET Get an Account Balance', () => {
       it('should return the balance object with status 200', async () => {
-        const response = await viewAccountBalance('accountid', '2000', 'recurringPayment');
+        const response = await viewAccountBalance('recurringPayment');
 
         expect(response.status).toBe(200);
       });
@@ -319,7 +263,7 @@ describe('Recurring Payments', () => {
   describe('Retrieve Payments for a Service Provider', () => {
     describe('GET Retrieve a Set of Transactions for an Account', () => {
       it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
-        const response = await viewAccountTransactions('accountid', '2000', 0, 20, 'recurringPayment');
+        const response = await viewAccountTransactions('recurringPayment');
 
         expect(response.status).toBe(200);
         expect(response.data.length).toBe(20);
@@ -347,7 +291,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Take a Recurring Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction(buildMerchantTransactionRequestBody('REF-1637670547701'), 'recurringPayment');
+        const response = await createMerchantTransaction('recurringPayment', 'mandatereference', 'REF-1637670547701');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -362,7 +306,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Retrieve a Missing Response', () => {
       it('should return a response object with status 200 containing a link to the missing resource', async () => {
-        const response = await viewResponse(clientCorrelationId, 'recurringPayment');
+        const response = await viewResponse('recurringPayment', clientCorrelationId);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('link');
@@ -373,7 +317,7 @@ describe('Recurring Payments', () => {
 
     describe('GET Retrieve a Missing Resource', () => {
       it('should return the requested object with status 200 containing a representation of the missing resource', async () => {
-        const response = await viewResource(link, 'recurringPayment');
+        const response = await viewResource('recurringPayment', link);
 
         expect(response.status).toBe(200);
       });
