@@ -18,7 +18,7 @@ const createInternationalTransaction = async (body, polling = false) => {
     const request = new mmapi.internationalTransfer.createInternationalTransaction();
 
     /**
-     * Set the request body parameter
+     * Set the request body parameters individually or by request.body(body);
      */
     request.requestingOrganisationTransactionReference(body.requestingOrganisationTransactionReference);
     request.originalTransactionReference(body.originalTransactionReference);
