@@ -2,6 +2,8 @@ const core = require('./core/index');
 const accounts = require('./accounts/index');
 const authorisationCodes = require('./authorisationCodes/index');
 const batchTransactions = require('./batchTransactions/index');
+const bills = require('./bills/index');
+const billPayments = require('./billPayments/index');
 const debitMandates = require('./debitMandates/index');
 const links = require('./links/index');
 const quotations = require('./quotations/index');
@@ -14,6 +16,8 @@ module.exports = {
   ...accounts,
   ...authorisationCodes,
   ...batchTransactions,
+  ...bills,
+  ...billPayments,
   ...debitMandates,
   ...links,
   ...quotations,
