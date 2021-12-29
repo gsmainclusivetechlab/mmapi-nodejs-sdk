@@ -639,7 +639,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td rowspan="1">Successful Retrieval of Bills</td>
     <td><a href="/docs/billPayment/viewAccountBills.Readme.md">Retrieve a Set of Bills</a></td>
     <td>viewAccountBills</td>
-    <td></td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
   <tr>
     <td rowspan="2">Make a Successful Bill Payment with Callback</td>
@@ -650,35 +650,35 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
   <tr>
     <td><a href="/docs/billPayment/createBillPayment.Readme.md">Make a Bill Payment</a></td>
     <td>createBillPayment</td>
-    <td></td>
+    <td>{ identifierType1: identifier1 }, billReference</td>
   </tr>
  <tr>
     <td rowspan="3">Make a Bill Payment with Polling</td>
     <td><a href="/docs/billPayment/createBillPayment.Readme.md">Make a Bill Payment Via the Polling Method</a></td>
     <td>createBillPayment</td>
-    <td></td>
+    <td>{ identifierType1: identifier1 }, billReference</td>
   </tr>
   <tr>
     <td><a href="/docs/billPayment/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
     <td>viewRequestState</td>
-    <td></td>
+    <td>serverCorrelationId</td>
   </tr>
   <tr>
     <td><a href="/docs/billPayment/viewBillPayment.Readme.md">Retrieve Bill Payments for a Given Bill</a></td>
     <td>viewBillPayment</td>
-    <td></td>
+    <td>{ identifierType1: identifier1 }, billReference</td>
   </tr>
   <tr>
     <td rowspan="1">Retrieval of Bill Payments</td>
     <td><a href="/docs/billPayment/viewBillPayment.Readme.md">Retrieve a Set of Bill Payments</a></td>
     <td>viewBillPayment</td>
-    <td></td>
+    <td>{ identifierType1: identifier1 }, billReference</td>
   </tr>
   <tr>
     <td rowspan="1">Retrieve a Transaction</td>
     <td><a href="/docs/billPayment/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
     <td>viewTransaction</td>
-    <td></td>
+    <td>transactionReference</td>
   </tr>
   <tr>
     <td rowspan="1">Check for Service Availability</td>
