@@ -87,6 +87,10 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 * [Disbursements](#disbursements)
 * [International Transfers](#international-transfers)
 * [P2P Transfers](#p2p-transfers)
+* [Recurring Payments](#recurring-payments)
+* [Account Linking](#account-linking)
+* [Bill Payments](#bill-payments)
+* [Agent Services (including Cash-In and Cash-Out)](#agent-services)
 
 ### Merchant Payments
 <table>
@@ -465,6 +469,74 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
   </tr>
   <tr>
     <td><a href="/docs/p2pTransfer/viewResource.Readme.md">Retrieve Representation a Missing Resource</a></td>
+    <td>viewResource</td>
+    <td>link</td>
+  </tr>
+</tbody>
+</table>
+
+### Account Linking
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="1">Setup an Account Link</td>
+    <td><a href="/docs/p2pTransfer/createAccountLink.Readme.md">Establish an Account to Account Link</a></td>
+    <td>createAccountLink</td>
+    <td>{ identifierType1: identifier1 }</td>
+  </tr>
+  <tr>
+    <td rowspan="1">Perform a Transfer for a Linked Account</td>
+    <td><a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Use a Link to make a Transfer</a></td>
+    <td>createTransferTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="1">Perform a Transfer using an Account Link via the Polling Method</td>
+    <td><a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Use a Link to make a Transfer</a></td>
+    <td>createTransferTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="1">Perform a Transfer Reversal</td>
+    <td><a href="/docs/p2pTransfer/createReversal.Readme.md">Perform a Transaction Reversal</a></td>
+    <td>createReversal</td>
+    <td>originalTransactionReference</td>
+  </tr>
+  <tr>
+    <td rowspan="1">Obtain a Financial Service Provider Balance</td>
+    <td><a href="/docs/p2pTransfer/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td>{ identifierType: identifier }</td>
+  </tr>
+  <tr>
+    <td rowspan="1">Retrieve Transfers for a Financial Service Provider</td>
+    <td><a href="/docs/p2pTransfer/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountTransactions</td>
+    <td>{ identifierType1: identifier1 }</td>
+  </tr>
+  <tr>
+    <td rowspan="1">Check for Service Availability</td>
+    <td><a href="/docs/p2pTransfer/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Retrieve a Missing API Response</td>
+    <td><a href="/docs/p2pTransfer/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>clientCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/p2pTransfer/viewResource.Readme.md">Retrieve a Missing Resource</a></td>
     <td>viewResource</td>
     <td>link</td>
   </tr>
