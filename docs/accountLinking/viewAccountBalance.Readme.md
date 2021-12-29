@@ -1,6 +1,6 @@
 # View Account Balance
 
-1) `Here, viewAccountBalance({ identifierType: identifier }) creates a GET request to /accounts/{identifierType}/{identifier}/balance`
+1) `Here, viewAccountBalance({ identifierType1: identifier1 }) creates a GET request to /accounts/{identifierType}/{identifier}/balance`
 
 > `This endpoint returns the balance of an account where one identifier suffices to uniquely identify an account.`
 

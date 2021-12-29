@@ -163,13 +163,13 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td>Obtain a Merchant Balance</td>
     <td><a href="docs/merchantPayment/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
     <td>viewAccountBalance</td>
-    <td>{ identifierType: identifier }</td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
   <tr>
     <td>Retrieve Payments for a Merchant</td>
     <td><a href="/docs/merchantPayment/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
     <td>viewAccountTransactions</td>
-    <td>{ identifierType: identifier }</td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
   <tr>
     <td>Check for Service Availability</td>
@@ -281,7 +281,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td>Obtain a Disbursement Organisation Balance</td>
     <td><a href="/docs/disbursement/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
     <td>viewAccountBalance</td>
-    <td>{ identifierType: identifier }</td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
   <tr>
     <td>Retrieve Transactions for a Disbursement Organisation</td>
@@ -354,13 +354,13 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td>Obtain an FSP Balance</td>
     <td><a href="/docs/internationalTransfer/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
     <td>viewAccountBalance</td>
-    <td>{ identifierType: identifier }</td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
   <tr>
     <td>Retrieve Transactions for an FSP</td>
     <td><a href="/docs/internationalTransfer/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
     <td>viewAccountTransactions</td>
-    <td>{ identifierType: identifier }</td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
   <tr>
     <td>Check for Service Availability</td>
@@ -398,7 +398,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td rowspan="3">P2P Transfer via Switch</td>
     <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
     <td>viewAccountName</td>
-    <td>{ identifierType: identifier }</td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
   <tr>
     <td><a href="/docs/p2pTransfer/createQuotation.Readme.md">Request a P2P Quotation</a></td>
@@ -414,7 +414,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td rowspan="2">Bilateral P2P Transfer</td>
     <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
     <td>viewAccountName</td>
-    <td>{ identifierType: identifier }</td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
   <tr>
     <td><a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
@@ -425,7 +425,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td rowspan="3">‘On-us’ P2P Transfer Initiated by a Third Party Provider</td>
     <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
     <td>viewAccountName</td>
-    <td>{ identifierType: identifier }</td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
   <tr>
     <td><a href="/docs/p2pTransfer/createQuotation.Readme.md">Request a P2P Quotation</a></td>
@@ -447,7 +447,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td>Obtain an FSP Balance</td>
     <td><a href="/docs/p2pTransfer/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
     <td>viewAccountBalance</td>
-    <td>{ identifierType: identifier }</td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
    <tr>
     <td>Retrieve Transactions for an FSP</td>
@@ -469,6 +469,86 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
   </tr>
   <tr>
     <td><a href="/docs/p2pTransfer/viewResource.Readme.md">Retrieve Representation a Missing Resource</a></td>
+    <td>viewResource</td>
+    <td>link</td>
+  </tr>
+</tbody>
+</table>
+
+### Recurring Payments
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="1">Setup a Recurring Payment</td>
+    <td><a href="/docs/recurringPayment/createAccountDebitMandate.Readme.md">Setup a Recurring Payment</a></td>
+    <td>createAccountDebitMandate</td>
+    <td>{ identifierType1: identifier1 }</td>
+  </tr>
+  <tr>
+    <td rowspan="1">Take a Recurring Payment</td>
+    <td><a href="/docs/recurringPayment/createMerchantTransaction.Readme.md">Take a Recurring Payment</a></td>
+    <td>createMerchantTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="1">Take a Recurring Payment using the Polling Method</td>
+    <td><a href="/docs/recurringPayment/createMerchantTransaction.Readme.md">Take a Recurring Payment</a></td>
+    <td>createMerchantTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="1">Recurring Payment Refund</td>
+    <td><a href="/docs/recurringPayment/createRefundTransaction.Readme.md">Perform a Recurring Payment Refund</a></td>
+    <td>createRefundTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="1">Recurring Payment Reversal</td>
+    <td><a href="/docs/recurringPayment/createReversal.Readme.md">Perform a Merchant Payment Reversal</a></td>
+    <td>createReversal</td>
+    <td>originalTransactionReference</td>
+  </tr>
+  <tr>
+    <td rowspan="1">Payer sets up a Recurring Payment using MMP Channel</td>
+    <td><a href="/docs/recurringPayment/createAccountDebitMandate.Readme.md">Setup a Recurring Payment</a></td>
+    <td>createAccountDebitMandate</td>
+    <td>{ identifierType1: identifier1 }</td>
+  </tr>
+  <tr>
+    <td rowspan="1">Obtain a Service Provider Balance</td>
+    <td><a href="/docs/recurringPayment/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td>{ identifierType1: identifier1 }</td>
+  </tr>
+  <tr>
+    <td rowspan="1">Retrieve Payments for a Service Provider</td>
+    <td><a href="/docs/recurringPayment/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountTransactions</td>
+    <td>{ identifierType1: identifier1 }</td>
+  </tr>
+  <tr>
+    <td rowspan="1">Check for Service Availability</td>
+    <td><a href="/docs/recurringPayment/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Retrieve a Missing API Response</td>
+    <td><a href="/docs/recurringPayment/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>clientCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/recurringPayment/viewResource.Readme.md">Retrieve a Missing Resource</a></td>
     <td>viewResource</td>
     <td>link</td>
   </tr>
@@ -515,7 +595,7 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
     <td rowspan="1">Obtain a Financial Service Provider Balance</td>
     <td><a href="/docs/p2pTransfer/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
     <td>viewAccountBalance</td>
-    <td>{ identifierType: identifier }</td>
+    <td>{ identifierType1: identifier1 }</td>
   </tr>
   <tr>
     <td rowspan="1">Retrieve Transfers for a Financial Service Provider</td>
@@ -537,6 +617,83 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
   </tr>
   <tr>
     <td><a href="/docs/p2pTransfer/viewResource.Readme.md">Retrieve a Missing Resource</a></td>
+    <td>viewResource</td>
+    <td>link</td>
+  </tr>
+</tbody>
+</table>
+
+### Bill Payments
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="1">Successful Retrieval of Bills</td>
+    <td><a href="/docs/billPayment/viewAccountBills.Readme.md">Retrieve a Set of Bills</a></td>
+    <td>viewAccountBills</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Make a Successful Bill Payment with Callback</td>
+    <td><a href="/docs/billPayment/createBillTransaction.Readme.md">Perform a Bill Payment Transaction</a></td>
+    <td>createBillTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="/docs/billPayment/createBillPayment.Readme.md">Make a Bill Payment</a></td>
+    <td>createBillPayment</td>
+    <td></td>
+  </tr>
+ <tr>
+    <td rowspan="3">Make a Bill Payment with Polling</td>
+    <td><a href="/docs/billPayment/createBillPayment.Readme.md">Make a Bill Payment Via the Polling Method</a></td>
+    <td>createBillPayment</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="/docs/billPayment/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
+    <td>viewRequestState</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="/docs/billPayment/viewBillPayment.Readme.md">Retrieve Bill Payments for a Given Bill</a></td>
+    <td>viewBillPayment</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="1">Retrieval of Bill Payments</td>
+    <td><a href="/docs/billPayment/viewBillPayment.Readme.md">Retrieve a Set of Bill Payments</a></td>
+    <td>viewBillPayment</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="1">Retrieve a Transaction</td>
+    <td><a href="/docs/billPayment/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
+    <td>viewTransaction</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="1">Check for Service Availability</td>
+    <td><a href="/docs/billPayment/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td rowspan="2">Retrieve a Missing API Response</td>
+    <td><a href="/docs/billPayment/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>clientCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/billPayment/viewResource.Readme.md">Retrieve a Missing Resource</a></td>
     <td>viewResource</td>
     <td>link</td>
   </tr>
