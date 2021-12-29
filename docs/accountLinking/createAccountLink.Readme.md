@@ -24,7 +24,7 @@ const createAccountLink = async (body, accountIdentifiers, polling = false) => {
     console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
-     * Set the request body parameter
+     * Set the request body parameters individually or by request.body(body);
      */
     request.sourceAccountIdentifiers(body.sourceAccountIdentifiers);
     request.status(body.status);
@@ -34,10 +34,11 @@ const createAccountLink = async (body, accountIdentifiers, polling = false) => {
     request.requestDate(body.requestDate);
 
     /**
-     * Chose the polling method.
+     * Synchronous and asynchronous modes are supported.
+     * By default polling method is used for asynchronous mode. If needed, chose the callback method for asynchronous mode.
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback('<<REPLCASE-WITH-X-CALLBACK-URL>>');
     }
 
     /**

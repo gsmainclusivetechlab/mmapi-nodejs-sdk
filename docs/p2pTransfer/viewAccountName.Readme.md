@@ -1,6 +1,6 @@
 # View Account Name
 
-`Here, viewAccountName({ identifierType: identifier }) creates a GET request to /accounts/{identifierType}/{identifier}/accountname`
+`Here, viewAccountName({ identifierType1: identifier1 }) creates a GET request to /accounts/{identifierType}/{identifier}/accountname`
 
 > `This endpoint returns the name of an account holder where one identifier suffices to uniquely identify an account.`
 

@@ -19,7 +19,7 @@ const createReversal = async (body, originalTransactionReference, polling = fals
     console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
-     * Set the request body parameter
+     * Set the request body parameters individually or by request.body(body);
      */
     request.creditParty(body.creditParty);
     request.debitParty(body.debitParty);

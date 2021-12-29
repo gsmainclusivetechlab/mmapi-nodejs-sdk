@@ -23,7 +23,7 @@ const createAccountDebitMandate = async (body, accountIdentifiers, polling = fal
     console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
-     * Set the request body parameter
+     * Set the request body parameters individually or by request.body(body);
      */
     request.payee(body.payee);
     request.requestDate(body.requestDate);

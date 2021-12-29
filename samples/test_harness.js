@@ -29,4 +29,5 @@ const client = () => new mmapi.core.MobileMoneyApiHttpClient(environment());
 module.exports = {
   client,
   environment,
+  callbackUrl: process.env.CALLBACK_URL
 };

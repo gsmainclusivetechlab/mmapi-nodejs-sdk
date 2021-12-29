@@ -21,7 +21,7 @@ const createRefundTransaction = async (body, polling = false) => {
     console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
-     * Set the request body parameter
+     * Set the request body parameters individually or by request.body(body);
      */
     request.requestingOrganisationTransactionReference(body.requestingOrganisationTransactionReference);
     request.originalTransactionReference(body.originalTransactionReference);
