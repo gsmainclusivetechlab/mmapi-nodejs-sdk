@@ -38,7 +38,7 @@ const createBillPayment = async (body, accountIdentifiers, billReference, callba
     request.metadata(body.metadata);
 
     /**
-     * Chose the callback method. Default is the polling method.
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
     if (callback) {
       request.callback(process.env.CALLBACK_URL);
