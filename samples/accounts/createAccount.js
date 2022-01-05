@@ -115,7 +115,7 @@ const createAccount = async (useCase, bodyProperties = {}, callback = false, deb
     }
 
     /**
-     * Chose the callback method.
+     * Chose the callback method. Default is the polling method.
      */
     if (callback) {
       request.callback(callbackUrl);

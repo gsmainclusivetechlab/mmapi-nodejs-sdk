@@ -16,7 +16,7 @@ describe('International Transfers', () => {
   describe('Perform an International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation('internationalTransfer');
+        const response = await createQuotation('internationalTransfer', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -29,7 +29,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -44,7 +44,7 @@ describe('International Transfers', () => {
   describe('Perform an Bilateral International Transfer', () => {
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation('internationalTransfer');
+        const response = await createQuotation('internationalTransfer', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -57,7 +57,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -75,7 +75,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, true);
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -125,7 +125,7 @@ describe('International Transfers', () => {
 
     describe('POST Request a International Transfer Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation('internationalTransfer', undefined, true);
+        const response = await createQuotation('internationalTransfer');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -174,7 +174,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -205,7 +205,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal('internationalTransfer', objectReference);
+        const response = await createReversal('internationalTransfer', objectReference, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -258,7 +258,7 @@ describe('International Transfers', () => {
 
     describe('POST Perform an International Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined);
+        const response = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

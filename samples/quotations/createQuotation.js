@@ -9,6 +9,7 @@ require('../test_helper');
  * mobileMoneyApi HTTP client dependency
  */
 const client = require('../test_harness').client();
+const callbackUrl = require('../test_harness').callbackUrl;
 
 /**
  * Create the request body parameter
@@ -111,7 +112,7 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createQuotation = async (useCase, body = buildRequestBody(), polling = false, debug = false) => {
+const createQuotation = async (useCase, body = buildRequestBody(), callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -126,10 +127,10 @@ const createQuotation = async (useCase, body = buildRequestBody(), polling = fal
     }
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method.
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(callbackUrl);
     }
 
     /**

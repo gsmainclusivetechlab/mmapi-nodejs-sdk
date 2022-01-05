@@ -17,14 +17,14 @@ const usecase1 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment...");
 
   console.log("POST Payee Initiated Merchant Payment")
-  await createMerchantTransaction('merchantPayment', undefined, undefined, undefined, true);
+  await createMerchantTransaction('merchantPayment', undefined, undefined, true, true);
 }
 
 const usecase2 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment via the Polling Method...")
 
   console.log('POST Payee Initiated Merchant Payment')
-  const { data: { serverCorrelationId } } = await createMerchantTransaction('merchantPayment', undefined, undefined, true, true);
+  const { data: { serverCorrelationId } } = await createMerchantTransaction('merchantPayment', undefined, undefined, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('merchantPayment', serverCorrelationId, true);
@@ -37,21 +37,21 @@ const usecase3 = async () => {
   console.log("Perform a Payer-Initiated Merchant Payment...")
 
   console.log('POST Payer Initiated Merchant Payment')
-  await createMerchantTransaction('merchantPayment', undefined, undefined, undefined, true);
+  await createMerchantTransaction('merchantPayment', undefined, undefined, true, true);
 }
 
 const usecase4 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code...")
 
   console.log('POST Obtain an Authorisation Code')
-  await createAuthorisationCode('merchantPayment', undefined, undefined, undefined, true);
+  await createAuthorisationCode('merchantPayment', undefined, undefined, true, true);
 }
 
 const usecase5 = async () => {
   console.log("Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code Using the Polling Method...")
 
   console.log('POST Obtain an Authorisation Code')
-  const { data: { serverCorrelationId } } = await createAuthorisationCode('merchantPayment', undefined, undefined, true, true);
+  const { data: { serverCorrelationId } } = await createAuthorisationCode('merchantPayment', undefined, undefined, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('merchantPayment', serverCorrelationId, true);
@@ -64,14 +64,14 @@ const usecase6 = async () => {
   console.log("Perform a Merchant Payment Refund...")
 
   console.log('POST Perform a Merchant Payment Refund')
-  await createRefundTransaction('merchantPayment', undefined, undefined, undefined, true);
+  await createRefundTransaction('merchantPayment', undefined, undefined, true, true);
 }
 
 const usecase7 = async () => {
   console.log("Perform a Merchant Payment Refund Using the Polling Method...")
 
   console.log('POST Perform a Merchant Payment Refund')
-  const { data: { serverCorrelationId } } = await createRefundTransaction('merchantPayment', undefined, undefined, true, true);
+  const { data: { serverCorrelationId } } = await createRefundTransaction('merchantPayment', undefined, undefined, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('merchantPayment', serverCorrelationId, true);
@@ -90,7 +90,7 @@ const usecase8 = async () => {
   const { data: { objectReference } } = await viewRequestState('merchantPayment', serverCorrelationId, true);
 
   console.log('POST Perform a Merchant Payment Reversal')
-  await createReversal('merchantPayment', objectReference, undefined, undefined, true);
+  await createReversal('merchantPayment', objectReference, undefined, true, true);
 }
 
 const usecase9 = async () => {
@@ -118,7 +118,7 @@ const usecase12 = async () => {
   console.log("Retrieve a Missing API Response from an API Provider...")
 
   console.log('POST Payee Initiated Merchant Payment');
-  const { config: { headers } } = await createMerchantTransaction('merchantPayment', undefined, undefined, undefined, true);
+  const { config: { headers } } = await createMerchantTransaction('merchantPayment', undefined, undefined, true, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewResponse('merchantPayment', headers['X-CorrelationID'], true);

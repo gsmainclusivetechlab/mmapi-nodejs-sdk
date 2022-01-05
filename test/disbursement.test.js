@@ -19,7 +19,7 @@ describe('Disbursements', () => {
   describe('Perform an Individual Disbursement', () => {
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createDisbursementTransaction('disbursement');
+        const response = await createDisbursementTransaction('disbursement', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -34,7 +34,7 @@ describe('Disbursements', () => {
   describe('Perform a Bulk Disbursement', () => {
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBatchTransaction('disbursement');
+        const response = await createBatchTransaction('disbursement', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -88,7 +88,7 @@ describe('Disbursements', () => {
   describe('Perform a Bulk Disbursement with Maker / Checker', () => {
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBatchTransaction('disbursement');
+        const response = await createBatchTransaction('disbursement', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -103,7 +103,7 @@ describe('Disbursements', () => {
 
     describe('PATCH Approve The Transaction Batch', () => {
       it('should return the request state object with status 202 to indicate that the request is completed', async () => {
-        const response = await updateBatchTransaction('disbursement', batchId);
+        const response = await updateBatchTransaction('disbursement', batchId, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -158,7 +158,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createDisbursementTransaction('disbursement', undefined, true);
+        const response = await createDisbursementTransaction('disbursement');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -208,7 +208,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform a Bulk Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBatchTransaction('disbursement', undefined, true);
+        const response = await createBatchTransaction('disbursement');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -256,7 +256,7 @@ describe('Disbursements', () => {
 
     describe('PATCH Approve The Transaction Batch', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await updateBatchTransaction('disbursement', "REF-1636656115835", true);
+        const response = await updateBatchTransaction('disbursement', "REF-1636656115835");
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -304,7 +304,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createDisbursementTransaction('disbursement');
+        const response = await createDisbursementTransaction('disbursement', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -335,7 +335,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal('disbursement', objectReference);
+        const response = await createReversal('disbursement', objectReference, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -388,7 +388,7 @@ describe('Disbursements', () => {
 
     describe('POST Perform an Individual Disbursement', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createDisbursementTransaction('disbursement');
+        const response = await createDisbursementTransaction('disbursement', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

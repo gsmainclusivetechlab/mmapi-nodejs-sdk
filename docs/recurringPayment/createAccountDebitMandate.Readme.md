@@ -14,7 +14,7 @@
 /**
  * Set up your function to be invoked
  */
-const createAccountDebitMandate = async (body, accountIdentifiers, polling = false) => {
+const createAccountDebitMandate = async (body, accountIdentifiers, callback = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -38,10 +38,10 @@ const createAccountDebitMandate = async (body, accountIdentifiers, polling = fal
     request.mandateStatus(body.mandateStatus);
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method.
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(process.env.CALLBACK_URL);
     }
 
     /**

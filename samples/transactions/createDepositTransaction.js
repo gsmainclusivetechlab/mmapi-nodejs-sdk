@@ -49,7 +49,7 @@ const createDepositTransaction = async (useCase, body = buildRequestBody(), call
     }
 
     /**
-     * Chose the callback method.
+     * Chose the callback method. Default is the polling method.
      */
     if (callback) {
       request.callback(callbackUrl);

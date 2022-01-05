@@ -105,7 +105,7 @@ describe('Agent Services (including Cash-In and Cash-Out)', () => {
 
     describe('POST Obtain an Authorisation Code', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAuthorisationCode('agentService', undefined, undefined, true);
+        const response = await createAuthorisationCode('agentService');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

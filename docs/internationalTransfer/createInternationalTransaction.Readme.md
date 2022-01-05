@@ -10,7 +10,7 @@
 /**
  * Set up your function to be invoked
  */
-const createInternationalTransaction = async (body, polling = false) => {
+const createInternationalTransaction = async (body, callback = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -42,10 +42,10 @@ const createInternationalTransaction = async (body, polling = false) => {
     request.metadata(body.metadata);
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method.
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(process.env.CALLBACK_URL);
     }
 
     /**

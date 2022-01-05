@@ -63,7 +63,7 @@ const createWithdrawalTransaction = async (useCase, bodyProperties = {}, callbac
     }
 
     /**
-     * Chose the callback method.
+     * Chose the callback method. Default is the polling method.
      */
     if (callback) {
       request.callback(callbackUrl);

@@ -50,7 +50,7 @@ const updateAccountIdentity = async (useCase, body = buildRequestBody(), account
     }
 
     /**
-     * Chose the callback method.
+     * Chose the callback method. Default is the polling method.
      */
     if (callback) {
       request.callback(callbackUrl);

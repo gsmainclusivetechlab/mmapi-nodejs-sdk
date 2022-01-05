@@ -10,7 +10,7 @@
 /**
  * Set up your function to be invoked
  */
-const createBatchTransaction = async (body, polling = false) => {
+const createBatchTransaction = async (body, callback = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -27,10 +27,10 @@ const createBatchTransaction = async (body, polling = false) => {
     request.scheduledStartDate(body.scheduledStartDate);
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method.
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(process.env.CALLBACK_URL);
     }
 
     /**

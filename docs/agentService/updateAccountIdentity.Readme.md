@@ -30,7 +30,7 @@ const updateAccountIdentity = async (body, accountIdentifiers, identityId, callb
     request.value(body.value);
 
     /**
-     * Chose the callback method.
+     * Chose the callback method. Default is the polling method.
      */
     if (callback) {
       request.callback(process.env.CALLBACK_URL);

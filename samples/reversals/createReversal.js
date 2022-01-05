@@ -9,6 +9,7 @@ require('../test_helper');
  * mobileMoneyApi HTTP client dependency
  */
 const client = require('../test_harness').client();
+const callbackUrl = require('../test_harness').callbackUrl;
 
 /**
  * Create the request body parameter
@@ -20,7 +21,7 @@ const buildRequestBody = () => ({
 /**
  * Set up your function to be invoked
  */
-const createReversal = async (useCase, originalTransactionReference, body = buildRequestBody(), polling = false, debug = false) => {
+const createReversal = async (useCase, originalTransactionReference, body = buildRequestBody(), callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -35,10 +36,10 @@ const createReversal = async (useCase, originalTransactionReference, body = buil
     }
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method.
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(callbackUrl);
     }
 
     /**

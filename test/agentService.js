@@ -48,7 +48,7 @@ const usecase4 = async () => {
   console.log("Customer Cash - out at an ATM using an Authorisation Code..");
 
   console.log('POST Obtain an Authorisation Code')
-  const { data: { serverCorrelationId } } = await createAuthorisationCode('agentService', undefined, undefined, true, true);
+  const { data: { serverCorrelationId } } = await createAuthorisationCode('agentService', undefined, undefined, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('agentService', serverCorrelationId, true);

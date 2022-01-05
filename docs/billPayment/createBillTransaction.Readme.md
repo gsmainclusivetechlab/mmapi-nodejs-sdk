@@ -44,7 +44,7 @@ const createBillTransaction = async (body, callback = false) => {
     request.metadata(body.metadata);
 
     /**
-     * Chose the callback method.
+     * Chose the callback method. Default is the polling method.
      */
     if (callback) {
       request.callback(process.env.CALLBACK_URL);

@@ -19,14 +19,14 @@ const usecase1 = async () => {
   console.log("Perform an Individual Disbursement...");
 
   console.log("POST Perform an Individual Disbursement")
-  await createDisbursementTransaction('disbursement', undefined, undefined, true);
+  await createDisbursementTransaction('disbursement', undefined, true, true);
 }
 
 const usecase2 = async () => {
   console.log("Perform a Bulk Disbursement...")
 
   console.log('POST Perform a Bulk Disbursement')
-  await createBatchTransaction('disbursement', undefined, undefined, true);
+  await createBatchTransaction('disbursement', undefined, true, true);
 
   let batchId = "REF-1636656115835";
 
@@ -44,7 +44,7 @@ const usecase3 = async () => {
   console.log("Perform a Bulk Disbursement with Maker / Checker...")
 
   console.log('POST Perform a Bulk Disbursement')
-  const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', undefined, true, true);
+  const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', undefined, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
@@ -53,7 +53,7 @@ const usecase3 = async () => {
   const { data: { batchId } } = await viewBatchTransaction('disbursement', objectReference, true);
 
   console.log('PATCH Approve The Transaction Batch')
-  const { data: { serverCorrelationId: serverCorrelationId1 } } = await updateBatchTransaction('disbursement', batchId, true, true);
+  const { data: { serverCorrelationId: serverCorrelationId1 } } = await updateBatchTransaction('disbursement', batchId, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference: objectReference1 } } = await viewRequestState('disbursement', serverCorrelationId1, true);
@@ -72,7 +72,7 @@ const usecase4 = async () => {
   console.log("Perform an Individual Disbursement Using the Polling Method...")
 
   console.log('POST Perform an Individual Disbursement')
-  const { data: { serverCorrelationId } } = await createDisbursementTransaction('disbursement', undefined, true, true);
+  const { data: { serverCorrelationId } } = await createDisbursementTransaction('disbursement', undefined, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
@@ -85,7 +85,7 @@ const usecase5 = async () => {
   console.log("Perform a Bulk Disbursement Using the Polling Method...")
 
   console.log('POST Perform a Bulk Disbursement')
-  const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', undefined, true, true);
+  const { data: { serverCorrelationId } } = await createBatchTransaction('disbursement', undefined, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
@@ -100,7 +100,7 @@ const usecase6 = async () => {
   let batchId = "REF-1636656115835";
 
   console.log('PATCH Approve The Transaction Batch')
-  const { data: { serverCorrelationId } } = await updateBatchTransaction('disbursement', batchId, true, true);
+  const { data: { serverCorrelationId } } = await updateBatchTransaction('disbursement', batchId, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
@@ -119,7 +119,7 @@ const usecase7 = async () => {
   const { data: { objectReference } } = await viewRequestState('disbursement', serverCorrelationId, true);
 
   console.log('POST Perform a Transaction Reversal')
-  await createReversal('disbursement', objectReference, undefined, undefined, true);
+  await createReversal('disbursement', objectReference, undefined, true, true);
 }
 
 const usecase8 = async () => {
@@ -147,7 +147,7 @@ const usecase11 = async () => {
   console.log("Retrieve a Missing API Response from an API Provider...")
 
   console.log('POST Perform an Individual Disbursement');
-  const { config: { headers } } = await createDisbursementTransaction('disbursement', undefined, undefined, true);
+  const { config: { headers } } = await createDisbursementTransaction('disbursement', undefined, true, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewResponse('disbursement', headers['X-CorrelationID'], true);

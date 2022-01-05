@@ -30,7 +30,7 @@ const createAccount = async (body, callback = false) => {
     request.requestDate(body.requestDate);
 
     /**
-     * Chose the callback method.
+     * Chose the callback method. Default is the polling method.
      */
     if (callback) {
       request.callback(process.env.CALLBACK_URL);

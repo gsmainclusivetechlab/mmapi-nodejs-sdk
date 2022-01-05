@@ -12,7 +12,7 @@
 /**
  * Set up your function to be invoked
  */
-const createRefundTransaction = async (body, polling = false) => {
+const createRefundTransaction = async (body, callback = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -45,10 +45,10 @@ const createRefundTransaction = async (body, polling = false) => {
     request.metadata(body.metadata);
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method.
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(process.env.CALLBACK_URL);
     }
 
     /**

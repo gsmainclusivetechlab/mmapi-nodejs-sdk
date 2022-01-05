@@ -16,27 +16,27 @@ const usecase1 = async () => {
   console.log("Perform an International Transfer...");
 
   console.log("POST Request a International Transfer Quotation")
-  await createQuotation('internationalTransfer', undefined, undefined, true);
+  await createQuotation('internationalTransfer', undefined, true, true);
 
   console.log("POST Perform an International Transfer")
-  await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, undefined, true);
+  await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, true, true);
 }
 
 const usecase2 = async () => {
   console.log("Perform an Bilateral International Transfer...");
 
   console.log("POST Request a International Transfer Quotation")
-  await createQuotation('internationalTransfer', undefined, undefined, true);
+  await createQuotation('internationalTransfer', undefined, true, true);
 
   console.log("POST Perform an International Transfer")
-  await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, undefined, true);
+  await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, true, true);
 }
 
 const usecase3 = async () => {
   console.log("Perform an International Transfer via the Polling Method...");
 
   console.log("POST Perform an International Transfer")
-  let { data: { serverCorrelationId } } = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, true, true);
+  let { data: { serverCorrelationId } } = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('internationalTransfer', serverCorrelationId, true);
@@ -49,7 +49,7 @@ const usecase4 = async () => {
   console.log("Request a International Transfer Quotation via the Polling Method...");
 
   console.log("POST Request a International Transfer Quotation")
-  let { data: { serverCorrelationId, pollLimit } } = await createQuotation('internationalTransfer', undefined, true, true);
+  let { data: { serverCorrelationId, pollLimit } } = await createQuotation('internationalTransfer', undefined, undefined, true);
 
   pollLimit = 3
 
@@ -76,7 +76,7 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState('internationalTransfer', serverCorrelationId, true);
 
   console.log('GET Perform a Merchant Payment Reversal')
-  await createReversal('internationalTransfer', objectReference, undefined, undefined, true);
+  await createReversal('internationalTransfer', objectReference, undefined, true, true);
 }
 
 const usecase6 = async () => {
@@ -104,7 +104,7 @@ const usecase9 = async () => {
   console.log("Retrieve a Missing API Response from an API Provider...")
 
   console.log('POST Perform an International Transfer');
-  const { config: { headers } } = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, undefined, true);
+  const { config: { headers } } = await createInternationalTransaction('internationalTransfer', 'REF-1636533162268', undefined, true, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewResponse('internationalTransfer', headers['X-CorrelationID'], true);

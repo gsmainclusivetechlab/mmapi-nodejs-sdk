@@ -49,7 +49,7 @@ const createBillTransaction = async (useCase, body = buildRequestBody(), callbac
     }
 
     /**
-     * Chose the callback method.
+     * Chose the callback method. Default is the polling method.
      */
     if (callback) {
       request.callback(callbackUrl);

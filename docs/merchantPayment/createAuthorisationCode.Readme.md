@@ -15,7 +15,7 @@
 /**
  * Set up your function to be invoked
  */
-const createAuthorisationCode = async (body, accountIdentifiers, polling = false) => {
+const createAuthorisationCode = async (body, accountIdentifiers, callback = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -31,10 +31,10 @@ const createAuthorisationCode = async (body, accountIdentifiers, polling = false
     request.amount(body.amount);
 
     /**
-     * Chose the polling method. If not chosen callback method will be used.
+     * Chose the callback method. Default is the polling method.
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(process.env.CALLBACK_URL);
     }
 
     /**

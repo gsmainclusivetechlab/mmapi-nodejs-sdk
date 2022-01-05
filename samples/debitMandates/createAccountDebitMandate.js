@@ -9,6 +9,7 @@ require('../test_helper');
  * mobileMoneyApi HTTP client dependency
  */
 const client = require('../test_harness').client();
+const callbackUrl = require('../test_harness').callbackUrl;
 
 /**
  * Create the request body parameter
@@ -45,7 +46,7 @@ const buildAccountIdentifiers = () => ({
 /**
  * Set up your function to be invoked
  */
-const createAccountDebitMandate = async (useCase, body = buildRequestBody(), accountIdentifiers = buildAccountIdentifiers(), polling = false, debug = false) => {
+const createAccountDebitMandate = async (useCase, body = buildRequestBody(), accountIdentifiers = buildAccountIdentifiers(), callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -60,10 +61,10 @@ const createAccountDebitMandate = async (useCase, body = buildRequestBody(), acc
     }
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method.
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(callbackUrl);
     }
 
     /**
