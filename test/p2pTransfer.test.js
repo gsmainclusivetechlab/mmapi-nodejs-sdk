@@ -25,7 +25,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Request a P2P Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation('p2pTransfer');
+        const response = await createQuotation('p2pTransfer', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -38,7 +38,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined });
+        const response = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined }, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -56,7 +56,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined }, true)
+        const response = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined })
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -111,7 +111,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction('p2pTransfer');
+        const response = await createTransferTransaction('p2pTransfer', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -134,7 +134,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Request a P2P Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createQuotation('p2pTransfer');
+        const response = await createQuotation('p2pTransfer', undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -147,7 +147,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined });
+        const response = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined }, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -165,7 +165,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined });
+        const response = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined }, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -196,7 +196,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal('p2pTransfer', objectReference);
+        const response = await createReversal('p2pTransfer', objectReference, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -249,7 +249,7 @@ describe('P2P Transfers', () => {
 
     describe('POST Perform a P2P Transfer', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined });
+        const response = await createTransferTransaction('p2pTransfer', { quotationReference: 'REF-1637249499739', quoteId: undefined }, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

@@ -17,7 +17,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Payee-Initiated Merchant Payment', () => {
     describe('POST Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction('merchantPayment');
+        const response = await createMerchantTransaction('merchantPayment', undefined, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -35,7 +35,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction('merchantPayment', undefined, undefined, true);
+        const response = await createMerchantTransaction('merchantPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -82,7 +82,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Payer-Initiated Merchant Payment', () => {
     describe('POST Payer Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction('merchantPayment');
+        const response = await createMerchantTransaction('merchantPayment', undefined, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -97,7 +97,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Payee-Initiated Merchant Payment using a Pre-authorised Payment Code', () => {
     describe('POST Obtain an Authorisation Code', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAuthorisationCode('merchantPayment');
+        const response = await createAuthorisationCode('merchantPayment', undefined, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -115,7 +115,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Obtain an Authorisation Code', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAuthorisationCode('merchantPayment', undefined, undefined, true);
+        const response = await createAuthorisationCode('merchantPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -158,7 +158,7 @@ describe('Merchant Payments', () => {
   describe('Perform a Merchant Payment Refund', () => {
     describe('POST Perform a Merchant Payment Refund', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createRefundTransaction('merchantPayment');
+        const response = await createRefundTransaction('merchantPayment', undefined, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -176,7 +176,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Perform a Merchant Payment Refund', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createRefundTransaction('merchantPayment', undefined, undefined, true);
+        const response = await createRefundTransaction('merchantPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -226,7 +226,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction('merchantPayment');
+        const response = await createMerchantTransaction('merchantPayment', undefined, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -257,7 +257,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Perform a Merchant Payment Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal('merchantPayment', objectReference);
+        const response = await createReversal('merchantPayment', objectReference, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -310,7 +310,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Payee Initiated Merchant Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createMerchantTransaction('merchantPayment');
+        const response = await createMerchantTransaction('merchantPayment', undefined, undefined, true);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

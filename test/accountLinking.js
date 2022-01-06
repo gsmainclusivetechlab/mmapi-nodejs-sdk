@@ -16,14 +16,14 @@ const usecase1 = async () => {
   console.log("Setup an Account Link...");
 
   console.log("POST Establish an Account to Account Link")
-  await createAccountLink('accountLinking', undefined, undefined, undefined, true);
+  await createAccountLink('accountLinking', undefined, undefined, true, true);
 }
 
 const usecase2 = async () => {
   console.log("Setup an Account Link using the Polling Method...");
 
   console.log("POST Establish an Account to Account Link");
-  const { data: { serverCorrelationId } } = await createAccountLink('accountLinking', undefined, undefined, true, true);
+  const { data: { serverCorrelationId } } = await createAccountLink('accountLinking', undefined, undefined, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('accountLinking', serverCorrelationId, true);
@@ -36,14 +36,14 @@ const usecase3 = async () => {
   console.log("Perform a Transfer for a Linked Account...");
 
   console.log("POST Use a Link to make a Transfer");
-  await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' }, undefined, true);
+  await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' }, true, true);
 }
 
 const usecase4 = async () => {
   console.log("Perform a Transfer using an Account Link via the Polling Method...");
 
   console.log('POST Use a Link to make a Transfer')
-  const { data: { serverCorrelationId } } = await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' }, true, true);
+  const { data: { serverCorrelationId } } = await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' }, undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('accountLinking', serverCorrelationId, true);
@@ -56,13 +56,13 @@ const usecase5 = async () => {
   console.log("Perform a Transfer Reversal...")
 
   console.log("POST Use a Link to make a Transfer");
-  const { data: { serverCorrelationId } } = await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' }, undefined, true);
+  const { data: { serverCorrelationId } } = await createTransferTransaction('accountLinking', { linkReference: 'REF-1638280960220' }, true, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState('accountLinking', serverCorrelationId, true);
 
   console.log('POST Perform a Transaction Reversal')
-  await createReversal('accountLinking', objectReference, undefined, undefined, true);
+  await createReversal('accountLinking', objectReference, undefined, true, true);
 }
 
 const usecase6 = async () => {
@@ -90,7 +90,7 @@ const usecase9 = async () => {
   console.log("Retrieve a Missing API Response...")
 
   console.log("POST Establish an Account to Account Link");
-  const { config: { headers } } = await createAccountLink('accountLinking', undefined, undefined, undefined, true);
+  const { config: { headers } } = await createAccountLink('accountLinking', undefined, undefined, true, true);
 
   console.log('GET Retrieve a Missing Response');
   const { data: { link } } = await viewResponse('accountLinking', headers['X-CorrelationID'], true);

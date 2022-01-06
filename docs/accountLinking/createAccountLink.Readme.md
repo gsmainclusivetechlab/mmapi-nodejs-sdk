@@ -15,7 +15,7 @@
 /**
  * Set up your function to be invoked
  */
-const createAccountLink = async (body, accountIdentifiers, polling = false) => {
+const createAccountLink = async (body, accountIdentifiers, callback = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -34,11 +34,10 @@ const createAccountLink = async (body, accountIdentifiers, polling = false) => {
     request.requestDate(body.requestDate);
 
     /**
-     * Synchronous and asynchronous modes are supported.
-     * By default polling method is used for asynchronous mode. If needed, chose the callback method for asynchronous mode.
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
     if (callback) {
-      request.callback('<<REPLCASE-WITH-X-CALLBACK-URL>>');
+      request.callback(process.env.CALLBACK_URL);
     }
 
     /**

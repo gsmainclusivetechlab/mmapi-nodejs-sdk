@@ -9,6 +9,7 @@ require('../test_helper');
  * mobileMoneyApi HTTP client dependency
  */
 const client = require('../test_harness').client();
+const callbackUrl = require('../test_harness').callbackUrl;
 
 /**
  * Create the request body parameter
@@ -33,7 +34,7 @@ const buildRequestBody = (debitPartyKey, debitPartyValue) => ({
 /**
  * Set up your function to be invoked
  */
-const createMerchantTransaction = async (useCase, debitPartyKey = 'walletid', debitPartyValue = '1', polling = false, debug = false) => {
+const createMerchantTransaction = async (useCase, debitPartyKey = 'walletid', debitPartyValue = '1', callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -48,10 +49,10 @@ const createMerchantTransaction = async (useCase, debitPartyKey = 'walletid', de
     }
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method.
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(callbackUrl);
     }
 
     /**

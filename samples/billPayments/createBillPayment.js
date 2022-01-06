@@ -49,7 +49,7 @@ const createBillPayment = async (useCase, body = buildRequestBody(), accountIden
     }
 
     /**
-     * Chose the callback method.
+     * Chose the callback method. Default is the polling method.
      */
     if (callback) {
       request.callback(callbackUrl);

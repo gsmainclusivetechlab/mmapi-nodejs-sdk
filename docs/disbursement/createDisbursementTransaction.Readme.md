@@ -10,7 +10,7 @@
 /**
  * Set up your function to be invoked
  */
-const createDisbursementTransaction = async (body, polling = false) => {
+const createDisbursementTransaction = async (body, callback = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -43,10 +43,10 @@ const createDisbursementTransaction = async (body, polling = false) => {
     request.metadata(body.metadata);
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(process.env.CALLBACK_URL);
     }
 
     /**

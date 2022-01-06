@@ -9,11 +9,12 @@ require('../test_helper');
  * mobileMoneyApi HTTP client dependency
  */
 const client = require('../test_harness').client();
+const callbackUrl = require('../test_harness').callbackUrl;
 
 /**
  * Set up your function to be invoked
  */
-const updateBatchTransaction = async (useCase, batchId, polling = false, debug = false) => {
+const updateBatchTransaction = async (useCase, batchId, callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -21,10 +22,10 @@ const updateBatchTransaction = async (useCase, batchId, polling = false, debug =
     const request = new mmapi[useCase].updateBatchTransaction(batchId);
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method.
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(callbackUrl);
     }
 
     /**

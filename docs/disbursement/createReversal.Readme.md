@@ -10,7 +10,7 @@
 /**
  * Set up your function to be invoked
  */
-const createReversal = async (body, originalTransactionReference, polling = false) => {
+const createReversal = async (body, originalTransactionReference, callback = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -37,10 +37,10 @@ const createReversal = async (body, originalTransactionReference, polling = fals
     request.metadata(body.metadata);
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(process.env.CALLBACK_URL);
     }
 
     /**

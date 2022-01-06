@@ -94,7 +94,7 @@ describe('Bill Payments', () => {
 
     describe('POST Make a Bill Payment Via the Polling Method', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBillPayment('billPayment', undefined, undefined, undefined);
+        const response = await createBillPayment('billPayment');
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

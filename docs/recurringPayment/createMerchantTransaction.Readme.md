@@ -11,7 +11,7 @@
 /**
  * Set up your function to be invoked
  */
-const createMerchantTransaction = async (body, polling = false) => {
+const createMerchantTransaction = async (body, callback = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -44,10 +44,10 @@ const createMerchantTransaction = async (body, polling = false) => {
     request.metadata(body.metadata);
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(process.env.CALLBACK_URL);
     }
 
     /**

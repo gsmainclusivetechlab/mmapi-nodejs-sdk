@@ -10,7 +10,7 @@
 /**
  * Set up your function to be invoked
  */
-const updateBatchTransaction = async (batchId, polling = false) => {
+const updateBatchTransaction = async (batchId, callback = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -19,10 +19,10 @@ const updateBatchTransaction = async (batchId, polling = false) => {
     console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
-     * Chose the polling method.
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
-    if (polling) {
-      request.polling();
+    if (callback) {
+      request.callback(process.env.CALLBACK_URL);
     }
 
     /**
