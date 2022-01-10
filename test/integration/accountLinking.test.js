@@ -10,7 +10,7 @@ const {
   createReversal,
   viewAccountTransactions,
   viewAccountLink
-} = require('../samples/index')
+} = require('../../samples/index')
 
 describe('Account Linking', () => {
   describe('Setup an Account Link', () => {

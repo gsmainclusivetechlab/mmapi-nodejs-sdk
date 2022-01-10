@@ -11,7 +11,7 @@ const {
   createReversal,
   viewAccountDebitMandate,
   viewAccountTransactions
-} = require('../samples/index')
+} = require('../../samples/index')
 
 describe('Recurring Payments', () => {
   describe('Setup a Recurring Payment', () => {

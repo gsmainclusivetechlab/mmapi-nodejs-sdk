@@ -8,7 +8,7 @@ const {
   viewServiceAvailability,
   viewResponse,
   viewResource
-} = require('../samples/index');
+} = require('../../samples/index')
 
 describe('Bill Payments', () => {
   describe('Successful Retrieval of Bills', () => {

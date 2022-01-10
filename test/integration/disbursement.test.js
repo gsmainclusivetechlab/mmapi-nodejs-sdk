@@ -13,7 +13,7 @@ const {
   viewTransaction,
   createReversal,
   viewAccountTransactions
-} = require('../samples/index')
+} = require('../../samples/index')
 
 describe('Disbursements', () => {
   describe('Perform an Individual Disbursement', () => {

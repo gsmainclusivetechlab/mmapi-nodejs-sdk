@@ -11,7 +11,7 @@ const {
   viewQuotation,
   viewRequestState,
   viewTransaction
-} = require('../samples/index')
+} = require('../../samples/index')
 
 describe('P2P Transfers', () => {
   describe('Perform a P2P Transfer via Switch', () => {

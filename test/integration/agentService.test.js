@@ -15,7 +15,7 @@ const {
   viewServiceAvailability,
   viewResponse,
   viewResource
-} = require('../samples/index');
+} = require('../../samples/index')
 
 describe('Agent Services (including Cash-In and Cash-Out)', () => {
   describe('Agent-initiated Cash-out using the Callback Method', () => {

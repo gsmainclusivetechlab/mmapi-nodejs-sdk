@@ -10,7 +10,7 @@ const {
   viewQuotation,
   viewRequestState,
   viewTransaction
-} = require('../samples/index')
+} = require('../../samples/index')
 
 describe('International Transfers', () => {
   describe('Perform an International Transfer', () => {

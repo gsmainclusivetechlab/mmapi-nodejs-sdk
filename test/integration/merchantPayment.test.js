@@ -11,7 +11,7 @@ const {
   createReversal,
   viewAccountTransactions,
   viewAuthorisationCode
-} = require('../samples/index')
+} = require('../../samples/index')
 
 describe('Merchant Payments', () => {
   describe('Perform a Payee-Initiated Merchant Payment', () => {
