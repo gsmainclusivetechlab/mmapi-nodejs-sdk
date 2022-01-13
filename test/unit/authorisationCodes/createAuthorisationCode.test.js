@@ -1,9 +1,9 @@
 'use strict';
 
-const mmapi = require('../../lib/index');
+const mmapi = require('../../../lib/index');
 const nock = require('nock');
 
-describe('Links', function () {
+describe('Authorization Code', function () {
   let environment = new mmapi.core.SandboxEnvironment('consumerKey', 'consumerSecret', 'apiKey', 'ENHANCED_LEVEL', 'https://e765d0c6-3d88-40d4-9fd8-ef93b154d663.mock.pstmn.io/callback');
 
   beforeEach(function () {
@@ -75,35 +75,20 @@ describe('Links', function () {
     }
   }
 
-  describe('CreateAccountLink', function () {
+  describe('CreateAuthorisationCode', function () {
     const authTokenHeader = authHeader(false);
     const authRefreshHeader = authHeader(true);
 
     let request;
 
     beforeEach(async () => {
-      request = new mmapi.accountLinking.createAccountLink({ "msisdn": '+44012345678' });
+      request = new mmapi.merchantPayment.createAuthorisationCode({ 'msisdn': '+44012345678' });
 
       request.body({
-        "sourceAccountIdentifiers": [
-          {
-            "key": "walletid",
-            "value": "1"
-          }
-        ],
-        "status": "active",
-        "mode": "both",
-        "customData": [
-          {
-            "key": "keytest",
-            "value": "keyvalue"
-          }
-        ],
-        "requestingOrganisation": {
-          "requestingOrganisationIdentifierType": "organisationid",
-          "requestingOrganisationIdentifier": "12345"
-        }
-      });
+        "requestDate": "2018-07-03T10:43:27.405Z",
+        "currency": "GBP",
+        "amount": "1000.00"
+      })
     });
 
     afterEach(async () => {
@@ -113,7 +98,7 @@ describe('Links', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "c7789514-cce8-49fd-8ce7-a151fd53eeb2", "status": "pending", "notificationMethod": "polling", "objectReference": "205", "pollLimit": 100
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -138,7 +123,7 @@ describe('Links', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "c7789514-cce8-49fd-8ce7-a151fd53eeb2", "status": "pending", "notificationMethod": "callback", "objectReference": "205", "pollLimit": 100
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "callback", "objectReference": "1056", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -163,7 +148,7 @@ describe('Links', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "c7789514-cce8-49fd-8ce7-a151fd53eeb2", "status": "pending", "notificationMethod": "polling", "objectReference": "205", "pollLimit": 100
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -182,18 +167,13 @@ describe('Links', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property sourceAccountIdentifiers if sourceAccountIdentifiers is invoked', async function () {
-      request.sourceAccountIdentifiers([
-        {
-          "key": "walletid",
-          "value": "1"
-        }
-      ]);
+    it('should return request data with property amount if amount is invoked', async function () {
+      request.amount("1000.00");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "c7789514-cce8-49fd-8ce7-a151fd53eeb2", "status": "pending", "notificationMethod": "polling", "objectReference": "205", "pollLimit": 100
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -202,7 +182,7 @@ describe('Links', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('sourceAccountIdentifiers');
+      expect(request.data).toHaveProperty('amount');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -213,13 +193,13 @@ describe('Links', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property mode if mode is invoked', async function () {
-      request.mode("both");
+    it('should return request data with property currency if currency is invoked', async function () {
+      request.currency("GBP");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "c7789514-cce8-49fd-8ce7-a151fd53eeb2", "status": "pending", "notificationMethod": "polling", "objectReference": "205", "pollLimit": 100
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -228,62 +208,7 @@ describe('Links', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('mode');
-      expect(response.status).toBe(202);
-      expect(response.data).toHaveProperty('status');
-      expect(response.data.status).toBe('pending');
-      expect(response.data).toHaveProperty('serverCorrelationId');
-      expect(response.data).toHaveProperty('notificationMethod');
-      expect(response.data.notificationMethod).toBe('polling');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return request data with property status if status is invoked', async function () {
-      request.status("active");
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .post(`${this.securityOptionUrl}${request.url}`, request.data)
-        .reply(202, {
-          "serverCorrelationId": "c7789514-cce8-49fd-8ce7-a151fd53eeb2", "status": "pending", "notificationMethod": "polling", "objectReference": "205", "pollLimit": 100
-        }, {
-          "Content-Type": "application/json"
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(request.data).toHaveProperty('status');
-      expect(response.status).toBe(202);
-      expect(response.data).toHaveProperty('status');
-      expect(response.data.status).toBe('pending');
-      expect(response.data).toHaveProperty('serverCorrelationId');
-      expect(response.data).toHaveProperty('notificationMethod');
-      expect(response.data.notificationMethod).toBe('polling');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return request data with property requestingOrganisation if requestingOrganisation is invoked', async function () {
-      request.requestingOrganisation({
-        "requestingOrganisationIdentifierType": "organisationid",
-        "requestingOrganisationIdentifier": "12345"
-      });
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .post(`${this.securityOptionUrl}${request.url}`, request.data)
-        .reply(202, {
-          "serverCorrelationId": "c7789514-cce8-49fd-8ce7-a151fd53eeb2", "status": "pending", "notificationMethod": "polling", "objectReference": "205", "pollLimit": 100
-        }, {
-          "Content-Type": "application/json"
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(request.data).toHaveProperty('requestingOrganisation');
+      expect(request.data).toHaveProperty('currency');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -300,7 +225,7 @@ describe('Links', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "c7789514-cce8-49fd-8ce7-a151fd53eeb2", "status": "pending", "notificationMethod": "polling", "objectReference": "205", "pollLimit": 100
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -320,18 +245,198 @@ describe('Links', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property customData if customData is invoked', async function () {
-      request.customData([
-        {
-          "key": "keytest",
-          "value": "keyvalue"
-        }
-      ]);
+    it('should return request data with property amountType if amountType is invoked', async function () {
+      request.amountType("exact");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "c7789514-cce8-49fd-8ce7-a151fd53eeb2", "status": "pending", "notificationMethod": "polling", "objectReference": "205", "pollLimit": 100
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('amountType');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property codeLifetime if codeLifetime is invoked', async function () {
+      request.codeLifetime(1);
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('codeLifetime');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property holdFundsIndicator if holdFundsIndicator is invoked', async function () {
+      request.holdFundsIndicator(true);
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('holdFundsIndicator');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property redemptionAccountIdentifiers if redemptionAccountIdentifiers is invoked', async function () {
+      request.redemptionAccountIdentifiers([{ "accountid": "1" }]);
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('redemptionAccountIdentifiers');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property redemptionChannels if redemptionChannels is invoked', async function () {
+      request.redemptionChannels("channelType");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('redemptionChannels');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property redemptionTransactionTypes if redemptionTransactionTypes is invoked', async function () {
+      request.redemptionTransactionTypes("redemptionTransactionTypes");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('redemptionTransactionTypes');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property requestingOrganisation if requestingOrganisation is invoked', async function () {
+      request.requestingOrganisation({
+        "requestingOrganisationIdentifierType": "organisationid",
+        "requestingOrganisationIdentifier": "12345"
+      });
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('requestingOrganisation');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property customData if customData is invoked', async function () {
+      request.customData("customData");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -350,26 +455,14 @@ describe('Links', function () {
       expect(requestNock.isDone()).toBe(true);
       expect(accessTokenNock.isDone()).toBe(true);
     });
-  })
 
-  describe('ViewAccountLink', function () {
-    const authTokenHeader = authHeader(false);
-    const authRefreshHeader = authHeader(true);
+    it('should return request data with property metadata if metadata is invoked', async function () {
+      request.metadata([{ "key": "value" }]);
 
-    let request;
-
-    beforeEach(async () => {
-      request = new mmapi.accountLinking.viewAccountLink({ "msisdn": '+44012345678' }, "REF-1638376731631");
-    })
-
-    afterEach(async () => {
-    });
-
-    it('should return a link object if request is valid', async function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .reply(200, {
-          "linkReference": "REF-1638376731631", "sourceAccountIdentifiers": [{ "key": "accountid", "value": "2999" }, { "key": "mandatereference", "value": "REF-1637907197912" }, { "key": "mandatereference", "value": "REF-1637907232832" }, { "key": "mandatereference", "value": "REF-1637907265888" }, { "key": "mandatereference", "value": "REF-1637907412029" }, { "key": "mandatereference", "value": "REF-1637907483978" }, { "key": "mandatereference", "value": "REF-1637909732171" }, { "key": "mandatereference", "value": "REF-1638330257762" }, { "key": "mandatereference", "value": "REF-1638360515423" }], "mode": "both", "status": "active", "requestingOrganisation": { "requestingOrganisationIdentifierType": "organisationid", "requestingOrganisationIdentifier": "12345" }, "creationDate": "2021-12-01T16:38:52", "modificationDate": "2021-12-01T16:38:52", "customData": [{ "key": "keytest", "value": "keyvalue" }]
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b", "status": "pending", "notificationMethod": "polling", "objectReference": "1056", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -378,11 +471,13 @@ describe('Links', function () {
 
       const response = await this.http.execute(request);
 
-      expect(response.status).toBe(200);
-      expect(response.data).toHaveProperty('linkReference');
-      expect(response.data).toHaveProperty('sourceAccountIdentifiers');
-      expect(response.data).toHaveProperty('mode');
+      expect(request.data).toHaveProperty('metadata');
+      expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
       expect(requestNock.isDone()).toBe(true);
       expect(accessTokenNock.isDone()).toBe(true);
     });

@@ -1,9 +1,9 @@
 'use strict';
 
-const mmapi = require('../../lib/index');
+const mmapi = require('../../../lib/index');
 const nock = require('nock');
 
-describe('Batch Transactions', function () {
+describe('Transactions', function () {
   let environment = new mmapi.core.SandboxEnvironment('consumerKey', 'consumerSecret', 'apiKey', 'ENHANCED_LEVEL', 'https://e765d0c6-3d88-40d4-9fd8-ef93b154d663.mock.pstmn.io/callback');
 
   beforeEach(function () {
@@ -75,56 +75,32 @@ describe('Batch Transactions', function () {
     }
   }
 
-  describe('CreateBatchTransaction', function () {
+  describe('CreateDepositTransaction', function () {
     const authTokenHeader = authHeader(false);
     const authRefreshHeader = authHeader(true);
 
     let request;
 
     beforeEach(async () => {
-      request = new mmapi.disbursement.createBatchTransaction();
+      request = new mmapi.agentService.createDepositTransaction();
 
       request.body({
-        "transactions": [
+        "amount": "16.00",
+        "debitParty": [
           {
-            "amount": "16.00",
-            "type": "transfer",
-            "creditParty": [
-              {
-                "key": "msisdn",
-                "value": "+44012345678"
-              }
-            ],
-            "currency": "USD",
-            "debitParty": [
-              {
-                "key": "walletid",
-                "value": "1"
-              }
-            ]
-          },
-          {
-            "amount": "16.00",
-            "type": "transfer",
-            "creditParty": [
-              {
-                "key": "msisdn",
-                "value": "+44012345678"
-              }
-            ],
-            "currency": "USD",
-            "debitParty": [
-              {
-                "key": "walletid",
-                "value": "1"
-              }
-            ]
+            "key": "walletid",
+            "value": "1"
           }
         ],
-        "batchTitle": "Batch_Test",
-        "batchDescription": "Testing a Batch",
-        "scheduledStartDate": "2019-12-11T15:08:03.158Z"
-      });
+        "creditParty": [
+          {
+            "key": "msisdn",
+            "value": "+44012345678"
+          }
+        ],
+        "currency": "USD"
+      })
+
     })
 
     afterEach(async () => {
@@ -134,7 +110,7 @@ describe('Batch Transactions', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75", "status": "pending", "notificationMethod": "polling", "objectReference": "429", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -159,7 +135,7 @@ describe('Batch Transactions', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75", "status": "pending", "notificationMethod": "callback", "objectReference": "429", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "callback", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -184,7 +160,7 @@ describe('Batch Transactions', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75", "status": "pending", "notificationMethod": "polling", "objectReference": "429", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -203,13 +179,13 @@ describe('Batch Transactions', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property batchStatus if batchStatus is invoked', async function () {
-      request.batchStatus("created");
+    it('should return request data with property requestingOrganisationTransactionReference if requestingOrganisationTransactionReference is invoked', async function () {
+      request.requestingOrganisationTransactionReference("REF-1234567890");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75", "status": "pending", "notificationMethod": "polling", "objectReference": "429", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -218,7 +194,7 @@ describe('Batch Transactions', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('batchStatus');
+      expect(request.data).toHaveProperty('requestingOrganisationTransactionReference');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -229,13 +205,13 @@ describe('Batch Transactions', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property transactions if transactions is invoked', async function () {
-      request.transactions([]);
+    it('should return request data with property originalTransactionReference if originalTransactionReference is invoked', async function () {
+      request.originalTransactionReference("REF-1234567890");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75", "status": "pending", "notificationMethod": "polling", "objectReference": "429", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -244,7 +220,7 @@ describe('Batch Transactions', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('transactions');
+      expect(request.data).toHaveProperty('originalTransactionReference');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -255,13 +231,18 @@ describe('Batch Transactions', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property batchTitle if batchTitle is invoked', async function () {
-      request.batchTitle("example");
+    it('should return request data with property creditParty if creditParty is invoked', async function () {
+      request.creditParty([
+        {
+          "key": "msisdn",
+          "value": "+44012345678"
+        }
+      ]);
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75", "status": "pending", "notificationMethod": "polling", "objectReference": "429", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -270,7 +251,7 @@ describe('Batch Transactions', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('batchTitle');
+      expect(request.data).toHaveProperty('creditParty');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -281,13 +262,18 @@ describe('Batch Transactions', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property batchDescription if batchDescription is invoked', async function () {
-      request.batchDescription("example description");
+    it('should return request data with property debitParty if debitParty is invoked', async function () {
+      request.debitParty([
+        {
+          "key": "walletid",
+          "value": "1"
+        }
+      ]);
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75", "status": "pending", "notificationMethod": "polling", "objectReference": "429", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -296,7 +282,7 @@ describe('Batch Transactions', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('batchDescription');
+      expect(request.data).toHaveProperty('debitParty');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -307,7 +293,341 @@ describe('Batch Transactions', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property requestingOrganisation if requestingOrganisation is invoked', async function () {
+    it('should return request data with property type if type is invoked', async function () {
+      request.type("merchantpay");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('type');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property subType if subType is invoked', async function () {
+      request.subType("abc");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('subType');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property amount if amount is invoked', async function () {
+      request.amount("10.00");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('amount');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property currency if currency is invoked', async function () {
+      request.currency("GBP");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('currency');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with descriptionText if descriptionText is invoked', async function () {
+      request.descriptionText("exampleDescriptionText");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('descriptionText');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with fees if fees is invoked', async function () {
+      request.fees([{ "feeType": "value", "feeAmount": "value", "feeCurrency": "value" }]);
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('fees');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with geoCode if geoCode is invoked', async function () {
+      request.geoCode("exampleGeoCode");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('geoCode');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with internationalTransferInformation if internationalTransferInformation is invoked', async function () {
+      request.internationalTransferInformation({
+        "quotationReference": "value",
+        "quoteId": "value",
+        "originCountry": "value",
+        "deliveryMethod": "value",
+        "receivingCountry": "value",
+        "relationshipSender": "value",
+        "recipientBlockingReason": "value",
+        "senderBlockingReason": "value",
+        "senderBlockingReason": "value",
+        "remittancePurpose": "value",
+        "sendingServiceProviderCountry": "value"
+      });
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('internationalTransferInformation');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with oneTimeCode if oneTimeCode is invoked', async function () {
+      request.oneTimeCode("exampleOneTimeCode");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('oneTimeCode');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with recipientKyc if recipientKyc is invoked', async function () {
+      request.recipientKyc({ "employerName": "exampleEmployerName" });
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('recipientKyc');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with senderKyc if senderKyc is invoked', async function () {
+      request.senderKyc({
+        "nationality": "GB",
+        "dateOfBirth": "1970-07-03T11:43:27.405Z",
+        "occupation": "Manager",
+        "employerName": "MFX",
+        "contactPhone": "+447125588999",
+        "gender": "m",
+        "emailAddress": "luke.skywalkeraaabbb@gmail.com",
+        "birthCountry": "GB",
+        "idDocument": [
+          {
+            "idType": "nationalidcard",
+            "idNumber": "1234567",
+            "issueDate": "2018-07-03T11:43:27.405Z",
+            "expiryDate": "2021-07-03T11:43:27.405Z",
+            "issuer": "UKPA",
+            "issuerPlace": "GB",
+            "issuerCountry": "GB",
+            "otherIdDescription": "test"
+          }
+        ],
+        "postalAddress": {
+          "country": "GB",
+          "addressLine1": "111 ABC Street",
+          "city": "New York",
+          "stateProvince": "New York",
+          "postalCode": "ABCD"
+        },
+        "subjectName": {
+          "title": "Mr",
+          "firstName": "Luke",
+          "middleName": "R",
+          "lastName": "Skywalker",
+          "fullName": "Luke R Skywalker",
+          "nativeName": "ABC"
+        }
+      });
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('senderKyc');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with requestingOrganisation if requestingOrganisation is invoked', async function () {
       request.requestingOrganisation({
         "requestingOrganisationIdentifierType": "organisationid",
         "requestingOrganisationIdentifier": "12345"
@@ -316,7 +636,7 @@ describe('Batch Transactions', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75", "status": "pending", "notificationMethod": "polling", "objectReference": "429", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -336,13 +656,13 @@ describe('Batch Transactions', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property scheduledStartDate if scheduledStartDate is invoked', async function () {
-      request.scheduledStartDate("2019-12-11T15:08:03.158Z");
+    it('should return request data with servicingIdentity if servicingIdentity is invoked', async function () {
+      request.servicingIdentity("till");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75", "status": "pending", "notificationMethod": "polling", "objectReference": "429", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -351,7 +671,7 @@ describe('Batch Transactions', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('scheduledStartDate');
+      expect(request.data).toHaveProperty('servicingIdentity');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -363,12 +683,12 @@ describe('Batch Transactions', function () {
     });
 
     it('should return request data with property requestDate if requestDate is invoked', async function () {
-      request.requestDate("2019-12-11T15:08:03.158Z");
+      request.requestDate("2018-07-03T11:43:27");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75", "status": "pending", "notificationMethod": "polling", "objectReference": "429", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -389,12 +709,17 @@ describe('Batch Transactions', function () {
     });
 
     it('should return request data with property customData if customData is invoked', async function () {
-      request.customData("{ key: value}");
+      request.customData([
+        {
+          "key": "keytest",
+          "value": "keyvalue"
+        }
+      ]);
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75", "status": "pending", "notificationMethod": "polling", "objectReference": "429", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -413,107 +738,19 @@ describe('Batch Transactions', function () {
       expect(requestNock.isDone()).toBe(true);
       expect(accessTokenNock.isDone()).toBe(true);
     });
-  })
 
-  describe('UpdateBatchTransaction', function () {
-    const authTokenHeader = authHeader(false);
-    const authRefreshHeader = authHeader(true);
-
-    let request;
-
-    beforeEach(async () => {
-      request = new mmapi.disbursement.updateBatchTransaction("REF-1635846330263");
-    })
-
-    afterEach(async () => {
-    });
-
-    it('should return the notification method polling by default', async function () {
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .patch(`${this.securityOptionUrl}${request.url}`, request.data)
-        .reply(202, {
-          "serverCorrelationId": "ade88ed4-decc-4e29-9c24-0c362b2ec284", "status": "pending", "notificationMethod": "polling", "objectReference": "493", "pollLimit": 100
-        }, {
-          "Content-Type": "application/json"
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(response.status).toBe(202);
-      expect(response.data).toHaveProperty('status');
-      expect(response.data.status).toBe('pending');
-      expect(response.data).toHaveProperty('serverCorrelationId');
-      expect(response.data).toHaveProperty('notificationMethod');
-      expect(response.data.notificationMethod).toBe('polling');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return notification method callback if callback is invoked', async function () {
-      request.callback('https://test.com/callback');
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .patch(`${this.securityOptionUrl}${request.url}`, request.data)
-        .reply(202, {
-          "serverCorrelationId": "ade88ed4-decc-4e29-9c24-0c362b2ec284", "status": "pending", "notificationMethod": "callback", "objectReference": "493", "pollLimit": 100
-        }, {
-          "Content-Type": "application/json"
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(response.status).toBe(202);
-      expect(response.data).toHaveProperty('status');
-      expect(response.data.status).toBe('pending');
-      expect(response.data).toHaveProperty('serverCorrelationId');
-      expect(response.data).toHaveProperty('notificationMethod');
-      expect(response.data.notificationMethod).toBe('callback');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return notification method polling if polling is invoked', async function () {
-      request.polling();
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .patch(`${this.securityOptionUrl}${request.url}`, request.data)
-        .reply(202, {
-          "serverCorrelationId": "ade88ed4-decc-4e29-9c24-0c362b2ec284", "status": "pending", "notificationMethod": "polling", "objectReference": "493", "pollLimit": 100
-        }, {
-          "Content-Type": "application/json"
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(response.status).toBe(202);
-      expect(response.data).toHaveProperty('status');
-      expect(response.data.status).toBe('pending');
-      expect(response.data).toHaveProperty('serverCorrelationId');
-      expect(response.data).toHaveProperty('notificationMethod');
-      expect(response.data.notificationMethod).toBe('polling');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return request data with properties if body is invoked', async function () {
-      request.body([
+    it('should return request data with property metadata if metadata is invoked', async function () {
+      request.metadata([
         {
-          "op": "replace",
-          "path": "/batchStatus",
-          "value": "approved"
+          "key": "keytest",
+          "value": "keyvalue"
         }
       ]);
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .patch(`${this.securityOptionUrl}${request.url}`, request.data)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "ade88ed4-decc-4e29-9c24-0c362b2ec284", "status": "pending", "notificationMethod": "polling", "objectReference": "493", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -522,325 +759,13 @@ describe('Batch Transactions', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data[0]).toHaveProperty('op');
-      expect(request.data[0]).toHaveProperty('path');
-      expect(request.data[0]).toHaveProperty('value');
+      expect(request.data).toHaveProperty('metadata');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
       expect(response.data).toHaveProperty('serverCorrelationId');
       expect(response.data).toHaveProperty('notificationMethod');
       expect(response.data.notificationMethod).toBe('polling');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-  })
-
-  describe('ViewBatchCompletions', function () {
-    const authTokenHeader = authHeader(false);
-    const authRefreshHeader = authHeader(true);
-
-    let request;
-
-    beforeEach(async () => {
-      request = new mmapi.disbursement.viewBatchCompletions("REF-1234567890");
-    })
-
-    afterEach(async () => {
-    });
-
-    it('should return a batch completions object array and indicate via response header how many batch completions available in total', async function () {
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .reply(200, [
-        ], {
-          "Content-Type": "application/json",
-          'x-records-available-count': 0,
-          'x-records-returned-count': 0,
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(response.status).toBe(200);
-      expect(response.data.length).toBe(0);
-      expect(response.headers).toHaveProperty('x-records-available-count');
-      expect(response.headers).toHaveProperty('x-records-returned-count');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return request params with property offset if offset is invoked', async function () {
-      request.offset(0);
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .query({ offset: "0" })
-        .reply(200, [
-        ], {
-          "Content-Type": "application/json",
-          'x-records-available-count': 0,
-          'x-records-returned-count': 0,
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(request.params).toHaveProperty('offset');
-      expect(response.data.length).toBe(0);
-      expect(response.headers).toHaveProperty('x-records-available-count');
-      expect(response.headers).toHaveProperty('x-records-returned-count');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return request params with property limit if limit is invoked', async function () {
-      request.limit(2);
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .query({ limit: "2" })
-        .reply(200, [
-        ], {
-          "Content-Type": "application/json",
-          'x-records-available-count': 0,
-          'x-records-returned-count': 0,
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(request.params).toHaveProperty('limit');
-      expect(response.data.length).toBe(0);
-      expect(response.headers).toHaveProperty('x-records-available-count');
-      expect(response.headers).toHaveProperty('x-records-returned-count');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return request params with property fromDateTime if fromDateTime is invoked', async function () {
-      request.fromDateTime("2022-01-01T00:00:00");
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .query({ fromDateTime: "2022-01-01T00:00:00" })
-        .reply(200, [
-        ], {
-          "Content-Type": "application/json",
-          'x-records-available-count': 0,
-          'x-records-returned-count': 0,
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(request.params).toHaveProperty('fromDateTime');
-      expect(response.data.length).toBe(0);
-      expect(response.headers).toHaveProperty('x-records-available-count');
-      expect(response.headers).toHaveProperty('x-records-returned-count');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return request params with property toDateTime if toDateTime is invoked', async function () {
-      request.toDateTime("2022-01-01T00:00:00");
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .query({ toDateTime: "2022-01-01T00:00:00" })
-        .reply(200, [
-        ], {
-          "Content-Type": "application/json",
-          'x-records-available-count': 0,
-          'x-records-returned-count': 0,
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(request.params).toHaveProperty('toDateTime');
-      expect(response.data.length).toBe(0);
-      expect(response.headers).toHaveProperty('x-records-available-count');
-      expect(response.headers).toHaveProperty('x-records-returned-count');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-  })
-
-  describe('ViewBatchRejections', function () {
-    const authTokenHeader = authHeader(false);
-    const authRefreshHeader = authHeader(true);
-
-    let request;
-
-    beforeEach(async () => {
-      request = new mmapi.disbursement.viewBatchRejections("REF-1234567890");
-    })
-
-    afterEach(async () => {
-    });
-
-    it('should return a batch completions object array and indicate via response header how many batch completions available in total', async function () {
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .reply(200, [
-        ], {
-          "Content-Type": "application/json",
-          'x-records-available-count': 0,
-          'x-records-returned-count': 0,
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(response.status).toBe(200);
-      expect(response.data.length).toBe(0);
-      expect(response.headers).toHaveProperty('x-records-available-count');
-      expect(response.headers).toHaveProperty('x-records-returned-count');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return request params with property offset if offset is invoked', async function () {
-      request.offset(0);
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .query({ offset: "0" })
-        .reply(200, [
-        ], {
-          "Content-Type": "application/json",
-          'x-records-available-count': 0,
-          'x-records-returned-count': 0,
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(request.params).toHaveProperty('offset');
-      expect(response.data.length).toBe(0);
-      expect(response.headers).toHaveProperty('x-records-available-count');
-      expect(response.headers).toHaveProperty('x-records-returned-count');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return request params with property limit if limit is invoked', async function () {
-      request.limit(2);
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .query({ limit: "2" })
-        .reply(200, [
-        ], {
-          "Content-Type": "application/json",
-          'x-records-available-count': 0,
-          'x-records-returned-count': 0,
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(request.params).toHaveProperty('limit');
-      expect(response.data.length).toBe(0);
-      expect(response.headers).toHaveProperty('x-records-available-count');
-      expect(response.headers).toHaveProperty('x-records-returned-count');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return request params with property fromDateTime if fromDateTime is invoked', async function () {
-      request.fromDateTime("2022-01-01T00:00:00");
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .query({ fromDateTime: "2022-01-01T00:00:00" })
-        .reply(200, [
-        ], {
-          "Content-Type": "application/json",
-          'x-records-available-count': 0,
-          'x-records-returned-count': 0,
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(request.params).toHaveProperty('fromDateTime');
-      expect(response.data.length).toBe(0);
-      expect(response.headers).toHaveProperty('x-records-available-count');
-      expect(response.headers).toHaveProperty('x-records-returned-count');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-
-    it('should return request params with property toDateTime if toDateTime is invoked', async function () {
-      request.toDateTime("2022-01-01T00:00:00");
-
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .query({ toDateTime: "2022-01-01T00:00:00" })
-        .reply(200, [
-        ], {
-          "Content-Type": "application/json",
-          'x-records-available-count': 0,
-          'x-records-returned-count': 0,
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(request.params).toHaveProperty('toDateTime');
-      expect(response.data.length).toBe(0);
-      expect(response.headers).toHaveProperty('x-records-available-count');
-      expect(response.headers).toHaveProperty('x-records-returned-count');
-      expect(requestNock.isDone()).toBe(true);
-      expect(accessTokenNock.isDone()).toBe(true);
-    });
-  })
-
-  describe('ViewBatchTransaction', function () {
-    const authTokenHeader = authHeader(false);
-    const authRefreshHeader = authHeader(true);
-
-    let request;
-
-    beforeEach(async () => {
-      request = new mmapi.disbursement.viewBatchTransaction("REF-1234567890");
-    })
-
-    afterEach(async () => {
-    });
-
-    it('should return a batch transaction object if request is valid', async function () {
-      let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .reply(200, {
-          "approvalDate": "2019-12-11T15:08:03.158Z", "batchId": "REF-1234567890", "batchStatus": "created", "batchTitle": "Batch_Test", "batchDescription": "Testing a Batch", "processingFlag": false, "completionDate": "2019-12-11T15:08:03.158Z", "completedCount": 0, "rejectionCount": 0, "parsingSuccessCount": 0, "scheduledStartDate": "2019-12-11T15:08:03", "creationDate": "2021-11-02T09:45:30", "modificationDate": "2021-11-02T09:45:30", "requestDate": "2021-11-02T09:45:30"
-        }, {
-          "Content-Type": "application/json",
-          'x-records-available-count': 0,
-          'x-records-returned-count': 0,
-        });
-
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
-
-      const response = await this.http.execute(request);
-
-      expect(response.status).toBe(200);
-      expect(response.data).toHaveProperty('batchId');
-      expect(response.data).toHaveProperty('batchStatus');
-      expect(response.data).toHaveProperty('approvalDate');
-      expect(response.data).toHaveProperty('completionDate');
       expect(requestNock.isDone()).toBe(true);
       expect(accessTokenNock.isDone()).toBe(true);
     });

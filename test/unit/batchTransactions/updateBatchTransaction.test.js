@@ -1,9 +1,9 @@
 'use strict';
 
-const mmapi = require('../../lib/index');
+const mmapi = require('../../../lib/index');
 const nock = require('nock');
 
-describe('Supporting', function () {
+describe('Batch Transactions', function () {
   let environment = new mmapi.core.SandboxEnvironment('consumerKey', 'consumerSecret', 'apiKey', 'ENHANCED_LEVEL', 'https://e765d0c6-3d88-40d4-9fd8-ef93b154d663.mock.pstmn.io/callback');
 
   beforeEach(function () {
@@ -75,24 +75,24 @@ describe('Supporting', function () {
     }
   }
 
-  describe('ViewRequestState', function () {
+  describe('UpdateBatchTransaction', function () {
     const authTokenHeader = authHeader(false);
     const authRefreshHeader = authHeader(true);
 
     let request;
 
     beforeEach(async () => {
-      request = new mmapi.merchantPayment.viewRequestState("8626661d-2b3a-4166-b3d2-33a0c5fccd35");
+      request = new mmapi.disbursement.updateBatchTransaction("REF-1635846330263");
     })
 
     afterEach(async () => {
     });
 
-    it('should return the request state object if request is valid', async function () {
+    it('should return the notification method polling by default', async function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .reply(200, {
-          "serverCorrelationId": "8626661d-2b3a-4166-b3d2-33a0c5fccd35", "status": "completed", "notificationMethod": "polling", "objectReference": "REF-1635488317033", "pollLimit": 100
+        .patch(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "ade88ed4-decc-4e29-9c24-0c362b2ec284", "status": "pending", "notificationMethod": "polling", "objectReference": "493", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -101,36 +101,23 @@ describe('Supporting', function () {
 
       const response = await this.http.execute(request);
 
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
-      expect(response.data.status).toMatch(/^(pending|completed|failed)$/);
+      expect(response.data.status).toBe('pending');
       expect(response.data).toHaveProperty('serverCorrelationId');
       expect(response.data).toHaveProperty('notificationMethod');
       expect(response.data.notificationMethod).toBe('polling');
-      expect(response.data).toHaveProperty('objectReference');
       expect(requestNock.isDone()).toBe(true);
       expect(accessTokenNock.isDone()).toBe(true);
     });
-  })
 
-  describe('ViewResource', function () {
-    const authTokenHeader = authHeader(false);
-    const authRefreshHeader = authHeader(true);
+    it('should return notification method callback if callback is invoked', async function () {
+      request.callback('https://test.com/callback');
 
-    let request;
-
-    beforeEach(async () => {
-      request = new mmapi.merchantPayment.viewResource("/transactions/REF-1635433380991");
-    })
-
-    afterEach(async () => {
-    });
-
-    it('should return the representation of the missing resource if request is valid', async function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .reply(200, {
-          "transactionReference": "REF-1635433380991", "creditParty": [{ "key": "accountid", "value": "2999" }], "debitParty": [{ "key": "accountid", "value": "2999" }], "type": "merchantpay", "transactionStatus": "pending", "amount": "200.00", "currency": "RWF", "creationDate": "2021-10-28T18:42:35", "modificationDate": "2021-10-28T18:42:35", "requestDate": "2021-10-28T18:42:35"
+        .patch(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "ade88ed4-decc-4e29-9c24-0c362b2ec284", "status": "pending", "notificationMethod": "callback", "objectReference": "493", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -139,30 +126,23 @@ describe('Supporting', function () {
 
       const response = await this.http.execute(request);
 
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('callback');
       expect(requestNock.isDone()).toBe(true);
       expect(accessTokenNock.isDone()).toBe(true);
     });
-  })
 
-  describe('ViewResponse', function () {
-    const authTokenHeader = authHeader(false);
-    const authRefreshHeader = authHeader(true);
+    it('should return notification method polling if polling is invoked', async function () {
+      request.polling();
 
-    let request;
-
-    beforeEach(async () => {
-      request = new mmapi.merchantPayment.viewResponse("Abcdefgh");
-    })
-
-    afterEach(async () => {
-    });
-
-    it('should return the link containing the representation of the missing resource if request is valid', async function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .reply(200, {
-          "link": "/transactions/REF-1635433380991"
+        .patch(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "ade88ed4-decc-4e29-9c24-0c362b2ec284", "status": "pending", "notificationMethod": "polling", "objectReference": "493", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -171,31 +151,29 @@ describe('Supporting', function () {
 
       const response = await this.http.execute(request);
 
-      expect(response.status).toBe(200);
-      expect(response.data).toHaveProperty('link');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
       expect(requestNock.isDone()).toBe(true);
       expect(accessTokenNock.isDone()).toBe(true);
     });
-  })
 
-  describe('ViewServiceAvailability', function () {
-    const authTokenHeader = authHeader(false);
-    const authRefreshHeader = authHeader(true);
+    it('should return request data with properties if body is invoked', async function () {
+      request.body([
+        {
+          "op": "replace",
+          "path": "/batchStatus",
+          "value": "approved"
+        }
+      ]);
 
-    let request;
-
-    beforeEach(async () => {
-      request = new mmapi.merchantPayment.viewServiceAvailability();
-    })
-
-    afterEach(async () => {
-    });
-
-    it('should return return the heartbeat object if request is valid', async function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .reply(200, {
-          "serviceStatus": "available"
+        .patch(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "ade88ed4-decc-4e29-9c24-0c362b2ec284", "status": "pending", "notificationMethod": "polling", "objectReference": "493", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -204,9 +182,15 @@ describe('Supporting', function () {
 
       const response = await this.http.execute(request);
 
-      expect(response.status).toBe(200);
-      expect(response.data).toHaveProperty('serviceStatus');
-      expect(response.data.serviceStatus).toMatch(/^(available|unavailable|degraded)$/);
+      expect(request.data[0]).toHaveProperty('op');
+      expect(request.data[0]).toHaveProperty('path');
+      expect(request.data[0]).toHaveProperty('value');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
       expect(requestNock.isDone()).toBe(true);
       expect(accessTokenNock.isDone()).toBe(true);
     });

@@ -1,9 +1,9 @@
 'use strict';
 
-const mmapi = require('../../lib/index');
+const mmapi = require('../../../lib/index');
 const nock = require('nock');
 
-describe('Bills', function () {
+describe('Batch Transactions', function () {
   let environment = new mmapi.core.SandboxEnvironment('consumerKey', 'consumerSecret', 'apiKey', 'ENHANCED_LEVEL', 'https://e765d0c6-3d88-40d4-9fd8-ef93b154d663.mock.pstmn.io/callback');
 
   beforeEach(function () {
@@ -75,28 +75,27 @@ describe('Bills', function () {
     }
   }
 
-  describe('ViewBillPayment', function () {
+  describe('ViewBatchCompletions', function () {
     const authTokenHeader = authHeader(false);
     const authRefreshHeader = authHeader(true);
 
     let request;
 
     beforeEach(async () => {
-      request = new mmapi.billPayment.viewAccountBills({ 'msisdn': '+44012345678' });
+      request = new mmapi.disbursement.viewBatchCompletions("REF-1234567890");
     })
 
     afterEach(async () => {
     });
 
-    it('should return a bills object array and indicate via response header how many bills available in total', async function () {
+    it('should return a batch completions object array and indicate via response header how many batch completions available in total', async function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .get(`${this.securityOptionUrl}${request.url}`)
         .reply(200, [
-          { "billReference": "REF-000002", "amountDue": "60.00", "currency": "GBP", "dueDate": "2016-09-30", "minimumAmountDue": "0.00", "creationDate": "2021-02-17T00:00:00", "modificationDate": "2021-02-17T00:00:00" }
         ], {
           "Content-Type": "application/json",
-          'x-records-available-count': 1,
-          'x-records-returned-count': 1,
+          'x-records-available-count': 0,
+          'x-records-returned-count': 0,
         });
 
       let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
@@ -104,7 +103,7 @@ describe('Bills', function () {
       const response = await this.http.execute(request);
 
       expect(response.status).toBe(200);
-      expect(response.data.length).toBe(1);
+      expect(response.data.length).toBe(0);
       expect(response.headers).toHaveProperty('x-records-available-count');
       expect(response.headers).toHaveProperty('x-records-returned-count');
       expect(requestNock.isDone()).toBe(true);
@@ -118,11 +117,10 @@ describe('Bills', function () {
         .get(`${this.securityOptionUrl}${request.url}`)
         .query({ offset: "0" })
         .reply(200, [
-          { "billReference": "REF-000002", "amountDue": "60.00", "currency": "GBP", "dueDate": "2016-09-30", "minimumAmountDue": "0.00", "creationDate": "2021-02-17T00:00:00", "modificationDate": "2021-02-17T00:00:00" }
         ], {
           "Content-Type": "application/json",
-          'x-records-available-count': 1,
-          'x-records-returned-count': 1,
+          'x-records-available-count': 0,
+          'x-records-returned-count': 0,
         });
 
       let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
@@ -130,8 +128,7 @@ describe('Bills', function () {
       const response = await this.http.execute(request);
 
       expect(request.params).toHaveProperty('offset');
-      expect(response.status).toBe(200);
-      expect(response.data.length).toBe(1);
+      expect(response.data.length).toBe(0);
       expect(response.headers).toHaveProperty('x-records-available-count');
       expect(response.headers).toHaveProperty('x-records-returned-count');
       expect(requestNock.isDone()).toBe(true);
@@ -145,11 +142,10 @@ describe('Bills', function () {
         .get(`${this.securityOptionUrl}${request.url}`)
         .query({ limit: "2" })
         .reply(200, [
-          { "billReference": "REF-000002", "amountDue": "60.00", "currency": "GBP", "dueDate": "2016-09-30", "minimumAmountDue": "0.00", "creationDate": "2021-02-17T00:00:00", "modificationDate": "2021-02-17T00:00:00" }
         ], {
           "Content-Type": "application/json",
-          'x-records-available-count': 1,
-          'x-records-returned-count': 1,
+          'x-records-available-count': 0,
+          'x-records-returned-count': 0,
         });
 
       let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
@@ -157,8 +153,7 @@ describe('Bills', function () {
       const response = await this.http.execute(request);
 
       expect(request.params).toHaveProperty('limit');
-      expect(response.status).toBe(200);
-      expect(response.data.length).toBe(1);
+      expect(response.data.length).toBe(0);
       expect(response.headers).toHaveProperty('x-records-available-count');
       expect(response.headers).toHaveProperty('x-records-returned-count');
       expect(requestNock.isDone()).toBe(true);
@@ -172,11 +167,10 @@ describe('Bills', function () {
         .get(`${this.securityOptionUrl}${request.url}`)
         .query({ fromDateTime: "2022-01-01T00:00:00" })
         .reply(200, [
-          { "billReference": "REF-000002", "amountDue": "60.00", "currency": "GBP", "dueDate": "2016-09-30", "minimumAmountDue": "0.00", "creationDate": "2021-02-17T00:00:00", "modificationDate": "2021-02-17T00:00:00" }
         ], {
           "Content-Type": "application/json",
-          'x-records-available-count': 1,
-          'x-records-returned-count': 1,
+          'x-records-available-count': 0,
+          'x-records-returned-count': 0,
         });
 
       let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
@@ -184,8 +178,7 @@ describe('Bills', function () {
       const response = await this.http.execute(request);
 
       expect(request.params).toHaveProperty('fromDateTime');
-      expect(response.status).toBe(200);
-      expect(response.data.length).toBe(1);
+      expect(response.data.length).toBe(0);
       expect(response.headers).toHaveProperty('x-records-available-count');
       expect(response.headers).toHaveProperty('x-records-returned-count');
       expect(requestNock.isDone()).toBe(true);
@@ -199,11 +192,10 @@ describe('Bills', function () {
         .get(`${this.securityOptionUrl}${request.url}`)
         .query({ toDateTime: "2022-01-01T00:00:00" })
         .reply(200, [
-          { "billReference": "REF-000002", "amountDue": "60.00", "currency": "GBP", "dueDate": "2016-09-30", "minimumAmountDue": "0.00", "creationDate": "2021-02-17T00:00:00", "modificationDate": "2021-02-17T00:00:00" }
         ], {
           "Content-Type": "application/json",
-          'x-records-available-count': 1,
-          'x-records-returned-count': 1,
+          'x-records-available-count': 0,
+          'x-records-returned-count': 0,
         });
 
       let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
@@ -211,8 +203,7 @@ describe('Bills', function () {
       const response = await this.http.execute(request);
 
       expect(request.params).toHaveProperty('toDateTime');
-      expect(response.status).toBe(200);
-      expect(response.data.length).toBe(1);
+      expect(response.data.length).toBe(0);
       expect(response.headers).toHaveProperty('x-records-available-count');
       expect(response.headers).toHaveProperty('x-records-returned-count');
       expect(requestNock.isDone()).toBe(true);

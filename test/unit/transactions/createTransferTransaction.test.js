@@ -1,9 +1,9 @@
 'use strict';
 
-const mmapi = require('../../lib/index');
+const mmapi = require('../../../lib/index');
 const nock = require('nock');
 
-describe('Debit Mandates', function () {
+describe('Transactions', function () {
   let environment = new mmapi.core.SandboxEnvironment('consumerKey', 'consumerSecret', 'apiKey', 'ENHANCED_LEVEL', 'https://e765d0c6-3d88-40d4-9fd8-ef93b154d663.mock.pstmn.io/callback');
 
   beforeEach(function () {
@@ -75,37 +75,33 @@ describe('Debit Mandates', function () {
     }
   }
 
-  describe('CreateAccountDebitMandate', function () {
+  describe('CreateTransferTransaction', function () {
     const authTokenHeader = authHeader(false);
     const authRefreshHeader = authHeader(true);
 
     let request;
 
     beforeEach(async () => {
-      request = new mmapi.recurringPayment.createAccountDebitMandate({ "walletid": '1' });
+      request = new mmapi.accountLinking.createTransferTransaction();
 
       request.body({
-        "payee": [
+        "amount": "16.00",
+        "debitParty": [
+          {
+            "key": "linkref",
+            "value": "linkrefValue"
+          }
+        ],
+        "creditParty": [
           {
             "key": "msisdn",
             "value": "+44012345678"
           }
         ],
-        "requestDate": "2018-07-03T10:43:27.405Z",
-        "startDate": "2018-07-03T10:43:27.405Z",
-        "currency": "GBP",
-        "amountLimit": "1000.00",
-        "endDate": "2028-07-03T10:43:27.405Z",
-        "numberOfPayments": "2",
-        "frequencyType": "sixmonths",
-        "customData": [
-          {
-            "key": "keytest",
-            "value": "keyvalue"
-          }
-        ]
+        "currency": "USD"
       })
-    });
+
+    })
 
     afterEach(async () => {
     });
@@ -114,7 +110,7 @@ describe('Debit Mandates', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "f2fbaf72-5ca7-46df-ba9d-e8cda6bd267d", "status": "pending", "notificationMethod": "polling", "objectReference": "153", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -139,7 +135,7 @@ describe('Debit Mandates', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "f2fbaf72-5ca7-46df-ba9d-e8cda6bd267d", "status": "pending", "notificationMethod": "callback", "objectReference": "153", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "callback", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -164,7 +160,7 @@ describe('Debit Mandates', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "f2fbaf72-5ca7-46df-ba9d-e8cda6bd267d", "status": "pending", "notificationMethod": "polling", "objectReference": "153", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -183,13 +179,13 @@ describe('Debit Mandates', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property currency if currency is invoked', async function () {
-      request.currency("GBP");
+    it('should return request data with property requestingOrganisationTransactionReference if requestingOrganisationTransactionReference is invoked', async function () {
+      request.requestingOrganisationTransactionReference("REF-1234567890");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "f2fbaf72-5ca7-46df-ba9d-e8cda6bd267d", "status": "pending", "notificationMethod": "polling", "objectReference": "153", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -198,7 +194,7 @@ describe('Debit Mandates', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('currency');
+      expect(request.data).toHaveProperty('requestingOrganisationTransactionReference');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -209,8 +205,34 @@ describe('Debit Mandates', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property payee if payee is invoked', async function () {
-      request.payee([
+    it('should return request data with property originalTransactionReference if originalTransactionReference is invoked', async function () {
+      request.originalTransactionReference("REF-1234567890");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('originalTransactionReference');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property creditParty if creditParty is invoked', async function () {
+      request.creditParty([
         {
           "key": "msisdn",
           "value": "+44012345678"
@@ -220,7 +242,7 @@ describe('Debit Mandates', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "e4ec6346-65e0-4761-8c91-51a06f423008", "status": "pending", "notificationMethod": "polling", "objectReference": "1227", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -229,7 +251,7 @@ describe('Debit Mandates', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('payee');
+      expect(request.data).toHaveProperty('creditParty');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -240,13 +262,18 @@ describe('Debit Mandates', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property mandateStatus if mandateStatus is invoked', async function () {
-      request.mandateStatus("active");
+    it('should return request data with property debitParty if debitParty is invoked', async function () {
+      request.debitParty([
+        {
+          "key": "walletid",
+          "value": "1"
+        }
+      ]);
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "e4ec6346-65e0-4761-8c91-51a06f423008", "status": "pending", "notificationMethod": "polling", "objectReference": "1227", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -255,7 +282,7 @@ describe('Debit Mandates', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('mandateStatus');
+      expect(request.data).toHaveProperty('debitParty');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -266,13 +293,13 @@ describe('Debit Mandates', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property startDate if startDate is invoked', async function () {
-      request.startDate("2018-07-03T10:43:27.405Z");
+    it('should return request data with property type if type is invoked', async function () {
+      request.type("merchantpay");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "e4ec6346-65e0-4761-8c91-51a06f423008", "status": "pending", "notificationMethod": "polling", "objectReference": "1227", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -281,7 +308,7 @@ describe('Debit Mandates', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('startDate');
+      expect(request.data).toHaveProperty('type');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -292,13 +319,13 @@ describe('Debit Mandates', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property amountLimit if amountLimit is invoked', async function () {
-      request.amountLimit("1000.00");
+    it('should return request data with property subType if subType is invoked', async function () {
+      request.subType("abc");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "e4ec6346-65e0-4761-8c91-51a06f423008", "status": "pending", "notificationMethod": "polling", "objectReference": "1227", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -307,7 +334,33 @@ describe('Debit Mandates', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('amountLimit');
+      expect(request.data).toHaveProperty('subType');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property amount if amount is invoked', async function () {
+      request.amount("10.00");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('amount');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -324,7 +377,7 @@ describe('Debit Mandates', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "e4ec6346-65e0-4761-8c91-51a06f423008", "status": "pending", "notificationMethod": "polling", "objectReference": "1227", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -344,13 +397,13 @@ describe('Debit Mandates', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property endDate if endDate is invoked', async function () {
-      request.endDate("2028-07-03T10:43:27.405Z");
+    it('should return request data with descriptionText if descriptionText is invoked', async function () {
+      request.descriptionText("exampleDescriptionText");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "e4ec6346-65e0-4761-8c91-51a06f423008", "status": "pending", "notificationMethod": "polling", "objectReference": "1227", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -359,7 +412,7 @@ describe('Debit Mandates', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('endDate');
+      expect(request.data).toHaveProperty('descriptionText');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -370,13 +423,13 @@ describe('Debit Mandates', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property frequencyType if frequencyType is invoked', async function () {
-      request.frequencyType("sixmonths");
+    it('should return request data with fees if fees is invoked', async function () {
+      request.fees([{ "feeType": "value", "feeAmount": "value", "feeCurrency": "value" }]);
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "e4ec6346-65e0-4761-8c91-51a06f423008", "status": "pending", "notificationMethod": "polling", "objectReference": "1227", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -385,7 +438,7 @@ describe('Debit Mandates', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('frequencyType');
+      expect(request.data).toHaveProperty('fees');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -396,13 +449,13 @@ describe('Debit Mandates', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property numberOfPayments if numberOfPayments is invoked', async function () {
-      request.numberOfPayments("2");
+    it('should return request data with geoCode if geoCode is invoked', async function () {
+      request.geoCode("exampleGeoCode");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "e4ec6346-65e0-4761-8c91-51a06f423008", "status": "pending", "notificationMethod": "polling", "objectReference": "1227", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -411,7 +464,7 @@ describe('Debit Mandates', function () {
 
       const response = await this.http.execute(request);
 
-      expect(request.data).toHaveProperty('numberOfPayments');
+      expect(request.data).toHaveProperty('geoCode');
       expect(response.status).toBe(202);
       expect(response.data).toHaveProperty('status');
       expect(response.data.status).toBe('pending');
@@ -422,7 +475,159 @@ describe('Debit Mandates', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property requestingOrganisation if requestingOrganisation is invoked', async function () {
+    it('should return request data with internationalTransferInformation if internationalTransferInformation is invoked', async function () {
+      request.internationalTransferInformation({
+        "quotationReference": "value",
+        "quoteId": "value",
+        "originCountry": "value",
+        "deliveryMethod": "value",
+        "receivingCountry": "value",
+        "relationshipSender": "value",
+        "recipientBlockingReason": "value",
+        "senderBlockingReason": "value",
+        "senderBlockingReason": "value",
+        "remittancePurpose": "value",
+        "sendingServiceProviderCountry": "value"
+      });
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('internationalTransferInformation');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with oneTimeCode if oneTimeCode is invoked', async function () {
+      request.oneTimeCode("exampleOneTimeCode");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('oneTimeCode');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with recipientKyc if recipientKyc is invoked', async function () {
+      request.recipientKyc({ "employerName": "exampleEmployerName" });
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('recipientKyc');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with senderKyc if senderKyc is invoked', async function () {
+      request.senderKyc({
+        "nationality": "GB",
+        "dateOfBirth": "1970-07-03T11:43:27.405Z",
+        "occupation": "Manager",
+        "employerName": "MFX",
+        "contactPhone": "+447125588999",
+        "gender": "m",
+        "emailAddress": "luke.skywalkeraaabbb@gmail.com",
+        "birthCountry": "GB",
+        "idDocument": [
+          {
+            "idType": "nationalidcard",
+            "idNumber": "1234567",
+            "issueDate": "2018-07-03T11:43:27.405Z",
+            "expiryDate": "2021-07-03T11:43:27.405Z",
+            "issuer": "UKPA",
+            "issuerPlace": "GB",
+            "issuerCountry": "GB",
+            "otherIdDescription": "test"
+          }
+        ],
+        "postalAddress": {
+          "country": "GB",
+          "addressLine1": "111 ABC Street",
+          "city": "New York",
+          "stateProvince": "New York",
+          "postalCode": "ABCD"
+        },
+        "subjectName": {
+          "title": "Mr",
+          "firstName": "Luke",
+          "middleName": "R",
+          "lastName": "Skywalker",
+          "fullName": "Luke R Skywalker",
+          "nativeName": "ABC"
+        }
+      });
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('senderKyc');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with requestingOrganisation if requestingOrganisation is invoked', async function () {
       request.requestingOrganisation({
         "requestingOrganisationIdentifierType": "organisationid",
         "requestingOrganisationIdentifier": "12345"
@@ -431,7 +636,7 @@ describe('Debit Mandates', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "e4ec6346-65e0-4761-8c91-51a06f423008", "status": "pending", "notificationMethod": "polling", "objectReference": "1227", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -451,13 +656,39 @@ describe('Debit Mandates', function () {
       expect(accessTokenNock.isDone()).toBe(true);
     });
 
-    it('should return request data with property requestDate if requestDate is invoked', async function () {
-      request.requestDate("2018-07-03T10:43:27.405Z");
+    it('should return request data with servicingIdentity if servicingIdentity is invoked', async function () {
+      request.servicingIdentity("till");
 
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "e4ec6346-65e0-4761-8c91-51a06f423008", "status": "pending", "notificationMethod": "polling", "objectReference": "1227", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
+        }, {
+          "Content-Type": "application/json"
+        });
+
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
+
+      const response = await this.http.execute(request);
+
+      expect(request.data).toHaveProperty('servicingIdentity');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
+      expect(requestNock.isDone()).toBe(true);
+      expect(accessTokenNock.isDone()).toBe(true);
+    });
+
+    it('should return request data with property requestDate if requestDate is invoked', async function () {
+      request.requestDate("2018-07-03T11:43:27");
+
+      let requestNock = nock(environment.baseUrl, authTokenHeader)
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -488,7 +719,7 @@ describe('Debit Mandates', function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
         .post(`${this.securityOptionUrl}${request.url}`, request.data)
         .reply(202, {
-          "serverCorrelationId": "e4ec6346-65e0-4761-8c91-51a06f423008", "status": "pending", "notificationMethod": "polling", "objectReference": "1227", "pollLimit": 100
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -507,26 +738,19 @@ describe('Debit Mandates', function () {
       expect(requestNock.isDone()).toBe(true);
       expect(accessTokenNock.isDone()).toBe(true);
     });
-  })
 
-  describe('ViewAccountDebitMandate', function () {
-    const authTokenHeader = authHeader(false);
-    const authRefreshHeader = authHeader(true);
+    it('should return request data with property metadata if metadata is invoked', async function () {
+      request.metadata([
+        {
+          "key": "keytest",
+          "value": "keyvalue"
+        }
+      ]);
 
-    let request;
-
-    beforeEach(async () => {
-      request = new mmapi.recurringPayment.viewAccountDebitMandate({ "walletid": '1' }, "REF-1637662586029");
-    })
-
-    afterEach(async () => {
-    });
-
-    it('should return a debit mandate object if request is valid', async function () {
       let requestNock = nock(environment.baseUrl, authTokenHeader)
-        .get(`${this.securityOptionUrl}${request.url}`)
-        .reply(200, {
-          "currency": "GBP", "amountLimit": "1000.00", "startDate": "2018-07-03", "endDate": "2028-07-03", "numberOfPayments": 2, "frequencyType": "sixmonths", "mandateStatus": "active", "requestDate": "2018-07-03T10:43:27", "mandateReference": "REF-1637662586029", "creationDate": "2021-11-23T10:16:26", "modificationDate": "2021-11-23T10:16:26", "payee": [{ "key": "accountid", "value": "2999" }], "customData": [{ "key": "keytest", "value": "keyvalue" }]
+        .post(`${this.securityOptionUrl}${request.url}`, request.data)
+        .reply(202, {
+          "serverCorrelationId": "c368cc63-97ce-49e9-bba0-4d46e7c7fcf0", "status": "pending", "notificationMethod": "polling", "objectReference": "20171", "pollLimit": 100
         }, {
           "Content-Type": "application/json"
         });
@@ -535,9 +759,13 @@ describe('Debit Mandates', function () {
 
       const response = await this.http.execute(request);
 
-      expect(response.status).toBe(200);
-      expect(response.data).toHaveProperty('mandateReference');
-      expect(response.data).toHaveProperty('startDate');
+      expect(request.data).toHaveProperty('metadata');
+      expect(response.status).toBe(202);
+      expect(response.data).toHaveProperty('status');
+      expect(response.data.status).toBe('pending');
+      expect(response.data).toHaveProperty('serverCorrelationId');
+      expect(response.data).toHaveProperty('notificationMethod');
+      expect(response.data.notificationMethod).toBe('polling');
       expect(requestNock.isDone()).toBe(true);
       expect(accessTokenNock.isDone()).toBe(true);
     });

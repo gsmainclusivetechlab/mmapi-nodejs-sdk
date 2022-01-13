@@ -1,6 +1,6 @@
 'use strict';
 
-const mmapi = require('../../lib/index');
+const mmapi = require('../../../lib/index');
 const nock = require('nock');
 
 describe('MobileMoneyApiHttpClient', function () {
