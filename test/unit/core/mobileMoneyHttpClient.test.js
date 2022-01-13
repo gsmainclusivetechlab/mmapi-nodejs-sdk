@@ -4,8 +4,8 @@ const mmapi = require('../../../lib/index');
 const nock = require('nock');
 
 describe('MobileMoneyApiHttpClient', function () {
-  let environment = new mmapi.core.SandboxEnvironment('consumerKey', 'consumerSecret', 'apiKey', 'ENHANCED_LEVEL', 'https://e765d0c6-3d88-40d4-9fd8-ef93b154d663.mock.pstmn.io/callback');
-  let environment2 = new mmapi.core.SandboxEnvironment('consumerKey2', 'consumerSecret2', 'apiKey2', 'ENHANCED_LEVEL', 'https://e765d0c6-3d88-40d4-9fd8-ef93b154d663.mock.pstmn.io/callback');
+  let environment = new mmapi.core.SandboxEnvironment('consumerKey', 'consumerSecret', 'apiKey', 'ENHANCED_LEVEL', 'https://test.com/callback');
+  let environment2 = new mmapi.core.SandboxEnvironment('consumerKey2', 'consumerSecret2', 'apiKey2', 'ENHANCED_LEVEL', 'https://test.com/callback');
 
   beforeEach(function () {
     clearToken();
@@ -282,7 +282,7 @@ describe('MobileMoneyApiHttpClient', function () {
       });
     });
 
-    it('Retries calls on authorization errors', async function () {
+    it('retries calls on authorization errors', function () {
       let request = {
         url: '/heartbeat',
         method: 'get',
@@ -291,10 +291,8 @@ describe('MobileMoneyApiHttpClient', function () {
       };
 
       let accessTokenNock = mockAccessTokenRequest(this.context, { times: 2 });
-
-      let rejectionNock = this.context.get(`${this.securityOptionUrl}${request.url}`).times(2).reply(401);
-
-      let requestNock = this.context.get(`${this.securityOptionUrl}${request.url}`).times(2).reply(200, () => JSON.stringify({ serviceStatus: 'available' }), {
+      let rejectionNock = this.context.get('/').times(2).reply(401);
+      let requestNock = this.context.get('/').times(2).reply(200, () => JSON.stringify({ serviceStatus: 'available' }), {
         'Content-Type': 'application/json'
       });
 
