@@ -103,7 +103,7 @@ describe('Authorization Code', function () {
           "Content-Type": "application/json"
         });
 
-      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 2 });
+      let accessTokenNock = mockAccessTokenRequest(this.context, { times: 1 });
 
       const response = await this.http.execute(request);
 

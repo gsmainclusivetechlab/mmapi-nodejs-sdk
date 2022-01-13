@@ -291,26 +291,27 @@ describe('MobileMoneyApiHttpClient', function () {
       };
 
       let accessTokenNock = mockAccessTokenRequest(this.context, { times: 2 });
-      let rejectionNock = this.context.get('/').times(2).reply(401);
-      let requestNock = this.context.get('/').times(2).reply(200, () => JSON.stringify({ serviceStatus: 'available' }), {
+      let rejectionNock = this.context.get(`${this.securityOptionUrl}${request.url}`).times(2).reply(401);
+      let requestNock = this.context.get(`${this.securityOptionUrl}${request.url}`).times(2).reply(200, () => JSON.stringify({ serviceStatus: 'available' }), {
         'Content-Type': 'application/json'
       });
 
-      Promise.all([
+      return Promise.all([
         this.http.execute(request),
         this.http.execute(request)
       ]).then((results) => {
         expect(accessTokenNock.isDone()).toBe(true);
-        expect(rejectionNock.isDone()).toBe(true);
+        expect(rejectionNock.isDone()).toBe(true);;
         expect(requestNock.isDone()).toBe(true);
         results.forEach((res) => {
+          // expect(res.result.some_data).toBe('some_value');
           expect(resp.data.serviceStatus).toMatch(/^(available)$/);
         });
       });
     });
 
-    it('Retries authorization calls on 401 errors only once', async function () {
-      this.context.post('/v1/oauth2/token').times(2).reply(function (uri, requestBody) {
+    it('retries authorization calls on 401 errors only once', function () {
+      this.context.post('/v1/oauth/accesstoken').times(2).reply(function (uri, requestBody) {
         return [
           401,
           'there was an error fetching your access token',
@@ -331,7 +332,7 @@ describe('MobileMoneyApiHttpClient', function () {
         expect().fail('should have failed with 401 error');
       }).catch((err) => {
         expect(requestNock.isDone()).toBe(false);
-        expect(requestNock.pendingMocks()).toBe(false);
+        expect(requestNock.pendingMocks()).toHaveLength(1)
         expect(err.statusCode).toBe(401);
         expect(err.message).toBe('there was an error fetching your access token');
       })
