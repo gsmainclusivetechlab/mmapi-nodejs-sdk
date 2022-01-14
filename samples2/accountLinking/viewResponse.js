@@ -1,12 +1,15 @@
-# View A Response
+'use strict';
 
-`Here, viewResponse(clientCorrelationId) creates a GET request to /responses/{clientCorrelationId}`
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-> `This endpoint returns a specific response.`
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-### Usage/Examples
-
-```javascript
 /**
  * Set up your function to be invoked
  */
@@ -39,7 +42,9 @@ const viewResponse = async (clientCorrelationId, debug = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -49,17 +54,23 @@ const viewResponse = async (clientCorrelationId, debug = false) => {
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-viewResponse('<<REPLACE-WITH-CLIENT-CORRELATION-ID>>', true);
-```
-
-### Example Output
-
-```javascript
-200
-
-{
-  "link": "/transactions/REF-1635433380991"
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await viewResponse('<<REPLACE-WITH-CLIENT-CORRELATION-ID>>', true);
+    } catch (err) {
+    }
+  })();
 }
-```
+
+/**
+* Exports the function. If needed this can be invoked from the other modules.
+*/
+module.exports = {
+  viewResponse
+};

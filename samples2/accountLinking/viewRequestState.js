@@ -1,12 +1,15 @@
-# View A Request State
+'use strict';
 
-`Here, viewRequestState(serverCorrelationId) creates a GET request to /requeststates/{serverCorrelationId}`
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-> `This endpoint returns a specific request state`
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-### Usage/Examples
-
-```javascript
 /**
  * Set up your function to be invoked
  */
@@ -39,7 +42,9 @@ const viewRequestState = async (serverCorrelationId, debug = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -49,21 +54,23 @@ const viewRequestState = async (serverCorrelationId, debug = false) => {
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-viewRequestState('<<REPLACE-WITH-SERVER-CORRELATION-ID>>', true);
-```
-
-### Example Output
-
-```javascript
-200
-
-{
-  "serverCorrelationId": "8626661d-2b3a-4166-b3d2-33a0c5fccd35",
-  "status": "completed",
-  "notificationMethod": "callback",
-  "objectReference": "REF-1635488317033",
-  "pollLimit": 100
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await viewRequestState('<<REPLACE-WITH-SERVER-CORRELATION-ID>>', true);
+    } catch (err) {
+    }
+  })();
 }
-```
+
+/**
+* Exports the function. If needed this can be invoked from the other modules.
+*/
+module.exports = {
+  viewRequestState
+};

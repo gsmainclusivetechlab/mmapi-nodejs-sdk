@@ -15,23 +15,21 @@
 /**
  * Set up your function to be invoked
  */
-const createAccountLink = async (body, accountIdentifiers, callback = false) => {
+const createAccountLink = async (callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.accountLinking.createAccountLink(accountIdentifiers);
-    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
+    const request = new mmapi.accountLinking.createAccountLink({ "accountid": "2000" });
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.sourceAccountIdentifiers(body.sourceAccountIdentifiers);
-    request.status(body.status);
-    request.mode(body.mode);
-    request.customData(body.customData);
-    request.requestingOrganisation(body.requestingOrganisation);
-    request.requestDate(body.requestDate);
+    request.sourceAccountIdentifiers([{ "key": "accountid", "value": "2999" }]);
+    request.status("active");
+    request.mode("both");
+    request.customData([{ "key": "keytest", "value": "keyvalue" }]);
+    request.requestingOrganisation({ "requestingOrganisationIdentifierType": "organisationid", "requestingOrganisationIdentifier": "12345" });
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
@@ -40,12 +38,19 @@ const createAccountLink = async (body, accountIdentifiers, callback = false) => 
       request.callback(process.env.CALLBACK_URL);
     }
 
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
+    }
+
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -67,7 +72,7 @@ const createAccountLink = async (body, accountIdentifiers, callback = false) => 
 /**
  * Invoke the function
  */
-createAccountLink('<<REPLACE-WITH-REQUEST-BODY>>', '<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>');
+createAccountLink(false, true);
 ```
 
 ### Example Output - Callback

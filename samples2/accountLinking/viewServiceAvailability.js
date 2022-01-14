@@ -1,12 +1,15 @@
-# Check Api Availability
+'use strict';
 
-`Here, viewServiceAvailability() creates a GET request to /heartbeat`
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-> `This endpoint returns the current status of the API`
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-### Usage/Examples
-
-```javascript
 /**
  * Set up your function to be invoked
  */
@@ -39,7 +42,9 @@ const viewServiceAvailability = async (debug = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err)
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -49,17 +54,24 @@ const viewServiceAvailability = async (debug = false) => {
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-viewServiceAvailability(true);
-```
-
-### Example Output
-
-```javascript
-200
-
-{
-  "serviceStatus": "available"
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await viewServiceAvailability(true);
+    } catch (err) {
+    }
+  })();
 }
-```
+
+/**
+* Exports the function. If needed this can be invoked from the other modules.
+*/
+module.exports = {
+  viewServiceAvailability
+};
+

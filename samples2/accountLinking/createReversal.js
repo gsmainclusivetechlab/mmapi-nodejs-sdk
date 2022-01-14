@@ -1,12 +1,20 @@
-# Create A Reversal
+'use strict';
 
-`Here, createReversal(originalTransactionReference) creates a POST request to /transactions/{transactionReference}/reversals`
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-> `Provided with a valid object representation, this endpoint allows for a new reversal to be created`
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-### Usage/Examples
+/**
+ * Setting up the X-Callback-URL
+ */
+let callbackUrl = require('../test_harness').callbackUrl;
 
-```javascript
 /**
  * Set up your function to be invoked
  */
@@ -26,7 +34,7 @@ const createReversal = async (originalTransactionReference, callback = false, de
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
     if (callback) {
-      request.callback(process.env.CALLBACK_URL);
+      request.callback(callbackUrl);
     }
 
     if (debug) {
@@ -51,7 +59,9 @@ const createReversal = async (originalTransactionReference, callback = false, de
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -61,29 +71,23 @@ const createReversal = async (originalTransactionReference, callback = false, de
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-createReversal('<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>', false, true)
-```
-
-### Example Output
-
-```javascript
-202
-
-{
-  "serverCorrelationId": "66b3e91a-1d36-41a6-8f4a-833ef1f9d125",
-  "status": "pending",
-  "notificationMethod": "callback",
-  "objectReference": "8287",
-  "pollLimit": 100
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await createReversal('<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>', false, true);
+    } catch (err) {
+    }
+  })();
 }
-```
 
----
-
-**NOTE**
-
-In asynchronous flows, a callback mechanism or polling mechanism is utilised to allow the client to determine the request's final state. Use the [viewRequestState()](viewRequestState.Readme.md) function for the polling mechanism to receive the status of a request, and the [viewTransaction()](viewTransaction.Readme.md) function to acquire the final representation of the Transaction object.
-
----
+/**
+ * Exports the function. If needed this can be invoked from the other modules.
+ */
+module.exports = {
+  createReversal
+};

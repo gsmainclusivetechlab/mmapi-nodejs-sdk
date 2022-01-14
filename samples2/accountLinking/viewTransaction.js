@@ -1,12 +1,15 @@
-# View A Transaction
+'use strict';
 
-`Here, viewTransaction(transactionReference) creates a GET request to /transactions/{transactionReference}`
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-> `This endpoint returns the details of a transaction`
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-### Usage/Examples
-
-```javascript
 /**
  * Set up your function to be invoked
  */
@@ -39,7 +42,9 @@ const viewTransaction = async (transactionReference, debug = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -49,36 +54,23 @@ const viewTransaction = async (transactionReference, debug = false) => {
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-viewTransaction('<<REPLACE-WITH-TRANSACTION-REFERENCE>>', true);
-```
-
-### Example Output
-
-```javascript
-200
-
-{
-  "transactionReference": "REF-1635490512846",
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await viewTransaction('<<REPLACE-WITH-TRANSACTION-REFERENCE>>', true);
+    } catch (err) {
     }
-  ],
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "type": "merchantpay",
-  "transactionStatus": "pending",
-  "amount": "200.00",
-  "currency": "RWF",
-  "creationDate": "2021-10-29T07:55:13",
-  "modificationDate": "2021-10-29T07:55:13",
-  "requestDate": "2021-10-29T07:55:13"
+  })();
 }
-```
+
+/**
+* Exports the function. If needed this can be invoked from the other modules.
+*/
+module.exports = {
+  viewTransaction
+};
