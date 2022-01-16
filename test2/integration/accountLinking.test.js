@@ -17,13 +17,23 @@ let callbackUrl = require('../test_harness').callbackUrl;
 
 const createAccountLink = async (callback = false, debug = false) => {
   try {
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.accountLinking.createAccountLink({ "accountid": "2000" });
+
+    /**
+     * Set the request body parameters individually or by request.body(body);
+     */
     request.sourceAccountIdentifiers([{ "key": "accountid", "value": "2999" }]);
     request.status("active");
     request.mode("both");
     request.customData([{ "key": "keytest", "value": "keyvalue" }]);
     request.requestingOrganisation({ "requestingOrganisationIdentifierType": "organisationid", "requestingOrganisationIdentifier": "12345" });
 
+    /**
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
+     */
     if (callback) {
       request.callback(callbackUrl);
     }
@@ -32,6 +42,9 @@ const createAccountLink = async (callback = false, debug = false) => {
       console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
 
     if (debug) {
@@ -39,22 +52,40 @@ const createAccountLink = async (callback = false, debug = false) => {
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
     }
 
+    /**
+     * Return a successful response
+     */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
     if (debug) {
       console.log(err);
     }
 
+    /**
+     * Return an error response
+     */
     return err;
   }
 };
 
 const createReversal = async (originalTransactionReference, callback = false, debug = false) => {
   try {
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.accountLinking.createReversal(originalTransactionReference);
 
+    /**
+     * Set the request body parameters individually or by request.body(body);
+     */
     request.type("reversal");
 
+    /**
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
+     */
     if (callback) {
       request.callback(callbackUrl);
     }
@@ -63,6 +94,9 @@ const createReversal = async (originalTransactionReference, callback = false, de
       console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
 
     if (debug) {
@@ -70,25 +104,43 @@ const createReversal = async (originalTransactionReference, callback = false, de
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
     }
 
+    /**
+     * Return a successful response
+     */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
     if (debug) {
       console.log(err);
     }
 
+    /**
+     * Return an error response
+     */
     return err;
   }
 };
 
 const createTransferTransaction = async (linkref, callback = false, debug = false) => {
   try {
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.accountLinking.createTransferTransaction();
 
+    /**
+     * Set the request body parameters individually or by request.body(body);
+     */
     request.amount("200.00");
     request.creditParty([{ "key": "linkref", "value": `${linkref}` }]);
     request.currency("RWF");
     request.debitParty([{ "key": "accountid", "value": "2999" }]);
 
+    /**
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
+     */
     if (callback) {
       request.callback(callbackUrl);
     }
@@ -97,6 +149,9 @@ const createTransferTransaction = async (linkref, callback = false, debug = fals
       console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
 
     if (debug) {
@@ -104,24 +159,39 @@ const createTransferTransaction = async (linkref, callback = false, debug = fals
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
     }
 
+    /**
+     * Return a successful response
+     */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
     if (debug) {
       console.log(err);
     }
 
+    /**
+     * Return an error response
+     */
     return err;
   }
 };
 
 const viewAccountBalance = async (debug = false) => {
   try {
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.accountLinking.viewAccountBalance({ "accountid": "2000" });
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
 
     if (debug) {
@@ -129,24 +199,39 @@ const viewAccountBalance = async (debug = false) => {
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
     }
 
+    /**
+     * Return a successful response
+     */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
     if (debug) {
       console.log(err);
     }
 
+    /**
+     * Return an error response
+     */
     return err;
   }
 };
 
 const viewAccountLink = async (linkref, debug = false) => {
   try {
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.accountLinking.viewAccountLink({ "accountid": "2000" }, linkref);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
 
     if (debug) {
@@ -154,28 +239,49 @@ const viewAccountLink = async (linkref, debug = false) => {
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
     }
 
+    /**
+     * Return a successful response
+     */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
     if (debug) {
       console.log(err);
     }
 
+    /**
+     * Return an error response
+     */
     return err;
   }
 };
 
 const viewAccountTransactions = async (debug = false) => {
   try {
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.accountLinking.viewAccountTransactions({ "accountid": "2000" });
 
+    /**
+     * Set the offset parameter
+     */
     request.offset(0);
 
+    /**
+     * Set the limit parameter
+     */
     request.limit(20);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
 
     if (debug) {
@@ -185,24 +291,39 @@ const viewAccountTransactions = async (debug = false) => {
       console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
     }
 
+    /**
+     * Return a successful response
+     */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
     if (debug) {
       console.log(err);
     }
 
+    /**
+     * Return an error response
+     */
     return err;
   }
 };
 
 const viewRequestState = async (serverCorrelationId, debug = false) => {
   try {
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.accountLinking.viewRequestState(serverCorrelationId);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
 
     if (debug) {
@@ -210,24 +331,39 @@ const viewRequestState = async (serverCorrelationId, debug = false) => {
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
     }
 
+    /**
+     * Return a successful response
+     */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
     if (debug) {
       console.log(err);
     }
 
+    /**
+     * Return an error response
+     */
     return err;
   }
 };
 
 const viewResource = async (link, debug = false) => {
   try {
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.accountLinking.viewResource(link);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
 
     if (debug) {
@@ -235,24 +371,39 @@ const viewResource = async (link, debug = false) => {
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
     }
 
+    /**
+     * Return a successful response
+     */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
     if (debug) {
       console.log(err);
-    };
+    }
 
+    /**
+     * Return an error response
+     */
     return err;
   }
 };
 
 const viewResponse = async (clientCorrelationId, debug = false) => {
   try {
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.accountLinking.viewResponse(clientCorrelationId);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
 
     if (debug) {
@@ -260,24 +411,39 @@ const viewResponse = async (clientCorrelationId, debug = false) => {
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
     }
 
+    /**
+     * Return a successful response
+     */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
     if (debug) {
       console.log(err);
     }
 
+    /**
+     * Return an error response
+     */
     return err;
   }
 };
 
 const viewServiceAvailability = async (debug = false) => {
   try {
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.accountLinking.viewServiceAvailability();
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
 
     if (debug) {
@@ -285,24 +451,39 @@ const viewServiceAvailability = async (debug = false) => {
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
     }
 
+    /**
+     * Return a successful response
+     */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
     if (debug) {
       console.log(err);
     }
 
+    /**
+     * Return an error response
+     */
     return err;
   }
 };
 
 const viewTransaction = async (transactionReference, debug = false) => {
   try {
+    /**
+     * Construct a request object and set desired parameters
+     */
     const request = new mmapi.accountLinking.viewTransaction(transactionReference);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
+    /**
+     * Call API with your client and get a response for your call
+     */
     const response = await client.execute(request);
 
     if (debug) {
@@ -310,12 +491,21 @@ const viewTransaction = async (transactionReference, debug = false) => {
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
     }
 
+    /**
+     * Return a successful response
+     */
     return response;
   } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
     if (debug) {
       console.log(err);
     }
 
+    /**
+     * Return an error response
+     */
     return err;
   }
 };

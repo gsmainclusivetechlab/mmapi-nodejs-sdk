@@ -14,19 +14,26 @@
 /**
  * Set up your function to be invoked
  */
-const viewAccountName = async (accountIdentifiers) => {
+const viewAccountName = async (debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.agentService.viewAccountName(accountIdentifiers);
+    const request = new mmapi.agentService.viewAccountName({ "accountid": "2000" });
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
+    }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -36,7 +43,9 @@ const viewAccountName = async (accountIdentifiers) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -48,7 +57,7 @@ const viewAccountName = async (accountIdentifiers) => {
 /**
  * Invoke the function
  */
-viewAccountName('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>');
+viewAccountName(true);
 ```
 
 ### Example Output

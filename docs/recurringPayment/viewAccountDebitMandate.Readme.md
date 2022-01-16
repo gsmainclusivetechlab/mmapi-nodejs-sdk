@@ -14,20 +14,26 @@
 /**
  * Set up your function to be invoked
  */
-const viewAccountDebitMandate = async (accountIdentifiers, debitMandateReference) => {
+const viewAccountDebitMandate = async (mandateReference, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.recurringPayment.viewAccountDebitMandate(accountIdentifiers, debitMandateReference);
-    console.log('Request: ', request);
+    const request = new mmapi.recurringPayment.viewAccountDebitMandate({ "accountid": "2000" }, mandateReference);
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
+    }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -37,7 +43,9 @@ const viewAccountDebitMandate = async (accountIdentifiers, debitMandateReference
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -49,7 +57,7 @@ const viewAccountDebitMandate = async (accountIdentifiers, debitMandateReference
 /**
  * Invoke the function
  */
-viewAccountDebitMandate('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-DEBIT-MANDATE-REFERENCE>>');
+viewAccountDebitMandate('<<REPLACE-WITH-MANDATE-REFERENCE>>', true);
 ```
 
 ### Example Output

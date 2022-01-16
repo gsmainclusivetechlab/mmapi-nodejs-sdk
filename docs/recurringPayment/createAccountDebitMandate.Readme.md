@@ -14,42 +14,46 @@
 /**
  * Set up your function to be invoked
  */
-const createAccountDebitMandate = async (body, accountIdentifiers, callback = false) => {
+const createAccountDebitMandate = async (callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.recurringPayment.createAccountDebitMandate(accountIdentifiers);
-    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
+    const request = new mmapi.recurringPayment.createAccountDebitMandate({ "accountid": "2000" });
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.payee(body.payee);
-    request.requestDate(body.requestDate);
-    request.startDate(body.startDate);
-    request.currency(body.currency);
-    request.amountLimit(body.amountLimit);
-    request.endDate(body.endDate);
-    request.numberOfPayments(body.numberOfPayments);
-    request.frequencyType(body.frequencyType);
-    request.customData(body.customData);
-    request.requestingOrganisation(body.requestingOrganisation);
-    request.mandateStatus(body.mandateStatus);
+    request.payee([{ "key": "accountid", "value": "2999" }]);
+    request.requestDate("2018-07-03T10:43:27.405Z");
+    request.startDate("2018-07-03T10:43:27.405Z");
+    request.currency("GBP");
+    request.amountLimit("1000.00");
+    request.endDate("2028-07-03T10:43:27.405Z");
+    request.numberOfPayments("2");
+    request.frequencyType("sixmonths");
+    request.customData([{ "key": "keytest", "value": "keyvalue" }]);
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
     if (callback) {
-      request.callback(process.env.CALLBACK_URL);
+      request.callback(callbackUrl);
+    }
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -59,7 +63,9 @@ const createAccountDebitMandate = async (body, accountIdentifiers, callback = fa
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -71,7 +77,7 @@ const createAccountDebitMandate = async (body, accountIdentifiers, callback = fa
 /**
  * Invoke the function
  */
-createAccountDebitMandate('<<REPLACE-WITH-REQUEST-BODY>>', '<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>');
+createAccountDebitMandate(false, true);
 ```
 
 ### Example Output - Callback

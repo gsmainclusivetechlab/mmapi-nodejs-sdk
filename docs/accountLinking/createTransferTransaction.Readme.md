@@ -30,7 +30,7 @@ const createTransferTransaction = async (linkref, callback = false, debug = fals
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
     if (callback) {
-      request.callback(process.env.CALLBACK_URL);
+      request.callback(callbackUrl);
     }
 
     if (debug) {
