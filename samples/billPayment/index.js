@@ -1,5 +1,5 @@
-const { viewAccountBills } = require('./viewAccountBills');
-const { createBillPayment } = require('./createBillPayment');
+const { viewAccountBills, viewAccountBillsError } = require('./viewAccountBills');
+const { createBillPayment, createBillPaymentError } = require('./createBillPayment');
 const { createBillTransaction } = require('./createBillTransaction');
 const { viewBillPayment } = require('./viewBillPayment');
 const { viewTransaction } = require('./viewTransaction');
@@ -10,7 +10,9 @@ const { viewResource } = require('./viewResource');
 
 module.exports = {
   viewAccountBills,
+  viewAccountBillsError,
   createBillPayment,
+  createBillPaymentError,
   createBillTransaction,
   viewBillPayment,
   viewTransaction,

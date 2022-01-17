@@ -18,18 +18,31 @@ let callbackUrl = require('../test_harness').callbackUrl;
 /**
  * Set up your function to be invoked
  */
-const createBillPayment = async (callback = false, debug = false) => {
+const createTransferTransaction = async (quotationReference, callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.createBillPayment({ "accountid": "1" }, "REF-000001");
+    const request = new mmapi.p2pTransfer.createTransferTransaction();
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
+    request.creditParty([{ "key": "msisdn", "value": "+44012345678" }]);
+    request.debitParty([{ "key": "walletid", "value": "1" }]);
+    request.amount("100.00");
     request.currency("GBP");
-    request.amountPaid("5.30");
+    request.internationalTransferInformation({
+      "originCountry": "AD",
+      "quotationReference": `${quotationReference}`,
+      // "quoteId": "{{quoteId}}",
+      "remittancePurpose": "personal",
+      "deliveryMethod": "agent"
+    });
+    request.requestingOrganisation({
+      "requestingOrganisationIdentifierType": "organisationid",
+      "requestingOrganisationIdentifier": "testorganisation"
+    });
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
@@ -74,18 +87,24 @@ const createBillPayment = async (callback = false, debug = false) => {
 /**
  * Set up your function to be invoked
  */
-const createBillPaymentError = async (callback = false, debug = false) => {
+const createTransferTransaction2 = async (callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.createBillPayment({ "accountid": "123" }, "REF-000001");
+    const request = new mmapi.p2pTransfer.createTransferTransaction();
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
+    request.creditParty([{ "key": "msisdn", "value": "+44012345678" }]);
+    request.debitParty([{ "key": "walletid", "value": "1" }]);
+    request.amount("100.00");
     request.currency("GBP");
-    request.amountPaid("5.30");
+    request.requestingOrganisation({
+      "requestingOrganisationIdentifierType": "organisationid",
+      "requestingOrganisationIdentifier": "testorganisation"
+    });
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
@@ -136,17 +155,17 @@ if (require.main === module) {
    */
   (async () => {
     try {
-      await createBillPayment(false, true);
-      await createBillPaymentError(false, true);
+      await createTransferTransaction('<<REPLACE-WITH-QUOTATION-REFERENCE>>', false, true);
+      await createTransferTransaction2(false, true);
     } catch (err) {
     }
   })();
 }
 
 /**
-* Exports the function. If needed this can be invoked from the other modules.
-*/
+ * Exports the function. If needed this can be invoked from the other modules.
+ */
 module.exports = {
-  createBillPayment,
-  createBillPaymentError
+  createTransferTransaction,
+  createTransferTransaction2
 };

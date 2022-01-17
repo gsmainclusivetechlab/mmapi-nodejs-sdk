@@ -11,51 +11,52 @@
 /**
  * Set up your function to be invoked
  */
-const createTransferTransaction = async (body, callback = false) => {
+const createTransferTransaction = async (quotationReference, callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
     const request = new mmapi.p2pTransfer.createTransferTransaction();
-    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.requestingOrganisationTransactionReference(body.requestingOrganisationTransactionReference);
-    request.originalTransactionReference(body.originalTransactionReference);
-    request.creditParty(body.creditParty);
-    request.debitParty(body.debitParty);
-    request.type(body.type);
-    request.subType(body.subType);
-    request.amount(body.amount);
-    request.currency(body.currency);
-    request.descriptionText(body.descriptionText);
-    request.fees(body.fees);
-    request.geoCode(body.geoCode);
-    request.internationalTransferInformation(body.internationalTransferInformation);
-    request.oneTimeCode(body.oneTimeCode);
-    request.recipientKyc(body.recipientKyc);
-    request.senderKyc(body.senderKyc);
-    request.requestingOrganisation(body.requestingOrganisation);
-    request.servicingIdentity(body.servicingIdentity);
-    request.requestDate(body.requestDate);
-    request.customData(body.customData);
-    request.metadata(body.metadata);
+    request.creditParty([{ "key": "msisdn", "value": "+44012345678" }]);
+    request.debitParty([{ "key": "walletid", "value": "1" }]);
+    request.amount("100.00");
+    request.currency("GBP");
+    request.internationalTransferInformation({
+      "originCountry": "AD",
+      "quotationReference": `${quotationReference}`,
+      // "quoteId": "{{quoteId}}",
+      "remittancePurpose": "personal",
+      "deliveryMethod": "agent"
+    });
+    request.requestingOrganisation({
+      "requestingOrganisationIdentifierType": "organisationid",
+      "requestingOrganisationIdentifier": "testorganisation"
+    });
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
     if (callback) {
-      request.callback(process.env.CALLBACK_URL);
+      request.callback(callbackUrl);
+    }
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -65,7 +66,9 @@ const createTransferTransaction = async (body, callback = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -77,7 +80,7 @@ const createTransferTransaction = async (body, callback = false) => {
 /**
  * Invoke the function
  */
-createTransferTransaction('<<REPLACE-WITH-REQUEST-BODY>>');
+createTransferTransaction('<<REPLACE-WITH-QUOTATION-REFERENCE>>', false, true);
 ```
 
 ### Example Output - Callback

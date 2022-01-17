@@ -15,18 +15,143 @@ const client = require('../test_harness').client();
  */
 let callbackUrl = require('../test_harness').callbackUrl;
 
-const createBillPayment = async (callback = false, debug = false) => {
+const createQuotation = async (callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.createBillPayment({ "accountid": "1" }, "REF-000001");
+    const request = new mmapi.p2pTransfer.createQuotation();
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
+    request.creditParty([{ "key": "msisdn", "value": "+44012345678" }]);
+    request.debitParty([{ "key": "walletid", "value": "1" }]);
+    request.type("transfer");
+    request.subType("abc");
+    request.requestAmount("75.30");
+    request.requestCurrency("RWF");
+    request.chosenDeliveryMethod("directtoaccount");
+    request.requestDate("2018-07-03T11:43:27.405Z");
+    request.customData([{ "key": "keytest", "value": "keyvalue" }]);
+
+    /**
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
+     */
+    if (callback) {
+      request.callback(callbackUrl);
+    }
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
+    }
+
+    /**
+     * Call API with your client and get a response for your call
+     */
+    const response = await client.execute(request);
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
+
+    /**
+     * Return a successful response
+     */
+    return response;
+  } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
+    if (debug) {
+      console.log(err);
+    }
+
+    /**
+     * Return an error response
+     */
+    return err;
+  }
+};
+
+const createReversal = async (originalTransactionReference, callback = false, debug = false) => {
+  try {
+    /**
+     * Construct a request object and set desired parameters
+     */
+    const request = new mmapi.p2pTransfer.createReversal(originalTransactionReference);
+
+    /**
+     * Set the request body parameters individually or by request.body(body);
+     */
+    request.type("reversal");
+
+    /**
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
+     */
+    if (callback) {
+      request.callback(callbackUrl);
+    }
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
+    }
+
+    /**
+     * Call API with your client and get a response for your call
+     */
+    const response = await client.execute(request);
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
+
+    /**
+     * Return a successful response
+     */
+    return response;
+  } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
+    if (debug) {
+      console.log(err);
+    }
+
+    /**
+     * Return an error response
+     */
+    return err;
+  }
+};
+
+const createTransferTransaction = async (quotationReference, callback = false, debug = false) => {
+  try {
+    /**
+     * Construct a request object and set desired parameters
+     */
+    const request = new mmapi.p2pTransfer.createTransferTransaction();
+
+    /**
+     * Set the request body parameters individually or by request.body(body);
+     */
+    request.creditParty([{ "key": "msisdn", "value": "+44012345678" }]);
+    request.debitParty([{ "key": "walletid", "value": "1" }]);
+    request.amount("100.00");
     request.currency("GBP");
-    request.amountPaid("5.30");
+    request.internationalTransferInformation({
+      "originCountry": "AD",
+      "quotationReference": `${quotationReference}`,
+      // "quoteId": "{{quoteId}}",
+      "remittancePurpose": "personal",
+      "deliveryMethod": "agent"
+    });
+    request.requestingOrganisation({
+      "requestingOrganisationIdentifierType": "organisationid",
+      "requestingOrganisationIdentifier": "testorganisation"
+    });
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
@@ -68,18 +193,24 @@ const createBillPayment = async (callback = false, debug = false) => {
   }
 };
 
-const createBillPaymentError = async (callback = false, debug = false) => {
+const createTransferTransaction2 = async (callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.createBillPayment({ "accountid": "123" }, "REF-000001");
+    const request = new mmapi.p2pTransfer.createTransferTransaction();
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
+    request.creditParty([{ "key": "msisdn", "value": "+44012345678" }]);
+    request.debitParty([{ "key": "walletid", "value": "1" }]);
+    request.amount("100.00");
     request.currency("GBP");
-    request.amountPaid("5.30");
+    request.requestingOrganisation({
+      "requestingOrganisationIdentifierType": "organisationid",
+      "requestingOrganisationIdentifier": "testorganisation"
+    });
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
@@ -121,27 +252,12 @@ const createBillPaymentError = async (callback = false, debug = false) => {
   }
 };
 
-const createBillTransaction = async (callback = false, debug = false) => {
+const viewAccountBalance = async (debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.createBillTransaction();
-
-    /**
-     * Set the request body parameters individually or by request.body(body);
-     */
-    request.amount("200.00");
-    request.debitParty([{ "key": "accountid", "value": "2999" }]);
-    request.creditParty([{ "key": "accountid", "value": "2999" }]);
-    request.currency("RWF");
-
-    /**
-     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
-     */
-    if (callback) {
-      request.callback(callbackUrl);
-    }
+    const request = new mmapi.p2pTransfer.viewAccountBalance({ "walletid": "1" });
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -176,12 +292,52 @@ const createBillTransaction = async (callback = false, debug = false) => {
   }
 };
 
-const viewAccountBills = async (debug = false) => {
+const viewAccountName = async (debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.viewAccountBills({ "accountid": "1" });
+    const request = new mmapi.p2pTransfer.viewAccountName({ "msisdn": "+44012345678" });
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
+    }
+
+    /**
+     * Call API with your client and get a response for your call
+     */
+    const response = await client.execute(request);
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
+
+    /**
+     * Return a successful response
+     */
+    return response;
+  } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
+    if (debug) {
+      console.log(err);
+    }
+
+    /**
+     * Return an error response
+     */
+    return err;
+  }
+};
+
+const viewAccountTransactions = async (debug = false) => {
+  try {
+    /**
+     * Construct a request object and set desired parameters
+     */
+    const request = new mmapi.p2pTransfer.viewAccountTransactions({ "walletid": "1" });
 
     /**
      * Set the offset parameter
@@ -228,22 +384,12 @@ const viewAccountBills = async (debug = false) => {
   }
 };
 
-const viewAccountBillsError = async (debug = false) => {
+const viewQuotation = async (quotationReference, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.viewAccountBills({ "accountid": "123" });
-
-    /**
-     * Set the offset parameter
-     */
-    request.offset(0);
-
-    /**
-     * Set the limit parameter
-     */
-    request.limit(20);
+    const request = new mmapi.p2pTransfer.viewQuotation(quotationReference);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -257,55 +403,6 @@ const viewAccountBillsError = async (debug = false) => {
     if (debug) {
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-      console.log("Response X-Records-Available-Count", response.headers['x-records-available-count']);
-      console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
-    }
-
-    /**
-     * Return a successful response
-     */
-    return response;
-  } catch (err) {
-    /**
-     * Handle any errors from the call
-     */
-    if (debug) {
-      console.log(err);
-    }
-
-    /**
-     * Return an error response
-     */
-    return err;
-  }
-};
-
-const viewBillPayment = async (debug = false) => {
-  try {
-    /**
-     * Construct a request object and set desired parameters
-     */
-    const request = new mmapi.billPayment.viewBillPayment({ "accountid": "1" }, "REF-000001");
-
-    /**
-      * Set the limit parameter
-      */
-    request.limit(5);
-
-    if (debug) {
-      console.log("Request: ", JSON.stringify(request, null, 4));
-    }
-
-    /**
-     * Call API with your client and get a response for your call
-     */
-    const response = await client.execute(request);
-
-    if (debug) {
-      console.log("Response Status: ", response.status);
-      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-      console.log("Response X-Records-Available-Count", response.headers['x-records-available-count']);
-      console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
     }
 
     /**
@@ -332,7 +429,7 @@ const viewRequestState = async (serverCorrelationId, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.viewRequestState(serverCorrelationId);
+    const request = new mmapi.p2pTransfer.viewRequestState(serverCorrelationId);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -372,7 +469,7 @@ const viewResource = async (link, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.viewResource(link);
+    const request = new mmapi.p2pTransfer.viewResource(link);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -412,7 +509,7 @@ const viewResponse = async (clientCorrelationId, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.viewResponse(clientCorrelationId);
+    const request = new mmapi.p2pTransfer.viewResponse(clientCorrelationId);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -452,7 +549,7 @@ const viewServiceAvailability = async (debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.viewServiceAvailability();
+    const request = new mmapi.p2pTransfer.viewServiceAvailability();
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -492,7 +589,7 @@ const viewTransaction = async (transactionReference, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.viewTransaction(transactionReference);
+    const request = new mmapi.p2pTransfer.viewTransaction(transactionReference);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -527,35 +624,32 @@ const viewTransaction = async (transactionReference, debug = false) => {
   }
 };
 
-describe('Bill Payments', () => {
-  describe('Successful Retrieval of Bills', () => {
-    describe('GET Retrieve a Set of Bills', () => {
-      it('should return the bills object with status 200', async () => {
-        const response = await viewAccountBills(false);
+describe('P2P Transfers', () => {
+  describe('Perform a P2P Transfer via Switch', () => {
+    describe('GET Retrieve the Name of the Recipient', () => {
+      it('should return the account holder name object with status 200', async () => {
+        const response = await viewAccountName(false);
 
         expect(response.status).toBe(200);
-        expect(response.headers).toHaveProperty('x-records-available-count');
-        expect(response.headers).toHaveProperty('x-records-returned-count');
       });
     })
-  });
 
-  describe('Unsuccessful Retrieval of Bills', () => {
-    describe('GET Retrieve a Set of Bills', () => {
-      it('should return the error object with status 404 by providing details of the failure reason', async () => {
-        const response = await viewAccountBillsError(false);
-
-        expect(response.status).toBe(404);
-        expect(response.data).toHaveProperty('errorCategory');
-        expect(response.data).toHaveProperty('errorCode');
-      });
-    })
-  });
-
-  describe('Make a Successful Bill Payment with Callback', () => {
-    describe('POST Make a Bill Payment', () => {
+    describe('POST Request a P2P Quotation', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBillPayment(true, false);
+        const response = await createQuotation(true, false);
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('callback');
+      });
+    })
+
+    describe('POST Perform a P2P Transfer', () => {
+      it('should return request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createTransferTransaction('REF-1637249499739', true, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -567,13 +661,13 @@ describe('Bill Payments', () => {
     })
   });
 
-  describe('Make a Successful Bill Transaction with Polling', () => {
+  describe('Perform a P2P Transfer via the Polling Method', () => {
     let serverCorrelationId;
     let objectReference;
 
-    describe('POST Make a Bill Transaction Via the Polling Method', () => {
+    describe('POST Perform a P2P Transfer', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBillTransaction(undefined, false);
+        const response = await createTransferTransaction('REF-1637249499739', undefined, false)
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -609,7 +703,7 @@ describe('Bill Payments', () => {
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');
         expect(response.data).toHaveProperty('type');
-        expect(response.data.type).toBe('billpay');
+        expect(response.data.type).toBe('transfer');
         expect(response.data).toHaveProperty('transactionStatus');
         expect(response.data).toHaveProperty('amount');
         expect(response.data).toHaveProperty('currency');
@@ -617,32 +711,79 @@ describe('Bill Payments', () => {
     })
   });
 
-  describe('Make an Unsuccessful Bill Payment with Callback', () => {
-    describe('POST Make a Bill Payment', () => {
-      it('should return the error object with status 404 by providing details of the failure reason', async () => {
-        const response = await createBillPaymentError(true, false);
+  describe('Perform a Bilateral P2P Transfer', () => {
+    describe('GET Retrieve the Name of the Recipient', () => {
+      it('should return the account holder name object with status 200', async () => {
+        const response = await viewAccountName(false);
 
-        expect(response.status).toBe(404);
-        expect(response.data).toHaveProperty('errorCategory');
-        expect(response.data).toHaveProperty('errorCode');
+        expect(response.status).toBe(200);
       });
     })
-  });
 
-  describe('Make a Bill Payment with Polling', () => {
-    let serverCorrelationId;
-    let objectReference;
-
-    describe('POST Make a Bill Payment Via the Polling Method', () => {
-      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBillPayment(undefined, false);
+    describe('POST Perform a P2P Transfer', () => {
+      it('should return request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createTransferTransaction2(true, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
         expect(response.data.status).toBe('pending');
         expect(response.data).toHaveProperty('serverCorrelationId');
         expect(response.data).toHaveProperty('notificationMethod');
-        expect(response.data.notificationMethod).toBe('polling');
+        expect(response.data.notificationMethod).toBe('callback');
+      });
+    })
+  });
+
+  describe('Perform an ‘On-us’ P2P Transfer Initiated by a Third Party Provider', () => {
+    describe('GET Retrieve the Name of the Recipient', () => {
+      it('should return the account holder name object with status 200', async () => {
+        const response = await viewAccountName(false);
+
+        expect(response.status).toBe(200);
+      });
+    })
+
+    describe('POST Request a P2P Quotation', () => {
+      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createQuotation(true, false);
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('callback');
+      });
+    })
+
+    describe('POST Perform a P2P Transfer', () => {
+      it('should return request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createTransferTransaction('REF-1637249499739', true, false);
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('callback');
+      });
+    })
+  });
+
+  describe('P2P Transfer Reversal', () => {
+    let serverCorrelationId;
+    let objectReference;
+
+    describe('POST Perform a P2P Transfer', () => {
+      it('should return request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createTransferTransaction('REF-1637249499739', true, false);
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('callback');
 
         serverCorrelationId = response.data.serverCorrelationId
       });
@@ -657,51 +798,51 @@ describe('Bill Payments', () => {
         expect(response.data.status).toMatch(/^(pending|completed|failed)$/);
         expect(response.data).toHaveProperty('serverCorrelationId');
         expect(response.data).toHaveProperty('notificationMethod');
-        expect(response.data.notificationMethod).toBe('polling');
+        expect(response.data.notificationMethod).toBe('callback');
         expect(response.data).toHaveProperty('objectReference');
 
         objectReference = response.data.objectReference;
       });
     })
 
-    describe('GET Retrieve Bill Payments for a Given Bill', () => {
-      it('should return bill payment object with status 200 for a given object reference', async () => {
-        const response = await viewBillPayment(false);
+    describe('POST Perform a Transaction Reversal', () => {
+      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createReversal(objectReference, true, false);
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('callback');
+      });
+    })
+  });
+
+  describe('Obtain an FSP Balance', () => {
+    describe('GET Get an Account Balance', () => {
+      it('should return the balance object with status 200', async () => {
+        const response = await viewAccountBalance(false);
 
         expect(response.status).toBe(200);
-        if (response.data.length) {
-          response.data.forEach(data => {
-            expect(data).toHaveProperty('billPaymentStatus');
-            expect(data).toHaveProperty('amountPaid');
-            expect(data).toHaveProperty('currency');
-          });
-        }
+      });
+    })
+  });
+
+  describe('Retrieve Transactions for an FSP', () => {
+    describe('GET Retrieve a Set of Transactions for an Account', () => {
+      it('should return a transactions array of length 20 and indicate via response header how many transactions available in total', async () => {
+        const response = await viewAccountTransactions(false);
+
+        expect(response.status).toBe(200);
+        expect(response.data.length).toBe(20);
         expect(response.headers).toHaveProperty('x-records-available-count');
         expect(response.headers).toHaveProperty('x-records-returned-count');
       });
     })
   });
 
-  describe('Retrieval of Bill Payments', () => {
-    describe('GET Retrieve a Set of Bill Payments', () => {
-      it('should return bill payments array with status 200 for a given bill reference', async () => {
-        const response = await viewBillPayment(false);
-
-        expect(response.status).toBe(200);
-        if (response.data.length) {
-          response.data.forEach(data => {
-            expect(data).toHaveProperty('billPaymentStatus');
-            expect(data).toHaveProperty('amountPaid');
-            expect(data).toHaveProperty('currency');
-          });
-        }
-        expect(response.headers).toHaveProperty('x-records-available-count');
-        expect(response.headers).toHaveProperty('x-records-returned-count');
-      });
-    })
-  });
-
-  describe('Check for Service Availability', () => {
+  describe('Check for API Provider Service Availability', () => {
     describe('GET Check for Service Availability', () => {
       it('should return the heartbeat object with status 200 to indicate the status available, unavailable or degraded', async () => {
         const response = await viewServiceAvailability(false);
@@ -713,20 +854,20 @@ describe('Bill Payments', () => {
     })
   });
 
-  describe('Retrieve a Missing API Response from an API Provider', () => {
+  describe('Retrieve a Missing API Response', () => {
     let clientCorrelationId;
     let link;
 
-    describe('POST Make a Bill Payment', () => {
-      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createBillPayment(undefined, false);
+    describe('POST Perform a P2P Transfer', () => {
+      it('should return request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createTransferTransaction('REF-1637249499739', true, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
         expect(response.data.status).toBe('pending');
         expect(response.data).toHaveProperty('serverCorrelationId');
         expect(response.data).toHaveProperty('notificationMethod');
-        expect(response.data.notificationMethod).toBe('polling');
+        expect(response.data.notificationMethod).toBe('callback');
 
         clientCorrelationId = response.config.headers['X-CorrelationID']
       });
@@ -752,3 +893,6 @@ describe('Bill Payments', () => {
     })
   });
 })
+
+
+

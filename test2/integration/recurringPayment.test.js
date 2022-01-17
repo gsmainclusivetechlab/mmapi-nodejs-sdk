@@ -20,12 +20,12 @@ const createAccountDebitMandate = async (callback = false, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.recurringPayment.createAccountDebitMandate({ "accountid": "2000" });
+    const request = new mmapi.recurringPayment.createAccountDebitMandate({ "walletid": "1" });
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.payee([{ "key": "accountid", "value": "2999" }]);
+    request.payee([{ "key": "msisdn", "value": "+44012345678" }]);
     request.requestDate("2018-07-03T10:43:27.405Z");
     request.startDate("2018-07-03T10:43:27.405Z");
     request.currency("GBP");
@@ -75,7 +75,7 @@ const createAccountDebitMandate = async (callback = false, debug = false) => {
   }
 };
 
-const createAccountDebitMandateUnsuccessful = async (callback = false, debug = false) => {
+const createAccountDebitMandateError = async (callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -85,7 +85,7 @@ const createAccountDebitMandateUnsuccessful = async (callback = false, debug = f
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.payee([{ "key": "accountid", "value": "2999" }]);
+    request.payee([{ "key": "msisdn", "value": "+44012345678" }]);
     request.requestDate("2018-07-03T10:43:27.405Z");
     request.startDate("2018-07-03T10:43:27.405Z");
     request.currency("GBP");
@@ -190,7 +190,7 @@ const createMerchantTransaction = async (mandateReference, callback = false, deb
   }
 };
 
-const createMerchantTransactionUnsuccessful = async (mandateReference, callback = false, debug = false) => {
+const createMerchantTransactionError = async (mandateReference, callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
@@ -703,7 +703,7 @@ describe('Recurring Payments', () => {
   describe('Setup a Recurring Payment Failure', () => {
     describe('POST Setup a Recurring Payment', () => {
       it('should return the error object with status 404 by providing details of the failure reason', async () => {
-        const response = await createAccountDebitMandateUnsuccessful(true, false);
+        const response = await createAccountDebitMandateError(true, false);
 
         expect(response.status).toBe(404);
         expect(response.data).toHaveProperty('errorCategory');
@@ -870,7 +870,7 @@ describe('Recurring Payments', () => {
 
     describe('POST Take a Recurring Payment', () => {
       it('should return the error object with status 404 by providing details of the failure reason', async () => {
-        const response = await createMerchantTransactionUnsuccessful(mandateReference, true, false);
+        const response = await createMerchantTransactionError(mandateReference, true, false);
 
         expect(response.status).toBe(404);
         expect(response.data).toHaveProperty('errorCategory');

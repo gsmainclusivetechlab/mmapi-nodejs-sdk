@@ -2,8 +2,8 @@ const { viewAccountBalance } = require('./viewAccountBalance');
 const { viewServiceAvailability } = require('./viewServiceAvailability');
 const { viewResponse } = require('./viewResponse');
 const { viewResource } = require('./viewResource');
-const { createAccountDebitMandate } = require('./createAccountDebitMandate');
-const { createMerchantTransaction } = require('./createMerchantTransaction');
+const { createAccountDebitMandate, createAccountDebitMandateError } = require('./createAccountDebitMandate');
+const { createMerchantTransaction, createMerchantTransactionError } = require('./createMerchantTransaction');
 const { viewRequestState } = require('./viewRequestState');
 const { viewTransaction } = require('./viewTransaction');
 const { createRefundTransaction } = require('./createRefundTransaction');
@@ -17,7 +17,9 @@ module.exports = {
   viewResponse,
   viewResource,
   createAccountDebitMandate,
+  createAccountDebitMandateError,
   createMerchantTransaction,
+  createMerchantTransactionError,
   viewRequestState,
   viewTransaction,
   createRefundTransaction,
