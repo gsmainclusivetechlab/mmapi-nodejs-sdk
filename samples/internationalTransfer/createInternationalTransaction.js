@@ -1,34 +1,47 @@
-# Create A New Quotation
+'use strict';
 
-`Here, createQuotation() creates a POST request to /quotations`
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-> `Provided with a valid object representation, this endpoint allows for a new quotation to be created.`
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-### Usage/Examples
+/**
+ * Setting up the X-Callback-URL
+ */
+let callbackUrl = require('../test_harness').callbackUrl;
 
-```javascript
 /**
  * Set up your function to be invoked
  */
-const createQuotation = async (callback = false, debug = false) => {
+const createInternationalTransaction = async (quotationReference, callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.internationalTransfer.createQuotation();
+    const request = new mmapi.internationalTransfer.createInternationalTransaction();
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
     request.creditParty([{ "key": "msisdn", "value": "+44012345678" }]);
     request.debitParty([{ "key": "walletid", "value": "1" }]);
-    request.type("inttransfer");
-    request.subType("abc");
-    request.requestAmount("75.30");
-    request.requestCurrency("RWF");
-    request.chosenDeliveryMethod("agent");
-    request.requestDate("2018-07-03T11:43:27.405Z");
-    request.customData([{ "key": "keytest", "value": "keyvalue" }]);
+    request.amount("100.00");
+    request.currency("GBP");
+    request.internationalTransferInformation({
+      "originCountry": "GB",
+      "quotationReference": `${quotationReference}`,
+      // "quoteId": "{{quoteId}}",
+      "receivingCountry": "RW",
+      "remittancePurpose": "personal",
+      "relationshipSender": "none",
+      "deliveryMethod": "agent",
+      "sendingServiceProviderCountry": "AD"
+    });
     request.senderKyc({
       "nationality": "GB",
       "dateOfBirth": "1970-07-03T11:43:27.405Z",
@@ -66,9 +79,10 @@ const createQuotation = async (callback = false, debug = false) => {
         "nativeName": "ABC"
       }
     });
-    request.sendingServiceProviderCountry("AD");
-    request.originCountry("AD");
-    request.receivingCountry("AD");
+    request.requestingOrganisation({
+      "requestingOrganisationIdentifierType": "organisationid",
+      "requestingOrganisationIdentifier": "testorganisation"
+    });
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
@@ -111,43 +125,23 @@ const createQuotation = async (callback = false, debug = false) => {
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-createQuotation(false, true);
-```
-
-### Example Output - Callback
-
-```javascript
-202
-
-{
-  "serverCorrelationId": "7a20ef01-996c-4652-95ee-13766f116544",
-  "status": "pending",
-  "notificationMethod": "callback",
-  "objectReference": "535",
-  "pollLimit": 100
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await createInternationalTransaction('<<REPLACE-WITH-QUOTATION-REFERENCE>>', false, true);
+    } catch (err) {
+    }
+  })();
 }
-```
 
-### Example Output - Polling
-
-```javascript
-202
-
-{
-  "serverCorrelationId": "eb95b1b5-79bb-4729-9d7c-67d8bd357f8e",
-  "status": "pending",
-  "notificationMethod": "polling",
-  "objectReference": "804",
-  "pollLimit": 100
-}
-```
-
----
-
-**NOTE**
-
-In asynchronous flows, a callback mechanism or polling mechanism is utilised to allow the client to determine the request's final state. Use the [viewRequestState()](viewRequestState.Readme.md) function for the polling mechanism to receive the status of a request, and the [viewQuotation()](viewQuotation.Readme.md) function to acquire the final representation of the Quotation object.
-
----
+/**
+* Exports the function. If needed this can be invoked from the other modules.
+*/
+module.exports = {
+  createInternationalTransaction
+};

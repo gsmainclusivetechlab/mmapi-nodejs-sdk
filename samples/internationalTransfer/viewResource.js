@@ -1,12 +1,15 @@
-# View A Resource
+'use strict';
 
-`Here, viewResource(link) creates a GET request to /{link}`
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-> `This endpoint allows to obtain a representation of the missing resource`
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-### Usage/Examples
-
-```javascript
 /**
  * Set up your function to be invoked
  */
@@ -51,36 +54,23 @@ const viewResource = async (link, debug = false) => {
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-viewResource('<<REPLACE-WITH-LINK>>', true);
-```
-
-### Example Output
-
-```javascript
-200
-
-{
-  "transactionReference": "REF-1635442955061",
-  "creditParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await viewResource('<<REPLACE-WITH-LINK>>', true);
+    } catch (err) {
     }
-  ],
-  "debitParty": [
-    {
-      "key": "accountid",
-      "value": "2999"
-    }
-  ],
-  "type": "merchantpay",
-  "transactionStatus": "pending",
-  "amount": "200.00",
-  "currency": "RWF",
-  "creationDate": "2021-10-28T18:42:35",
-  "modificationDate": "2021-10-28T18:42:35",
-  "requestDate": "2021-10-28T18:42:35"
+  })();
 }
-```
+
+/**
+* Exports the function. If needed this can be invoked from the other modules.
+*/
+module.exports = {
+  viewResource
+};

@@ -1,12 +1,20 @@
-# Create A Disbursement Transaction
+'use strict';
 
-`Here, createDisbursementTransaction() creates a POST request to /transactions/type/disbursement`
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-> `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'disbursement' passed via the URL.`
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-### Usage/Examples
+/**
+ * Setting up the X-Callback-URL
+ */
+let callbackUrl = require('../test_harness').callbackUrl;
 
-```javascript
 /**
  * Set up your function to be invoked
  */
@@ -76,43 +84,23 @@ const createDisbursementTransaction = async (callback = false, debug = false) =>
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-createDisbursementTransaction(false, true);
-```
-
-### Example Output - Callback
-
-```javascript
-202
-
-{
-  "serverCorrelationId": "208108a9-18f7-4b11-8c50-cbb13e25c39d",
-  "status": "pending",
-  "notificationMethod": "callback",
-  "objectReference": "8331",
-  "pollLimit": 100
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await createDisbursementTransaction(false, true);
+    } catch (err) {
+    }
+  })();
 }
-```
 
-### Example Output - Polling
-
-```javascript
-202
-
-{
-  "serverCorrelationId": "208108a9-18f7-4b11-8c50-cbb13e25c39d",
-  "status": "pending",
-  "notificationMethod": "polling",
-  "objectReference": "8331",
-  "pollLimit": 100
-}
-```
-
----
-
-**NOTE**
-
-In asynchronous flows, a callback mechanism or polling mechanism is utilised to allow the client to determine the request's final state. Use the [viewRequestState()](viewRequestState.Readme.md) function for the polling mechanism to receive the status of a request, and the [viewTransaction()](viewTransaction.Readme.md) function to acquire the final representation of the Transaction object.
-
----
+/**
+ * Exports the function. If needed this can be invoked from the other modules.
+ */
+module.exports = {
+  createDisbursementTransaction
+};

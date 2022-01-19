@@ -10,27 +10,33 @@
 /**
  * Set up your function to be invoked
  */
-const updateBatchTransaction = async (batchId, callback = false) => {
+const updateBatchTransaction = async (batchId, callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
     const request = new mmapi.disbursement.updateBatchTransaction(batchId);
-    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
     if (callback) {
-      request.callback(process.env.CALLBACK_URL);
+      request.callback(callbackUrl);
+    }
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -40,7 +46,9 @@ const updateBatchTransaction = async (batchId, callback = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -49,7 +57,7 @@ const updateBatchTransaction = async (batchId, callback = false) => {
   }
 };
 
-updateBatchTransaction('<<REPLACE-WITH-BATCH-ID>>');
+updateBatchTransaction('<<REPLACE-WITH-BATCH-ID>>', false, true);
 ```
 
 ### Example Output - Callback

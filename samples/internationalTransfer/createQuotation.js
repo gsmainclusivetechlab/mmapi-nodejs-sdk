@@ -1,12 +1,20 @@
-# Create A New Quotation
+'use strict';
 
-`Here, createQuotation() creates a POST request to /quotations`
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-> `Provided with a valid object representation, this endpoint allows for a new quotation to be created.`
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-### Usage/Examples
+/**
+ * Setting up the X-Callback-URL
+ */
+let callbackUrl = require('../test_harness').callbackUrl;
 
-```javascript
 /**
  * Set up your function to be invoked
  */
@@ -111,43 +119,23 @@ const createQuotation = async (callback = false, debug = false) => {
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-createQuotation(false, true);
-```
-
-### Example Output - Callback
-
-```javascript
-202
-
-{
-  "serverCorrelationId": "7a20ef01-996c-4652-95ee-13766f116544",
-  "status": "pending",
-  "notificationMethod": "callback",
-  "objectReference": "535",
-  "pollLimit": 100
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await createQuotation(false, true);
+    } catch (err) {
+    }
+  })();
 }
-```
 
-### Example Output - Polling
-
-```javascript
-202
-
-{
-  "serverCorrelationId": "eb95b1b5-79bb-4729-9d7c-67d8bd357f8e",
-  "status": "pending",
-  "notificationMethod": "polling",
-  "objectReference": "804",
-  "pollLimit": 100
-}
-```
-
----
-
-**NOTE**
-
-In asynchronous flows, a callback mechanism or polling mechanism is utilised to allow the client to determine the request's final state. Use the [viewRequestState()](viewRequestState.Readme.md) function for the polling mechanism to receive the status of a request, and the [viewQuotation()](viewQuotation.Readme.md) function to acquire the final representation of the Quotation object.
-
----
+/**
+ * Exports the function. If needed this can be invoked from the other modules.
+ */
+module.exports = {
+  createQuotation
+};

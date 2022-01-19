@@ -1,12 +1,20 @@
-# Create A Transaction Batch
+'use strict';
 
-`Here, createBatchTransaction() creates a POST request to /batchtransactions`
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-> `Provided with a valid object representation, this endpoint allows for a new transaction batch to be created`
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-### Usage/Examples
+/**
+ * Setting up the X-Callback-URL
+ */
+let callbackUrl = require('../test_harness').callbackUrl;
 
-```javascript
 /**
  * Set up your function to be invoked
  */
@@ -101,43 +109,23 @@ const createBatchTransaction = async (callback = false, debug = false) => {
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-createBatchTransaction(false, true);
-```
-
-### Example Output - Callback
-
-```javascript
-202
-
-{
-  "serverCorrelationId": "8a8e8d59-8f3b-40a7-b9cc-1fdb63358a75",
-  "status": "pending",
-  "notificationMethod": "callback",
-  "objectReference": "429",
-  "pollLimit": 100
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await createBatchTransaction(false, true);
+    } catch (err) {
+    }
+  })();
 }
-```
 
-### Example Output - Polling
-
-```javascript
-202
-
-{
-  "serverCorrelationId": "f91e19ec-5116-4491-a447-11cfc2bc7f93",
-  "status": "pending",
-  "notificationMethod": "polling",
-  "objectReference": "920",
-  "pollLimit": 100
-}
-```
-
----
-
-**NOTE**
-
-In asynchronous flows, a callback mechanism or polling mechanism is utilised to allow the client to determine the request's final state. Use the [viewRequestState()](viewRequestState.Readme.md) function for the polling mechanism to receive the status of a request, and the [viewBatchTransaction()](viewBatchTransaction.Readme.md) function to acquire the final representation of the Batch Transaction object.
-
----
+/**
+ * Exports the function. If needed this can be invoked from the other modules.
+ */
+module.exports = {
+  createBatchTransaction
+};

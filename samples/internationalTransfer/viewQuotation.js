@@ -1,21 +1,24 @@
-# View Batch Completions
+'use strict';
 
-`Here, viewBatchCompletions(batchId) creates a GET request to /batchtransactions/{batchId}/completions`
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-> `This API lists all transactions that have successfully completed for a given batch.`
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-### Usage / Examples
-
-```javascript
 /**
  * Set up your function to be invoked
  */
-const viewBatchCompletions = async (batchId, debug = false) => {
+const viewQuotation = async (quotationReference, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.disbursement.viewBatchCompletions(batchId);
+    const request = new mmapi.internationalTransfer.viewQuotation(quotationReference);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -29,8 +32,6 @@ const viewBatchCompletions = async (batchId, debug = false) => {
     if (debug) {
       console.log("Response Status: ", response.status);
       console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-      console.log("Response X-Records-Available-Count", response.headers['x-records-available-count']);
-      console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
     }
 
     /**
@@ -53,15 +54,23 @@ const viewBatchCompletions = async (batchId, debug = false) => {
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-viewBatchCompletions('<<REPLACE-WITH-BATCH-ID>>', true);
-```
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await viewQuotation('<<REPLACE-WITH-QUOTATION-REFERENCE>>', true);
+    } catch (err) {
+    }
+  })();
+}
 
-### Example Output
-
-```javascript
-200
-
-[]
-```
+/**
+* Exports the function. If needed this can be invoked from the other modules.
+*/
+module.exports = {
+  viewQuotation
+};
