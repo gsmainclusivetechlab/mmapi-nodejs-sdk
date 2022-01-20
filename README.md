@@ -11,7 +11,6 @@ This document contains the following sections:
 
 -  [Requirements](#requirements)
 -  [Getting Started](#getting-started)
-    * [Installation](#installation)
 -  [Setting Up](#setting-up)
 -  [Use Cases](#use-cases)
     * [Merchant Payments](#merchant-payments)
@@ -32,8 +31,6 @@ This document contains the following sections:
 -  Node.js 16.13.1 LTS or higher
 
 ## Getting Started
-
-#### Installation
 
 Create a Node.js project in your directory, then run the following command to install the Mobile Money Api Node.js SDK.
 
