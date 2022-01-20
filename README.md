@@ -11,10 +11,20 @@ This document contains the following sections:
 
 -  [Requirements](#requirements)
 -  [Getting Started](#getting-started)
-      -  [Installation](#installation)
-      -  [Development And Testing](#development-and-testing)
+    * [Installation](#installation)
 -  [Setting Up](#setting-up)
 -  [Use Cases](#use-cases)
+    * [Merchant Payments](#merchant-payments)
+    * [Disbursements](#disbursements)
+    * [International Transfers](#international-transfers)
+    * [P2P Transfers](#p2p-transfers)
+    * [Recurring Payments](#recurring-payments)
+    * [Account Linking](#account-linking)
+    * [Bill Payments](#bill-payments)
+    * [Agent Services (including Cash-In and Cash-Out)](#agent-services)
+-   [Tests](#tests)
+    -   [Unit Test](#unit-test)
+    -   [Integration Test](#integration-test)
 -  [Samples](#samples)
 
 ## Requirements
@@ -29,20 +39,6 @@ Create a Node.js project in your directory, then run the following command to in
 
 ```javascript 
 npm install mmapi-nodejs-sdk
-```
-
-#### Development And Testing
-
-It is not mandatory to fork this repository for using the MMAPI SDK. You can refer Setting Up for configuring and working with SDK without forking this code.
-
-For contributing or referring the samples, you can fork/refer this repository.
-
-To run integration tests using your consumer key, consumer secret and api key, clone this repository and run the following command:
-
-```
-$ npm install
-$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL npm run test
-
 ```
 
 ## Setting Up
@@ -811,6 +807,20 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 </tbody>
 </table>
 
+#### Tests
+
+It is not mandatory to fork this repository for using the MMAPI SDK. You can refer Setting Up for configuring and working with SDK without forking this code.
+
+For contributing or referring the samples, you can fork/refer this repository.
+
+To run integration tests using your consumer key, consumer secret and api key, clone this repository and run the following command:
+
+```
+$ npm install
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL npm run test
+
+```
+
 ## Samples
 
 To test interactions before integration by by trying out different samples, clone this repository and run the following command:
@@ -821,20 +831,19 @@ Note: Update the samples/test_harness.js with your sandbox client credentials or
 
 ```
 $ npm install
-$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node test/merchantPayment.js
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node samples/merchantPayment/runAll.js
 ```
 
 ```
 $ npm install
-$ node test/merchantPayment.js
+$ node samples/merchantPayment/runAll.js
 ```
 
-*By default merchantPayment.js will execute all usecase scenarios for the usecase*
+*By default runAll.js will execute all usecase scenarios for the usecase*
 
-> To select a specific use case scenario, edit the test/merchantPayment.js by passing the usecase number as shown below
+> To select a specific use case scenario, edit the samples/merchantPayment/runAll.js by passing the usecase number as shown below
 
 ```javascript
-// merchantPayment.js
 (async () => {
  
 })(5);
@@ -845,12 +854,12 @@ $ node test/merchantPayment.js
 *Replace the parameter with a value*
 
 ```javascript
-// samples/transactions/createMerchantTransaction.js
+// samples/merchantPayment/createMerchantTransaction.js
 
 if (require.main === module) {
   (async () => {
     try {
-      await createMerchantTransaction('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, undefined, true);
+      await createMerchantTransaction(false, true);
     } catch (err) {
     }
   })();
@@ -859,5 +868,5 @@ if (require.main === module) {
 
 ```
 $ npm install
-$ node samples/transactions/createMerchantTransaction.js
+$ node samples/merchantPayment/createMerchantTransaction.js
 ```

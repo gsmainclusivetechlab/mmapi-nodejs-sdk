@@ -1,14 +1,20 @@
+'use strict';
 
+/**
+ * mobileMoneyApi Node.js SDK dependency
+ */
+require('../test_helper');
 
-# Create A Refund Transaction
+/**
+ * mobileMoneyApi HTTP client dependency
+ */
+const client = require('../test_harness').client();
 
-`Here, createRefundTransaction() creates a POST request to /transactions/type/adjustment`
+/**
+ * Setting up the X-Callback-URL
+ */
+let callbackUrl = require('../test_harness').callbackUrl;
 
-> `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'adjustment' passed via the URL.`
-
-### Usage/Examples
-
-```javascript
 /**
  * Set up your function to be invoked
  */
@@ -68,43 +74,23 @@ const createRefundTransaction = async (callback = false, debug = false) => {
 };
 
 /**
- * Invoke the function
+ * This module was run directly from the command line as in node xxx.js
  */
-createRefundTransaction(false, true);
-```
-
-### Example Output - Callback
-
-```javascript
-202
-
-{
-  "serverCorrelationId": "233b226e-a2da-48f7-8510-9c79a352906b",
-  "status": "pending",
-  "notificationMethod": "callback",
-  "objectReference": "8182",
-  "pollLimit": 100
+if (require.main === module) {
+  /**
+   * This is an immediately invoked function
+   */
+  (async () => {
+    try {
+      await createRefundTransaction(false, true);
+    } catch (err) {
+    }
+  })();
 }
-```
 
-### Example Output - Polling
-
-```javascript
-202
-
-{
-  "serverCorrelationId": "a0913b62-a7e1-4641-98fa-f93750413600",
-  "status": "pending",
-  "notificationMethod": "polling",
-  "objectReference": "14208",
-  "pollLimit": 100
-}
-```
-
----
-
-**NOTE**
-
-In asynchronous flows, a callback mechanism or polling mechanism is utilised to allow the client to determine the request's final state. Use the [viewRequestState()](viewRequestState.Readme.md) function for the polling mechanism to receive the status of a request, and the [viewTransaction()](viewTransaction.Readme.md) function to acquire the final representation of the Transaction object.
-
----
+/**
+* Exports the function. If needed this can be invoked from the other modules.
+*/
+module.exports = {
+  createRefundTransaction
+};

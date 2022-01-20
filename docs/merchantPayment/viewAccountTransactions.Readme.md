@@ -14,53 +14,62 @@
 /**
  * Set up your function to be invoked
  */
-const viewAccountTransactions = async (accountIdentifiers, offset, limit) => {
-  try {
-    /**
-     * Construct a request object and set desired parameters
-     */
-    const request = new mmapi.merchantPayment.viewAccountTransactions(accountIdentifiers);
+const viewAccountTransactions = async (debug = false) => {
+    try {
+        /**
+         * Construct a request object and set desired parameters
+         */
+        const request = new mmapi.merchantPayment.viewAccountTransactions({ "walletid": "1" });
 
-    /**
-     * Set the offset parameter
-     */
-    request.offset(offset);
+        /**
+         * Set the offset parameter
+         */
+        request.offset(0);
 
-    /**
-     * Set the limit parameter
-     */
-    request.limit(limit);
+        /**
+         * Set the limit parameter
+         */
+        request.limit(20);
 
-    /**
-     * Call API with your client and get a response for your call
-     */
-    const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-    console.log("Response X-Records-Available-Count", response.headers['x-records-available-count']);
-    console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
+        if (debug) {
+            console.log("Request: ", JSON.stringify(request, null, 4));
+        }
 
-    /**
-     * Return a successful response
-     */
-    return response;
-  } catch (err) {
-    /**
-     * Handle any errors from the call
-     */
-    console.log(err);
+        /**
+         * Call API with your client and get a response for your call
+         */
+        const response = await client.execute(request);
 
-    /**
-     * Return an error response
-     */
-    return err;
-  }
+        if (debug) {
+            console.log("Response Status: ", response.status);
+            console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+            console.log("Response X-Records-Available-Count", response.headers['x-records-available-count']);
+            console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
+        }
+
+        /**
+         * Return a successful response
+         */
+        return response;
+    } catch (err) {
+        /**
+         * Handle any errors from the call
+         */
+        if (debug) {
+            console.log(err);
+        }
+
+        /**
+         * Return an error response
+         */
+        return err;
+    }
 };
 
 /**
  * Invoke the function
  */
-viewAccountTransactions('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-OFFSET>>', '<<REPLACE-WITH-LIMIT>>');
+viewAccountTransactions(true);
 ```
 
 ### Example Output
