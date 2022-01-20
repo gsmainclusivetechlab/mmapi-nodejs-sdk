@@ -22,7 +22,6 @@ This document contains the following sections:
     * [Bill Payments](#bill-payments)
     * [Agent Services (including Cash-In and Cash-Out)](#agent-services)
 -   [Tests](#tests)
-    *   [Unit Test & Integration Test](#unit-test-and-integration-test)
     *   [Unit Test](#unit-test)
     *   [Integration Test](#integration-test)
 -  [Samples](#samples)
@@ -803,8 +802,6 @@ It is not mandatory to fork this repository for using the MMAPI SDK. You can ref
 For contributing or referring the samples, you can fork/refer this repository.
 
 To run integration tests using your consumer key, consumer secret and api key, clone this repository and run the following command:
-
-### Unit Test & Integration Test
 
 So, there are actually two different types of tests, and we're going to try them all. The first is a unit test. The second type of test is an integration test.
 
