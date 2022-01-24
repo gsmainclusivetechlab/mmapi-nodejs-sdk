@@ -129,13 +129,13 @@ const createAuthorisationCode = async (callback = false, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.agentService.createAuthorisationCode({ "accountid": "2000" });
+    const request = new mmapi.agentService.createAuthorisationCode({ "walletid": "1" });
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
     request.requestDate("2018-07-03T10:43:27.405Z");
-    request.currency("GBP");
+    request.currency("USD");
     request.amount("1000.00");
 
     /**
@@ -397,12 +397,12 @@ const createWithdrawalTransaction2 = async (oneTimeCode, callback = false, debug
   }
 };
 
-const updateAccountIdentity = async (callback = false, debug = false) => {
+const updateAccountIdentity = async (msisdn, identityId, callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.agentService.updateAccountIdentity({ "accountid": "2000" }, "105");
+    const request = new mmapi.agentService.updateAccountIdentity({ "msisdn": msisdn }, identityId);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -496,7 +496,7 @@ const viewAccountBalance = async (debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.agentService.viewAccountBalance({ "accountid": "2000" });
+    const request = new mmapi.agentService.viewAccountBalance({ "walletid": "1" });
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -536,7 +536,7 @@ const viewAccountName = async (debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.agentService.viewAccountName({ "accountid": "2000" });
+    const request = new mmapi.agentService.viewAccountName({ "walletid": "1" });
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -576,7 +576,7 @@ const viewAccountTransactions = async (debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.accountLinking.viewAccountTransactions({ "accountid": "2000" });
+    const request = new mmapi.accountLinking.viewAccountTransactions({ "accountid": "2999" });
 
     /**
      * Set the offset parameter
@@ -628,7 +628,7 @@ const viewAuthorisationCode = async (authorisationCode, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.agentService.viewAuthorisationCode({ "accountid": "2000" }, authorisationCode);
+    const request = new mmapi.agentService.viewAuthorisationCode({ "walletid": "1" }, authorisationCode);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -1132,6 +1132,7 @@ describe('Agent Services (including Cash-In and Cash-Out)', () => {
   describe('Verify a Customer’s KYC', () => {
     let serverCorrelationId;
     let objectReference;
+    let identityId;
 
     var minm = parseInt('00000000');
     var maxm = parseInt('99999999');
@@ -1176,12 +1177,14 @@ describe('Agent Services (including Cash-In and Cash-Out)', () => {
         expect(response.data).toHaveProperty('accountIdentifiers');
         expect(response.data).toHaveProperty('identity');
         expect(response.data).toHaveProperty('accountStatus');
+
+        identityId = response.data.identity[0].identityId;
       });
     })
 
     describe('PATCH Update KYC Verification Status', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await updateAccountIdentity(undefined, false);
+        const response = await updateAccountIdentity(msisdn, identityId, undefined, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

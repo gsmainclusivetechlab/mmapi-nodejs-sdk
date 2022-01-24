@@ -13,7 +13,7 @@ const {
   viewTransaction,
   createReversal,
   viewAccountTransactions
-} = require('../samples/index')
+} = require('./index')
 
 const usecase1 = async () => {
   console.log("Perform an Individual Disbursement...");

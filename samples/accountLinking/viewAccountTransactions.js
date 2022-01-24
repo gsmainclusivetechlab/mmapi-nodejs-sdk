@@ -18,7 +18,7 @@ const viewAccountTransactions = async (debug = false) => {
         /**
          * Construct a request object and set desired parameters
          */
-        const request = new mmapi.accountLinking.viewAccountTransactions({ "accountid": "2000" });
+        const request = new mmapi.accountLinking.viewAccountTransactions({ "accountid": "2999" });
 
         /**
          * Set the offset parameter

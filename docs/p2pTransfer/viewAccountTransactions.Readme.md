@@ -19,7 +19,7 @@ const viewAccountTransactions = async (debug = false) => {
         /**
          * Construct a request object and set desired parameters
          */
-        const request = new mmapi.p2pTransfer.viewAccountTransactions({ "walletid": "1" });
+        const request = new mmapi.p2pTransfer.viewAccountTransactions({ "accountid": "2999" });
 
         /**
          * Set the offset parameter

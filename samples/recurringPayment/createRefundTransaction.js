@@ -29,9 +29,9 @@ const createRefundTransaction = async (mandateReference, callback = false, debug
      * Set the request body parameters individually or by request.body(body);
      */
     request.creditParty([{ "key": "mandateReference", "value": `${mandateReference}` }]);
-    request.debitParty([{ "key": "accountid", "value": "2999" }]);
+    request.debitParty([{ "key": "msisdn", "value": "+44012345678" }]);
     request.amount("200.00");
-    request.currency("RWF");
+    request.currency("USD");
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();

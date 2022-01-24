@@ -31,7 +31,7 @@ const createAccountDebitMandate = async (callback = false, debug = false) => {
     request.payee([{ "key": "msisdn", "value": "+44012345678" }]);
     request.requestDate("2018-07-03T10:43:27.405Z");
     request.startDate("2018-07-03T10:43:27.405Z");
-    request.currency("GBP");
+    request.currency("USD");
     request.amountLimit("1000.00");
     request.endDate("2028-07-03T10:43:27.405Z");
     request.numberOfPayments("2");
@@ -86,7 +86,7 @@ const createAccountDebitMandateError = async (callback = false, debug = false) =
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.recurringPayment.createAccountDebitMandate({ "accountid": "123" });
+    const request = new mmapi.recurringPayment.createAccountDebitMandate({ "walletid": "123" });
 
     /**
      * Set the request body parameters individually or by request.body(body);
@@ -94,7 +94,7 @@ const createAccountDebitMandateError = async (callback = false, debug = false) =
     request.payee([{ "key": "msisdn", "value": "+44012345678" }]);
     request.requestDate("2018-07-03T10:43:27.405Z");
     request.startDate("2018-07-03T10:43:27.405Z");
-    request.currency("GBP");
+    request.currency("USD");
     request.amountLimit("1000.00");
     request.endDate("2028-07-03T10:43:27.405Z");
     request.numberOfPayments("2");

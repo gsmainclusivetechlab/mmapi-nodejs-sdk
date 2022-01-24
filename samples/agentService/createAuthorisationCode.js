@@ -23,13 +23,13 @@ const createAuthorisationCode = async (callback = false, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.agentService.createAuthorisationCode({ "accountid": "2000" });
+    const request = new mmapi.agentService.createAuthorisationCode({ "walletid": "1" });
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
     request.requestDate("2018-07-03T10:43:27.405Z");
-    request.currency("GBP");
+    request.currency("USD");
     request.amount("1000.00");
 
     /**

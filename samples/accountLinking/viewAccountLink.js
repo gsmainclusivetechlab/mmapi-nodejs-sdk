@@ -18,7 +18,7 @@ const viewAccountLink = async (linkref, debug = false) => {
         /**
          * Construct a request object and set desired parameters
          */
-        const request = new mmapi.accountLinking.viewAccountLink({ "accountid": "2000" }, linkref);
+        const request = new mmapi.accountLinking.viewAccountLink({ "walletid": "1" }, linkref);
 
         if (debug) {
             console.log("Request: ", JSON.stringify(request, null, 4));

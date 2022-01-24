@@ -24,7 +24,7 @@ const createTransferTransaction = async (linkref, callback = false, debug = fals
     request.amount("200.00");
     request.creditParty([{ "key": "linkref", "value": `${linkref}` }]);
     request.currency("RWF");
-    request.debitParty([{ "key": "accountid", "value": "2999" }]);
+    request.debitParty([{ "key": "walletid", "value": "1" }]);
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
@@ -55,7 +55,9 @@ const createTransferTransaction = async (linkref, callback = false, debug = fals
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response

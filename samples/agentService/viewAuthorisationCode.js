@@ -18,7 +18,7 @@ const viewAuthorisationCode = async (authorisationCode, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.agentService.viewAuthorisationCode({ "accountid": "2000" }, authorisationCode);
+    const request = new mmapi.agentService.viewAuthorisationCode({ "walletid": "1" }, authorisationCode);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));

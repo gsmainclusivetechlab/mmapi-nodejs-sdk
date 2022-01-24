@@ -20,12 +20,12 @@ const createAccountLink = async (callback = false, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.accountLinking.createAccountLink({ "accountid": "2000" });
+    const request = new mmapi.accountLinking.createAccountLink({ "walletid": "1" });
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.sourceAccountIdentifiers([{ "key": "accountid", "value": "2999" }]);
+    request.sourceAccountIdentifiers([{ "key": "walletid", "value": "1" }]);
     request.status("active");
     request.mode("both");
     request.customData([{ "key": "keytest", "value": "keyvalue" }]);
@@ -136,7 +136,7 @@ const createTransferTransaction = async (linkref, callback = false, debug = fals
     request.amount("200.00");
     request.creditParty([{ "key": "linkref", "value": `${linkref}` }]);
     request.currency("RWF");
-    request.debitParty([{ "key": "accountid", "value": "2999" }]);
+    request.debitParty([{ "key": "walletid", "value": "1" }]);
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
@@ -183,7 +183,7 @@ const viewAccountBalance = async (debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.accountLinking.viewAccountBalance({ "accountid": "2000" });
+    const request = new mmapi.accountLinking.viewAccountBalance({ "walletid": "1" });
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -223,7 +223,7 @@ const viewAccountLink = async (linkref, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.accountLinking.viewAccountLink({ "accountid": "2000" }, linkref);
+    const request = new mmapi.accountLinking.viewAccountLink({ "walletid": "1" }, linkref);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -263,7 +263,7 @@ const viewAccountTransactions = async (debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.accountLinking.viewAccountTransactions({ "accountid": "2000" });
+    const request = new mmapi.accountLinking.viewAccountTransactions({ "accountid": "2999" });
 
     /**
      * Set the offset parameter
@@ -690,7 +690,10 @@ describe('Account Linking', () => {
 
   describe('Perform a Transfer Reversal', () => {
     let serverCorrelationId;
+    let serverCorrelationId2;
     let objectReference;
+    let objectReference2;
+    let linkReference;
 
     describe('POST Establish an Account to Account Link', () => {
       it('should return request state object with status 202 to indicate that the request is pending', async () => {
@@ -723,9 +726,54 @@ describe('Account Linking', () => {
       });
     })
 
+    describe('GET View A Link', () => {
+      it('should return link object with status 200 for a given object reference', async () => {
+        const response = await viewAccountLink(objectReference, false);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('linkReference');
+        expect(response.data).toHaveProperty('sourceAccountIdentifiers');
+        expect(response.data).toHaveProperty('mode');
+        expect(response.data).toHaveProperty('status');
+
+        linkReference = response.data.linkReference;
+      });
+    })
+
+    describe('POST Use a Link to make a Transfer', () => {
+      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
+        const response = await createTransferTransaction(linkReference, undefined, false);
+
+        expect(response.status).toBe(202);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toBe('pending');
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('polling');
+
+        serverCorrelationId2 = response.data.serverCorrelationId
+      });
+    })
+
+    describe('GET Poll to Determine the Request State', () => {
+      it('should return the request state object with status 200 for a given server correlation id', async () => {
+        const response = await viewRequestState(serverCorrelationId2, false);
+
+        expect(response.status).toBe(200);
+        expect(response.data).toHaveProperty('status');
+        expect(response.data.status).toMatch(/^(pending|completed|failed)$/);
+        expect(response.data).toHaveProperty('serverCorrelationId');
+        expect(response.data).toHaveProperty('notificationMethod');
+        expect(response.data.notificationMethod).toBe('polling');
+        expect(response.data).toHaveProperty('objectReference');
+
+        objectReference2 = response.data.objectReference;
+      });
+    })
+
     describe('POST Perform a Transaction Reversal', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createReversal(objectReference, true, true);
+        const response = await createReversal(objectReference2, true, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');

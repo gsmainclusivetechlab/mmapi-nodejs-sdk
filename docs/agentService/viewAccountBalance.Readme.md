@@ -23,7 +23,7 @@ const viewAccountBalance = async (debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.agentService.viewAccountBalance({ "accountid": "2000" });
+    const request = new mmapi.agentService.viewAccountBalance({ "walletid": "1" });
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));

@@ -14,12 +14,12 @@
 /**
  * Set up your function to be invoked
  */
-const updateAccountIdentity = async (callback = false, debug = false) => {
+const updateAccountIdentity = async (msisdn, identityId, callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.agentService.updateAccountIdentity({ "accountid": "2000" }, "105");
+    const request = new mmapi.agentService.updateAccountIdentity({ "msisdn": msisdn }, identityId);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -71,7 +71,7 @@ const updateAccountIdentity = async (callback = false, debug = false) => {
 /**
  * Invoke the function
  */
-updateAccountIdentity(false, true);
+updateAccountIdentity('<<REPLACE-WITH-MSISDN>>', '<<REPLACE-WITH-IDENTITY-ID>>', false, true);
 ```
 
 ### Example Output - Callback

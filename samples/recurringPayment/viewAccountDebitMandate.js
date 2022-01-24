@@ -18,7 +18,7 @@ const viewAccountDebitMandate = async (mandateReference, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.recurringPayment.viewAccountDebitMandate({ "accountid": "2000" }, mandateReference);
+    const request = new mmapi.recurringPayment.viewAccountDebitMandate({ "walletid": "1" }, mandateReference);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));

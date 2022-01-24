@@ -333,7 +333,7 @@ const viewAccountTransactions = async (debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.merchantPayment.viewAccountTransactions({ "walletid": "1" });
+    const request = new mmapi.merchantPayment.viewAccountTransactions({ "accountid": "2999" });
 
     /**
      * Set the offset parameter
@@ -799,7 +799,7 @@ describe('Merchant Payments', () => {
 
     describe('POST Perform a Merchant Payment Refund', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createRefundTransaction('merchantPayment');
+        const response = await createRefundTransaction(undefined, false);
 
         expect(response.status).toBe(202);
         expect(response.data).toHaveProperty('status');
@@ -814,7 +814,7 @@ describe('Merchant Payments', () => {
 
     describe('GET Poll to Determine the Request State', () => {
       it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState('merchantPayment', serverCorrelationId);
+        const response = await viewRequestState(serverCorrelationId, false);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('status');
@@ -830,7 +830,7 @@ describe('Merchant Payments', () => {
 
     describe('GET Retrieve a Transaction', () => {
       it('should return transactions object with status 200 for a given object reference', async () => {
-        const response = await viewTransaction('merchantPayment', objectReference);
+        const response = await viewTransaction(objectReference, false);
 
         expect(response.status).toBe(200);
         expect(response.data).toHaveProperty('transactionReference');

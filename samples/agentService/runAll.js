@@ -115,10 +115,10 @@ const usecase8 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
   console.log('GET View an Account')
-  await viewAccount(objectReference.substr(7), true);
+  const { data: { identity } } = await viewAccount(objectReference.substr(7), true);
 
   console.log('PATCH Update KYC Verification Status')
-  await updateAccountIdentity(true, true);
+  await updateAccountIdentity(msisdn, identity[0].identityId, true, true);
 }
 
 const usecase9 = async () => {

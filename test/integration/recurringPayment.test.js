@@ -28,7 +28,7 @@ const createAccountDebitMandate = async (callback = false, debug = false) => {
     request.payee([{ "key": "msisdn", "value": "+44012345678" }]);
     request.requestDate("2018-07-03T10:43:27.405Z");
     request.startDate("2018-07-03T10:43:27.405Z");
-    request.currency("GBP");
+    request.currency("USD");
     request.amountLimit("1000.00");
     request.endDate("2028-07-03T10:43:27.405Z");
     request.numberOfPayments("2");
@@ -80,7 +80,7 @@ const createAccountDebitMandateError = async (callback = false, debug = false) =
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.recurringPayment.createAccountDebitMandate({ "accountid": "123" });
+    const request = new mmapi.recurringPayment.createAccountDebitMandate({ "walletid": "123" });
 
     /**
      * Set the request body parameters individually or by request.body(body);
@@ -88,7 +88,7 @@ const createAccountDebitMandateError = async (callback = false, debug = false) =
     request.payee([{ "key": "msisdn", "value": "+44012345678" }]);
     request.requestDate("2018-07-03T10:43:27.405Z");
     request.startDate("2018-07-03T10:43:27.405Z");
-    request.currency("GBP");
+    request.currency("USD");
     request.amountLimit("1000.00");
     request.endDate("2028-07-03T10:43:27.405Z");
     request.numberOfPayments("2");
@@ -145,10 +145,10 @@ const createMerchantTransaction = async (mandateReference, callback = false, deb
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.creditParty([{ "key": "accountid", "value": "2999" }]);
+    request.creditParty([{ "key": "msisdn", "value": "+44012345678" }]);
     request.debitParty([{ "key": "mandatereference", "value": `${mandateReference}` }]);
     request.amount("200.00");
-    request.currency("RWF");
+    request.currency("USD");
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
@@ -200,10 +200,10 @@ const createMerchantTransactionError = async (mandateReference, callback = false
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.creditParty([{ "key": "accountid", "value": "123" }]);
+    request.creditParty([{ "key": "msisdn", "value": "+44012345678" }]);
     request.debitParty([{ "key": "mandatereference", "value": `${mandateReference}` }]);
     request.amount("200.00");
-    request.currency("RWF");
+    request.currency("USDD");
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
@@ -256,9 +256,9 @@ const createRefundTransaction = async (mandateReference, callback = false, debug
      * Set the request body parameters individually or by request.body(body);
      */
     request.creditParty([{ "key": "mandateReference", "value": `${mandateReference}` }]);
-    request.debitParty([{ "key": "accountid", "value": "2999" }]);
+    request.debitParty([{ "key": "msisdn", "value": "+44012345678" }]);
     request.amount("200.00");
-    request.currency("RWF");
+    request.currency("USD");
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
@@ -357,7 +357,7 @@ const viewAccountBalance = async (debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.recurringPayment.viewAccountBalance({ "accountid": "2000" });
+    const request = new mmapi.recurringPayment.viewAccountBalance({ "walletid": "1" });
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -397,7 +397,7 @@ const viewAccountDebitMandate = async (mandateReference, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.recurringPayment.viewAccountDebitMandate({ "accountid": "2000" }, mandateReference);
+    const request = new mmapi.recurringPayment.viewAccountDebitMandate({ "walletid": "1" }, mandateReference);
 
     if (debug) {
       console.log("Request: ", JSON.stringify(request, null, 4));
@@ -437,7 +437,7 @@ const viewAccountTransactions = async (debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.recurringPayment.viewAccountTransactions({ "accountid": "2000" });
+    const request = new mmapi.recurringPayment.viewAccountTransactions({ "accountid": "2999" });
 
     /**
      * Set the offset parameter
@@ -699,7 +699,6 @@ describe('Recurring Payments', () => {
       });
     })
   });
-
   describe('Setup a Recurring Payment Failure', () => {
     describe('POST Setup a Recurring Payment', () => {
       it('should return the error object with status 404 by providing details of the failure reason', async () => {
@@ -872,7 +871,7 @@ describe('Recurring Payments', () => {
       it('should return the error object with status 404 by providing details of the failure reason', async () => {
         const response = await createMerchantTransactionError(mandateReference, true, false);
 
-        expect(response.status).toBe(404);
+        expect(response.status).toBe(400);
         expect(response.data).toHaveProperty('errorCategory');
         expect(response.data).toHaveProperty('errorCode');
       });

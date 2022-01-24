@@ -20,12 +20,12 @@ const createAccountLink = async (callback = false, debug = false) => {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.accountLinking.createAccountLink({ "accountid": "2000" });
+    const request = new mmapi.accountLinking.createAccountLink({ "walletid": "1" });
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.sourceAccountIdentifiers([{ "key": "accountid", "value": "2999" }]);
+    request.sourceAccountIdentifiers([{ "key": "walletid", "value": "1" }]);
     request.status("active");
     request.mode("both");
     request.customData([{ "key": "keytest", "value": "keyvalue" }]);
@@ -60,7 +60,9 @@ const createAccountLink = async (callback = false, debug = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
