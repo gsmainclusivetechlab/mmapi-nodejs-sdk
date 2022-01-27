@@ -10,47 +10,46 @@
 /**
  * Set up your function to be invoked
  */
-const createQuotation = async (body, callback = false) => {
+const createQuotation = async (callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
     const request = new mmapi.p2pTransfer.createQuotation();
-    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.creditParty(body.creditParty);
-    request.debitParty(body.debitParty);
-    request.type(body.type);
-    request.subtype(body.subtype);
-    request.requestAmount(body.requestAmount);
-    request.requestCurrency(body.requestCurrency);
-    request.chosenDeliveryMethod(body.chosenDeliveryMethod);
-    request.originCountry(body.originCountry);
-    request.receivingCountry(body.receivingCountry);
-    request.recipientKyc(body.recipientKyc);
-    request.senderKyc(body.senderKyc);
-    request.requestingOrganisation(body.requestingOrganisation);
-    request.sendingServiceProviderCountry(body.sendingServiceProviderCountry);
-    request.requestDate(body.requestDate);
-    request.customData(body.customData);
-    request.metadata(body.metadata);
+    request.creditParty([{ "key": "msisdn", "value": "+44012345678" }]);
+    request.debitParty([{ "key": "walletid", "value": "1" }]);
+    request.type("transfer");
+    request.subType("abc");
+    request.requestAmount("75.30");
+    request.requestCurrency("RWF");
+    request.chosenDeliveryMethod("directtoaccount");
+    request.requestDate("2018-07-03T11:43:27.405Z");
+    request.customData([{ "key": "keytest", "value": "keyvalue" }]);
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
     if (callback) {
-      request.callback(process.env.CALLBACK_URL);
+      request.callback(callbackUrl);
+    }
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -60,7 +59,9 @@ const createQuotation = async (body, callback = false) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -72,7 +73,7 @@ const createQuotation = async (body, callback = false) => {
 /**
  * Invoke the function
  */
-createQuotation('<<REPLACE-WITH-REQUEST-BODY>>');
+createQuotation(false, true);
 ```
 
 ### Example Output - Callback

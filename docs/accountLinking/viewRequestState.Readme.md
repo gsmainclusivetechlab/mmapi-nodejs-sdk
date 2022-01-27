@@ -10,20 +10,26 @@
 /**
  * Set up your function to be invoked
  */
-const viewRequestState = async (serverCorrelationId) => {
+const viewRequestState = async (serverCorrelationId, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
     const request = new mmapi.accountLinking.viewRequestState(serverCorrelationId);
-    console.log('Request: ', request);
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
+    }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -45,7 +51,7 @@ const viewRequestState = async (serverCorrelationId) => {
 /**
  * Invoke the function
  */
-viewRequestState('<<REPLACE-WITH-SERVER-CORRELATION-ID>>');
+viewRequestState('<<REPLACE-WITH-SERVER-CORRELATION-ID>>', true);
 ```
 
 ### Example Output

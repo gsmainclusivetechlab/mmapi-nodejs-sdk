@@ -11,10 +11,19 @@ This document contains the following sections:
 
 -  [Requirements](#requirements)
 -  [Getting Started](#getting-started)
-      -  [Installation](#installation)
-      -  [Development And Testing](#development-and-testing)
 -  [Setting Up](#setting-up)
 -  [Use Cases](#use-cases)
+    * [Merchant Payments](#merchant-payments)
+    * [Disbursements](#disbursements)
+    * [International Transfers](#international-transfers)
+    * [P2P Transfers](#p2p-transfers)
+    * [Recurring Payments](#recurring-payments)
+    * [Account Linking](#account-linking)
+    * [Bill Payments](#bill-payments)
+    * [Agent Services (including Cash-In and Cash-Out)](#agent-services)
+-   [Tests](#tests)
+    *   [Unit Test](#unit-test)
+    *   [Integration Test](#integration-test)
 -  [Samples](#samples)
 
 ## Requirements
@@ -23,26 +32,10 @@ This document contains the following sections:
 
 ## Getting Started
 
-#### Installation
-
 Create a Node.js project in your directory, then run the following command to install the Mobile Money Api Node.js SDK.
 
-```javascript 
+```javascript
 npm install mmapi-nodejs-sdk
-```
-
-#### Development And Testing
-
-It is not mandatory to fork this repository for using the MMAPI SDK. You can refer Setting Up for configuring and working with SDK without forking this code.
-
-For contributing or referring the samples, you can fork/refer this repository.
-
-To run integration tests using your consumer key, consumer secret and api key, clone this repository and run the following command:
-
-```
-$ npm install
-$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL npm run test
-
 ```
 
 ## Setting Up
@@ -82,15 +75,6 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 ```
 
 ## Use Cases
-
-* [Merchant Payments](#merchant-payments)
-* [Disbursements](#disbursements)
-* [International Transfers](#international-transfers)
-* [P2P Transfers](#p2p-transfers)
-* [Recurring Payments](#recurring-payments)
-* [Account Linking](#account-linking)
-* [Bill Payments](#bill-payments)
-* [Agent Services (including Cash-In and Cash-Out)](#agent-services)
 
 ### Merchant Payments
 <table>
@@ -811,6 +795,39 @@ let client = new mmapi.core.MobileMoneyApiHttpClient(environment);
 </tbody>
 </table>
 
+## Tests
+
+It is not mandatory to fork this repository for using the MMAPI SDK. You can refer Setting Up for configuring and working with SDK without forking this code.
+
+For contributing or referring the samples, you can fork/refer this repository.
+
+To run integration tests using your consumer key, consumer secret and api key, clone this repository and run the following command:
+
+So, there are actually two different types of tests, and we're going to try them all. The first is a unit test. The second type of test is an integration test.
+
+```
+$ npm install
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL npm run test
+```
+
+### Unit Test
+
+In a unit test, you test one specific function on a class. You call a function with some input, and test the return value. Each unit test is done in isolation. If, for example, a class needs a simulator connection, we're actually going to fake that simulator connection so that we can focus on testing just the logic of the class itself.
+
+```
+$ npm install
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL npm run test test/unit
+```
+
+### Integration Test
+
+An integration test is basically a unit test: you call functions and check their return values. But now, instead of faking the simulator connection, you'll use the real simulator connection.
+
+```
+$ npm install
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL npm run test test/integration
+```
+
 ## Samples
 
 To test interactions before integration by by trying out different samples, clone this repository and run the following command:
@@ -821,22 +838,21 @@ Note: Update the samples/test_harness.js with your sandbox client credentials or
 
 ```
 $ npm install
-$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node test/merchantPayment.js
+$ CONSUMER_KEY=YOUR_CONSUMER_KEY CONSUMER_SECRET=YOUR_CONSUMER_SECRET API_KEY=YOUR_API_KEY SECURITY_OPTION=YOUR_SECURITY_OPTION CALLBACK_URL=YOUR_CALLBACK_URL node samples/merchantPayment/runAll.js
 ```
 
 ```
 $ npm install
-$ node test/merchantPayment.js
+$ node samples/merchantPayment/runAll.js
 ```
 
-*By default merchantPayment.js will execute all usecase scenarios for the usecase*
+*By default runAll.js will execute all usecase scenarios for the usecase*
 
-> To select a specific use case scenario, edit the test/merchantPayment.js by passing the usecase number as shown below
+> To select a specific use case scenario, edit the samples/merchantPayment/runAll.js by passing the usecase number as shown below
 
 ```javascript
-// merchantPayment.js
 (async () => {
- 
+
 })(5);
 ```
 
@@ -845,12 +861,12 @@ $ node test/merchantPayment.js
 *Replace the parameter with a value*
 
 ```javascript
-// samples/transactions/createMerchantTransaction.js
+// samples/merchantPayment/createMerchantTransaction.js
 
 if (require.main === module) {
   (async () => {
     try {
-      await createMerchantTransaction('<<REPLACE-WITH-USE-CASE>>', undefined, undefined, undefined, true);
+      await createMerchantTransaction(false, true);
     } catch (err) {
     }
   })();
@@ -859,5 +875,5 @@ if (require.main === module) {
 
 ```
 $ npm install
-$ node samples/transactions/createMerchantTransaction.js
+$ node samples/merchantPayment/createMerchantTransaction.js
 ```

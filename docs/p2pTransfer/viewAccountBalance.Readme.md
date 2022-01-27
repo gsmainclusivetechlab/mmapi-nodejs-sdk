@@ -18,19 +18,26 @@
 /**
  * Set up your function to be invoked
  */
-const viewAccountBalance = async (accountIdentifiers) => {
+const viewAccountBalance = async (debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.p2pTransfer.viewAccountBalance(accountIdentifiers);
+    const request = new mmapi.p2pTransfer.viewAccountBalance({ "walletid": "1" });
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
+    }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -40,7 +47,9 @@ const viewAccountBalance = async (accountIdentifiers) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -52,7 +61,7 @@ const viewAccountBalance = async (accountIdentifiers) => {
 /**
  * Invoke the function
  */
-viewAccountBalance('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>');
+viewAccountBalance(true);
 ```
 
 ### Example Output

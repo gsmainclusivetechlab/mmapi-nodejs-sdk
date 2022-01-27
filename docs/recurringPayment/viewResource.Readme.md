@@ -10,20 +10,26 @@
 /**
  * Set up your function to be invoked
  */
-const viewResource = async (link) => {
+const viewResource = async (link, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
     const request = new mmapi.recurringPayment.viewResource(link);
-    console.log("Request: ", request);
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
+    }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -33,7 +39,9 @@ const viewResource = async (link) => {
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -45,7 +53,7 @@ const viewResource = async (link) => {
 /**
  * Invoke the function
  */
-viewResource('<<REPLACE-WITH-LINK>>');
+viewResource('<<REPLACE-WITH-LINK>>', true);
 ```
 
 ### Example Output

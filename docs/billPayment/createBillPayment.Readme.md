@@ -14,42 +14,39 @@
 /**
  * Set up your function to be invoked
  */
-const createBillPayment = async (body, accountIdentifiers, billReference, callback = false) => {
+const createBillPayment = async (callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
-    const request = new mmapi.billPayment.createBillPayment(accountIdentifiers, billReference);
-    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
+    const request = new mmapi.billPayment.createBillPayment({ "accountid": "1" }, "REF-000001");
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.serviceProviderPaymentReference(body.serviceProviderPaymentReference);
-    request.requestingOrganisationTransactionReference(body.requestingOrganisationTransactionReference);
-    request.paymentType(body.paymentType);
-    request.amountPaid(body.amountPaid);
-    request.currency(body.currency);
-    request.customerReference(body.customerReference);
-    request.requestingOrganisation(body.requestingOrganisation);
-    request.supplementaryBillReferenceDetails(body.supplementaryBillReferenceDetails);
-    request.requestDate(body.requestDate);
-    request.customData(body.customData);
-    request.metadata(body.metadata);
+    request.currency("GBP");
+    request.amountPaid("5.30");
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
     if (callback) {
-      request.callback(process.env.CALLBACK_URL);
+      request.callback(callbackUrl);
+    }
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -59,7 +56,9 @@ const createBillPayment = async (body, accountIdentifiers, billReference, callba
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -71,7 +70,7 @@ const createBillPayment = async (body, accountIdentifiers, billReference, callba
 /**
  * Invoke the function
  */
-createBillPayment('<<REPLACE-WITH-REQUEST-BODY>>', '<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-BILL-REFERENCE>>');
+createBillPayment(false, true);
 ```
 
 ### Example Output - Callback

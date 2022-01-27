@@ -10,20 +10,26 @@
 /**
  * Set up your function to be invoked
  */
-const viewTransaction = async (transactionReference) => {
+const viewTransaction = async (transactionReference, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
     const request = new mmapi.accountLinking.viewTransaction(transactionReference);
-    console.log("Request: ", request);
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
+    }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -45,7 +51,7 @@ const viewTransaction = async (transactionReference) => {
 /**
  * Invoke the function
  */
-viewTransaction('<<REPLACE-WITH-TRANSACTION-REFERENCE>>');
+viewTransaction('<<REPLACE-WITH-TRANSACTION-REFERENCE>>', true);
 ```
 
 ### Example Output

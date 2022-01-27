@@ -10,45 +10,38 @@
 /**
  * Set up your function to be invoked
  */
-const createReversal = async (body, originalTransactionReference, callback = false) => {
+const createReversal = async (originalTransactionReference, callback = false, debug = false) => {
   try {
     /**
      * Construct a request object and set desired parameters
      */
     const request = new mmapi.disbursement.createReversal(originalTransactionReference);
-    console.log('Request X-CorrelationID', request.headers['X-CorrelationID']);
 
     /**
      * Set the request body parameters individually or by request.body(body);
      */
-    request.creditParty(body.creditParty);
-    request.debitParty(body.debitParty);
-    request.type(body.type);
-    request.subType(body.subType);
-    request.amount(body.amount);
-    request.currency(body.currency);
-    request.descriptionText(body.descriptionText);
-    request.fees(body.fees);
-    request.geoCode(body.geoCode);
-    request.requestingOrganisation(body.requestingOrganisation);
-    request.servicingIdentity(body.servicingIdentity);
-    request.requestDate(body.requestDate);
-    request.customData(body.customData);
-    request.metadata(body.metadata);
+    request.type("reversal");
 
     /**
      * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
      */
     if (callback) {
-      request.callback(process.env.CALLBACK_URL);
+      request.callback(callbackUrl);
+    }
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
     }
 
     /**
      * Call API with your client and get a response for your call
      */
     const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
 
     /**
      * Return a successful response
@@ -58,7 +51,9 @@ const createReversal = async (body, originalTransactionReference, callback = fal
     /**
      * Handle any errors from the call
      */
-    console.log(err);
+    if (debug) {
+      console.log(err);
+    }
 
     /**
      * Return an error response
@@ -70,7 +65,7 @@ const createReversal = async (body, originalTransactionReference, callback = fal
 /**
  * Invoke the function
  */
-createReversal('<<REPLACE-WITH-REQUEST-BODY>>', '<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>');
+createReversal('<<REPLACE-WITH-ORIGINAL-TRANSACTION-REFERENCE>>', false, true);
 ```
 
 ### Example Output

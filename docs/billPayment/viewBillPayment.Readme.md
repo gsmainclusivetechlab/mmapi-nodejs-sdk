@@ -14,51 +14,57 @@
 /**
  * Set up your function to be invoked
  */
-const viewBillPayment = async (accountIdentifiers, billReference, query) => {
-  try {
-    /**
-     * Construct a request object and set desired parameters
-     */
-    const request = new mmapi.billPayment.viewBillPayment(accountIdentifiers, billReference);
+const viewBillPayment = async (debug = false) => {
+    try {
+        /**
+         * Construct a request object and set desired parameters
+         */
+        const request = new mmapi.billPayment.viewBillPayment({ "accountid": "1" }, "REF-000001");
 
-    /**
-     * Set the request query parameter
-     */
-    request.offset(query.offset);
-    request.limit(query.limit);
-    request.fromDateTime(query.fromDateTime);
-    request.toDateTime(query.toDateTime);
+        /**
+          * Set the limit parameter
+          */
+        request.limit(5);
 
-    /**
-     * Call API with your client and get a response for your call
-     */
-    const response = await client.execute(request);
-    console.log("Response Status: ", response.status);
-    console.log("Response Data: ", JSON.stringify(response.data, null, 4));
-    console.log("Response X-Records-Available-Count", response.headers['x-records-available-count']);
-    console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
+        if (debug) {
+            console.log("Request: ", JSON.stringify(request, null, 4));
+        }
 
-    /**
-     * Return a successful response
-     */
-    return response;
-  } catch (err) {
-    /**
-     * Handle any errors from the call
-     */
-    console.log(err);
+        /**
+         * Call API with your client and get a response for your call
+         */
+        const response = await client.execute(request);
 
-    /**
-     * Return an error response
-     */
-    return err;
-  }
+        if (debug) {
+            console.log("Response Status: ", response.status);
+            console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+            console.log("Response X-Records-Available-Count", response.headers['x-records-available-count']);
+            console.log("Response X-Records-Returned-Count", response.headers['x-records-returned-count']);
+        }
+
+        /**
+         * Return a successful response
+         */
+        return response;
+    } catch (err) {
+        /**
+         * Handle any errors from the call
+         */
+        if (debug) {
+            console.log(err);
+        }
+
+        /**
+         * Return an error response
+         */
+        return err;
+    }
 };
 
 /**
  * Invoke the function
  */
-viewBillPayment('<<REPLACE-WITH-ACCOUNT-IDENTIFIERS>>', '<<REPLACE-WITH-BILL-REFERENCE>>', '<<REPLACE-WITH-QUERY-PARAMETERS>>');
+viewBillPayment(true);
 ```
 
 ### Example Output
