@@ -1,0 +1,107 @@
+/**
+ * Set up your function to be invoked
+ */
+const createQuotation = async (callback = false, debug = false) => {
+  try {
+    /**
+     * Construct a request object and set desired parameters
+     */
+    const request = new mmapi.internationalTransfer.createQuotation();
+
+    /**
+     * Set the request body parameters individually or by request.body(body);
+     */
+    request.creditParty([{ "key": "msisdn", "value": "+44012345678" }]);
+    request.debitParty([{ "key": "walletid", "value": "1" }]);
+    request.type("inttransfer");
+    request.subType("abc");
+    request.requestAmount("75.30");
+    request.requestCurrency("RWF");
+    request.chosenDeliveryMethod("agent");
+    request.requestDate("2018-07-03T11:43:27.405Z");
+    request.customData([{ "key": "keytest", "value": "keyvalue" }]);
+    request.senderKyc({
+      "nationality": "GB",
+      "dateOfBirth": "1970-07-03T11:43:27.405Z",
+      "occupation": "Manager",
+      "employerName": "MFX",
+      "contactPhone": "+447125588999",
+      "gender": "m",
+      "emailAddress": "luke.skywalkeraaabbb@gmail.com",
+      "birthCountry": "GB",
+      "idDocument": [
+        {
+          "idType": "nationalidcard",
+          "idNumber": "1234567",
+          "issueDate": "2018-07-03T11:43:27.405Z",
+          "expiryDate": "2021-07-03T11:43:27.405Z",
+          "issuer": "UKPA",
+          "issuerPlace": "GB",
+          "issuerCountry": "GB",
+          "otherIdDescription": "test"
+        }
+      ],
+      "postalAddress": {
+        "country": "GB",
+        "addressLine1": "111 ABC Street",
+        "city": "New York",
+        "stateProvince": "New York",
+        "postalCode": "ABCD"
+      },
+      "subjectName": {
+        "title": "Mr",
+        "firstName": "Luke",
+        "middleName": "R",
+        "lastName": "Skywalker",
+        "fullName": "Luke R Skywalker",
+        "nativeName": "ABC"
+      }
+    });
+    request.sendingServiceProviderCountry("AD");
+    request.originCountry("AD");
+    request.receivingCountry("AD");
+
+    /**
+     * Chose the callback method. Default is the polling method. You can also chose it by request.polling();
+     */
+    if (callback) {
+      request.callback(callbackUrl);
+    }
+
+    if (debug) {
+      console.log("Request: ", JSON.stringify(request, null, 4));
+    }
+
+    /**
+     * Call API with your client and get a response for your call
+     */
+    const response = await client.execute(request);
+
+    if (debug) {
+      console.log("Response Status: ", response.status);
+      console.log("Response Data: ", JSON.stringify(response.data, null, 4));
+    }
+
+    /**
+     * Return a successful response
+     */
+    return response;
+  } catch (err) {
+    /**
+     * Handle any errors from the call
+     */
+    if (debug) {
+      console.log(err);
+    }
+
+    /**
+     * Return an error response
+     */
+    return err;
+  }
+};
+
+/**
+ * Invoke the function
+ */
+createQuotation(false, true);
