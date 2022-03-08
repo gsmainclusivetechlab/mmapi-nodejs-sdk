@@ -699,17 +699,6 @@ describe('Recurring Payments', () => {
       });
     })
   });
-  describe('Setup a Recurring Payment Failure', () => {
-    describe('POST Setup a Recurring Payment', () => {
-      it('should return the error object with status 404 by providing details of the failure reason', async () => {
-        const response = await createAccountDebitMandateError(true, false);
-
-        expect(response.status).toBe(404);
-        expect(response.data).toHaveProperty('errorCategory');
-        expect(response.data).toHaveProperty('errorCode');
-      });
-    })
-  });
 
   describe('Setup a Recurring Payment via the Polling Method', () => {
     let serverCorrelationId;
@@ -815,65 +804,6 @@ describe('Recurring Payments', () => {
         expect(response.data).toHaveProperty('serverCorrelationId');
         expect(response.data).toHaveProperty('notificationMethod');
         expect(response.data.notificationMethod).toBe('callback');
-      });
-    })
-  });
-
-  describe('Take a Recurring Payment Failure', () => {
-    let serverCorrelationId;
-    let objectReference;
-    let mandateReference;
-
-    describe('POST Setup a Recurring Payment', () => {
-      it('should return the request state object with status 202 to indicate that the request is pending', async () => {
-        const response = await createAccountDebitMandate(undefined, false);
-
-        expect(response.status).toBe(202);
-        expect(response.data).toHaveProperty('status');
-        expect(response.data.status).toBe('pending');
-        expect(response.data).toHaveProperty('serverCorrelationId');
-        expect(response.data).toHaveProperty('notificationMethod');
-        expect(response.data.notificationMethod).toBe('polling');
-
-        serverCorrelationId = response.data.serverCorrelationId
-      });
-    })
-
-    describe('GET Poll to Determine the Request State', () => {
-      it('should return the request state object with status 200 for a given server correlation id', async () => {
-        const response = await viewRequestState(serverCorrelationId, false);
-
-        expect(response.status).toBe(200);
-        expect(response.data).toHaveProperty('status');
-        expect(response.data.status).toMatch(/^(pending|completed|failed)$/);
-        expect(response.data).toHaveProperty('serverCorrelationId');
-        expect(response.data).toHaveProperty('notificationMethod');
-        expect(response.data.notificationMethod).toBe('polling');
-        expect(response.data).toHaveProperty('objectReference');
-
-        objectReference = response.data.objectReference;
-      });
-    })
-
-    describe('GET View A Debit Mandate', () => {
-      it('should return debit mandate object with status 200 for a given object reference', async () => {
-        const response = await viewAccountDebitMandate(objectReference, false);
-
-        expect(response.status).toBe(200);
-        expect(response.data).toHaveProperty('mandateReference');
-        expect(response.data).toHaveProperty('startDate');
-
-        mandateReference = response.data.mandateReference;
-      });
-    })
-
-    describe('POST Take a Recurring Payment', () => {
-      it('should return the error object with status 404 by providing details of the failure reason', async () => {
-        const response = await createMerchantTransactionError(mandateReference, true, false);
-
-        expect(response.status).toBe(400);
-        expect(response.data).toHaveProperty('errorCategory');
-        expect(response.data).toHaveProperty('errorCode');
       });
     })
   });

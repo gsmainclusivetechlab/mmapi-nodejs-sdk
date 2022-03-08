@@ -540,18 +540,6 @@ describe('Bill Payments', () => {
     })
   });
 
-  describe('Unsuccessful Retrieval of Bills', () => {
-    describe('GET Retrieve a Set of Bills', () => {
-      it('should return the error object with status 404 by providing details of the failure reason', async () => {
-        const response = await viewAccountBillsError(false);
-
-        expect(response.status).toBe(404);
-        expect(response.data).toHaveProperty('errorCategory');
-        expect(response.data).toHaveProperty('errorCode');
-      });
-    })
-  });
-
   describe('Make a Successful Bill Payment with Callback', () => {
     describe('POST Make a Bill Payment', () => {
       it('should return the request state object with status 202 to indicate that the request is pending', async () => {
@@ -613,18 +601,6 @@ describe('Bill Payments', () => {
         expect(response.data).toHaveProperty('transactionStatus');
         expect(response.data).toHaveProperty('amount');
         expect(response.data).toHaveProperty('currency');
-      });
-    })
-  });
-
-  describe('Make an Unsuccessful Bill Payment with Callback', () => {
-    describe('POST Make a Bill Payment', () => {
-      it('should return the error object with status 404 by providing details of the failure reason', async () => {
-        const response = await createBillPaymentError(true, false);
-
-        expect(response.status).toBe(404);
-        expect(response.data).toHaveProperty('errorCategory');
-        expect(response.data).toHaveProperty('errorCode');
       });
     })
   });
