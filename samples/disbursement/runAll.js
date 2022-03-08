@@ -27,17 +27,6 @@ const usecase2 = async () => {
 
   console.log('POST Perform a Bulk Disbursement')
   await createBatchTransaction(true, true);
-
-  let batchId = "REF-1636656115835";
-
-  console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(batchId, true);
-
-  console.log('GET Retrieve Batch Transactions that have Completed')
-  await viewBatchCompletions(batchId, true);
-
-  console.log('GET Retrieve Batch Transactions that have been Rejected')
-  await viewBatchRejections(batchId, true);
 }
 
 const usecase3 = async () => {
@@ -91,22 +80,35 @@ const usecase5 = async () => {
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
   console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(objectReference, true);
+  const { data: { batchId } } = await viewBatchTransaction(objectReference, true);
+
+  console.log('GET Retrieve Batch Transactions that have Completed')
+  await viewBatchCompletions(batchId, true);
+
+  console.log('GET Retrieve Batch Transactions that have been Rejected')
+  await viewBatchRejections(batchId, true);
 }
 
 const usecase6 = async () => {
   console.log("Approve The Transaction Batch Using the Polling Method...")
 
-  let batchId = "REF-1636656115835";
-
-  console.log('PATCH Approve The Transaction Batch')
-  const { data: { serverCorrelationId } } = await updateBatchTransaction(batchId, undefined, true);
+  console.log('POST Perform a Bulk Disbursement')
+  const { data: { serverCorrelationId } } = await createBatchTransaction(undefined, true);
 
   console.log('GET Poll to Determine the Request State')
   const { data: { objectReference } } = await viewRequestState(serverCorrelationId, true);
 
   console.log('GET View A Transaction Batch')
-  await viewBatchTransaction(objectReference, true);
+  const { data: { batchId } } = await viewBatchTransaction(objectReference, true);
+
+  console.log('PATCH Approve The Transaction Batch')
+  const { data: { serverCorrelationId: serverCorrelationId2 } } = await updateBatchTransaction(batchId, undefined, true);
+
+  console.log('GET Poll to Determine the Request State')
+  const { data: { objectReference: objectReference2 } } = await viewRequestState(serverCorrelationId2, true);
+
+  console.log('GET View A Transaction Batch')
+  await viewBatchTransaction(objectReference2, true);
 }
 
 const usecase7 = async () => {
