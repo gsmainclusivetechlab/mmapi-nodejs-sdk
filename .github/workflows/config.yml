@@ -33,4 +33,4 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
           SECURITY_OPTION: ${{ secrets.SECURITY_OPTION }}
           CALLBACK_URL: ${{ secrets.CALLBACK_URL }}
-        run: npm run test test/unit
+        run: npm run test-ci test/unit
