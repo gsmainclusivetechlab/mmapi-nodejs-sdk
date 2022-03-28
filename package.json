@@ -17,7 +17,8 @@
     "nock": "^13.2.1"
   },
   "scripts": {
-    "test": "jest --watchAll --verbose --detectOpenHandles --forceExit --coverage"
+    "test": "jest --watchAll --verbose --detectOpenHandles --forceExit --coverage",
+    "test-ci": "jest --detectOpenHandles --forceExit --coverage"
   },
   "jest": {
     "testTimeout": 25000
